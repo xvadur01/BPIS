@@ -1,0 +1,10 @@
+{* Latte template *}
+{block scripts}
+ {include #parent}  {* include parent #scripts block *}
+<script src="{$basePath}/js/ckeditor/ckeditor.js"></script>
+<script type="text/javascript">
+	CKEDITOR.replace( 'editor' );
+</script>
+{/block}
+{block content}
+{control recordForm}

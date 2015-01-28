@@ -323,12 +323,12 @@
         "source": {
             "type": "git",
             "url": "https://github.com/nette/nette.git",
-            "reference": "4203bd23672f565a6eb427ff8c297f57f09c4290"
+            "reference": "d3a0af521cc5d09d4474ca51b9ba34ae910b83cf"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/nette/nette/zipball/4203bd23672f565a6eb427ff8c297f57f09c4290",
-            "reference": "4203bd23672f565a6eb427ff8c297f57f09c4290",
+            "url": "https://api.github.com/repos/nette/nette/zipball/d3a0af521cc5d09d4474ca51b9ba34ae910b83cf",
+            "reference": "d3a0af521cc5d09d4474ca51b9ba34ae910b83cf",
             "shasum": ""
         },
         "require": {
@@ -357,7 +357,7 @@
         "require-dev": {
             "nette/tester": "~1.3"
         },
-        "time": "2014-10-15 22:18:40",
+        "time": "2014-12-22 03:37:31",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -368,9 +368,6 @@
         "autoload": {
             "classmap": [
                 "Nette/"
-            ],
-            "files": [
-                "Nette/loader.php"
             ]
         },
         "notification-url": "https://packagist.org/downloads/",
@@ -522,126 +519,6 @@
         ]
     },
     {
-        "name": "radekdostal/nette-datetimepicker",
-        "version": "dev-master",
-        "version_normalized": "9999999-dev",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/radekdostal/Nette-DateTimePicker.git",
-            "reference": "61f1c37921d911e2308352c73dbff75375c985ec"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/radekdostal/Nette-DateTimePicker/zipball/61f1c37921d911e2308352c73dbff75375c985ec",
-            "reference": "61f1c37921d911e2308352c73dbff75375c985ec",
-            "shasum": ""
-        },
-        "require": {
-            "nette/nette": ">=2.2.0",
-            "php": ">=5.3.0"
-        },
-        "time": "2014-10-30 05:49:57",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "classmap": [
-                "src/"
-            ]
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "LGPL-2.1",
-            "LGPL-3.0"
-        ],
-        "authors": [
-            {
-                "name": "Radek Dostál",
-                "email": "radek.dostal@gmail.com"
-            }
-        ],
-        "description": "DatePicker and DateTimePicker input controls for Nette Framework"
-    },
-    {
-        "name": "kdyby/forms-replicator",
-        "version": "dev-master",
-        "version_normalized": "9999999-dev",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/Kdyby/Replicator.git",
-            "reference": "5330eba09ba46df212c9fb9a827d17ca06caf7e8"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/Kdyby/Replicator/zipball/5330eba09ba46df212c9fb9a827d17ca06caf7e8",
-            "reference": "5330eba09ba46df212c9fb9a827d17ca06caf7e8",
-            "shasum": ""
-        },
-        "require": {
-            "nette/forms": "~2.2@dev"
-        },
-        "require-dev": {
-            "jakub-onderka/php-parallel-lint": "~0.7",
-            "latte/latte": "~2.2@dev",
-            "nette/application": "~2.2@dev",
-            "nette/bootstrap": "~2.2@dev",
-            "nette/caching": "~2.2@dev",
-            "nette/component-model": "~2.2@dev",
-            "nette/database": "~2.2@dev",
-            "nette/deprecated": "~2.2@dev",
-            "nette/di": "~2.2@dev",
-            "nette/finder": "~2.2@dev",
-            "nette/forms": "~2.2@dev",
-            "nette/http": "~2.2@dev",
-            "nette/mail": "~2.2@dev",
-            "nette/neon": "~2.2@dev",
-            "nette/nette": "~2.2@dev",
-            "nette/php-generator": "~2.2@dev",
-            "nette/reflection": "~2.2@dev",
-            "nette/robot-loader": "~2.2@dev",
-            "nette/safe-stream": "~2.2@dev",
-            "nette/security": "~2.2@dev",
-            "nette/tester": "@dev",
-            "nette/tokenizer": "~2.2@dev",
-            "nette/utils": "~2.2@dev",
-            "tracy/tracy": "~2.2@dev"
-        },
-        "time": "2014-11-20 19:59:36",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "1.2-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-0": {
-                "Kdyby\\Replicator\\": "src/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "BSD-3-Clause",
-            "GPL-2.0",
-            "GPL-3.0"
-        ],
-        "authors": [
-            {
-                "name": "Filip Procházka",
-                "email": "filip@prochazka.su",
-                "homepage": "http://filip-prochazka.com"
-            }
-        ],
-        "description": "Nette forms container replicator aka addDynamic",
-        "homepage": "http://kdyby.org",
-        "keywords": [
-            "Forms",
-            "addDynamic",
-            "kdyby",
-            "nette",
-            "replicator"
-        ]
-    },
-    {
         "name": "dg/adminer-custom",
         "version": "v1.5.0",
         "version_normalized": "1.5.0.0",
@@ -774,58 +651,6 @@
             }
         ],
         "description": "Nette Utility Classes",
-        "homepage": "http://nette.org"
-    },
-    {
-        "name": "nette/security",
-        "version": "v2.2.1",
-        "version_normalized": "2.2.1.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/nette/security.git",
-            "reference": "72a0f78fee1a1ff54d233e8a4e8fb2236d68875f"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/nette/security/zipball/72a0f78fee1a1ff54d233e8a4e8fb2236d68875f",
-            "reference": "72a0f78fee1a1ff54d233e8a4e8fb2236d68875f",
-            "shasum": ""
-        },
-        "require": {
-            "nette/utils": "~2.2",
-            "php": ">=5.3.1"
-        },
-        "conflict": {
-            "nette/nette": "<2.2"
-        },
-        "require-dev": {
-            "nette/tester": "~1.0"
-        },
-        "time": "2014-11-05 02:05:01",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "classmap": [
-                "src/"
-            ]
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "BSD-3-Clause",
-            "GPL-2.0",
-            "GPL-3.0"
-        ],
-        "authors": [
-            {
-                "name": "David Grudl",
-                "homepage": "http://davidgrudl.com"
-            },
-            {
-                "name": "Nette Community",
-                "homepage": "http://nette.org/contributors"
-            }
-        ],
-        "description": "Nette Security: Access Control Component",
         "homepage": "http://nette.org"
     },
     {
@@ -1551,5 +1376,177 @@
         ],
         "description": "Nette Mail: Sending E-mails",
         "homepage": "http://nette.org"
+    },
+    {
+        "name": "nette/security",
+        "version": "v2.2.2",
+        "version_normalized": "2.2.2.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/nette/security.git",
+            "reference": "9678d50769eba82a9e9621b19720152b14055b0a"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/nette/security/zipball/9678d50769eba82a9e9621b19720152b14055b0a",
+            "reference": "9678d50769eba82a9e9621b19720152b14055b0a",
+            "shasum": ""
+        },
+        "require": {
+            "nette/utils": "~2.2",
+            "php": ">=5.3.1"
+        },
+        "conflict": {
+            "nette/nette": "<2.2"
+        },
+        "require-dev": {
+            "nette/tester": "~1.0"
+        },
+        "time": "2014-12-14 17:53:13",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "classmap": [
+                "src/"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3-Clause",
+            "GPL-2.0",
+            "GPL-3.0"
+        ],
+        "authors": [
+            {
+                "name": "David Grudl",
+                "homepage": "http://davidgrudl.com"
+            },
+            {
+                "name": "Nette Community",
+                "homepage": "http://nette.org/contributors"
+            }
+        ],
+        "description": "Nette Security: Access Control Component",
+        "homepage": "http://nette.org"
+    },
+    {
+        "name": "kdyby/forms-replicator",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/Kdyby/Replicator.git",
+            "reference": "d10ec08a02bd5016690d69bd26e6d1cee59c291b"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/Kdyby/Replicator/zipball/d10ec08a02bd5016690d69bd26e6d1cee59c291b",
+            "reference": "d10ec08a02bd5016690d69bd26e6d1cee59c291b",
+            "shasum": ""
+        },
+        "require": {
+            "nette/forms": "~2.2@dev"
+        },
+        "require-dev": {
+            "jakub-onderka/php-parallel-lint": "~0.7",
+            "latte/latte": "~2.2@dev",
+            "nette/application": "~2.2@dev",
+            "nette/bootstrap": "~2.2@dev",
+            "nette/caching": "~2.2@dev",
+            "nette/component-model": "~2.2@dev",
+            "nette/database": "~2.2@dev",
+            "nette/deprecated": "~2.2@dev",
+            "nette/di": "~2.2@dev",
+            "nette/finder": "~2.2@dev",
+            "nette/forms": "~2.2@dev",
+            "nette/http": "~2.2@dev",
+            "nette/mail": "~2.2@dev",
+            "nette/neon": "~2.2@dev",
+            "nette/nette": "~2.2@dev",
+            "nette/php-generator": "~2.2@dev",
+            "nette/reflection": "~2.2@dev",
+            "nette/robot-loader": "~2.2@dev",
+            "nette/safe-stream": "~2.2@dev",
+            "nette/security": "~2.2@dev",
+            "nette/tester": "@dev",
+            "nette/tokenizer": "~2.2@dev",
+            "nette/utils": "~2.2@dev",
+            "tracy/tracy": "~2.2@dev"
+        },
+        "time": "2014-12-05 18:57:19",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.2-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Kdyby\\Replicator\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3-Clause",
+            "GPL-2.0",
+            "GPL-3.0"
+        ],
+        "authors": [
+            {
+                "name": "Filip Procházka",
+                "email": "filip@prochazka.su",
+                "homepage": "http://filip-prochazka.com"
+            }
+        ],
+        "description": "Nette forms container replicator aka addDynamic",
+        "homepage": "http://kdyby.org",
+        "keywords": [
+            "Forms",
+            "addDynamic",
+            "kdyby",
+            "nette",
+            "replicator"
+        ]
+    },
+    {
+        "name": "radekdostal/nette-datetimepicker",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/radekdostal/Nette-DateTimePicker.git",
+            "reference": "e3cbf95d54bd30597068f303ee75b08ff6acd34b"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/radekdostal/Nette-DateTimePicker/zipball/e3cbf95d54bd30597068f303ee75b08ff6acd34b",
+            "reference": "e3cbf95d54bd30597068f303ee75b08ff6acd34b",
+            "shasum": ""
+        },
+        "require": {
+            "nette/nette": ">=2.2.0",
+            "php": ">=5.3.0"
+        },
+        "time": "2015-01-02 09:24:51",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "classmap": [
+                "src/"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "LGPL-2.1",
+            "LGPL-3.0"
+        ],
+        "authors": [
+            {
+                "name": "Radek Dostál",
+                "email": "radek.dostal@gmail.com"
+            }
+        ],
+        "description": "DatePicker and DateTimePicker input controls for Nette Framework"
     }
 ]

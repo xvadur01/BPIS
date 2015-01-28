@@ -1,0 +1,28 @@
+{* Latte template *}
+
+{block content}
+
+<a n:href="Record:default">frontrecord</a>
+<a n:href="Record:add">add</a>
+
+<table>
+	<tr>
+		<th>id</th>
+		<th>nazev</th>
+		<th>popis</th>
+		<th>datum</th>
+		<th>datupm splneni</th>
+	</tr>
+{if $records}
+	{foreach $records as $record}
+			<td>{$record->id}</td>
+			<td>{$record->nazev}</td>
+			<td>{$record->popis}</td>
+			<td>{$record->datum}</td>
+			<td>{$record->datum_splneni}</td>
+			<td><a n:href="Record:delete $record->id"><img src="{$basePath}/images/delete.png" width='25' alt="smazat"></a><a n:href="Record:edit $record->id"><img src="{$basePath}/images/edit.png" width='25' alt="edit"></a></td>
+
+		</tr>
+	{/foreach}
+{/if}
+</table>

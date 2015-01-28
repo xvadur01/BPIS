@@ -1,0 +1,42 @@
+{**
+ * @param string   $basePath web base path
+ * @param array    $flashes  flash messages
+ *}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>{ifset #title}{include title|striptags} | {/ifset}Nette Sandbox</title>
+	<link href="{$basePath}/css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+	<link rel="stylesheet" media="screen,projection,tv" href="{$basePath}/css/screen.css">
+	<link rel="stylesheet" media="print" href="{$basePath}/css/print.css">
+	  <!-- CSS  -->
+
+	<link rel="shortcut icon" href="{$basePath}/favicon.ico">
+	{block head}{/block}
+</head>
+
+<body>
+	<script> document.documentElement.className+=' js' </script>
+
+	<div n:foreach="$flashes as $flash" class="flash {$flash->type}">{$flash->message}</div>
+	<div class="sing">
+			{if $user->loggedIn}
+				{$user->getIdentity()->login}
+				<a n:href=":Front:Sign:out">Odhlásit</a>
+			{else}
+				<a n:href=":Front:Sign:in">Přihlásit</a>
+			{/if}
+		</div>
+	{include content}
+
+	{block scripts}
+	<script src="{$basePath}/js/jquery.js"></script>
+	<script src="{$basePath}/js/netteForms.js"></script>
+	<script src="{$basePath}/js/main.js"></script>
+	<script src="{$basePath}/js/materialize.min.js"></script>
+	{/block}
+</body>
+</html>

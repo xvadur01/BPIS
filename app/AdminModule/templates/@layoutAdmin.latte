@@ -1,0 +1,203 @@
+{**
+ * @param string   $basePath web base path
+ * @param array    $flashes  flash messages
+ *}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>{ifset #title}{include title|striptags} | {/ifset}Nette Sandbox</title>
+	<!-- CSS  -->
+	<link href="{$basePath}/css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+	<link href="{$basePath}/css/jquery-clockpicker.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+	<link href="{$basePath}/css/clockpicker.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+	<link href="{$basePath}/css/screen.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+	<link rel="shortcut icon" href="{$basePath}/favicon.ico">
+	<!--<link rel="stylesheet" media="screen,projection,tv" href="{$basePath}/css/jQueryUi.css">
+	<link rel="stylesheet" media="screen,projection,tv" href="{$basePath}/css/dateTimePicker.css">
+	-->
+	{block head}{/block}
+</head>
+
+<body>
+	<script> document.documentElement.className+=' js' </script>
+
+	<header>
+	<!-- Dropdown Structure -->
+	<ul id="dropdown1" class="dropdown-content">
+		<li>{if $user->loggedIn}
+				<a n:href=":Front:Sign:out">Odhlásit</a>
+			{else}
+				<a n:href=":Front:Sign:in">Přihlásit</a>
+			{/if}
+		</li>
+		  <li></li>
+	</ul>
+	<nav class="top-nav">
+	<div class="container">
+			<div class="nav-wrapper">
+				<div class="col s12">
+					<a href="#!" class="brand-logo">Logo</a>
+					<ul class="right side-nav">
+					  <!-- Dropdown Trigger -->
+					  <li><a class="dropdown-button" href="#!" data-activates="dropdown1">{$user->getIdentity()->login}<i class="mdi-navigation-arrow-drop-down right"></i></a></li>
+					</ul>
+				</div>
+			</div>
+	</div>
+	</nav>
+	<div class="container">
+		<a class="button-collapse top-nav full" data-activates="nav-mobile" href="#">
+			<i class="mdi-navigation-menu"></i>
+		</a>
+	</div>
+	{control menu:bootstrapNav}
+	</header>
+	<main>
+	<div class="container col s12 m9 l10 ">
+		<div class="row">
+			<div class="col s10 m10 l10">
+				<div n:foreach="$flashes as $flash" class="card-panel tea"><span class="">{$flash->message}</span></div>
+			</div>
+		</div>
+		{include content}
+	</div>
+	</main>
+	{block scripts}
+	<script src="{$basePath}/js/jquery-2.1.3.min.js"></script>
+	<script src="{$basePath}/js/netteForms.js"></script>
+	<script src="{$basePath}/js/main.js"></script>
+	<script src="{$basePath}/js/materialize.min.js"></script>
+	<script src="{$basePath}/js/jquery-clockpicker.min.js"></script>
+	<script src="{$basePath}/js/clockpicker.js"></script>
+	<script src="{$basePath}/js/live-form-validation.js"></script>
+	{*<script src="{$basePath}/js/jqueryUi.js"></script>
+	<script src="{$basePath}/js/moment.js"></script>
+	<script src="{$basePath}/js/timepickerAddon.js"></script>*}
+
+
+
+	<script type="text/javascript">
+
+	$(document).ready(function()
+    {
+		$(".dropdown-button").dropdown();
+
+  // Initialize collapse button
+  $(".button-collapse").sideNav();
+  // Initialize collapsible
+  $('.collapsible').collapsible();
+
+	});
+	{*	DatePicker.regional['cs'] = {
+		prevText: 'předchozí',
+		nextText: 'další',
+		weekHeader: 'we',
+		dateFormat: 'dd.mm.yy',
+		showMonthAfterYear: false,
+		yearSuffix: '',
+		timeOnlyTitle: 'Vyberte čas',
+		timeText: 'Čas',
+		hourText: 'Hodiny',
+		minuteText: 'Minuty',
+		secondText: 'Vteřiny',
+		millisecText: 'Milisekundy',
+		microsecText: 'Mikrosekundy',
+		timezoneText: 'Časové pásmo',
+		currentText: 'Nyní',
+		closeText: 'Zavřít',
+		timeFormat: 'HH:mm',
+		amNames: ['dop.', 'AM', 'A'],
+		pmNames: ['odp.', 'PM', 'P'],
+		isRTL: false,
+		firstDay: 1,
+		dayNamesMin: [ "Ne", "Po", "Út", "St", "Čt", "Pá", "So" ],
+		dayNames: [ "Neděle", "Pondělí", "Úterý", "Středa", "Čtvrtek", "Pátek", "Sobota" ],
+		dayNamesShort:  [ "Ne", "Po", "Út", "St", "Čt", "Pá", "So" ],
+		monthNamesShort: [ "Leden", "Únor", "Březen", "Duben", "Květen", "Červen", "Červenec", "Srpen", "Září", "Říjen", "Listopad", "Prosinec" ],
+		monthNames: [ "Leden", "Únor", "Březen", "Duben", "Květen", "Červen", "Červenec", "Srpen", "Září", "Říjen", "Listopad", "Prosinec" ]
+
+		};
+		DatePicker.setDefaults(DatePicker.regional['cs']);
+
+
+		$(document).ready(function()
+		{
+		$('input.datepicker').datepicker(
+		{
+		changeMonth: true,
+		changeYear: true,
+		//dateFormat: 'mm/dd/yy',
+		dateFormat: 'dd.mm.yy',
+		yearRange: '2010:2020'
+		});
+		});
+
+    $(document).ready(function()
+    {
+      $('input.datetimepicker').datetimepicker(
+      {
+        duration: '',
+        changeMonth: true,
+        changeYear: true,
+        dateFormat: 'dd.mm.yy',
+        yearRange: '2010:2020',
+        stepMinute: 5
+
+      });
+  });
+
+	  $.datepicker.regional['cs'] = {
+		prevText: 'předchozí',
+		nextText: 'další',
+		weekHeader: 'we',
+		dateFormat: 'dd.mm.yy',
+		showMonthAfterYear: false,
+		yearSuffix: '',
+		timeOnlyTitle: 'Vyberte čas',
+		timeText: 'Čas',
+		hourText: 'Hodiny',
+		minuteText: 'Minuty',
+		secondText: 'Vteřiny',
+		millisecText: 'Milisekundy',
+		microsecText: 'Mikrosekundy',
+		timezoneText: 'Časové pásmo',
+		currentText: 'Nyní',
+		closeText: 'Zavřít',
+		timeFormat: 'HH:mm',
+		amNames: ['dop.', 'AM', 'A'],
+		pmNames: ['odp.', 'PM', 'P'],
+		isRTL: false,
+		firstDay: 1,
+		dayNamesMin: [ "Ne", "Po", "Út", "St", "Čt", "Pá", "So" ],
+		dayNames: [ "Neděle", "Pondělí", "Úterý", "Středa", "Čtvrtek", "Pátek", "Sobota" ],
+		dayNamesShort:  [ "Ne", "Po", "Út", "St", "Čt", "Pá", "So" ],
+		monthNamesShort: [ "Leden", "Únor", "Březen", "Duben", "Květen", "Červen", "Červenec", "Srpen", "Září", "Říjen", "Listopad", "Prosinec" ],
+		monthNames: [ "Leden", "Únor", "Březen", "Duben", "Květen", "Červen", "Červenec", "Srpen", "Září", "Říjen", "Listopad", "Prosinec" ]
+
+		};
+		$.datepicker.setDefaults($.datepicker.regional['cs']);
+
+
+		$.timepicker.regional['cs'] = {
+		timeOnlyTitle: 'Vyberte čas',
+		timeText: 'Čas',
+		hourText: 'Hodiny',
+		minuteText: 'Minuty',
+		secondText: 'Vteřiny',
+		currentText: 'Nyní',
+		closeText: 'Zavřít',
+		millisecText: 'Milisekundy',
+		};
+		$.timepicker.setDefaults($.timepicker.regional['cs']);
+
+
+
+
+	*}
+</script>
+	{/block}
+</body>
+</html>

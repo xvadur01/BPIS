@@ -1,0 +1,37 @@
+{* Latte template *}
+
+{block content}
+
+<a n:href="Borrowing:default">borrowing</a>
+<a n:href="Borrowing:add">add</a>
+
+<table class="striped">
+	<thead>
+	<tr>
+		<th>id</th>
+		<th>nazev</th>
+		<th>jmeno</th>
+		<th>prijmeni</th>
+		<th>datum</th>
+		<th>uzivatel</th>
+		<th>vraceno</th>
+	</tr>
+	</thead>
+{if $borrowings}
+	<tbody>
+	{foreach $borrowings as $borrowing}
+		<tr>
+			<td>{$borrowing->id}</td>
+			<td>{$borrowing->nazev}</td>
+			<td>{$borrowing->jmeno}</td>
+			<td>{$borrowing->prijmeni}</td>
+			<td>{$borrowing->datum}</td>
+			<td>{$borrowing->uzivatel_id}</td>
+			<td>{$borrowing->vraceno}</td>
+			<td><a n:href="Borrowing:giveback $borrowing->id"><img src="{$basePath}/images/delete.png" width='25' alt="vratit"></a><a n:href="Borrowing:delete $borrowing->id"><img src="{$basePath}/images/delete.png" width='25' alt="smazat"></a><a n:href="Borrowing:edit $borrowing->id"><img src="{$basePath}/images/edit.png" width='25' alt="edit"></a></td>
+
+		</tr>
+	{/foreach}
+	</tbody>
+{/if}
+</table>

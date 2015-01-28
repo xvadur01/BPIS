@@ -2,32 +2,22 @@
 
 namespace App\Model;
 
-use Nette,
-	Nette\Utils\Strings,
-	Nette\Security\Passwords;
+use \Nette,
+	\Nette\Utils\Strings,
+	\Nette\Security\Passwords;
 
 
 /**
  * Users management.
  */
-class UserManager extends Nette\Object implements Nette\Security\IAuthenticator
+class UserManager extends BaseManager implements Nette\Security\IAuthenticator
 {
 	const
-		TABLE_NAME = 'users',
+		TABLE_NAME = 'uzivatel',
 		COLUMN_ID = 'id',
-		COLUMN_NAME = 'username',
-		COLUMN_PASSWORD_HASH = 'password',
+		COLUMN_NAME = 'login',
+		COLUMN_PASSWORD_HASH = 'heslo',
 		COLUMN_ROLE = 'role';
-
-
-	/** @var Nette\Database\Context */
-	private $database;
-
-
-	public function __construct(Nette\Database\Context $database)
-	{
-		$this->database = $database;
-	}
 
 
 	/**
@@ -39,7 +29,7 @@ class UserManager extends Nette\Object implements Nette\Security\IAuthenticator
 	{
 		list($username, $password) = $credentials;
 
-		$row = $this->database->table(self::TABLE_NAME)->where(self::COLUMN_NAME, $username)->fetch();
+		$row = $this->connection->table(self::TABLE_NAME)->where(self::COLUMN_NAME, $username)->fetch();
 
 		if (!$row) {
 			throw new Nette\Security\AuthenticationException('The username is incorrect.', self::IDENTITY_NOT_FOUND);
@@ -65,12 +55,12 @@ class UserManager extends Nette\Object implements Nette\Security\IAuthenticator
 	 * @param  string
 	 * @return void
 	 */
-	public function add($username, $password)
+	/*public function add($username, $password)
 	{
 		$this->database->table(self::TABLE_NAME)->insert(array(
 			self::COLUMN_NAME => $username,
 			self::COLUMN_PASSWORD_HASH => Passwords::hash($password),
 		));
-	}
+	}*/
 
 }

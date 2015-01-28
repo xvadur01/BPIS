@@ -14,8 +14,6 @@ php:
 nette:
 	application:
 		errorPresenter: Error
-		mapping:
-			*: App\*Module\Presenters\*Presenter
 
 	session:
 		expiration: 14 days
@@ -24,4 +22,12 @@ nette:
 services:
 	- App\Model\UserManager
 	- App\RouterFactory
+	- App\Model\TermManager
+	- App\Model\RecordManager
+	- App\Model\FrontpageManager
+	- App\Model\EventManager
+	- App\Model\ConfigManager
+	- App\Model\BorrowingManager
 	router: @App\RouterFactory::createRouter
+smfMenu:
+    defaultRenderer: bootstrapNav # jaký použít výchozí renderer (úplně výchozí je list)

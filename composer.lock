@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "c1cad82ba92a08d7d6abc140634186b4",
+    "hash": "6b37dde2720a9e2a637859ab242b5e0d",
     "packages": [
         {
             "name": "dg/adminer-custom",
@@ -31,12 +31,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Kdyby/Replicator.git",
-                "reference": "5330eba09ba46df212c9fb9a827d17ca06caf7e8"
+                "reference": "d10ec08a02bd5016690d69bd26e6d1cee59c291b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Kdyby/Replicator/zipball/5330eba09ba46df212c9fb9a827d17ca06caf7e8",
-                "reference": "5330eba09ba46df212c9fb9a827d17ca06caf7e8",
+                "url": "https://api.github.com/repos/Kdyby/Replicator/zipball/d10ec08a02bd5016690d69bd26e6d1cee59c291b",
+                "reference": "d10ec08a02bd5016690d69bd26e6d1cee59c291b",
                 "shasum": ""
             },
             "require": {
@@ -101,7 +101,7 @@
                 "nette",
                 "replicator"
             ],
-            "time": "2014-11-20 19:59:36"
+            "time": "2014-12-05 18:57:19"
         },
         {
             "name": "knplabs/knp-menu",
@@ -870,12 +870,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/nette.git",
-                "reference": "4203bd23672f565a6eb427ff8c297f57f09c4290"
+                "reference": "d3a0af521cc5d09d4474ca51b9ba34ae910b83cf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/nette/zipball/4203bd23672f565a6eb427ff8c297f57f09c4290",
-                "reference": "4203bd23672f565a6eb427ff8c297f57f09c4290",
+                "url": "https://api.github.com/repos/nette/nette/zipball/d3a0af521cc5d09d4474ca51b9ba34ae910b83cf",
+                "reference": "d3a0af521cc5d09d4474ca51b9ba34ae910b83cf",
                 "shasum": ""
             },
             "require": {
@@ -913,9 +913,6 @@
             "autoload": {
                 "classmap": [
                     "Nette/"
-                ],
-                "files": [
-                    "Nette/loader.php"
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -945,7 +942,7 @@
                 "mvc",
                 "templating"
             ],
-            "time": "2014-10-15 22:18:40"
+            "time": "2014-12-22 03:37:31"
         },
         {
             "name": "nette/php-generator",
@@ -1152,16 +1149,16 @@
         },
         {
             "name": "nette/security",
-            "version": "v2.2.1",
+            "version": "v2.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/security.git",
-                "reference": "72a0f78fee1a1ff54d233e8a4e8fb2236d68875f"
+                "reference": "9678d50769eba82a9e9621b19720152b14055b0a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/security/zipball/72a0f78fee1a1ff54d233e8a4e8fb2236d68875f",
-                "reference": "72a0f78fee1a1ff54d233e8a4e8fb2236d68875f",
+                "url": "https://api.github.com/repos/nette/security/zipball/9678d50769eba82a9e9621b19720152b14055b0a",
+                "reference": "9678d50769eba82a9e9621b19720152b14055b0a",
                 "shasum": ""
             },
             "require": {
@@ -1198,7 +1195,7 @@
             ],
             "description": "Nette Security: Access Control Component",
             "homepage": "http://nette.org",
-            "time": "2014-11-05 02:05:01"
+            "time": "2014-12-14 17:53:13"
         },
         {
             "name": "nette/tokenizer",
@@ -1302,44 +1299,6 @@
             "description": "Nette Utility Classes",
             "homepage": "http://nette.org",
             "time": "2014-10-26 23:12:20"
-        },
-        {
-            "name": "radekdostal/nette-datetimepicker",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/radekdostal/Nette-DateTimePicker.git",
-                "reference": "61f1c37921d911e2308352c73dbff75375c985ec"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/radekdostal/Nette-DateTimePicker/zipball/61f1c37921d911e2308352c73dbff75375c985ec",
-                "reference": "61f1c37921d911e2308352c73dbff75375c985ec",
-                "shasum": ""
-            },
-            "require": {
-                "nette/nette": ">=2.2.0",
-                "php": ">=5.3.0"
-            },
-            "type": "library",
-            "autoload": {
-                "classmap": [
-                    "src/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "LGPL-2.1",
-                "LGPL-3.0"
-            ],
-            "authors": [
-                {
-                    "name": "Radek Dostál",
-                    "email": "radek.dostal@gmail.com"
-                }
-            ],
-            "description": "DatePicker and DateTimePicker input controls for Nette Framework",
-            "time": "2014-10-30 05:49:57"
         },
         {
             "name": "tracy/tracy",
@@ -1512,8 +1471,8 @@
         "nette/nette": 20,
         "knplabs/knp-menu": 20,
         "trunda/smf-menu": 20,
-        "radekdostal/nette-datetimepicker": 20,
-        "kdyby/forms-replicator": 20
+        "kdyby/forms-replicator": 20,
+        "radekdostal/nette-datetimepicker": 20
     },
     "prefer-stable": false,
     "platform": {

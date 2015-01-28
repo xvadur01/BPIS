@@ -1,0 +1,25 @@
+{* Latte template *}
+
+{block content}
+<a n:href="Event:add">add</a>
+{*
+<table>
+	<tr>
+		<th>id</th>
+		<th>titulek</th>
+		<th>nadpis</th>
+		<th>text</th>
+		<th>aktivni</th>
+	</tr>
+
+{foreach $pages as $page}
+		<td>{$page->id}</td>
+		<td>{$page->titulek}</td>
+		<td>{$page->nadpis}</td>
+		<td>{$page->text}</td>
+		<td>{$page->aktivni}</td>
+		<td><a n:href="Frontpage:delete $page->id"><img src="{$basePath}/images/delete.png" width='25' alt="smazat"></a><a n:href="Frontpage:edit $page->id"><img src="{$basePath}/images/edit.png" width='25' alt="edit"></a></td>
+
+	</tr>
+{/foreach}
+</table>*}

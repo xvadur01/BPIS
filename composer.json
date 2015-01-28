@@ -20,7 +20,6 @@
 		"dg/adminer-custom": "~1.0",
 		"knplabs/knp-menu": "dev-master",
 		"trunda/smf-menu": "dev-master",
-		"radekdostal/nette-datetimepicker": "dev-master",
 		"kdyby/forms-replicator": "dev-master"
 	},
 	"require-dev": {
