@@ -24,6 +24,8 @@ class BasePresenter extends \Nette\Application\UI\Presenter {
             }
             $this->redirect(':Front:Sign:in', array('backlink' => $this->storeRequest()));
         }
+		$this->template->titleColor = "";
+		$this->template->title = "";
 	}
 	protected function form() {
         $form = new \Nette\Application\UI\Form;
@@ -85,6 +87,11 @@ class BasePresenter extends \Nette\Application\UI\Presenter {
 		$root->addChild('home3', array(
 			'label' => 'Event',
 			'link'  => 'Event:default',
+        ));
+
+		$root->addChild('home4', array(
+			'label' => 'User',
+			'link'  => 'User:default',
         ));
 
 

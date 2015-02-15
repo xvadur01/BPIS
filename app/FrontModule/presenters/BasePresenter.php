@@ -1,13 +1,39 @@
 <?php
 
 namespace FrontModule;
-
+use \Nette,
+	\App\Model;
+use Smf\Menu;
 
 /**
  * Base presenter for all application presenters.
  */
 abstract class BasePresenter extends \Nette\Application\UI\Presenter
 {
+	/** @var Menu\Control\Factory */
+    protected $menuFactory;
+	public function injectMenuFactory(Menu\Control\Factory $factory)
+    {
+        $this->menuFactory = $factory;
+    }
+
+	/** @var \Todo\FrontpageManager */
+	protected $frontpageManager;
+	public function injectFrontpageManager(\App\Model\FrontpageManager $frontpageManager)
+    {
+        $this->frontpageManager = $frontpageManager;
+    }
+
+    function __construct(\App\Model\FrontpageManager $frontpageManager) {
+		$this->frontpageManager = $frontpageManager;
+    }
+
+
+	public function beforeRender() {
+        $this->setLayout('layout');
+    }
+
+
 	function startup() {
 		parent::startup();
 	}
@@ -40,5 +66,24 @@ abstract class BasePresenter extends \Nette\Application\UI\Presenter
 
         return $form;
 	}
+
+	protected function createComponentMenu()
+    {
+        $menu = $this->menuFactory->createControl();
+        $root = $menu->getRoot();
+		$root->setChildrenAttributes(array('class' => 'side-nav fixed','id' => 'nav-mobile'));
+
+		$frontPage = $this->frontpageManager->getAtiveFronPage();
+
+		foreach ($frontPage as $page)
+		{
+			$root->addChild($page->titulek, array(
+				'label' => $page->titulek,
+				'link'  => array('Homepage:default', array('id' => $page->id))
+			));
+		}
+        return $menu;
+    }
+
 
 }

@@ -8,7 +8,29 @@ class FrontpageManager extends BaseManager
 	const
 		TABLE_NAME = 'stranky',
 		COLUMN_ID = 'id',
-		COLUMN_ACTIVE = 'aktivni';
+		COLUMN_ACTIVE = 'aktivni',
+		COLUMN_URL = 'url';
+
+
+	/**
+	 * get active pages
+	 * @return void
+	 */
+
+	public function getByUrl($url)
+	{
+		return $this->connection->table(self::TABLE_NAME)->where(self::COLUMN_URL,$url)->limit(1);
+	}
+
+	/**
+	 * get active pages
+	 * @return void
+	 */
+
+	public function getFirstAtiveFronPage()
+	{
+		return $this->connection->table(self::TABLE_NAME)->where(self::COLUMN_ACTIVE)->limit(1);
+	}
 
 	/**
 	 * get active pages
@@ -31,9 +53,9 @@ class FrontpageManager extends BaseManager
 
 	public function get($id)
 	{
-		return $this->connection->table(self::TABLE_NAME)->get($id);;
+		return $this->connection->table(self::TABLE_NAME)->get($id);
 	}
-	
+
 	/**
 	 * Add
 	 * @param $record associative array

@@ -1,0 +1,12 @@
+{block scripts}
+{include #parent}  {* include parent #scripts block *}
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('select').material_select();
+		$('.labelNoabsolute').parent().parent().addClass("labelNoabsolute");
+		
+	});
+</script>
+{/block}
+{block content}
+{control userForm}

@@ -15,24 +15,21 @@ class HomepagePresenter extends BasePresenter
 		$this->configManager = $configManager;
 	}
 
-	public function renderDefault()
-	{
-		$this->template->test = $this->configManager->getTable();
-		$this->template->anyVariable = 'any value';
+	public function renderSitemap() {
+			$this->template->sitemap = $this->frontpageManager->getTable();
 	}
 
-	 protected function createComponentTestForm()
-    {
-         $form = $this->form();
+	public function renderDefault($id = null)
+	{
+		if($id)
+		{
+			$this->template->page = $this->frontpageManager->get($id);
 
-        $form->addText('name', 'Jméno:')
-            ->setRequired();
+		}
+		else {
+			$this->template->page = $this->frontpageManager->getFirstAtiveFronPage()->fetch();
 
-        $form->addTextArea('body', 'Komentář:')
-            ->setRequired();
-
-        $form->addSubmit('send', 'Publikovat komentář');
-        return $form;
-    }
-
+		}
+		$this->template->test = $this->configManager->getTable();
+	}
 }

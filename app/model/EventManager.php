@@ -20,7 +20,7 @@ class EventManager extends BaseManager
 
 	public function getTable()
 	{
-		return $this->connection->table(self::TABLE_NAME)->fetch();
+		return $this->connection->table(self::TABLE_NAME);
 	}
 
 	/**
@@ -30,7 +30,7 @@ class EventManager extends BaseManager
 	 */
 	public function add($item)
 	{
-		$this->connection->table(self::TABLE_NAME)->insert($item);
+		return $this->connection->table(self::TABLE_NAME)->insert($item);
 	}
 	/**
 	 * edit
@@ -39,6 +39,16 @@ class EventManager extends BaseManager
 	 */
 	public function edit($item)
 	{
-		$this->connection->table(self::TABLE_NAME)->where(self::COLUMN_ID, $item['id'])->update($item);
+		return $this->connection->table(self::TABLE_NAME)->where(self::COLUMN_ID, $item['id'])->update($item);
+	}
+
+	/**
+	 * delete
+	 * @param  $item associative array
+	 * @return void
+	 */
+	public function delete($id)
+	{
+		$this->connection->table(self::TABLE_NAME)->where(self::COLUMN_ID, $id)->delete();
 	}
 }

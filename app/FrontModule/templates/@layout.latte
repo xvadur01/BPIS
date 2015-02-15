@@ -20,23 +20,66 @@
 
 <body>
 	<script> document.documentElement.className+=' js' </script>
-
-	<div n:foreach="$flashes as $flash" class="flash {$flash->type}">{$flash->message}</div>
-	<div class="sing">
-			{if $user->loggedIn}
-				{$user->getIdentity()->login}
+	<header>
+	<!-- Dropdown Structure -->
+	<ul id="dropdown1" class="dropdown-content">
+		<li>{if $user->loggedIn}
 				<a n:href=":Front:Sign:out">Odhlásit</a>
 			{else}
 				<a n:href=":Front:Sign:in">Přihlásit</a>
 			{/if}
+		</li>
+		  <li></li>
+	</ul>
+	<nav class="top-nav">
+	<div class="container">
+			<div class="nav-wrapper">
+				<div class="col s12">
+					<a href="" class="brand-logo"><h1>{block headerH1}{/block}</h1></a>
+					{if $user->loggedIn}
+						<ul class="right side-nav">
+						  <!-- Dropdown Trigger -->
+						  <li><a class="dropdown-button" href="#!" data-activates="dropdown1">{$user->getIdentity()->login}<i class="mdi-navigation-arrow-drop-down right"></i></a></li>
+						</ul>
+					{/if}
+				</div>
+			</div>
+	</div>
+	</nav>
+	<div class="container">
+		<a class="button-collapse top-nav full" data-activates="nav-mobile" href="#">
+			<i class="mdi-navigation-menu"></i>
+		</a>
+	</div>
+	{control menu:bootstrapNav}
+	</header>
+	<main>
+	<div class="container col s12 m9 l10 ">
+		<div class="row">
+			<div class="col s10 m10 l10">
+				<div n:foreach="$flashes as $flash" class="card-panel tea"><span class="">{$flash->message}</span></div>
+			</div>
 		</div>
-	{include content}
+		{include content}
+	</div>
+	</main>
 
 	{block scripts}
 	<script src="{$basePath}/js/jquery.js"></script>
 	<script src="{$basePath}/js/netteForms.js"></script>
 	<script src="{$basePath}/js/main.js"></script>
 	<script src="{$basePath}/js/materialize.min.js"></script>
+
+	<script type="text/javascript">
+		$(document).ready(function()
+		{
+			$(".dropdown-button").dropdown();
+			// Initialize collapse button
+			$(".button-collapse").sideNav();
+			// Initialize collapsible
+			$('.collapsible').collapsible();
+		});
+	</script>
 	{/block}
 </body>
 </html>

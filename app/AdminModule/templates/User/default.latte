@@ -1,0 +1,35 @@
+{* Latte template *}
+
+{block content}
+
+<a n:href="User:default">user</a>
+<a n:href="User:add">add</a>
+
+<table>
+	<tr>
+		<th>id</th>
+		<th>login</th>
+		<th>heslo</th>
+		<th>prijmeni</th>
+		<th>jmeno</th>
+		<th>role</th>
+		<th>telefon</th>
+		<th>email</th>
+		<th>pracovna</th>
+	</tr>
+
+{foreach $users as $user}
+		<td>{$user->id}</td>
+		<td>{$user->login}</td>
+		<td>{$user->heslo}</td>
+		<td>{$user->prijmeni}</td>
+		<td>{$user->jmeno}</td>
+		<td>{$user->role}</td>
+		<td>{$user->telefon}</td>
+		<td>{$user->email}</td>
+		<td>{$user->pracovna}</td>
+		<td><a n:href="User:delete $user->id"><img src="{$basePath}/images/delete.png" width='25' alt="smazat"></a><a n:href="User:edit $user->id"><img src="{$basePath}/images/edit.png" width='25' alt="edit"></a></td>
+
+	</tr>
+{/foreach}
+</table>

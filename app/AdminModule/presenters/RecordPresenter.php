@@ -6,10 +6,23 @@ class RecordPresenter extends BasePresenter {
 
 	/** @var \Todo\RecordManager */
 	private $recordManager;
+	/** @var \ITimeLineControlFactory @inject */
+    public $timeLineControlFactory;
 
+	protected $data;
+	protected $type;
 
     function __construct(\App\Model\RecordManager $recordManager) {
 		$this->recordManager = $recordManager;
+    }
+
+
+    protected function createComponentTimeLine()
+    {
+		$timeLine = new \TimeLineControl();
+		$timeLine->setType($this->type);
+		$timeLine->setData($this->data);
+        return $timeLine;
     }
 
 	public function actionDelete($recordId)
@@ -39,6 +52,11 @@ class RecordPresenter extends BasePresenter {
 		$this->template->records = $this->recordManager->getTable();
 	}
 
+	public function renderList()
+	{
+		$this->data = $this->recordManager->getTable();
+		$this->type = "record";
+	}
 
 	protected function createComponentRecordForm()
     {

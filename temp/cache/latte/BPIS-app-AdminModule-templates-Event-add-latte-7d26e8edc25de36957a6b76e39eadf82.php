@@ -2,13 +2,13 @@
 // source: C:\xampp\htdocs\BPIS\app\AdminModule/templates/Event/add.latte
 
 // prolog Latte\Macros\CoreMacros
-list($_b, $_g, $_l) = $template->initialize('9687970335', 'html')
+list($_b, $_g, $_l) = $template->initialize('0487726371', 'html')
 ;
 // prolog Latte\Macros\BlockMacros
 //
 // block scripts
 //
-if (!function_exists($_b->blocks['scripts'][] = '_lbcad2845f93_scripts')) { function _lbcad2845f93_scripts($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+if (!function_exists($_b->blocks['scripts'][] = '_lbb9d52e2cf5_scripts')) { function _lbb9d52e2cf5_scripts($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ?> <?php Latte\Macros\BlockMacros::callBlockParent($_b, 'scripts', get_defined_vars()) ?>  
 <script type="text/javascript">
 
@@ -35,7 +35,11 @@ if (!function_exists($_b->blocks['scripts'][] = '_lbcad2845f93_scripts')) { func
 
 		$("form input:checkbox").click(function(){
 			$("form input:checkbox").attr ( "checked" , false );
-			 this.checked = true;
+			if(this.checked)
+			{
+				this.checked = true;
+			}
+
 		});
 
 
@@ -47,7 +51,7 @@ if (!function_exists($_b->blocks['scripts'][] = '_lbcad2845f93_scripts')) { func
 //
 // block content
 //
-if (!function_exists($_b->blocks['content'][] = '_lb5bbb1e7d44_content')) { function _lb5bbb1e7d44_content($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+if (!function_exists($_b->blocks['content'][] = '_lb122673f87b_content')) { function _lb122673f87b_content($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ;Nette\Bridges\FormsLatte\FormMacros::renderFormBegin($form = $_form = $_control["eventForm"], array()) ?>
 
 <div class="row">
@@ -82,7 +86,6 @@ if (!function_exists($_b->blocks['content'][] = '_lb5bbb1e7d44_content')) { func
 </div>
 
 
-
 <div class="row">
 <?php $iterations = 0; foreach ($form['dates']->containers as $dateid => $user) { ?>
 	<div class="col s12 l3 z-depth-2 card" >
@@ -111,17 +114,12 @@ if (!function_exists($_b->blocks['content'][] = '_lb5bbb1e7d44_content')) { func
 					<?php echo $_form["dates-$dateid-times-$timeid-remove"]->getControl()->addAttributes(array('class'=>'btn btn-flat')) ?>
 
 				</div>
-
-
-
 <?php $iterations++; } ?>
 			<div class="col offset-s4 ">
 				<?php echo $_form["dates-$dateid-times-add"]->getControl()->addAttributes(array('class'=>'btn btn-flat')) ?>
 
 			</div>
 		</div>
-
-
 	</div>
 <?php $iterations++; } ?>
 

@@ -1,0 +1,108 @@
+{* Latte template *}
+{block scripts}
+ {include #parent}  {* include parent #scripts block *}
+<script type="text/javascript">
+
+	$(document).ready(function()
+    {
+      	$(".clockpicker").clockpicker({
+			placement: 'top',
+			donetext: 'Vložit',
+			afterDone: function() {
+                $('.active2').click();
+			},
+
+		});
+
+		/*$('.time-input input').click(function(){
+			$(this).parent().addClass('active2');
+		});
+
+		$('.time-input').click(function(){
+			$(this).find('label:first').addClass('active');
+			$(this).find('label:first').click();
+			$(this).removeClass('active2');
+		});*/
+
+		$("form input:checkbox").click(function(){
+			if(this.checked)
+			{
+				$("form input:checkbox").attr ( "checked" , false );
+				this.checked = true;
+
+			}
+			else
+			{
+				$("form input:checkbox").attr ( "checked" , false );
+			}
+		});
+
+
+	});
+</script>
+{/block}
+{block content}
+{form eventForm}
+<div class="row">
+	<div class="input-field">
+		{label nazev}{/label}
+		{input nazev}
+	</div>
+</div>
+<div class="row">
+	<div class="s12 m6 col input-field">
+		{input misto}
+		{label misto/}
+	</div>
+	<div class="s12 m6 col input-field">
+		{input pocet_upozorneni}
+		{label pocet_upozorneni/}
+	</div>
+</div>
+<div class="row">
+	<div class="input-field">
+		{label zapis}{/label}
+		{input zapis}
+	</div>
+</div>
+
+
+<div class="row">
+{foreach $form['dates']->containers as $dateid => $user}
+	<div class="col s12 l3 z-depth-2 card" >
+		<div class="col offset-s3 offset-l5 ">
+			{input dates-$dateid-remove class=>'btn btn-flat'}
+		</div>
+		<div class="input-field col s12">
+			{$user['datum']->label}{$user['datum']->control}
+		</div>
+		<div class="col s12">
+			{foreach $user['times']->containers as $timeid => $time}
+				<div class="col input-field s12">
+					{input $time['pick']: }
+					{label $time['pick']: /}
+				</div>
+				<div class="col input-field s6 time-input">
+						{$time['cas']->label}{$time['cas']->control}
+
+				</div>
+				<div class="col s6">
+					{input dates-$dateid-times-$timeid-remove class=>'btn btn-flat'}
+				</div>
+			{/foreach}
+			<div class="col offset-s4 ">
+				{input dates-$dateid-times-add class=>'btn btn-flat'}
+			</div>
+		</div>
+	</div>
+{/foreach}
+
+</div>
+<div class='row'>
+	{input dates-add class=>'btn btn-default'}
+</div>
+<div class='row right-align'>
+	{label send /}
+    {input send class=>'btn btn-default'}
+</div>
+{/form}

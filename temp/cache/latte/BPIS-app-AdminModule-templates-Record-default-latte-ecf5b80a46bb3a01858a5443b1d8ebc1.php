@@ -2,17 +2,19 @@
 // source: C:\xampp\htdocs\BPIS\app\AdminModule/templates/Record/default.latte
 
 // prolog Latte\Macros\CoreMacros
-list($_b, $_g, $_l) = $template->initialize('9304819975', 'html')
+list($_b, $_g, $_l) = $template->initialize('1262409474', 'html')
 ;
 // prolog Latte\Macros\BlockMacros
 //
 // block content
 //
-if (!function_exists($_b->blocks['content'][] = '_lbb80fbccea3_content')) { function _lbb80fbccea3_content($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+if (!function_exists($_b->blocks['content'][] = '_lb59dfaa599c_content')) { function _lb59dfaa599c_content($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ?><a href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Record:default"), ENT_COMPAT) ?>
 ">frontrecord</a>
 <a href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Record:add"), ENT_COMPAT) ?>
 ">add</a>
+<a href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Record:list"), ENT_COMPAT) ?>
+">list</a>
 
 <table>
 	<tr>

@@ -3,43 +3,37 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/xampp/htdocs/BPIS/app/model/TermManager.php</file>
             <file>file:/C:/xampp/htdocs/BPIS/app/AdminModule/templates/FrontPage/add.latte</file>
-            <file>file:/C:/xampp/htdocs/BPIS/app/AdminModule/templates/Record/edit.latte</file>
-            <file>file:/C:/xampp/htdocs/BPIS/app/model/RecordManager.php</file>
-            <file>file:/C:/xampp/htdocs/BPIS/app/FrontModule/templates/Sign/in.latte</file>
-            <file>file:/C:/xampp/htdocs/BPIS/app/AdminModule/templates/Event/add.latte</file>
-            <file>file:/C:/xampp/htdocs/BPIS/vendor/trunda/smf-menu/src/Smf/Menu/Control/Factory.php</file>
-            <file>file:/C:/xampp/htdocs/BPIS/app/AdminModule/templates/Borrowing/default.latte</file>
+            <file>file:/C:/xampp/htdocs/BPIS/app/AdminModule/templates/User/edit.latte</file>
             <file>file:/C:/xampp/htdocs/BPIS/app/config/config.neon</file>
-            <file>file:/C:/xampp/htdocs/BPIS/app/FrontModule/presenters/SignPresenter.php</file>
-            <file>file:/C:/xampp/htdocs/BPIS/app/AdminModule/templates/@layoutAdmin.latte</file>
+            <file>file:/C:/xampp/htdocs/BPIS/app/AdminModule/templates/Event/detail.latte</file>
             <file>file:/C:/xampp/htdocs/BPIS/app/AdminModule/presenters/BasePresenter.php</file>
-            <file>file:/C:/xampp/htdocs/BPIS/app/AdminModule/templates/FrontPage/edit.latte</file>
+            <file>file:/C:/xampp/htdocs/BPIS/app/AdminModule/templates/@layoutAdmin.latte</file>
+            <file>file:/C:/xampp/htdocs/BPIS/www/css/timeLine.css</file>
             <file>file:/C:/xampp/htdocs/BPIS/app/AdminModule/presenters/EventPresenter.php</file>
             <file>file:/C:/xampp/htdocs/BPIS/app/AdminModule/templates/Record/default.latte</file>
-            <file>file:/C:/xampp/htdocs/BPIS/app/AdminModule/presenters/AdminPresenter.php</file>
-            <file>file:/C:/xampp/htdocs/BPIS/www/js/main.js</file>
+            <file>file:/C:/xampp/htdocs/BPIS/app/AdminModule/templates/User/default.latte</file>
+            <file>file:/C:/xampp/htdocs/BPIS/app/AdminModule/templates/Record/list.latte</file>
+            <file>file:/C:/xampp/htdocs/BPIS/app/components/TimeLine/TimeLineRecordControl.latte</file>
             <file>file:/C:/xampp/htdocs/BPIS/app/AdminModule/presenters/RecordPresenter.php</file>
             <file>file:/C:/xampp/htdocs/BPIS/app/AdminModule/templates/Record/add.latte</file>
-            <file>file:/C:/xampp/htdocs/BPIS/app/AdminModule/templates/Borrowing/edit.latte</file>
+            <file>file:/C:/xampp/htdocs/BPIS/app/model/EventManager.php</file>
             <file>file:/C:/xampp/htdocs/BPIS/app/model/FrontpageManager.php</file>
-            <file>file:/C:/xampp/htdocs/BPIS/app/bootstrap.php</file>
             <file>file:/C:/xampp/htdocs/BPIS/app/FrontModule/templates/Homepage/default.latte</file>
-            <file>file:/C:/xampp/htdocs/BPIS/vendor/nette/security/src/Security/User.php</file>
+            <file>file:/C:/xampp/htdocs/BPIS/app/AdminModule/templates/Event/default.latte</file>
             <file>file:/C:/xampp/htdocs/BPIS/app/AdminModule/presenters/BorrowingPresenter.php</file>
             <file>file:/C:/xampp/htdocs/BPIS/app/AdminModule/templates/Admin/default.latte</file>
-            <file>file:/C:/xampp/htdocs/BPIS/app/config/config.local.neon</file>
+            <file>file:/C:/xampp/htdocs/BPIS/app/components/TimeLine/TimeLineEventControl.latte</file>
             <file>file:/C:/xampp/htdocs/BPIS/app/AdminModule/presenters/FrontPagePresenter.php</file>
-            <file>file:/C:/xampp/htdocs/BPIS/app/AdminModule/templates/FrontPage/default.latte</file>
+            <file>file:/C:/xampp/htdocs/BPIS/app/AdminModule/templates/Event/list.latte</file>
+            <file>file:/C:/xampp/htdocs/BPIS/app/AdminModule/templates/User/add.latte</file>
+            <file>file:/C:/xampp/htdocs/BPIS/app/router/RouterFactory.php</file>
+            <file>file:/C:/xampp/htdocs/BPIS/app/AdminModule/presenters/UserPresenter.php</file>
             <file>file:/C:/xampp/htdocs/BPIS/app/model/UserManager.php</file>
-            <file>file:/C:/xampp/htdocs/BPIS/app/model/BaseManager.php</file>
             <file>file:/C:/xampp/htdocs/BPIS/app/FrontModule/presenters/BasePresenter.php</file>
-            <file>file:/C:/xampp/htdocs/BPIS/vendor/trunda/smf-menu/src/Smf/Menu/Control/MenuControl.php</file>
-            <file>file:/C:/xampp/htdocs/BPIS/vendor/composer/installed.json</file>
             <file>file:/C:/xampp/htdocs/BPIS/app/FrontModule/templates/@layout.latte</file>
-            <file>file:/C:/xampp/htdocs/BPIS/app/AdminModule/templates/Borrowing/add.latte</file>
             <file>file:/C:/xampp/htdocs/BPIS/www/css/screen.css</file>
-            <file>file:/C:/xampp/htdocs/BPIS/app/model/BorrowingManager.php</file>
             <file>file:/C:/xampp/htdocs/BPIS/app/FrontModule/presenters/HomepagePresenter.php</file>
         </group>
     </open-files>

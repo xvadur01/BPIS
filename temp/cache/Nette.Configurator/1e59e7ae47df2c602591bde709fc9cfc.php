@@ -119,6 +119,7 @@ class SystemContainer extends Nette\DI\Container
 			'nette\\security\\iauthenticator' => array('36_App_Model_UserManager'),
 			'app\\model\\usermanager' => array('36_App_Model_UserManager'),
 			'app\\routerfactory' => array('37_App_RouterFactory'),
+			'itimelinecontrolfactory' => array('38_ITimeLineControlFactory'),
 			'nette\\di\\container' => array('container'),
 		),
 		'tags' => array(
@@ -225,8 +226,17 @@ class SystemContainer extends Nette\DI\Container
 	 */
 	public function createService__37_App_RouterFactory()
 	{
-		$service = new App\RouterFactory;
+		$service = new App\RouterFactory($this->getService('33_App_Model_FrontpageManager'));
 		return $service;
+	}
+
+
+	/**
+	 * @return ITimeLineControlFactory
+	 */
+	public function createService__38_ITimeLineControlFactory()
+	{
+		return new SystemContainer_ITimeLineControlFactoryImpl_38_ITimeLineControlFactory($this);
 	}
 
 
@@ -575,6 +585,28 @@ class SystemContainer extends Nette\DI\Container
 		Nette\Utils\SafeStream::register();
 		Nette\Reflection\AnnotationsParser::setCacheStorage($this->getByType("Nette\Caching\IStorage"));
 		Nette\Reflection\AnnotationsParser::$autoRefresh = TRUE;
+	}
+
+}
+
+
+
+final class SystemContainer_ITimeLineControlFactoryImpl_38_ITimeLineControlFactory implements ITimeLineControlFactory
+{
+
+	private $container;
+
+
+	public function __construct(Nette\DI\Container $container)
+	{
+		$this->container = $container;
+	}
+
+
+	public function create()
+	{
+		$service = new TimeLineControl;
+		return $service;
 	}
 
 }

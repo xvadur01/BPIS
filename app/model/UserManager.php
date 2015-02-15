@@ -48,19 +48,56 @@ class UserManager extends BaseManager implements Nette\Security\IAuthenticator
 		return new Nette\Security\Identity($row[self::COLUMN_ID], $row[self::COLUMN_ROLE], $arr);
 	}
 
-
 	/**
-	 * Adds new user.
-	 * @param  string
-	 * @param  string
+	 * get users by login
 	 * @return void
 	 */
-	/*public function add($username, $password)
+
+	public function getByLogin($login)
 	{
-		$this->database->table(self::TABLE_NAME)->insert(array(
-			self::COLUMN_NAME => $username,
-			self::COLUMN_PASSWORD_HASH => Passwords::hash($password),
-		));
-	}*/
+		return $this->connection->table(self::TABLE_NAME)->where(self::COLUMN_NAME,$login);
+	}
+
+	/**
+	 * get all data from table
+	 * @return void
+	 */
+	public function getTable()
+	{
+		return $this->connection->table(self::TABLE_NAME);
+	}
+
+	public function get($id)
+	{
+		return $this->connection->table(self::TABLE_NAME)->get($id);
+	}
+	/**
+	 * Add
+	 * @param $record associative array
+	 * @return void
+	 */
+	public function add($item)
+	{
+		$this->connection->table(self::TABLE_NAME)->insert($item);
+	}
+	/**
+	 * edit
+	 * @param  $item associative array
+	 * @return void
+	 */
+	public function edit($item)
+	{
+		$this->connection->table(self::TABLE_NAME)->where(self::COLUMN_ID, $item['id'])->update($item);
+	}
+
+	/**
+	 * delete
+	 * @param  $item associative array
+	 * @return void
+	 */
+	public function delete($id)
+	{
+		$this->connection->table(self::TABLE_NAME)->where(self::COLUMN_ID, $id)->delete();
+	}
 
 }

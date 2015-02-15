@@ -5,10 +5,6 @@ body {
 	background: white;
 }
 
-h1 {
-	color: #3484D2;
-}
-
 #ajax-spinner {
 	margin: 15px 0 0 15px;
 	padding: 13px;
@@ -8413,3 +8409,8 @@ body.parallax-demo footer {
     color: rgba(0, 0, 0, 0.87); }
   #tx-live-lang-container .txlive-langselector-marker {
     border-bottom: 4px solid rgba(0, 0, 0, 0.61); }
+
+
+.labelNoabsolute label{
+    position: static;
+}

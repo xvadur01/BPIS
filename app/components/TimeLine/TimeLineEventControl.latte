@@ -1,0 +1,20 @@
+<ul class="timeline">
+{foreach $data as $event}
+	<li>
+
+		<div class="timeline-badge  blue lighten-0"><i class="mdi-action-done"></i>
+		</div>
+		<div class="timeline-panel">
+			<div class="timeline-heading">
+				<a href="{plink Event:detail $event->id}"><h4 class="timeline-title">{$event->nazev}</h4></a>
+				<p>
+					<small class="text-muted"><i class="glyphicon glyphicon-time"></i>{$event->datum|date:'%d.%m.%Y'}</small>
+				</p>
+			</div>
+			<div class="timeline-body">
+				<p>{$event->zapis|noescape}</p>
+			</div>
+		</div>
+	</li>
+{/foreach}
+</ul>

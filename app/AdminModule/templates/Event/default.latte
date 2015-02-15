@@ -2,24 +2,27 @@
 
 {block content}
 <a n:href="Event:add">add</a>
-{*
+<a n:href="Event:list">list</a>
+
 <table>
 	<tr>
 		<th>id</th>
-		<th>titulek</th>
-		<th>nadpis</th>
-		<th>text</th>
-		<th>aktivni</th>
+		<th>nazev</th>
+		<th>datum</th>
+		<th>zapis</th>
+		<th>vytvoril</th>
+		<th>pocet upozorneni</th>
 	</tr>
 
-{foreach $pages as $page}
-		<td>{$page->id}</td>
-		<td>{$page->titulek}</td>
-		<td>{$page->nadpis}</td>
-		<td>{$page->text}</td>
-		<td>{$page->aktivni}</td>
-		<td><a n:href="Frontpage:delete $page->id"><img src="{$basePath}/images/delete.png" width='25' alt="smazat"></a><a n:href="Frontpage:edit $page->id"><img src="{$basePath}/images/edit.png" width='25' alt="edit"></a></td>
+{foreach $events as $event}
+		<td>{$event->id}</td>
+		<td>{$event->nazev}</td>
+		<td>{$event->datum}</td>
+		<td>{$event->zapis}</td>
+		<td>{$event->uzivatel_id}</td>
+		<td>{$event->pocet_upozorneni}</td>
+		<td><a n:href="Event:delete $event->id"><img src="{$basePath}/images/delete.png" width='25' alt="smazat"></a><a n:href="Event:edit $event->id"><img src="{$basePath}/images/edit.png" width='25' alt="edit"></a></td>
 
 	</tr>
 {/foreach}
-</table>*}
+</table>

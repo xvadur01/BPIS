@@ -1,0 +1,20 @@
+{* Latte template *}
+{block content}
+{form usersEventForm}
+
+<div class="row">
+	{foreach $users as $user}
+	<div class="col input-field s12">
+		{input select-{$user->id}: }
+		{label select-{$user->id}: /}
+	</div>
+
+{/foreach}
+
+</div>
+
+<div class='row right-align'>
+	{label send /}
+    {input send class=>'btn btn-default'}
+</div>
+{/form}

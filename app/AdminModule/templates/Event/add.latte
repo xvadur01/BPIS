@@ -26,7 +26,11 @@
 
 		$("form input:checkbox").click(function(){
 			$("form input:checkbox").attr ( "checked" , false );
-			 this.checked = true;
+			if(this.checked)
+			{
+				this.checked = true;
+			}
+
 		});
 
 
@@ -59,7 +63,6 @@
 </div>
 
 
-
 <div class="row">
 {foreach $form['dates']->containers as $dateid => $user}
 	<div class="col s12 l3 z-depth-2 card" >
@@ -82,16 +85,11 @@
 				<div class="col s6">
 					{input dates-$dateid-times-$timeid-remove class=>'btn btn-flat'}
 				</div>
-
-
-
 			{/foreach}
 			<div class="col offset-s4 ">
 				{input dates-$dateid-times-add class=>'btn btn-flat'}
 			</div>
 		</div>
-
-
 	</div>
 {/foreach}
 

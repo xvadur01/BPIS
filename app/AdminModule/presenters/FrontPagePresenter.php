@@ -60,7 +60,7 @@ class FrontPagePresenter extends BasePresenter {
     {
 
         $values = $form->getValues();
-		
+		$values['url'] = \Nette\Utils\Strings::webalize($values['nadpis']);
 		if ($values['id']) {
 			$this->frontpageManager->edit($values);
         } else {

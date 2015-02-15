@@ -28,6 +28,7 @@ services:
 	- App\Model\EventManager
 	- App\Model\ConfigManager
 	- App\Model\BorrowingManager
+	- ITimeLineControlFactory
 	router: @App\RouterFactory::createRouter
 smfMenu:
     defaultRenderer: bootstrapNav # jaký použít výchozí renderer (úplně výchozí je list)
