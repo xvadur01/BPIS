@@ -49,7 +49,14 @@ class RecordPresenter extends BasePresenter {
     }
 
 	public function renderDefault() {
-		$this->template->records = $this->recordManager->getTable();
+		if($this->user->isInRole('admin'))
+		{
+			$this->template->records = $this->recordManager->getTable();
+		}
+		else
+		{
+			$this->template->records = $this->recordManager->getUserRecord($this->user->getId());
+		}
 	}
 
 	public function renderList()

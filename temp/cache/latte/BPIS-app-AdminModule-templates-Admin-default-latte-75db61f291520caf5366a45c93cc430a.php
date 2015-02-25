@@ -2,13 +2,20 @@
 // source: C:\xampp\htdocs\BPIS\app\AdminModule/templates/Admin/default.latte
 
 // prolog Latte\Macros\CoreMacros
-list($_b, $_g, $_l) = $template->initialize('5235299908', 'html')
+list($_b, $_g, $_l) = $template->initialize('8038319307', 'html')
 ;
 // prolog Latte\Macros\BlockMacros
 //
+// block headerH1
+//
+if (!function_exists($_b->blocks['headerH1'][] = '_lb513dc8a0ec_headerH1')) { function _lb513dc8a0ec_headerH1($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+?>BPIS<?php
+}}
+
+//
 // block content
 //
-if (!function_exists($_b->blocks['content'][] = '_lbe5395e15fc_content')) { function _lbe5395e15fc_content($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+if (!function_exists($_b->blocks['content'][] = '_lbafbb8ef7c7_content')) { function _lbafbb8ef7c7_content($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ?><a href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("FrontPage:default"), ENT_COMPAT) ?>
 ">frontpage</a>
 <a href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("FrontPage:add"), ENT_COMPAT) ?>
@@ -17,7 +24,80 @@ if (!function_exists($_b->blocks['content'][] = '_lbe5395e15fc_content')) { func
 <a href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Record:default"), ENT_COMPAT) ?>
 ">record</a>
 <a href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Borrowing:default"), ENT_COMPAT) ?>
-">borrow</a><?php
+">borrow</a>
+
+<div class="row">
+	<div class="col s12 m4">
+<?php if (count($newestEvent)) { $iterations = 0; foreach ($newestEvent as $event) { ?>
+				<div class="card small blue">
+					<div class="card-content">
+					  <span class="card-title activator white-text text-darken-4"><?php echo Latte\Runtime\Filters::escapeHtml($event['nazev'], ENT_NOQUOTES) ?> <i class="mdi-navigation-more-vert right"></i></span>
+					</div>
+					<div class="card-reveal blue s12 m6 l6">
+						<span class="card-title white-text text-darken-4"><a class="white-text text-darken-4" href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Event:detail", array($event['id'])), ENT_COMPAT) ?>
+"><?php echo Latte\Runtime\Filters::escapeHtml($event['nazev'], ENT_NOQUOTES) ?></a><i class="mdi-navigation-close right"></i></span>
+					  <p class="white-text"><?php echo Latte\Runtime\Filters::escapeHtml($event['popis'], ENT_NOQUOTES) ?></p>
+					</div>
+				</div>
+<?php $iterations++; } } else { ?>
+			<div class="card small">
+				<div class="card-content">
+				  <span class="card-title activator grey-text text-darken-4">Žádná nová událost</span>
+				</div>
+			</div>
+<?php } ?>
+	</div>
+	<div class="col s12 m4">
+<?php if (count($closestEvent)) { $iterations = 0; foreach ($closestEvent as $event) { ?>
+			<div class="card small blue">
+				<div class="card-content">
+				  <span class="card-title activator white-text text-darken-4"><?php echo Latte\Runtime\Filters::escapeHtml($event['nazev'], ENT_NOQUOTES) ?> <i class="mdi-navigation-more-vert right"></i></span>
+				</div>
+				<div class="card-reveal blue s12 m6 l6">
+				 	<span class="card-title white-text text-darken-4"><a class="white-text text-darken-4" href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Event:detail", array($event['id'])), ENT_COMPAT) ?>
+"><?php echo Latte\Runtime\Filters::escapeHtml($event['nazev'], ENT_NOQUOTES) ?></a><i class="mdi-navigation-close right"></i></span>
+					<p class="white-text"><?php echo Latte\Runtime\Filters::escapeHtml($event['popis'], ENT_NOQUOTES) ?></p>
+				</div>
+			</div>
+<?php $iterations++; } } else { ?>
+			<div class="card small">
+				<div class="card-content">
+				  <span class="card-title activator grey-text text-darken-4">Žádná nadcházející událost</span>
+				</div>
+			</div>
+<?php } ?>
+	</div>
+<div class="col s12 m4">
+<?php if (count($borrowing)) { $iterations = 0; foreach ($borrowing as $borrow) { ?>
+	<div class="card small blue">
+			<div class="card-content">
+			  <span class="card-title activator white-text text-darken-4"><?php echo Latte\Runtime\Filters::escapeHtml($borrow['nazev'], ENT_NOQUOTES) ?> <i class="mdi-navigation-more-vert right"></i></span>
+			</div>
+			<div class="card-reveal blue s12 m6 l6">
+			  <span class="card-title white-text text-darken-4"><?php echo Latte\Runtime\Filters::escapeHtml($borrow['nazev'], ENT_NOQUOTES) ?><i class="mdi-navigation-close right"></i></span>
+			  <p class="white-text"><?php echo Latte\Runtime\Filters::escapeHtml($borrow['nazev'], ENT_NOQUOTES) ?>
+,<?php echo Latte\Runtime\Filters::escapeHtml($borrow['jmeno'], ENT_NOQUOTES) ?>
+,<?php echo Latte\Runtime\Filters::escapeHtml($borrow['prijmeni'], ENT_NOQUOTES) ?></p>
+			  <a href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Borrowing:giveBack", array($borrow['id'], 'backlink' => $presenter->storeRequest())), ENT_COMPAT) ?>
+">Vrátit</a>
+			</div>
+		</div>
+
+<?php $iterations++; } } else { ?>
+		<div class="card small">
+			<div class="card-content">
+			  <span class="card-title activator grey-text text-darken-4">Žádná výpujčka</span>
+			  <a href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Borrowing:add"), ENT_COMPAT) ?>
+">Nova</a>
+			</div>
+		</div>
+<?php } ?>
+</div>
+</div>
+
+<div class="row">
+<?php $_l->tmp = $_control->getComponent("timeLine"); if ($_l->tmp instanceof Nette\Application\UI\IRenderable) $_l->tmp->redrawControl(NULL, FALSE); $_l->tmp->render() ?>
+</div><?php
 }}
 
 //
@@ -40,7 +120,8 @@ if (empty($_l->extends) && !empty($_control->snippetMode)) {
 //
 // main template
 //
-?>
+if ($_l->extends) { ob_end_clean(); return $template->renderChildTemplate($_l->extends, get_defined_vars()); }
+call_user_func(reset($_b->blocks['headerH1']), $_b, get_defined_vars())  ?>
 
-<?php if ($_l->extends) { ob_end_clean(); return $template->renderChildTemplate($_l->extends, get_defined_vars()); }
-call_user_func(reset($_b->blocks['content']), $_b, get_defined_vars()) ; 
+
+<?php call_user_func(reset($_b->blocks['content']), $_b, get_defined_vars()) ; 

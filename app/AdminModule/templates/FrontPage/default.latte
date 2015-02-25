@@ -1,26 +1,37 @@
 {* Latte template *}
-
+{block headerH1}Přehled věřejných stránek{/block}
 {block content}
+<div class="row">
+<a n:href="FrontPage:add" title="Nová stránka" class="right-align btn-floating btn-large waves-effect waves-light blue"><i class="mdi-content-add"></i></a>
+</div>
 
-<a n:href="FrontPage:default">frontpage</a>
-<a n:href="FrontPage:add">add</a>
-
-<table>
+<table class=" striped responsive-table">
 	<tr>
-		<th>id</th>
-		<th>titulek</th>
-		<th>nadpis</th>
-		<th>text</th>
-		<th>aktivni</th>
+		<th>Id</th>
+		<th>Titulek</th>
+		<th>Nadpis</th>
+		<th>Text</th>
+		<th>Aktivní</th>
+		<th></th>
 	</tr>
 
 {foreach $pages as $page}
 		<td>{$page->id}</td>
 		<td>{$page->titulek}</td>
 		<td>{$page->nadpis}</td>
-		<td>{$page->text}</td>
-		<td>{$page->aktivni}</td>
-		<td><a n:href="Frontpage:delete $page->id"><img src="{$basePath}/images/delete.png" width='25' alt="smazat"></a><a n:href="Frontpage:edit $page->id"><img src="{$basePath}/images/edit.png" width='25' alt="edit"></a></td>
+		<td>{$page->text|truncate:500|striptags}</td>
+		<td>
+			{if $page->aktivni}
+				<span class="btn-floating green accent-2"><i class=" mdi-communication-invert-colors-on"></i></span>
+			{else}
+				<span class="btn-floating red lighten-4"><i class="mdi-communication-invert-colors-off"></i></span>
+			{/if}
+		</td>
+		<td>
+			<a n:href=":Front:Homepage:default, $page->id" title="Zobrazit ve veřejné části" class="btn-floating waves-effect waves-light light-blue lighten-1" target="_blank"><i class="mdi-image-portrait"></i></a>
+			<a n:href="Frontpage:edit $page->id" title="Upravit stránku" class="btn-floating waves-effect waves-light light-green accent-3"><i class="mdi-editor-mode-edit"></i></a>
+			<a n:href="Frontpage:delete $page->id" title="smazat stránku" class="btn-floating waves-effect waves-light red"><i class="mdi-action-delete"></i></a>
+		</td>
 
 	</tr>
 {/foreach}

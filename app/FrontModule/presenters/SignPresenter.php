@@ -20,12 +20,12 @@ class SignPresenter extends BasePresenter
 	{
 		$form = $this->form();
 		$form->addText('username', 'Username:')
-			->setRequired('Please enter your username.');
+			->setRequired('Prosím zadejte přihlašovací jméno.');
 
 		$form->addPassword('password', 'Password:')
-			->setRequired('Please enter your password.');
+			->setRequired('Prosím zadejte heslo.');
 
-		$form->addCheckbox('remember', 'Keep me signed in');
+		$form->addCheckbox('remember', 'Zůstat přihlášen')->getControlPrototype()->class('checkbox');
 
 		$form->addSubmit('send', 'Sign in')->getControlPrototype()->class="btn btn-default";
 
@@ -57,7 +57,7 @@ class SignPresenter extends BasePresenter
 	public function actionOut()
 	{
 		$this->getUser()->logout();
-		$this->flashMessage('You have been signed out.');
+		$this->flashMessage('Odhlášení proběhlov  pořádku.');
 		$this->redirect(':Front:Homepage:');
 	}
 

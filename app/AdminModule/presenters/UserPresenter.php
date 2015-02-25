@@ -8,10 +8,16 @@ class UserPresenter extends BasePresenter {
 
 	/** @var \Todo\UserManager */
 	private $userManager;
+	/** @var \Todo\EventManager */
+	private $eventManager;
+	/** @var \Todo\TermManager */
+	private $termManager;
 
 
-    function __construct(\App\Model\UserManager $userManager) {
+    function __construct(\App\Model\UserManager $userManager,\App\Model\EventManager $eventManager,\App\Model\TermManager $termManager) {
 		$this->userManager = $userManager;
+		$this->eventManager = $eventManager;
+		$this->termManager = $termManager;
     }
 
 	public function actionDelete($userId)
@@ -96,14 +102,16 @@ class UserPresenter extends BasePresenter {
 
 		if($values['id'])
 		{
+			$id = $values['id'];
 			$this->userManager->edit($values);
 		}
 		else
 		{
-			$this->userManager->add($values);
+			$user = $this->userManager->add($values);
+			$id = $user['id'];
 		}
         $this->flashMessage('Uzivatel byl vlozen', 'success');
-        $this->redirect('User:default');
+        $this->redirect('User:newUserEvents',array('id' => $id));
     }
 
 	protected function createComponentEditUserForm()
@@ -172,5 +180,59 @@ class UserPresenter extends BasePresenter {
 		}
         $this->flashMessage('Uzivatel byl vlozen', 'success');
         $this->redirect('User:default');
+    }
+
+	public function actionNewUserEvents($id)
+	{
+		$events = $this->eventManager->getFutureEvents();
+		$form = $this['newUserEventsForm'];
+		foreach ($events as $event)
+		{
+			$form['events'][$event['id']]->setValues(array("event_id" => $event['id'],"event_user_id" => $event['uzivatel_id']));
+			$form['events'][$event['id']]['pick']->caption = $event['nazev'];
+		}
+
+		$form->setValues(array("user_id" => $id));
+	}
+
+	protected function createComponentNewUserEventsForm()
+    {
+        $form = $this->form();
+		$removeEvent = callback($this, 'EventFormRemoveElementClicked');
+		$form->addHidden("user_id");
+		$dates = $form->addDynamic('events',
+                    function (Container $time) use ($removeEvent) {
+						$time->addHidden('event_id', null);
+						$time->addHidden('event_user_id', null);
+						$time->addCheckbox('pick',"")->getControlPrototype()->class('checkbox');;
+						$time->addSubmit('remove', 'Remove date')
+						->setValidationScope(FALSE) # disables validation
+						->onClick[] = $removeEvent;
+                    },0);
+
+		$form->addSubmit('send', 'Odeslat');
+        $form->onSuccess[] = $this->newUserEventsSucceeded;
+        return $form;
+    }
+
+    public function newUserEventsSucceeded($form)
+    {
+        $values = $form->getValues();
+		foreach ($values['events'] as $event)
+		{
+			if($event['pick'] == TRUE)
+			{
+				$terms = $this->termManager->getTermOfEvent($event['event_user_id'], $event['event_id']);
+				foreach ($terms as $key => $term) {
+					$term = $term->toArray();
+					$term['uzivatel_id'] = $values['user_id'];
+					$term['vyhovuje'] = null;
+					unset($term['id']);
+					$this->termManager->add($term);
+				}
+			}
+		}
+		$this->flashMessage('Změny byly uloženy', 'success');
+		$this->redirect('User:default');
     }
 }

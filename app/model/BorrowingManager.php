@@ -9,7 +9,8 @@ class BorrowingManager extends BaseManager
 	const
 		TABLE_NAME = 'vypujcka',
 		COLUMN_ID = 'id',
-		COLUMN_USER_ID = 'uzivatel_id';
+		COLUMN_USER_ID = 'uzivatel_id',
+		COLUMN_GIVE_BACK = 'vraceno';
 
 		/**
 	 * get all data from table
@@ -61,7 +62,17 @@ class BorrowingManager extends BaseManager
 	 */
 	public function getUserBorrow($userId)
 	{
-		$this->connection->table(self::TABLE_NAME)->where(self::COLUMN_USER_ID, $userId);
+		return $this->connection->table(self::TABLE_NAME)->where(self::COLUMN_USER_ID, $userId);
+	}
+
+	/**
+	 * getUserBorrow
+	 * @param $userId
+	 * @return all user borrows
+	 */
+	public function getUserActiveBorrow($userId)
+	{
+		return $this->connection->table(self::TABLE_NAME)->where(self::COLUMN_USER_ID, $userId)->where(self::COLUMN_GIVE_BACK,NULL);
 	}
 
 	/**

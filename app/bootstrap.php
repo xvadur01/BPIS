@@ -19,5 +19,5 @@ $configurator->addConfig(__DIR__ . '/config/config.neon');
 $configurator->addConfig(__DIR__ . '/config/config.local.neon');
 
 $container = $configurator->createContainer();
-
+$container->application->errorPresenter = 'Front:Error';
 return $container;

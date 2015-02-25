@@ -7,6 +7,8 @@ class BorrowingPresenter extends BasePresenter {
 	/** @var \Todo\BorrowingManager */
 	private $borrowingManager;
 
+	/** @persistent */
+    public $backlink = '';
 
     function __construct(\App\Model\BorrowingManager $borrowingManager) {
 		$this->borrowingManager = $borrowingManager;
@@ -23,7 +25,8 @@ class BorrowingPresenter extends BasePresenter {
     {
         $borrowing = $this->borrowingManager->giveBack($borrowingId);
 		$this->flashMessage('Vec byla navracena.', 'success');
-        $this->redirect('Borrowing:default');
+		$this->restoreRequest($this->backlink);
+		$this->redirect('Borrowing:default');
     }
 
 	public function actionEdit($borrowingId)
@@ -41,7 +44,14 @@ class BorrowingPresenter extends BasePresenter {
     }
 
 	public function renderDefault() {
-		$this->template->borrowings = $this->borrowingManager->getTable();
+		if($this->user->isInRole('admin'))
+		{
+			$this->template->borrowings = $this->borrowingManager->getTable();
+		}
+		else
+		{
+			$this->template->borrowings = $this->borrowingManager->getUserBorrow($this->user->getId());
+		}
 	}
 
 
@@ -58,7 +68,7 @@ class BorrowingPresenter extends BasePresenter {
 
 		$form->addText('prijmeni', 'Příjmení:')
             ->setRequired();
-		$form->addText('datum', 'Datum:', 16, 16)->getControlPrototype()->setClass('datepicker');
+		$form->addText('datum', 'Datum:', 20, 20)->getControlPrototype()->setClass('datepicker');
 
         $form->addSubmit('send', 'Odeslat');
 		$form->setDefaults(array("uzivatel_id" => $this->user->getId()));

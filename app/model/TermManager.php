@@ -93,6 +93,11 @@ class TermManager extends BaseManager
 		return $this->connection->table(self::TABLE_NAME)->where(self::COLUMN_USER,$idUser)->where(self::COLUMN_EVENT,$idEvent);
 	}
 
+	public function getTermsOfEvent($idEvent)
+	{
+		return $this->connection->table(self::TABLE_NAME)->where(self::COLUMN_EVENT,$idEvent);
+	}
+
 	/**
 	 * get active pages
 	 * @return void
@@ -102,5 +107,22 @@ class TermManager extends BaseManager
 		return $this->connection->table(self::TABLE_NAME)->where(self::COLUMN_EVENT,$idEvent)->group(self::COLUMN_USER);
 	}
 
+	/**
+	 * get active pages
+	 * @return void
+	 */
+	public function getNewestEvent($idUser)
+	{
+		return $this->connection->table(self::TABLE_NAME)->where(self::COLUMN_USER,$idUser)->group(self::COLUMN_EVENT)
+				->order(self::COLUMN_EVENT.' DESC')->limit(3);
+
+	}
+
+	public function getUserEvents($idUser)
+	{
+		return $this->connection->table(self::TABLE_NAME)->where(self::COLUMN_USER,$idUser)->group(self::COLUMN_EVENT);
+
+
+	}
 
 }

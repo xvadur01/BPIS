@@ -45,7 +45,7 @@ class UserManager extends BaseManager implements Nette\Security\IAuthenticator
 
 		$arr = $row->toArray();
 		unset($arr[self::COLUMN_PASSWORD_HASH]);
-		return new Nette\Security\Identity($row[self::COLUMN_ID], $row[self::COLUMN_ROLE], $arr);
+		return new Nette\Security\Identity($row[self::COLUMN_ID], array($row[self::COLUMN_ROLE]), $arr);
 	}
 
 	/**
@@ -78,7 +78,7 @@ class UserManager extends BaseManager implements Nette\Security\IAuthenticator
 	 */
 	public function add($item)
 	{
-		$this->connection->table(self::TABLE_NAME)->insert($item);
+		return $this->connection->table(self::TABLE_NAME)->insert($item);
 	}
 	/**
 	 * edit

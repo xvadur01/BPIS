@@ -2,7 +2,7 @@
 // source: C:\xampp\htdocs\BPIS\app\components\TimeLine/TimeLineRecordControl.latte
 
 // prolog Latte\Macros\CoreMacros
-list($_b, $_g, $_l) = $template->initialize('8481113233', 'html')
+list($_b, $_g, $_l) = $template->initialize('5399425079', 'html')
 ;
 // prolog Nette\Bridges\ApplicationLatte\UIMacros
 
@@ -25,7 +25,7 @@ if (empty($_l->extends) && !empty($_control->snippetMode)) {
 			<div class="timeline-heading">
 				<h4 class="timeline-title"><?php echo Latte\Runtime\Filters::escapeHtml($record->nazev, ENT_NOQUOTES) ?></h4>
 				<p>
-					<small class="text-muted"><i class="glyphicon glyphicon-time"></i><?php echo Latte\Runtime\Filters::escapeHtml($record->datum, ENT_NOQUOTES) ?></small>
+					<small class="text-muted"><i class="glyphicon glyphicon-time"></i><?php echo Latte\Runtime\Filters::escapeHtml($template->date($record->datum, '%d.%m.%Y'), ENT_NOQUOTES) ?></small>
 				</p>
 			</div>
 			<div class="timeline-body">

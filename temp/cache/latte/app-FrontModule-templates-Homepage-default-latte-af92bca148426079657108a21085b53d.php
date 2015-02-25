@@ -2,20 +2,20 @@
 // source: C:\xampp\htdocs\BPIS\app\FrontModule/templates/Homepage/default.latte
 
 // prolog Latte\Macros\CoreMacros
-list($_b, $_g, $_l) = $template->initialize('3589584901', 'html')
+list($_b, $_g, $_l) = $template->initialize('8091628404', 'html')
 ;
 // prolog Latte\Macros\BlockMacros
 //
 // block headerH1
 //
-if (!function_exists($_b->blocks['headerH1'][] = '_lb0d7c42d5a5_headerH1')) { function _lb0d7c42d5a5_headerH1($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+if (!function_exists($_b->blocks['headerH1'][] = '_lbda36b0f3be_headerH1')) { function _lbda36b0f3be_headerH1($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ;echo Latte\Runtime\Filters::escapeHtml($page->nadpis, ENT_NOQUOTES) ;
 }}
 
 //
 // block content
 //
-if (!function_exists($_b->blocks['content'][] = '_lb80239747c4_content')) { function _lb80239747c4_content($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+if (!function_exists($_b->blocks['content'][] = '_lb4c4b93f05e_content')) { function _lb4c4b93f05e_content($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ?>	<div>
 		<?php echo $page->text ?>
 

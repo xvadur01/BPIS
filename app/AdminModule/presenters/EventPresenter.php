@@ -15,6 +15,7 @@ class EventPresenter extends BasePresenter {
 
 	protected $data;
 	protected $type;
+	protected $eventId;
 
 	private $users;
 	function __construct(\App\Model\EventManager $eventManager,  \App\Model\TermManager $termManager, \App\Model\UserManager $userManager)
@@ -22,6 +23,14 @@ class EventPresenter extends BasePresenter {
 		$this->eventManager = $eventManager;
 		$this->termManager = $termManager;
 		$this->userManager = $userManager;
+    }
+
+	protected function createComponentEventPlaning()
+    {
+		$eventPlanning = new \EventPlanningControl($this->eventManager, $this->termManager, $this->userManager);
+		$eventPlanning->setEventId($this->eventId);
+		$eventPlanning->setUserId($this->user->getId());
+        return $eventPlanning;
     }
 
     protected function createComponentTimeLine()
@@ -95,7 +104,7 @@ class EventPresenter extends BasePresenter {
 			}
 			$i++;
 		}
-		$form->setValues(array("id" => $event['id'], "datum" => $event['datum'],
+		$form->setValues(array("id" => $event['id'], "datum" => $event['datum'],"popis" => $event['popis'],
 						"misto" =>$event['misto'],"nazev" => $event['nazev'],
 						"pocet_upozorneni" => $event['pocet_upozorneni'],
 						"zapis" => $event['zapis'],"uzivatel_id" => $event['uzivatel_id']));
@@ -104,7 +113,20 @@ class EventPresenter extends BasePresenter {
     }
 
 	public function renderDefault() {
-		$this->template->events = $this->eventManager->getTable();
+		if($this->user->isInRole('admin'))
+		{
+			$this->template->events = $this->eventManager->getTable();
+		}
+		else
+		{
+			$terms = $this->termManager->getUserEvents($this->user->getId());
+			$events = array();
+			foreach ($terms as $term)
+			{
+				$events[] = $term['udalost_id'];
+			}
+			$this->template->events = $this->eventManager->gets($events);
+		}
 	}
 
 	public function renderList()
@@ -130,6 +152,7 @@ class EventPresenter extends BasePresenter {
 
 	public function renderDetail($id)
 	{
+		$this->eventId = $id;
 		$event = $this->eventManager->get($id);
 		$this->template->title = $event->nazev;
 		$this->template->event = $event;
@@ -180,14 +203,14 @@ class EventPresenter extends BasePresenter {
 	public function usersEventFormSucceeded($form)
     {
 		$values = $form->getValues();
-		$termsEvent = $this->termManager->getTermOfEvent($values['id'],$values['user_id']);
+		$termsEvent = $this->termManager->getTermOfEvent($values['user_id'],$values['id']);
 		foreach ($values['select'] as $userID => $allow)
 		{
 			if($allow === FALSE && $userID != $values['user_id'])
 			{
 				$this->termManager->deleteUserEvent($values['id'],$userID);
 			}
-			else
+			elseif($userID != $values['user_id'])
 			{
 				$termsUser = $this->termManager->getTermOfEvent($values['id'],$userID);
 				$allowTerm = array();
@@ -223,10 +246,8 @@ class EventPresenter extends BasePresenter {
 				}
 			}
 		}
-
-		dump($values);
-       // $this->flashMessage('Partner byl vlozen', 'success');
-        //$this->redirect('Frontpage:default');
+        $this->flashMessage('Uživatelé byli pozváni na událost.', 'success');
+        $this->redirect('Event:default');
     }
 
 	protected function createComponentEventForm()
@@ -237,6 +258,7 @@ class EventPresenter extends BasePresenter {
 		$form->addHidden('uzivatel_id', null);
         $form->addText('nazev', 'Název:')
             ->setRequired();
+		$form->addText('popis', 'Popis:')->getControlPrototype()->setId('editor');
 
 		$form->addText('misto', 'Místo:')
             ->setRequired();
@@ -340,6 +362,6 @@ class EventPresenter extends BasePresenter {
 				$this->termManager->delete($term->id);
 			}
 		}
-		//$this->redirect('Event:users',array( 'idEvent' => $event['id'],'user_id' => $event['uzivatel_id']));
+		$this->redirect('Event:users',array( 'idEvent' => $event['id'],'user_id' => $event['uzivatel_id']));
     }
 }

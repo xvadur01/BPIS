@@ -119,7 +119,8 @@ class SystemContainer extends Nette\DI\Container
 			'nette\\security\\iauthenticator' => array('36_App_Model_UserManager'),
 			'app\\model\\usermanager' => array('36_App_Model_UserManager'),
 			'app\\routerfactory' => array('37_App_RouterFactory'),
-			'itimelinecontrolfactory' => array('38_ITimeLineControlFactory'),
+			'ieventplanningcontrolfactory' => array('38_IEventPlanningControlFactory'),
+			'itimelinecontrolfactory' => array('39_ITimeLineControlFactory'),
 			'nette\\di\\container' => array('container'),
 		),
 		'tags' => array(
@@ -232,11 +233,20 @@ class SystemContainer extends Nette\DI\Container
 
 
 	/**
+	 * @return IEventPlanningControlFactory
+	 */
+	public function createService__38_IEventPlanningControlFactory()
+	{
+		return new SystemContainer_IEventPlanningControlFactoryImpl_38_IEventPlanningControlFactory($this);
+	}
+
+
+	/**
 	 * @return ITimeLineControlFactory
 	 */
-	public function createService__38_ITimeLineControlFactory()
+	public function createService__39_ITimeLineControlFactory()
 	{
-		return new SystemContainer_ITimeLineControlFactoryImpl_38_ITimeLineControlFactory($this);
+		return new SystemContainer_ITimeLineControlFactoryImpl_39_ITimeLineControlFactory($this);
 	}
 
 
@@ -591,7 +601,29 @@ class SystemContainer extends Nette\DI\Container
 
 
 
-final class SystemContainer_ITimeLineControlFactoryImpl_38_ITimeLineControlFactory implements ITimeLineControlFactory
+final class SystemContainer_IEventPlanningControlFactoryImpl_38_IEventPlanningControlFactory implements IEventPlanningControlFactory
+{
+
+	private $container;
+
+
+	public function __construct(Nette\DI\Container $container)
+	{
+		$this->container = $container;
+	}
+
+
+	public function create()
+	{
+		$service = new EventPlanningControl($this->container->getService('32_App_Model_EventManager'), $this->container->getService('35_App_Model_TermManager'), $this->container->getService('36_App_Model_UserManager'));
+		return $service;
+	}
+
+}
+
+
+
+final class SystemContainer_ITimeLineControlFactoryImpl_39_ITimeLineControlFactory implements ITimeLineControlFactory
 {
 
 	private $container;

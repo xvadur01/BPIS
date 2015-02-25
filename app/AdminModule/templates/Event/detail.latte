@@ -1,10 +1,9 @@
-{* Latte template *}
-
+{block headerH1}Událost: {$event->nazev}{/block}
 {block content}
 <div class="event">
-	{*<p>{$event}<p>*}
-
+	<p>{$event->popis}<p>
 	<p>{$event->datum}<p>
 	<p>{$event->zapis}<p>
 
 </div>
+	{control eventPlaning}

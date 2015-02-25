@@ -2,27 +2,27 @@
 // source: C:\xampp\htdocs\BPIS\app\FrontModule/templates/@layout.latte
 
 // prolog Latte\Macros\CoreMacros
-list($_b, $_g, $_l) = $template->initialize('0669463066', 'html')
+list($_b, $_g, $_l) = $template->initialize('7086524406', 'html')
 ;
 // prolog Latte\Macros\BlockMacros
 //
 // block head
 //
-if (!function_exists($_b->blocks['head'][] = '_lb8ead2e1808_head')) { function _lb8ead2e1808_head($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+if (!function_exists($_b->blocks['head'][] = '_lbb8edb25afa_head')) { function _lbb8edb25afa_head($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ;
 }}
 
 //
 // block headerH1
 //
-if (!function_exists($_b->blocks['headerH1'][] = '_lb908de1a414_headerH1')) { function _lb908de1a414_headerH1($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+if (!function_exists($_b->blocks['headerH1'][] = '_lb852b5d6bf3_headerH1')) { function _lb852b5d6bf3_headerH1($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ;
 }}
 
 //
 // block scripts
 //
-if (!function_exists($_b->blocks['scripts'][] = '_lbc43ba3c1f3_scripts')) { function _lbc43ba3c1f3_scripts($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+if (!function_exists($_b->blocks['scripts'][] = '_lb731479e37b_scripts')) { function _lb731479e37b_scripts($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ?>	<script src="<?php echo Latte\Runtime\Filters::escapeHtml(Latte\Runtime\Filters::safeUrl($basePath), ENT_COMPAT) ?>/js/jquery.js"></script>
 	<script src="<?php echo Latte\Runtime\Filters::escapeHtml(Latte\Runtime\Filters::safeUrl($basePath), ENT_COMPAT) ?>/js/netteForms.js"></script>
 	<script src="<?php echo Latte\Runtime\Filters::escapeHtml(Latte\Runtime\Filters::safeUrl($basePath), ENT_COMPAT) ?>/js/main.js"></script>
@@ -31,7 +31,17 @@ if (!function_exists($_b->blocks['scripts'][] = '_lbc43ba3c1f3_scripts')) { func
 	<script type="text/javascript">
 		$(document).ready(function()
 		{
-			$(".dropdown-button").dropdown();
+			$("input.checkbox").each(function(){
+				$(this).insertBefore($(this).parent());
+			});
+			$("input").each(function(){
+				if(typeof($(this).val()) != "undefined" && $(this).val() !== null)
+				{
+					var $label = $("label[for='"+this.id+"']")
+					$label.addClass('active') ;
+				}
+			});
+			$(".dropdown-button").dropdown( { hover: false });
 			// Initialize collapse button
 			$(".button-collapse").sideNav();
 			// Initialize collapsible
@@ -85,6 +95,12 @@ call_user_func(reset($_b->blocks['head']), $_b, get_defined_vars())  ?>
 	<header>
 	<!-- Dropdown Structure -->
 	<ul id="dropdown1" class="dropdown-content">
+<?php if ($user->loggedIn) { ?>
+			<li>
+				<a href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link(":Admin:User:edit", array($user->getId())), ENT_COMPAT) ?>
+">Osobní údaje</a>
+			</li>
+<?php } ?>
 		<li><?php if ($user->loggedIn) { ?>
 
 				<a href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link(":Front:Sign:out"), ENT_COMPAT) ?>
@@ -94,19 +110,16 @@ call_user_func(reset($_b->blocks['head']), $_b, get_defined_vars())  ?>
 ">Přihlásit</a>
 <?php } ?>
 		</li>
-		  <li></li>
 	</ul>
 	<nav class="top-nav">
 	<div class="container">
 			<div class="nav-wrapper">
 				<div class="col s12">
 					<a href="" class="brand-logo"><h1><?php call_user_func(reset($_b->blocks['headerH1']), $_b, get_defined_vars())  ?></h1></a>
-<?php if ($user->loggedIn) { ?>
 						<ul class="right side-nav">
 						  <!-- Dropdown Trigger -->
-						  <li><a class="dropdown-button" href="#!" data-activates="dropdown1"><?php echo Latte\Runtime\Filters::escapeHtml($user->getIdentity()->login, ENT_NOQUOTES) ?><i class="mdi-navigation-arrow-drop-down right"></i></a></li>
+						  <li><a class="dropdown-button" href="#!" data-activates="dropdown1"><?php if ($user->loggedIn) { echo Latte\Runtime\Filters::escapeHtml($user->getIdentity()->login, ENT_NOQUOTES) ;} ?><i class="mdi-navigation-arrow-drop-down right"></i></a></li>
 						</ul>
-<?php } ?>
 				</div>
 			</div>
 	</div>
@@ -119,16 +132,37 @@ call_user_func(reset($_b->blocks['head']), $_b, get_defined_vars())  ?>
 <?php $_l->tmp = $_control->getComponent("menu"); if ($_l->tmp instanceof Nette\Application\UI\IRenderable) $_l->tmp->redrawControl(NULL, FALSE); $_l->tmp->renderBootstrapNav() ?>
 	</header>
 	<main>
-	<div class="container col s12 m9 l10 ">
-		<div class="row">
-			<div class="col s10 m10 l10">
-<?php $iterations = 0; foreach ($flashes as $flash) { ?>				<div class="card-panel tea"><span class=""><?php echo Latte\Runtime\Filters::escapeHtml($flash->message, ENT_NOQUOTES) ?></span></div>
+		<div class="container col s12 m9 l10 ">
+			<div class="row">
+				<div class="col s10 m10 l10">
+<?php $iterations = 0; foreach ($flashes as $flash) { ?>					<div class="card-panel tea"><span class=""><?php echo Latte\Runtime\Filters::escapeHtml($flash->message, ENT_NOQUOTES) ?></span></div>
 <?php $iterations++; } ?>
+				</div>
 			</div>
-		</div>
 <?php Latte\Macros\BlockMacros::callBlock($_b, 'content', $template->getParameters()) ?>
-	</div>
+		</div>
 	</main>
+	<footer class="page-footer">
+		<div class="container">
+		  <div class="row">
+			<div class="col l6 s12">
+			  <h5 class="white-text">Footer Content</h5>
+			  <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
+			</div>
+			<div class="col l4 offset-l2 s12">
+			  <h5 class="white-text">Links</h5>
+			  <ul>
+				<li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
+			  </ul>
+			</div>
+		  </div>
+		</div>
+		<div class="footer-copyright">
+		  <div class="container">
+			© 2015 Pavel Vaďura
+		  </div>
+		</div>
+    </footer>
 
 <?php call_user_func(reset($_b->blocks['scripts']), $_b, get_defined_vars())  ?>
 </body>

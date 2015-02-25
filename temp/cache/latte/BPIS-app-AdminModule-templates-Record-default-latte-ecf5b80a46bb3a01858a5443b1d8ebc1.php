@@ -2,39 +2,50 @@
 // source: C:\xampp\htdocs\BPIS\app\AdminModule/templates/Record/default.latte
 
 // prolog Latte\Macros\CoreMacros
-list($_b, $_g, $_l) = $template->initialize('1262409474', 'html')
+list($_b, $_g, $_l) = $template->initialize('3809286715', 'html')
 ;
 // prolog Latte\Macros\BlockMacros
 //
+// block headerH1
+//
+if (!function_exists($_b->blocks['headerH1'][] = '_lbc8908e446a_headerH1')) { function _lbc8908e446a_headerH1($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+?>Přehled záznamů<?php
+}}
+
+//
 // block content
 //
-if (!function_exists($_b->blocks['content'][] = '_lb59dfaa599c_content')) { function _lb59dfaa599c_content($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+if (!function_exists($_b->blocks['content'][] = '_lb6ddb26069e_content')) { function _lb6ddb26069e_content($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ?><a href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Record:default"), ENT_COMPAT) ?>
 ">frontrecord</a>
-<a href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Record:add"), ENT_COMPAT) ?>
-">add</a>
 <a href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Record:list"), ENT_COMPAT) ?>
 ">list</a>
 
-<table>
+<div class="row">
+<a title="Nový záznam" class="right-align btn-floating btn-large waves-effect waves-light blue" href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Record:add"), ENT_COMPAT) ?>
+"><i class="mdi-content-add"></i></a>
+</div>
+<table class=" striped responsive-table">
 	<tr>
 		<th>id</th>
 		<th>nazev</th>
 		<th>popis</th>
 		<th>datum</th>
 		<th>datupm splneni</th>
+		<th></th>
 	</tr>
 <?php if ($records) { $iterations = 0; foreach ($records as $record) { ?>
 			<td><?php echo Latte\Runtime\Filters::escapeHtml($record->id, ENT_NOQUOTES) ?></td>
 			<td><?php echo Latte\Runtime\Filters::escapeHtml($record->nazev, ENT_NOQUOTES) ?></td>
-			<td><?php echo Latte\Runtime\Filters::escapeHtml($record->popis, ENT_NOQUOTES) ?></td>
-			<td><?php echo Latte\Runtime\Filters::escapeHtml($record->datum, ENT_NOQUOTES) ?></td>
-			<td><?php echo Latte\Runtime\Filters::escapeHtml($record->datum_splneni, ENT_NOQUOTES) ?></td>
-			<td><a href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Record:delete", array($record->id)), ENT_COMPAT) ?>
-"><img src="<?php echo Latte\Runtime\Filters::escapeHtml(Latte\Runtime\Filters::safeUrl($basePath), ENT_COMPAT) ?>
-/images/delete.png" width='25' alt="smazat"></a><a href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Record:edit", array($record->id)), ENT_COMPAT) ?>
-"><img src="<?php echo Latte\Runtime\Filters::escapeHtml(Latte\Runtime\Filters::safeUrl($basePath), ENT_COMPAT) ?>/images/edit.png" width='25' alt="edit"></a></td>
-
+			<td><?php echo Latte\Runtime\Filters::escapeHtml($template->striptags($template->truncate($record->popis, 500)), ENT_NOQUOTES) ?></td>
+			<td><?php echo Latte\Runtime\Filters::escapeHtml($template->date($record->datum, '%d.%m.%Y'), ENT_NOQUOTES) ?></td>
+			<td><?php echo Latte\Runtime\Filters::escapeHtml($template->date($record->datum_splneni, '%d.%m.%Y'), ENT_NOQUOTES) ?></td>
+			<td>
+				<a title="Smazat záznam" class="btn-floating waves-effect waves-light  red" href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Record:delete", array($record->id)), ENT_COMPAT) ?>
+"><i class="mdi-action-delete"></i></a>
+				<a title="Upravit záznam" class="btn-floating waves-effect waves-light light-green accent-3" href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Record:edit", array($record->id)), ENT_COMPAT) ?>
+"><i class="mdi-editor-mode-edit"></i></a>
+			</td>
 		</tr>
 <?php $iterations++; } } ?>
 </table><?php
@@ -60,7 +71,8 @@ if (empty($_l->extends) && !empty($_control->snippetMode)) {
 //
 // main template
 //
-?>
+if ($_l->extends) { ob_end_clean(); return $template->renderChildTemplate($_l->extends, get_defined_vars()); }
+call_user_func(reset($_b->blocks['headerH1']), $_b, get_defined_vars())  ?>
 
-<?php if ($_l->extends) { ob_end_clean(); return $template->renderChildTemplate($_l->extends, get_defined_vars()); }
-call_user_func(reset($_b->blocks['content']), $_b, get_defined_vars()) ; 
+
+<?php call_user_func(reset($_b->blocks['content']), $_b, get_defined_vars()) ; 

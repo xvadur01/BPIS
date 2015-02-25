@@ -39,16 +39,18 @@ class BasePresenter extends \Nette\Application\UI\Presenter {
 		$renderer->wrappers['label']['container'] = '';
 		$renderer->wrappers['control']['description'] = 'span class=help-block';
 		$renderer->wrappers['control']['errorcontainer'] = 'span class=help-block';
+		$renderer->wrappers['control']['.submit'] = 'btn btn-default';
 		// make form and controls compatible with Twitter Bootstrap
 		$form->getElementPrototype()->class('col s12');
 		foreach ($form->getControls() as $control) {
 			if ($control instanceof Controls\Button) {
 			$control->getControlPrototype()->addClass(empty($usedPrimary) ? 'btn btn-primary' : 'btn btn-default');
 			$usedPrimary = TRUE;
-			} elseif ($control instanceof Controls\TextBase || $control instanceof Controls\SelectBox || $control instanceof Controls\MultiSelectBox) {
+			} elseif ($control instanceof \Controls\TextBase || $control instanceof \Controls\SelectBox || $control instanceof \Controls\MultiSelectBox) {
 			$control->getControlPrototype()->addClass('form-control');
-			} elseif ($control instanceof Controls\Checkbox || $control instanceof Controls\CheckboxList || $control instanceof Controls\RadioList) {
-			$control->getSeparatorPrototype()->setName('div')->addClass($control->getControlPrototype()->type);
+			} elseif ($control instanceof \Controls\Checkbox || $control instanceof \Controls\CheckboxList || $control instanceof \Controls\RadioList) {
+
+				$control->getSeparatorPrototype()->setName('div')->addClass($control->getControlPrototype()->type);
 			}
 		}
 
@@ -68,31 +70,42 @@ class BasePresenter extends \Nette\Application\UI\Presenter {
         $root = $menu->getRoot();
 		$root->setChildrenAttributes(array('class' => 'side-nav fixed','id' => 'nav-mobile'));
 
-
 		$root->addChild('home', array(
-			'label' => 'Frontpage',
-			'link'  => 'Frontpage:default',
+			'label' => 'Home',
+			'link'  => 'Admin:default',
         ));
 
+		if(in_array('admin', $this->user->getRoles()))
+		{
+			$root->addChild('Frontpage', array(
+				'label' => 'Veřejná část',
+				'link'  => 'Frontpage:default',
+			));
+		}
+
 		$root->addChild('home1', array(
-			'label' => 'Borrowing',
+			'label' => 'Výpujčky',
 			'link'  => 'Borrowing:default',
         ));
 
 		$root->addChild('home2', array(
-			'label' => 'Record',
+			'label' => 'Záznamy',
 			'link'  => 'Record:default',
         ));
 
 		$root->addChild('home3', array(
-			'label' => 'Event',
+			'label' => 'Události',
 			'link'  => 'Event:default',
         ));
 
-		$root->addChild('home4', array(
-			'label' => 'User',
-			'link'  => 'User:default',
-        ));
+		if(in_array('admin', $this->user->getRoles()))
+		{
+			$root->addChild('home4', array(
+				'label' => 'Uživatelé',
+				'link'  => 'User:default',
+			));
+		}
+
 
 
         return $menu;

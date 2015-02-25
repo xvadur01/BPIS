@@ -1,35 +1,36 @@
-{* Latte template *}
+{block headerH1}Přeled uživatelů{/block}
 
 {block content}
 
-<a n:href="User:default">user</a>
-<a n:href="User:add">add</a>
-
-<table>
+<div class="row">
+	<a n:href="User:add" title="Nový uživatel" class="right-align btn-floating btn-large waves-effect waves-light blue"><i class="mdi-content-add"></i></a>
+</div>
+<table class=" striped responsive-table">
 	<tr>
 		<th>id</th>
 		<th>login</th>
-		<th>heslo</th>
 		<th>prijmeni</th>
 		<th>jmeno</th>
 		<th>role</th>
 		<th>telefon</th>
 		<th>email</th>
 		<th>pracovna</th>
+		<th></th>
 	</tr>
 
 {foreach $users as $user}
 		<td>{$user->id}</td>
 		<td>{$user->login}</td>
-		<td>{$user->heslo}</td>
 		<td>{$user->prijmeni}</td>
 		<td>{$user->jmeno}</td>
 		<td>{$user->role}</td>
 		<td>{$user->telefon}</td>
 		<td>{$user->email}</td>
 		<td>{$user->pracovna}</td>
-		<td><a n:href="User:delete $user->id"><img src="{$basePath}/images/delete.png" width='25' alt="smazat"></a><a n:href="User:edit $user->id"><img src="{$basePath}/images/edit.png" width='25' alt="edit"></a></td>
-
+		<td>
+			<a n:href="User:delete $user->id" title="Smazat uživatele" class="btn-floating waves-effect waves-light  red"><i class="mdi-action-delete"></i></a>
+			<a n:href="User:edit $user->id" title="Upravit uživatele" class="btn-floating waves-effect waves-light light-green accent-3"><i class="mdi-editor-mode-edit"></i></a>
+		</td>
 	</tr>
 {/foreach}
 </table>

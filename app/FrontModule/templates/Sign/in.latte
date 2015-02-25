@@ -1,28 +1,3 @@
+{block headerH1}Přihlášení{/block}
 {block content}
-<h1 n:block=title>Sign in</h1>
-
-{form signInForm}
-
-<!-- Jednoduché vykreslení chyb -->
-<ul class="errors" n:if="$form->hasErrors()">
-        <li n:foreach="$form->errors as $error">{$error}</li>
-</ul>
-
-
-<div class="row input-field col s12 required">
-    {label username /}
-    {input username}
-</div>
-<div class="row input-field col s12 required">
-    {label password /}
-    {input password}
-</div>
-<div class="row input-field col s12" >
-	{input remember: }
-	{label remember: /}
-</div>
-<div class="row input-field col s12 required">
-    {label send /}
-    {input send}
-</div>
-{/form}
+{control signInForm}

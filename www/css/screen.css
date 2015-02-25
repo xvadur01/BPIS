@@ -5409,7 +5409,7 @@ small {
     .card a:hover {
       color: #ffd8a6; }
   .card.small {
-    height: 300px;
+    height: 150px;
     position: relative; }
     .card.small .card-image {
       overflow: hidden;
@@ -5714,7 +5714,8 @@ ul.tabs li.tab {
   margin: 0px;
   min-width: 100px;
   z-index: 1000;
-  max-height: 70%;
+  height: 130px;
+
   opacity: 0;
   overflow-y: hidden;
   will-change: width, height; }
@@ -8413,4 +8414,9 @@ body.parallax-demo footer {
 
 .labelNoabsolute label{
     position: static;
+}
+
+label[for=editor]
+{
+    display: none;
 }

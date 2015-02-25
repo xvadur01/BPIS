@@ -1,5 +1,5 @@
 {* Latte template *}
-
+{block headerH1}BPIS{/block}
 {block content}
 
 <a n:href="FrontPage:default">frontpage</a>
@@ -7,3 +7,76 @@
 
 <a n:href="Record:default">record</a>
 <a n:href="Borrowing:default">borrow</a>
+
+<div class="row">
+	<div class="col s12 m4">
+		{if count($newestEvent)}
+			{foreach $newestEvent as $event}
+				<div class="card small blue">
+					<div class="card-content">
+					  <span class="card-title activator white-text text-darken-4">{$event['nazev']} <i class="mdi-navigation-more-vert right"></i></span>
+					</div>
+					<div class="card-reveal blue s12 m6 l6">
+						<span class="card-title white-text text-darken-4"><a class="white-text text-darken-4" n:href="Event:detail,$event['id']">{$event['nazev']}</a><i class="mdi-navigation-close right"></i></span>
+					  <p class="white-text">{$event['popis']}</p>
+					</div>
+				</div>
+			{/foreach}
+		{else}
+			<div class="card small">
+				<div class="card-content">
+				  <span class="card-title activator grey-text text-darken-4">Žádná nová událost</span>
+				</div>
+			</div>
+		{/if}
+	</div>
+	<div class="col s12 m4">
+		{if count($closestEvent)}
+		{foreach $closestEvent as $event}
+			<div class="card small blue">
+				<div class="card-content">
+				  <span class="card-title activator white-text text-darken-4">{$event['nazev']} <i class="mdi-navigation-more-vert right"></i></span>
+				</div>
+				<div class="card-reveal blue s12 m6 l6">
+				 	<span class="card-title white-text text-darken-4"><a class="white-text text-darken-4" n:href="Event:detail,$event['id']">{$event['nazev']}</a><i class="mdi-navigation-close right"></i></span>
+					<p class="white-text">{$event['popis']}</p>
+				</div>
+			</div>
+		{/foreach}
+		{else}
+			<div class="card small">
+				<div class="card-content">
+				  <span class="card-title activator grey-text text-darken-4">Žádná nadcházející událost</span>
+				</div>
+			</div>
+		{/if}
+	</div>
+<div class="col s12 m4">
+	{if count($borrowing)}
+{foreach $borrowing as $borrow}
+	<div class="card small blue">
+			<div class="card-content">
+			  <span class="card-title activator white-text text-darken-4">{$borrow['nazev']} <i class="mdi-navigation-more-vert right"></i></span>
+			</div>
+			<div class="card-reveal blue s12 m6 l6">
+			  <span class="card-title white-text text-darken-4">{$borrow['nazev']}<i class="mdi-navigation-close right"></i></span>
+			  <p class="white-text">{$borrow['nazev']},{$borrow['jmeno']},{$borrow['prijmeni']}</p>
+			  <a n:href="Borrowing:giveBack,$borrow['id'], backlink => $presenter->storeRequest()">Vrátit</a>
+			</div>
+		</div>
+
+	{/foreach}
+	{else}
+		<div class="card small">
+			<div class="card-content">
+			  <span class="card-title activator grey-text text-darken-4">Žádná výpujčka</span>
+			  <a n:href="Borrowing:add">Nova</a>
+			</div>
+		</div>
+	{/if}
+</div>
+</div>
+
+<div class="row">
+	{control timeLine}
+</div>

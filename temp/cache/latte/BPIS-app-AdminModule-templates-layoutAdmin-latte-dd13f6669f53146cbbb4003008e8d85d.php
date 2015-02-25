@@ -2,26 +2,32 @@
 // source: C:\xampp\htdocs\BPIS\app\AdminModule/templates/@layoutAdmin.latte
 
 // prolog Latte\Macros\CoreMacros
-list($_b, $_g, $_l) = $template->initialize('3755839024', 'html')
+list($_b, $_g, $_l) = $template->initialize('0107573599', 'html')
 ;
 // prolog Latte\Macros\BlockMacros
 //
 // block head
 //
-if (!function_exists($_b->blocks['head'][] = '_lbbd97667959_head')) { function _lbbd97667959_head($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+if (!function_exists($_b->blocks['head'][] = '_lbd7751cb673_head')) { function _lbd7751cb673_head($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+;
+}}
+
+//
+// block headerH1
+//
+if (!function_exists($_b->blocks['headerH1'][] = '_lbd5b1c3bf0f_headerH1')) { function _lbd5b1c3bf0f_headerH1($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ;
 }}
 
 //
 // block scripts
 //
-if (!function_exists($_b->blocks['scripts'][] = '_lbf40b06ba05_scripts')) { function _lbf40b06ba05_scripts($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+if (!function_exists($_b->blocks['scripts'][] = '_lbf6fc0622bc_scripts')) { function _lbf6fc0622bc_scripts($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ?>	<script src="<?php echo Latte\Runtime\Filters::escapeHtml(Latte\Runtime\Filters::safeUrl($basePath), ENT_COMPAT) ?>/js/jquery-2.1.3.min.js"></script>
 	<script src="<?php echo Latte\Runtime\Filters::escapeHtml(Latte\Runtime\Filters::safeUrl($basePath), ENT_COMPAT) ?>/js/netteForms.js"></script>
 	<script src="<?php echo Latte\Runtime\Filters::escapeHtml(Latte\Runtime\Filters::safeUrl($basePath), ENT_COMPAT) ?>/js/main.js"></script>
 	<script src="<?php echo Latte\Runtime\Filters::escapeHtml(Latte\Runtime\Filters::safeUrl($basePath), ENT_COMPAT) ?>/js/materialize.min.js"></script>
-	<script src="<?php echo Latte\Runtime\Filters::escapeHtml(Latte\Runtime\Filters::safeUrl($basePath), ENT_COMPAT) ?>/js/jquery-clockpicker.min.js"></script>
-	<script src="<?php echo Latte\Runtime\Filters::escapeHtml(Latte\Runtime\Filters::safeUrl($basePath), ENT_COMPAT) ?>/js/clockpicker.js"></script>
+		<script src="<?php echo Latte\Runtime\Filters::escapeHtml(Latte\Runtime\Filters::safeUrl($basePath), ENT_COMPAT) ?>/js/clockpicker.js"></script>
 	<script src="<?php echo Latte\Runtime\Filters::escapeHtml(Latte\Runtime\Filters::safeUrl($basePath), ENT_COMPAT) ?>/js/live-form-validation.js"></script>
 	
 
@@ -29,7 +35,18 @@ if (!function_exists($_b->blocks['scripts'][] = '_lbf40b06ba05_scripts')) { func
 
 	$(document).ready(function()
     {
-		$(".dropdown-button").dropdown();
+		$(".dropdown-button").dropdown( { hover: false });
+		$("input.checkbox").each(function(){
+			$(this).insertBefore($(this).parent());
+		});
+
+			$("input").each(function(){
+				if(typeof($(this).val()) != "undefined" && $(this).val() !== null && $(this).val() != "")
+				{
+					var $label = $("label[for='"+this.id+"']")
+					$label.addClass('active') ;
+				}
+			});
 
   // Initialize collapse button
   $(".button-collapse").sideNav();
@@ -92,6 +109,13 @@ call_user_func(reset($_b->blocks['head']), $_b, get_defined_vars())  ?>
 	<ul id="dropdown1" class="dropdown-content">
 		<li><?php if ($user->loggedIn) { ?>
 
+				<a href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link(":Admin:User:edit", array($user->getId())), ENT_COMPAT) ?>
+">Osobní údaje</a>
+<?php } ?>
+		</li>
+		<li class="divider"></li>
+		<li><?php if ($user->loggedIn) { ?>
+
 				<a href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link(":Front:Sign:out"), ENT_COMPAT) ?>
 ">Odhlásit</a>
 <?php } else { ?>
@@ -99,13 +123,12 @@ call_user_func(reset($_b->blocks['head']), $_b, get_defined_vars())  ?>
 ">Přihlásit</a>
 <?php } ?>
 		</li>
-		  <li></li>
 	</ul>
 	<nav class="top-nav <?php echo Latte\Runtime\Filters::escapeHtml($titleColor, ENT_COMPAT) ?>">
 	<div class="container">
 			<div class="nav-wrapper">
 				<div class="col s12">
-					<a href="#!" class="brand-logo"><h1><?php echo Latte\Runtime\Filters::escapeHtml($title, ENT_NOQUOTES) ?></h1></a>
+					<a href="" class="brand-logo"><h1><?php call_user_func(reset($_b->blocks['headerH1']), $_b, get_defined_vars())  ?></h1></a>
 					<ul class="right side-nav">
 					  <!-- Dropdown Trigger -->
 					  <li><a class="dropdown-button" href="#!" data-activates="dropdown1"><?php echo Latte\Runtime\Filters::escapeHtml($user->getIdentity()->login, ENT_NOQUOTES) ?><i class="mdi-navigation-arrow-drop-down right"></i></a></li>
@@ -132,6 +155,27 @@ call_user_func(reset($_b->blocks['head']), $_b, get_defined_vars())  ?>
 <?php Latte\Macros\BlockMacros::callBlock($_b, 'content', $template->getParameters()) ?>
 	</div>
 	</main>
+	<footer class="page-footer">
+		<div class="container">
+		  <div class="row">
+			<div class="col l6 s12">
+			  <h5 class="white-text">Footer Content</h5>
+			  <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
+			</div>
+			<div class="col l4 offset-l2 s12">
+			  <h5 class="white-text">Links</h5>
+			  <ul>
+				<li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
+			  </ul>
+			</div>
+		  </div>
+		</div>
+		<div class="footer-copyright">
+		  <div class="container">
+			© 2015 Pavel Vaďura
+		  </div>
+		</div>
+    </footer>
 <?php call_user_func(reset($_b->blocks['scripts']), $_b, get_defined_vars())  ?>
 </body>
 </html>

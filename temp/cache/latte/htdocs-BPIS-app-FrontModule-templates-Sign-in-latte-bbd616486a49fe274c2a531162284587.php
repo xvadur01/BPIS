@@ -2,61 +2,21 @@
 // source: C:\xampp\htdocs\BPIS\app\FrontModule/templates/Sign/in.latte
 
 // prolog Latte\Macros\CoreMacros
-list($_b, $_g, $_l) = $template->initialize('9781786614', 'html')
+list($_b, $_g, $_l) = $template->initialize('2684808940', 'html')
 ;
 // prolog Latte\Macros\BlockMacros
 //
-// block content
+// block headerH1
 //
-if (!function_exists($_b->blocks['content'][] = '_lb9db687acf2_content')) { function _lb9db687acf2_content($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
-;call_user_func(reset($_b->blocks['title']), $_b, get_defined_vars())  ?>
-
-<?php Nette\Bridges\FormsLatte\FormMacros::renderFormBegin($form = $_form = $_control["signInForm"], array()) ?>
-
-
-<!-- Jednoduché vykreslení chyb -->
-<?php if ($form->hasErrors()) { ?><ul class="errors">
-<?php $iterations = 0; foreach ($form->errors as $error) { ?>        <li><?php echo Latte\Runtime\Filters::escapeHtml($error, ENT_NOQUOTES) ?></li>
-<?php $iterations++; } ?>
-</ul>
-<?php } ?>
-
-
-<div class="row input-field col s12 required">
-    <?php if ($_label = $_form["username"]->getLabel()) echo $_label  ?>
-
-    <?php echo $_form["username"]->getControl() ?>
-
-</div>
-<div class="row input-field col s12 required">
-    <?php if ($_label = $_form["password"]->getLabel()) echo $_label  ?>
-
-    <?php echo $_form["password"]->getControl() ?>
-
-</div>
-<div class="row input-field col s12" >
-	<?php echo $_form["remember"]->getControlPart("") ?>
-
-	<?php if ($_label = $_form["remember"]->getLabelPart("")) echo $_label  ?>
-
-</div>
-<div class="row input-field col s12 required">
-    <?php if ($_label = $_form["send"]->getLabel()) echo $_label  ?>
-
-    <?php echo $_form["send"]->getControl() ?>
-
-</div>
-<?php Nette\Bridges\FormsLatte\FormMacros::renderFormEnd($_form) ?>
-
-<?php
+if (!function_exists($_b->blocks['headerH1'][] = '_lb802489a473_headerH1')) { function _lb802489a473_headerH1($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+?>Přihlášení<?php
 }}
 
 //
-// block title
+// block content
 //
-if (!function_exists($_b->blocks['title'][] = '_lbb0f36cd74b_title')) { function _lbb0f36cd74b_title($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
-?><h1>Sign in</h1>
-<?php
+if (!function_exists($_b->blocks['content'][] = '_lb88c001923c_content')) { function _lb88c001923c_content($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+;$_l->tmp = $_control->getComponent("signInForm"); if ($_l->tmp instanceof Nette\Application\UI\IRenderable) $_l->tmp->redrawControl(NULL, FALSE); $_l->tmp->render() ;
 }}
 
 //
@@ -80,4 +40,6 @@ if (empty($_l->extends) && !empty($_control->snippetMode)) {
 // main template
 //
 if ($_l->extends) { ob_end_clean(); return $template->renderChildTemplate($_l->extends, get_defined_vars()); }
-call_user_func(reset($_b->blocks['content']), $_b, get_defined_vars()) ; 
+call_user_func(reset($_b->blocks['headerH1']), $_b, get_defined_vars())  ?>
+
+<?php call_user_func(reset($_b->blocks['content']), $_b, get_defined_vars()) ; 

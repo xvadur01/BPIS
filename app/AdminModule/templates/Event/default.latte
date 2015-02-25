@@ -1,28 +1,38 @@
-{* Latte template *}
-
+{block headerH1}Přehled událostí{/block}
 {block content}
-<a n:href="Event:add">add</a>
 <a n:href="Event:list">list</a>
 
-<table>
+<div class="row">
+	<a n:href="Event:add" title="Nová událost" class="right-align btn-floating btn-large waves-effect waves-light blue"><i class="mdi-content-add"></i></a>
+</div>
+<table class=" striped responsive-table">
 	<tr>
 		<th>id</th>
-		<th>nazev</th>
-		<th>datum</th>
-		<th>zapis</th>
-		<th>vytvoril</th>
-		<th>pocet upozorneni</th>
+		<th>název</th>
+		<th>datum konání</th>
+		<th>zápis</th>
+		<th>vytvořil</th>
+		<th>počet upozornění</th>
+		<th></th>
 	</tr>
 
 {foreach $events as $event}
 		<td>{$event->id}</td>
 		<td>{$event->nazev}</td>
-		<td>{$event->datum}</td>
-		<td>{$event->zapis}</td>
-		<td>{$event->uzivatel_id}</td>
+		<td>
+			{if $event->datum}
+				{$event->datum|date:'%d.%m.%Y'}
+			{else}
+				Datum konání není určen
+			{/if}
+		</td>
+		<td>{$event->zapis|truncate:500|striptags}</td>
+		<td>{$event->ref('uzivatel','uzivatel_id')->prijmeni}</td>
 		<td>{$event->pocet_upozorneni}</td>
-		<td><a n:href="Event:delete $event->id"><img src="{$basePath}/images/delete.png" width='25' alt="smazat"></a><a n:href="Event:edit $event->id"><img src="{$basePath}/images/edit.png" width='25' alt="edit"></a></td>
-
+		<td>
+			<a n:href="Event:delete $event->id" title="Smazat událost" class="btn-floating waves-effect waves-light  red"><i class="mdi-action-delete"></i></a>
+			<a n:href="Event:edit $event->id" title="Upravit událost" class="btn-floating waves-effect waves-light light-green accent-3"><i class="mdi-editor-mode-edit"></i></a>
+		</td>
 	</tr>
 {/foreach}
 </table>

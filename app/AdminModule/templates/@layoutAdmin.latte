@@ -29,18 +29,22 @@
 	<!-- Dropdown Structure -->
 	<ul id="dropdown1" class="dropdown-content">
 		<li>{if $user->loggedIn}
+				<a n:href=":Admin:User:edit, $user->getId()">Osobní údaje</a>
+			{/if}
+		</li>
+		<li class="divider"></li>
+		<li>{if $user->loggedIn}
 				<a n:href=":Front:Sign:out">Odhlásit</a>
 			{else}
 				<a n:href=":Front:Sign:in">Přihlásit</a>
 			{/if}
 		</li>
-		  <li></li>
 	</ul>
 	<nav class="top-nav {$titleColor}">
 	<div class="container">
 			<div class="nav-wrapper">
 				<div class="col s12">
-					<a href="#!" class="brand-logo"><h1>{$title}</h1></a>
+					<a href="" class="brand-logo"><h1>{block headerH1}{/block}</h1></a>
 					<ul class="right side-nav">
 					  <!-- Dropdown Trigger -->
 					  <li><a class="dropdown-button" href="#!" data-activates="dropdown1">{$user->getIdentity()->login}<i class="mdi-navigation-arrow-drop-down right"></i></a></li>
@@ -66,12 +70,33 @@
 		{include content}
 	</div>
 	</main>
+	<footer class="page-footer">
+		<div class="container">
+		  <div class="row">
+			<div class="col l6 s12">
+			  <h5 class="white-text">Footer Content</h5>
+			  <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
+			</div>
+			<div class="col l4 offset-l2 s12">
+			  <h5 class="white-text">Links</h5>
+			  <ul>
+				<li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
+			  </ul>
+			</div>
+		  </div>
+		</div>
+		<div class="footer-copyright">
+		  <div class="container">
+			© 2015 Pavel Vaďura
+		  </div>
+		</div>
+    </footer>
 	{block scripts}
 	<script src="{$basePath}/js/jquery-2.1.3.min.js"></script>
 	<script src="{$basePath}/js/netteForms.js"></script>
 	<script src="{$basePath}/js/main.js"></script>
 	<script src="{$basePath}/js/materialize.min.js"></script>
-	<script src="{$basePath}/js/jquery-clockpicker.min.js"></script>
+	{*<script src="{$basePath}/js/jquery-clockpicker.min.js"></script>*}
 	<script src="{$basePath}/js/clockpicker.js"></script>
 	<script src="{$basePath}/js/live-form-validation.js"></script>
 	{*<script src="{$basePath}/js/jqueryUi.js"></script>
@@ -84,7 +109,18 @@
 
 	$(document).ready(function()
     {
-		$(".dropdown-button").dropdown();
+		$(".dropdown-button").dropdown( { hover: false });
+		$("input.checkbox").each(function(){
+			$(this).insertBefore($(this).parent());
+		});
+
+			$("input").each(function(){
+				if(typeof($(this).val()) != "undefined" && $(this).val() !== null && $(this).val() != "")
+				{
+					var $label = $("label[for='"+this.id+"']")
+					$label.addClass('active') ;
+				}
+			});
 
   // Initialize collapse button
   $(".button-collapse").sideNav();

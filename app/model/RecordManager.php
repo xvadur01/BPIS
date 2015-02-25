@@ -22,7 +22,7 @@ class RecordManager extends BaseManager
 	{
 		return $this->connection->table(self::TABLE_NAME)->get($id);;
 	}
-	
+
 
 	/**
 	 * Add
@@ -49,6 +49,6 @@ class RecordManager extends BaseManager
 	 */
 	public function getUserRecord($userId)
 	{
-		$this->connection->table(self::TABLE_NAME)->where(self::COLUMN_USER_ID, $userId);
+		return $this->connection->table(self::TABLE_NAME)->where(self::COLUMN_USER_ID, $userId);
 	}
 }

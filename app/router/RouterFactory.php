@@ -46,9 +46,12 @@ class RouterFactory
 					{
 						if($id != 'admin')
 						{
-							return $this->fronpageManager->getByUrl($id)->fetch()->id;
+							$page = $this->fronpageManager->getByUrl($id)->fetch();
+							if($page)
+							{
+								return $page->id;
+							}
 						}
-
 					}
 				},
 				Route::FILTER_OUT => function ($id){
@@ -58,7 +61,11 @@ class RouterFactory
 					}
 					else
 					{
-						return $this->fronpageManager->get($id)->url;
+						$page = $this->fronpageManager->get($id);
+						if($page)
+						{
+							return $page->url;
+						}
 					}
 				}
 				),

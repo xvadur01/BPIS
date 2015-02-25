@@ -1,28 +1,32 @@
-{* Latte template *}
-
+{block headerH1}Přehled záznamů{/block}
 {block content}
 
 <a n:href="Record:default">frontrecord</a>
-<a n:href="Record:add">add</a>
 <a n:href="Record:list">list</a>
 
-<table>
+<div class="row">
+<a n:href="Record:add" title="Nový záznam" class="right-align btn-floating btn-large waves-effect waves-light blue"><i class="mdi-content-add"></i></a>
+</div>
+<table class=" striped responsive-table">
 	<tr>
 		<th>id</th>
 		<th>nazev</th>
 		<th>popis</th>
 		<th>datum</th>
 		<th>datupm splneni</th>
+		<th></th>
 	</tr>
 {if $records}
 	{foreach $records as $record}
 			<td>{$record->id}</td>
 			<td>{$record->nazev}</td>
-			<td>{$record->popis}</td>
-			<td>{$record->datum}</td>
-			<td>{$record->datum_splneni}</td>
-			<td><a n:href="Record:delete $record->id"><img src="{$basePath}/images/delete.png" width='25' alt="smazat"></a><a n:href="Record:edit $record->id"><img src="{$basePath}/images/edit.png" width='25' alt="edit"></a></td>
-
+			<td>{$record->popis|truncate:500|striptags}</td>
+			<td>{$record->datum|date:'%d.%m.%Y'}</td>
+			<td>{$record->datum_splneni|date:'%d.%m.%Y'}</td>
+			<td>
+				<a n:href="Record:delete $record->id" title="Smazat záznam" class="btn-floating waves-effect waves-light  red"><i class="mdi-action-delete"></i></a>
+				<a n:href="Record:edit $record->id" title="Upravit záznam" class="btn-floating waves-effect waves-light light-green accent-3"><i class="mdi-editor-mode-edit"></i></a>
+			</td>
 		</tr>
 	{/foreach}
 {/if}

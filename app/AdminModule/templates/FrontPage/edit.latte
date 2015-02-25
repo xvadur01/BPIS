@@ -1,4 +1,5 @@
 {* Latte template *}
+{block headerH1}Úprava stránky{/block}
 {block scripts}
  {include #parent}  {* include parent #scripts block *}
 <script src="{$basePath}/js/ckeditor/ckeditor.js"></script>
@@ -8,4 +9,4 @@
 {/block}
 
 {block content}
-{control frontPageForm}
+{control  frontPageForm}

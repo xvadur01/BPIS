@@ -36,7 +36,7 @@ class FrontPagePresenter extends BasePresenter {
 
 	protected function createComponentFrontPageForm()
     {
-        $form = new \Nette\Application\UI\Form;
+        $form = $this->form();
 		$form->addHidden('id', null);
 
         $form->addText('titulek', 'Titulek:')
@@ -49,7 +49,7 @@ class FrontPagePresenter extends BasePresenter {
             ->setRequired()
 			->getControlPrototype()->setId('editor');
 
-		$form->addCheckbox('aktivni', 'Aktivní:');
+		$form->addCheckbox('aktivni', 'Aktivní:')->getControlPrototype()->class('checkbox');
 
         $form->addSubmit('send', 'Odeslat');
         $form->onSuccess[] = $this->frontPageFormSucceeded;
@@ -66,7 +66,7 @@ class FrontPagePresenter extends BasePresenter {
         } else {
             $this->frontpageManager->add($values);
         }
-        $this->flashMessage('Partner byl vlozen', 'success');
+        $this->flashMessage('Stránka byla uložena', 'success');
         $this->redirect('Frontpage:default');
     }
 }

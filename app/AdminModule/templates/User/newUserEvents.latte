@@ -1,0 +1,35 @@
+{block headerH1}Přeled uživatelů{/block}
+{block scripts}
+{include #parent}  {* include parent #scripts block *}
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('select').material_select();
+		$('.labelNoabsolute').parent().parent().addClass("labelNoabsolute");
+
+	});
+</script>
+{/block}
+{block content}
+
+{form newUserEventsForm}
+	<div class="row">
+		<div class="input-field">
+			{label user_id/}
+			{input user_id}
+		</div>
+		<div class="row">
+			{foreach $form['events']->containers as $key => $event}
+				<div class="col input-field s6">
+					{$event['event_id']->control} {$event['event_id']->label}
+					{$event['event_user_id']->control} {$event['event_user_id']->label}
+					{$event['pick']->control}  {$event['pick']->label}
+				</div>
+			{/foreach}
+		</div>
+		<div class="input-field s12">
+				{label send /}
+				{input send class=>'btn btn-default'}
+		</div>
+	</div>
+
+	{/form}
