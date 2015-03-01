@@ -10,7 +10,8 @@ class BorrowingManager extends BaseManager
 		TABLE_NAME = 'vypujcka',
 		COLUMN_ID = 'id',
 		COLUMN_USER_ID = 'uzivatel_id',
-		COLUMN_GIVE_BACK = 'vraceno';
+		COLUMN_GIVE_BACK = 'vraceno',
+		COLUMN_DATE = 'datum';
 
 		/**
 	 * get all data from table

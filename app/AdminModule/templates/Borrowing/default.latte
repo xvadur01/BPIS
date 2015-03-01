@@ -36,11 +36,11 @@
 			</td>
 
 			<td>
-				{if !$borrowing->vraceno}
-					<a n:href="Borrowing:giveback $borrowing->id" title="Vráceno zpět" class="btn-floating waves-effect waves-light light-blue lighten-1"><i class="mdi-content-reply"></i></a>
+				{if !$borrowing->vraceno && $borrowing->uzivatel_id == $user->getId()}
+					<a n:href="Borrowing:giveback $borrowing->id" title="Vrátit zpět" class="btn-floating waves-effect waves-light light-blue lighten-1"><i class="mdi-content-reply"></i></a>
 				{/if}
-				<a n:href="Borrowing:delete $borrowing->id" title="Vráceno zpět" class="btn-floating waves-effect waves-light light-green accent-3"><i class="mdi-editor-mode-edit"></i></a>
-				<a n:href="Borrowing:edit $borrowing->id" title="Vráceno zpět" class="btn-floating waves-effect waves-light  red"><i class="mdi-image-portrait"></i></a>
+				<a n:href="Borrowing:delete $borrowing->id" title="Smazat" class="btn-floating waves-effect waves-light red"><i class="mdi-action-delete"></i></a>
+				<a n:href="Borrowing:edit $borrowing->id" title="Upravit" class="btn-floating waves-effect waves-light light-green accent-3 "><i class="mdi-editor-mode-edit"></i></a>
 			</td>
 		</tr>
 	{/foreach}

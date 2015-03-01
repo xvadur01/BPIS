@@ -1,18 +1,38 @@
 <ul class="timeline">
 {foreach $data as $event}
-	<li>
+	{if $iterator->isOdd()}
+		<li>
+	{else}
+		<li class="timeline-inverted">
+	{/if}
+		{if !$event->datum}
+			<div class="timeline-badge  blue lighten-0">
+					?
+			</div>
+		{elseif $event->datum >  new \DateTime() }
+				<div class="timeline-badge  green lighten-0">
+					<i class="mdi-action-event"></i>
+				</div>
+		{else}
+			<div class="timeline-badge grey">
+				<i class="mdi-action-done"></i>
+			</div>
+		{/if}
 
-		<div class="timeline-badge  blue lighten-0"><i class="mdi-action-done"></i>
-		</div>
 		<div class="timeline-panel">
 			<div class="timeline-heading">
 				<a href="{plink Event:detail $event->id}"><h4 class="timeline-title">{$event->nazev}</h4></a>
+				{if $type == 'event'}
+					<span><small class="text-muted">Organizátor: </small>{$event->ref('uzivatel','uzivatel_id')->prijmeni} </span>
+				{/if}
 				<p>
-					<small class="text-muted"><i class="glyphicon glyphicon-time"></i>{$event->datum|date:'%d.%m.%Y'}</small>
+					{if $event->datum}
+						<small class="text-muted"><i class="glyphicon glyphicon-time">Datum konání: </i></small>{$event->datum|date:'%d.%m.%Y'}
+					{/if}
 				</p>
 			</div>
 			<div class="timeline-body">
-				<p>{$event->zapis|noescape}</p>
+				<p>{$event->popis|truncate:500|striptags}</p>
 			</div>
 		</div>
 	</li>

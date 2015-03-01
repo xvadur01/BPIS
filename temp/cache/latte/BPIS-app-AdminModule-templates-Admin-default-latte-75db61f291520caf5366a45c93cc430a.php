@@ -2,32 +2,23 @@
 // source: C:\xampp\htdocs\BPIS\app\AdminModule/templates/Admin/default.latte
 
 // prolog Latte\Macros\CoreMacros
-list($_b, $_g, $_l) = $template->initialize('8038319307', 'html')
+list($_b, $_g, $_l) = $template->initialize('2650681135', 'html')
 ;
 // prolog Latte\Macros\BlockMacros
 //
 // block headerH1
 //
-if (!function_exists($_b->blocks['headerH1'][] = '_lb513dc8a0ec_headerH1')) { function _lb513dc8a0ec_headerH1($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+if (!function_exists($_b->blocks['headerH1'][] = '_lbafc86bebe0_headerH1')) { function _lbafc86bebe0_headerH1($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ?>BPIS<?php
 }}
 
 //
 // block content
 //
-if (!function_exists($_b->blocks['content'][] = '_lbafbb8ef7c7_content')) { function _lbafbb8ef7c7_content($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
-?><a href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("FrontPage:default"), ENT_COMPAT) ?>
-">frontpage</a>
-<a href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("FrontPage:add"), ENT_COMPAT) ?>
-">frontpage</a>
-
-<a href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Record:default"), ENT_COMPAT) ?>
-">record</a>
-<a href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Borrowing:default"), ENT_COMPAT) ?>
-">borrow</a>
-
-<div class="row">
+if (!function_exists($_b->blocks['content'][] = '_lb181f5cdeaa_content')) { function _lb181f5cdeaa_content($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+?><div class="row">
 	<div class="col s12 m4">
+		<h5>Nejnovější události</h5>
 <?php if (count($newestEvent)) { $iterations = 0; foreach ($newestEvent as $event) { ?>
 				<div class="card small blue">
 					<div class="card-content">
@@ -48,6 +39,7 @@ if (!function_exists($_b->blocks['content'][] = '_lbafbb8ef7c7_content')) { func
 <?php } ?>
 	</div>
 	<div class="col s12 m4">
+		<h5>Nejbližší události</h5>
 <?php if (count($closestEvent)) { $iterations = 0; foreach ($closestEvent as $event) { ?>
 			<div class="card small blue">
 				<div class="card-content">
@@ -68,6 +60,7 @@ if (!function_exists($_b->blocks['content'][] = '_lbafbb8ef7c7_content')) { func
 <?php } ?>
 	</div>
 <div class="col s12 m4">
+	<h5>Aktulání výpujčky</h5>
 <?php if (count($borrowing)) { $iterations = 0; foreach ($borrowing as $borrow) { ?>
 	<div class="card small blue">
 			<div class="card-content">
@@ -96,6 +89,7 @@ if (!function_exists($_b->blocks['content'][] = '_lbafbb8ef7c7_content')) { func
 </div>
 
 <div class="row">
+	<h5>Záznamy</h5>
 <?php $_l->tmp = $_control->getComponent("timeLine"); if ($_l->tmp instanceof Nette\Application\UI\IRenderable) $_l->tmp->redrawControl(NULL, FALSE); $_l->tmp->render() ?>
 </div><?php
 }}

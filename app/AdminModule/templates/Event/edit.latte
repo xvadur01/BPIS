@@ -29,21 +29,21 @@
 			{
 				$("form input:checkbox").attr ( "checked" , false );
 				this.checked = true;
-
 			}
 			else
 			{
 				$("form input:checkbox").attr ( "checked" , false );
+
 			}
 		});
 
 
 	});
 </script>
-<script src="{$basePath}/js/ckeditor/ckeditor.js"></script>
+{*<script src="{$basePath}/js/ckeditor/ckeditor.js"></script>
 <script type="text/javascript">
 	CKEDITOR.replace( 'editor' );
-</script>
+</script>*}
 {/block}
 {block content}
 {form eventForm}
@@ -60,13 +60,9 @@
 	</div>
 </div>
 <div class="row">
-	<div class="s12 m6 col input-field">
+	<div class="s12 input-field">
 		{input misto}
 		{label misto/}
-	</div>
-	<div class="s12 m6 col input-field">
-		{input pocet_upozorneni}
-		{label pocet_upozorneni/}
 	</div>
 </div>
 <div class="row">
@@ -89,8 +85,7 @@
 		<div class="col s12">
 			{foreach $user['times']->containers as $timeid => $time}
 				<div class="col input-field s12">
-					{input $time['pick']: }
-					{label $time['pick']: /}
+					{input $time['pick']:} {label $time['pick']: /}
 				</div>
 				<div class="col input-field s6 time-input">
 						{$time['cas']->label}{$time['cas']->control}

@@ -75,36 +75,42 @@ class BasePresenter extends \Nette\Application\UI\Presenter {
 			'link'  => 'Admin:default',
         ));
 
-		if(in_array('admin', $this->user->getRoles()))
+		if($this->user->isInRole('admin'))
 		{
 			$root->addChild('Frontpage', array(
 				'label' => 'Veřejná část',
 				'link'  => 'Frontpage:default',
 			));
 		}
+		if($this->user->isInRole('admin'))
+		{
+			$root->addChild('Config', array(
+				'label' => 'Nastavení systému',
+				'link'  => 'Config:default',
+			));
+		}
 
-		$root->addChild('home1', array(
+		$root->addChild('borrowing', array(
 			'label' => 'Výpujčky',
 			'link'  => 'Borrowing:default',
         ));
 
-		$root->addChild('home2', array(
+		$root->addChild('records', array(
 			'label' => 'Záznamy',
-			'link'  => 'Record:default',
+			'link'  => 'Record:list',
         ));
 
-		$root->addChild('home3', array(
+		$root->addChild('events', array(
 			'label' => 'Události',
-			'link'  => 'Event:default',
+			'link'  => 'Event:list',
         ));
 
-		if(in_array('admin', $this->user->getRoles()))
-		{
-			$root->addChild('home4', array(
-				'label' => 'Uživatelé',
-				'link'  => 'User:default',
-			));
-		}
+
+		$root->addChild('users', array(
+			'label' => 'Uživatelé',
+			'link'  => 'User:default',
+		));
+
 
 
 

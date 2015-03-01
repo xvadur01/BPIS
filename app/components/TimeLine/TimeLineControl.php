@@ -27,13 +27,15 @@ class TimeLineControl extends UI\Control
     {
         return $this->type;
     }
-	
+
 	public function render()
     {
 		$this->template->data = $this->data;
+		$this->template->type = $this->type;
 		switch($this->type)
 		{
 			case "event":
+			case "eventUser":
 				$this->template->render(__DIR__ . '/TimeLineEventControl.latte');
 			break;
 			case "record":

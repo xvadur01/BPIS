@@ -548,7 +548,7 @@ class SystemContainer extends Nette\DI\Container
 	{
 		$service = new Smf\Menu\Renderer\Manager;
 		Smf\Menu\Config\Extension::setupRenderers($service, $this);
-		$service->setDefaultRenderer('bootstrapNav');
+		$service->setDefaultRenderer('list');
 		return $service;
 	}
 

@@ -2,27 +2,27 @@
 // source: C:\xampp\htdocs\BPIS\app\FrontModule/templates/@layout.latte
 
 // prolog Latte\Macros\CoreMacros
-list($_b, $_g, $_l) = $template->initialize('7086524406', 'html')
+list($_b, $_g, $_l) = $template->initialize('4210166561', 'html')
 ;
 // prolog Latte\Macros\BlockMacros
 //
 // block head
 //
-if (!function_exists($_b->blocks['head'][] = '_lbb8edb25afa_head')) { function _lbb8edb25afa_head($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+if (!function_exists($_b->blocks['head'][] = '_lb5b7368c3ac_head')) { function _lb5b7368c3ac_head($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ;
 }}
 
 //
 // block headerH1
 //
-if (!function_exists($_b->blocks['headerH1'][] = '_lb852b5d6bf3_headerH1')) { function _lb852b5d6bf3_headerH1($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+if (!function_exists($_b->blocks['headerH1'][] = '_lba2aac0f874_headerH1')) { function _lba2aac0f874_headerH1($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ;
 }}
 
 //
 // block scripts
 //
-if (!function_exists($_b->blocks['scripts'][] = '_lb731479e37b_scripts')) { function _lb731479e37b_scripts($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+if (!function_exists($_b->blocks['scripts'][] = '_lbd35c5229a9_scripts')) { function _lbd35c5229a9_scripts($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ?>	<script src="<?php echo Latte\Runtime\Filters::escapeHtml(Latte\Runtime\Filters::safeUrl($basePath), ENT_COMPAT) ?>/js/jquery.js"></script>
 	<script src="<?php echo Latte\Runtime\Filters::escapeHtml(Latte\Runtime\Filters::safeUrl($basePath), ENT_COMPAT) ?>/js/netteForms.js"></script>
 	<script src="<?php echo Latte\Runtime\Filters::escapeHtml(Latte\Runtime\Filters::safeUrl($basePath), ENT_COMPAT) ?>/js/main.js"></script>
@@ -145,17 +145,7 @@ call_user_func(reset($_b->blocks['head']), $_b, get_defined_vars())  ?>
 	<footer class="page-footer">
 		<div class="container">
 		  <div class="row">
-			<div class="col l6 s12">
-			  <h5 class="white-text">Footer Content</h5>
-			  <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
-			</div>
-			<div class="col l4 offset-l2 s12">
-			  <h5 class="white-text">Links</h5>
-			  <ul>
-				<li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
-			  </ul>
-			</div>
-		  </div>
+					  </div>
 		</div>
 		<div class="footer-copyright">
 		  <div class="container">

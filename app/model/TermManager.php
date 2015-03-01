@@ -10,7 +10,8 @@ class TermManager extends BaseManager
 		TABLE_NAME = 'termin',
 		COLUMN_ID = 'id',
 		COLUMN_USER = '	uzivatel_id',
-		COLUMN_EVENT= 'udalost_id';
+		COLUMN_EVENT = 'udalost_id',
+		COLUMN_ALLOW = 'vyhovuje';
 
 
 	public function get($id)

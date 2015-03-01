@@ -24,22 +24,23 @@
 			$(this).removeClass('active2');
 		});
 
-		$("form input:checkbox").click(function(){
+	/*$("form input:checkbox").click(function(){
 			$("form input:checkbox").attr ( "checked" , false );
 			if(this.checked)
 			{
 				this.checked = true;
 			}
 
-		});
+		});*/
 
 
 	});
 </script>
-<script src="{$basePath}/js/ckeditor/ckeditor.js"></script>
+{*<script src="{$basePath}/js/ckeditor/ckeditor.js"></script>
 <script type="text/javascript">
 	CKEDITOR.replace( 'editor' );
 </script>
+  *}
 {/block}
 {block content}
 {form eventForm}
@@ -56,13 +57,9 @@
 	</div>
 </div>
 <div class="row">
-	<div class="s12 m6 col input-field">
+	<div class="s12 input-field">
 		{input misto}
 		{label misto/}
-	</div>
-	<div class="s12 m6 col input-field">
-		{input pocet_upozorneni}
-		{label pocet_upozorneni/}
 	</div>
 </div>
 <div class="row">

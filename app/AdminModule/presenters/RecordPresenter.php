@@ -29,7 +29,15 @@ class RecordPresenter extends BasePresenter {
     {
 		$this->recordManager->delete($recordId);
 		$this->flashMessage('stranka byla úspěšně smazána.', 'success');
-        $this->redirect('Record:default');
+        $this->redirect('Record:list');
+    }
+
+	public function actionFinish($recordId)
+    {
+		$data = array('id' =>$recordId, 'splneno' => 1 );
+		$this->recordManager->edit($data);
+		$this->flashMessage('Úkol byl dokončen.', 'success');
+        $this->redirect('Record:list');
     }
 
 	public function actionEdit($recordId)
@@ -48,20 +56,27 @@ class RecordPresenter extends BasePresenter {
         $this['recordForm']->setDefaults($record);
     }
 
-	public function renderDefault() {
-		if($this->user->isInRole('admin'))
+	public function renderDefault($own = null) {
+		if($this->user->isInRole('admin') && $own)
 		{
-			$this->template->records = $this->recordManager->getTable();
+			$this->template->records = $this->recordManager->getTable()->order(\App\Model\RecordManager::COLUMN_DATE.' DESC');
 		}
 		else
 		{
-			$this->template->records = $this->recordManager->getUserRecord($this->user->getId());
+			$this->template->records = $this->recordManager->getUserRecord($this->user->getId())->order(\App\Model\RecordManager::COLUMN_DATE.' DESC');
 		}
 	}
 
-	public function renderList()
+	public function renderList($own = null)
 	{
-		$this->data = $this->recordManager->getTable();
+		if($this->user->isInRole('admin') && $own)
+		{
+			$this->data = $this->recordManager->getTable()->order(\App\Model\RecordManager::COLUMN_DATE.' DESC');
+		}
+		else
+		{
+			$this->data = $this->recordManager->getUserRecord($this->user->getId())->order(\App\Model\RecordManager::COLUMN_DATE.' DESC');
+		}
 		$this->type = "record";
 	}
 
@@ -77,8 +92,8 @@ class RecordPresenter extends BasePresenter {
             ->setRequired()
 			->getControlPrototype()->setId('editor');
 
-		$form->addText('datum', 'Datum:', 16, 16)->getControlPrototype()->setClass('datepicker');
-		$form->addText('datum_splneni', 'Datum splnění:', 16, 16)->getControlPrototype()->setClass('datepicker');
+		$form->addText('datum', 'Datum:', 30, 30)->getControlPrototype()->setClass('datepicker');
+		$form->addText('datum_splneni', 'Datum splnění:', 30, 30)->getControlPrototype()->setClass('datepicker');
 
         $form->addSubmit('send', 'Odeslat');
 		$form->setDefaults(array("uzivatel_id" => $this->user->getId()));
@@ -101,6 +116,6 @@ class RecordPresenter extends BasePresenter {
             $this->recordManager->add($values);
         }
         $this->flashMessage('Partner byl vlozen', 'success');
-        $this->redirect('Record:default');
+        $this->redirect('Record:list');
     }
 }

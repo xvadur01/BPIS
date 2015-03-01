@@ -1,11 +1,13 @@
 {block headerH1}Přehled záznamů{/block}
 {block content}
 
-<a n:href="Record:default">frontrecord</a>
-<a n:href="Record:list">list</a>
-
 <div class="row">
-<a n:href="Record:add" title="Nový záznam" class="right-align btn-floating btn-large waves-effect waves-light blue"><i class="mdi-content-add"></i></a>
+	<div class="col s9">
+		<a n:href="Record:add" title="Nový záznam" class="right-align btn-floating btn-large waves-effect waves-light blue"><i class="mdi-content-add"></i></a>
+	</div>
+	<div class="col s3">
+		<a n:href="Record:list" class="waves-effect waves-light btn-large right-align grey" title="TimeLine výpis"><i class="mdi-action-question-answer"></i></a>
+	</div>
 </div>
 <table class=" striped responsive-table">
 	<tr>

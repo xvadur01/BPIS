@@ -1,14 +1,20 @@
 {block headerH1}Přehled událostí{/block}
 {block content}
-<a n:href="Event:list">list</a>
 
 <div class="row">
-	<a n:href="Event:add" title="Nová událost" class="right-align btn-floating btn-large waves-effect waves-light blue"><i class="mdi-content-add"></i></a>
+	<div class="col s9">
+		<a n:href="Event:add" title="Nová událost" class="right-align btn-floating btn-large waves-effect waves-light blue"><i class="mdi-content-add"></i></a>
+	</div>
+	<div class="col s3">
+		<a n:href="Event:list" class="waves-effect waves-light btn-large right-align grey" title="TimeLine výpis"><i class="mdi-action-question-answer"></i></a>
+	</div>
 </div>
+
 <table class=" striped responsive-table">
 	<tr>
 		<th>id</th>
 		<th>název</th>
+		<th>popis</th>
 		<th>datum konání</th>
 		<th>zápis</th>
 		<th>vytvořil</th>
@@ -19,6 +25,7 @@
 {foreach $events as $event}
 		<td>{$event->id}</td>
 		<td>{$event->nazev}</td>
+		<td>{$event->popis|truncate:500|striptags}</td>
 		<td>
 			{if $event->datum}
 				{$event->datum|date:'%d.%m.%Y'}

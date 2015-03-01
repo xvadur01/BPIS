@@ -2,14 +2,9 @@
 {block headerH1}BPIS{/block}
 {block content}
 
-<a n:href="FrontPage:default">frontpage</a>
-<a n:href="FrontPage:add">frontpage</a>
-
-<a n:href="Record:default">record</a>
-<a n:href="Borrowing:default">borrow</a>
-
 <div class="row">
 	<div class="col s12 m4">
+		<h5>Nejnovější události</h5>
 		{if count($newestEvent)}
 			{foreach $newestEvent as $event}
 				<div class="card small blue">
@@ -31,6 +26,7 @@
 		{/if}
 	</div>
 	<div class="col s12 m4">
+		<h5>Nejbližší události</h5>
 		{if count($closestEvent)}
 		{foreach $closestEvent as $event}
 			<div class="card small blue">
@@ -52,6 +48,7 @@
 		{/if}
 	</div>
 <div class="col s12 m4">
+	<h5>Aktulání výpujčky</h5>
 	{if count($borrowing)}
 {foreach $borrowing as $borrow}
 	<div class="card small blue">
@@ -78,5 +75,6 @@
 </div>
 
 <div class="row">
+	<h5>Záznamy</h5>
 	{control timeLine}
 </div>

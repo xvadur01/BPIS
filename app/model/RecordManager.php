@@ -8,7 +8,8 @@ class RecordManager extends BaseManager
 	const
 		TABLE_NAME = 'zaznam',
 		COLUMN_ID = 'id',
-		COLUMN_USER_ID = 'uzivatel_id';
+		COLUMN_USER_ID = 'uzivatel_id',
+		COLUMN_DATE = 'datum';
 		/**
 	 * get all data from table
 	 * @return void

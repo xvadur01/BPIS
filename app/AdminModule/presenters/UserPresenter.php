@@ -12,12 +12,22 @@ class UserPresenter extends BasePresenter {
 	private $eventManager;
 	/** @var \Todo\TermManager */
 	private $termManager;
+	/** @var \Todo\BorrowingManager */
+	private $borrowingManager;
+	/** @var \Todo\BorrowingManager */
+	private $recordManager;
+
+	protected $dataEvent;
+	protected $dataRecord;
 
 
-    function __construct(\App\Model\UserManager $userManager,\App\Model\EventManager $eventManager,\App\Model\TermManager $termManager) {
+    function __construct(\App\Model\UserManager $userManager,\App\Model\EventManager $eventManager,\App\Model\TermManager $termManager,
+					\App\Model\BorrowingManager $borrowingManager, \App\Model\RecordManager $recordManager) {
 		$this->userManager = $userManager;
 		$this->eventManager = $eventManager;
 		$this->termManager = $termManager;
+		$this->borrowingManager = $borrowingManager;
+		$this->recordManager = $recordManager;
     }
 
 	public function actionDelete($userId)
@@ -39,8 +49,33 @@ class UserPresenter extends BasePresenter {
         $this['editUserForm']->setDefaults($user);
     }
 
+	protected function createComponentTimeLineRecord()
+    {
+		$timeLine = new \TimeLineControl();
+		$timeLine->setType("record");
+		$timeLine->setData($this->dataRecord);
+        return $timeLine;
+    }
+
+	protected function createComponentTimeLineEvent()
+    {
+		$timeLine = new \TimeLineControl();
+		$timeLine->setType("eventUser");
+		$timeLine->setData($this->dataEvent);
+        return $timeLine;
+    }
+
+	public function renderDetail($id) {
+		$this->template->userData = $this->userManager->get($id);
+		$this->template->borrowing = $this->borrowingManager->getUserBorrow($id)->order(\App\Model\BorrowingManager::COLUMN_ID.' DESC');
+		$this->dataEvent = $this->eventManager->getNewestUserEvent($id,100);
+		$this->dataRecord = $this->recordManager->getUserRecord($id)->order(\App\Model\RecordManager::COLUMN_ID.' DESC');
+	}
+
 	public function renderDefault() {
-		$this->template->users = $this->userManager->getTable();
+		$this->template->users = $this->userManager->getTable()
+				->order(\App\Model\UserManager::COLUMN_USER_SURNAME.', ',\App\Model\UserManager::COLUMN_USER_NAME);
+
 	}
 
 	protected function createComponentUserForm()

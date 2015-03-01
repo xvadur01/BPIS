@@ -1,3 +1,11 @@
-{block headerH1}Hstorie záznamů{/block}
+{block headerH1}Historie záznamů{/block}
 {block content}
+<div class="row">
+	<div class="col s9">
+		<a n:href="Record:add" title="Nový záznam" class="right-align btn-floating btn-large waves-effect waves-light blue"><i class="mdi-content-add"></i></a>
+	</div>
+	<div class="col s3">
+		<a n:href="Record:default" class="waves-effect waves-light btn-large right-align grey" title="Tabulkový výpis"><i class="mdi-editor-format-align-justify"></i></a>
+	</div>
+</div>
 {control timeLine}

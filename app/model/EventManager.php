@@ -8,7 +8,8 @@ class EventManager extends BaseManager
 	const
 	TABLE_NAME = 'udalost',
 	COLUMN_ID = 'id',
-	COLUMN_DATE = 'datum';
+	COLUMN_DATE = 'datum',
+	COLUMN_COUNT_ALERT = 'pocet_upozorneni';
 
 		/**
 	 * get all data from table
@@ -63,17 +64,30 @@ class EventManager extends BaseManager
 	 * @param  $item associative array
 	 * @return void
 	 */
-	public function getNewestUserEvent($userId)
+	public function getNewestUserEvent($userId,$limit = 3)
 	{
 		return $this->connection->query('SELECT E.*,T.cas,T.vyhovuje FROM udalost AS E'
 				. ' JOIN termin AS T ON E.id = T.udalost_id'
-				. ' WHERE T.uzivatel_id = ? GROUP BY E.id  ORDER BY E.id DESC LIMIT 3',$userId);
+				. ' WHERE T.uzivatel_id = ? GROUP BY E.id  ORDER BY E.id DESC LIMIT ?',$userId,$limit);
 	}
 
 	public function getFutureEvents()
 	{
 		return $this->connection->table(self::TABLE_NAME)->where('datum > NOW() OR datum IS NULL');
 
+	}
+	public function getEventsInSevenDays()
+	{
+		return $this->connection->table(self::TABLE_NAME)->where(self::COLUMN_COUNT_ALERT,2)
+								->where(self::COLUMN_DATE . ' IS NOT NULL')
+								->where(self::COLUMN_DATE . ' > NOW() + INTERVAL 1 DAY')
+								->where(self::COLUMN_DATE . ' < NOW() + INTERVAL 7 DAY');
+	}
+	public function getEventsInOneDays()
+	{
+		return $this->connection->table(self::TABLE_NAME)->where(self::COLUMN_COUNT_ALERT,1)
+								->where(self::COLUMN_DATE . ' IS NOT NULL')
+								->where(self::COLUMN_DATE . ' < NOW() + INTERVAL 1 DAY');
 	}
 	public function getClosestUserEvent($userId)
 	{
@@ -82,5 +96,5 @@ class EventManager extends BaseManager
 				. ' WHERE T.uzivatel_id = ? AND E.datum > NOW() GROUP BY E.id ORDER BY E.datum DESC LIMIT 3',$userId);
 
 	}
-
+	
 }

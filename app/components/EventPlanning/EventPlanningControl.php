@@ -123,7 +123,7 @@ class EventPlanningControl extends UI\Control
 			}
 		}
 
+		$this->getPresenter()->flashMessage('Změny byly uloženy', 'success');
 		$this->getPresenter()->redirect(':Admin:Event:detail',array( 'id' => $values['id']));
-		 $this->flashMessage('Změny byly uloženy', 'success');
     }
 }

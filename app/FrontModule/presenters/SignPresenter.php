@@ -27,7 +27,7 @@ class SignPresenter extends BasePresenter
 
 		$form->addCheckbox('remember', 'Zůstat přihlášen')->getControlPrototype()->class('checkbox');
 
-		$form->addSubmit('send', 'Sign in')->getControlPrototype()->class="btn btn-default";
+		$form->addSubmit('send', 'Přihlásit se')->getControlPrototype()->class="btn btn-default";
 
 		// call method signInFormSucceeded() on success
 		$form->onSuccess[] = $this->signInFormSucceeded;

@@ -2,26 +2,26 @@
 // source: C:\xampp\htdocs\BPIS\app\AdminModule/templates/FrontPage/default.latte
 
 // prolog Latte\Macros\CoreMacros
-list($_b, $_g, $_l) = $template->initialize('0836683976', 'html')
+list($_b, $_g, $_l) = $template->initialize('7556274515', 'html')
 ;
 // prolog Latte\Macros\BlockMacros
 //
 // block headerH1
 //
-if (!function_exists($_b->blocks['headerH1'][] = '_lbcc6fce6a9b_headerH1')) { function _lbcc6fce6a9b_headerH1($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+if (!function_exists($_b->blocks['headerH1'][] = '_lb67180588c4_headerH1')) { function _lb67180588c4_headerH1($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ?>Přehled věřejných stránek<?php
 }}
 
 //
 // block content
 //
-if (!function_exists($_b->blocks['content'][] = '_lb3b6da5a5bf_content')) { function _lb3b6da5a5bf_content($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+if (!function_exists($_b->blocks['content'][] = '_lbd47f8ab46c_content')) { function _lbd47f8ab46c_content($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ?><div class="row">
 <a title="Nová stránka" class="right-align btn-floating btn-large waves-effect waves-light blue" href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("FrontPage:add"), ENT_COMPAT) ?>
 "><i class="mdi-content-add"></i></a>
 </div>
 
-<table class=" striped responsive-table">
+<table class=" striped table-condensed">
 	<tr>
 		<th>Id</th>
 		<th>Titulek</th>

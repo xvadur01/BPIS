@@ -2,7 +2,7 @@
 // source: C:\xampp\htdocs\BPIS\app\components\TimeLine/TimeLineEventControl.latte
 
 // prolog Latte\Macros\CoreMacros
-list($_b, $_g, $_l) = $template->initialize('3320560666', 'html')
+list($_b, $_g, $_l) = $template->initialize('2570447330', 'html')
 ;
 // prolog Nette\Bridges\ApplicationLatte\UIMacros
 
@@ -16,23 +16,42 @@ if (empty($_l->extends) && !empty($_control->snippetMode)) {
 //
 ?>
 <ul class="timeline">
-<?php $iterations = 0; foreach ($data as $event) { ?>
-	<li>
+<?php $iterations = 0; foreach ($iterator = $_l->its[] = new Latte\Runtime\CachingIterator($data) as $event) { if ($iterator->isOdd()) { ?>
+		<li>
+<?php } else { ?>
+		<li class="timeline-inverted">
+<?php } if (!$event->datum) { ?>
+			<div class="timeline-badge  blue lighten-0">
+					?
+			</div>
+<?php } elseif ($event->datum >  new \DateTime()) { ?>
+				<div class="timeline-badge  green lighten-0">
+					<i class="mdi-action-event"></i>
+				</div>
+<?php } else { ?>
+			<div class="timeline-badge grey">
+				<i class="mdi-action-done"></i>
+			</div>
+<?php } ?>
 
-		<div class="timeline-badge  blue lighten-0"><i class="mdi-action-done"></i>
-		</div>
 		<div class="timeline-panel">
 			<div class="timeline-heading">
 				<a href="<?php echo Latte\Runtime\Filters::escapeHtml($_presenter->link("Event:detail", array($event->id)), ENT_COMPAT) ?>
 "><h4 class="timeline-title"><?php echo Latte\Runtime\Filters::escapeHtml($event->nazev, ENT_NOQUOTES) ?></h4></a>
+<?php if ($type == 'event') { ?>
+					<span><small class="text-muted">Organizátor: </small><?php echo Latte\Runtime\Filters::escapeHtml($event->ref('uzivatel','uzivatel_id')->prijmeni, ENT_NOQUOTES) ?> </span>
+<?php } ?>
 				<p>
-					<small class="text-muted"><i class="glyphicon glyphicon-time"></i><?php echo Latte\Runtime\Filters::escapeHtml($template->date($event->datum, '%d.%m.%Y'), ENT_NOQUOTES) ?></small>
+<?php if ($event->datum) { ?>
+						<small class="text-muted"><i class="glyphicon glyphicon-time">Datum konání: </i></small><?php echo Latte\Runtime\Filters::escapeHtml($template->date($event->datum, '%d.%m.%Y'), ENT_NOQUOTES) ?>
+
+<?php } ?>
 				</p>
 			</div>
 			<div class="timeline-body">
-				<p><?php echo $event->zapis ?></p>
+				<p><?php echo Latte\Runtime\Filters::escapeHtml($template->striptags($template->truncate($event->popis, 500)), ENT_NOQUOTES) ?></p>
 			</div>
 		</div>
 	</li>
-<?php $iterations++; } ?>
+<?php $iterations++; } array_pop($_l->its); $iterator = end($_l->its) ?>
 </ul>

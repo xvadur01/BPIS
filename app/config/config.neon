@@ -32,5 +32,4 @@ services:
 	- ITimeLineControlFactory
 	- IEventPlanningControlFactory
 	router: @App\RouterFactory::createRouter
-smfMenu:
-    defaultRenderer: bootstrapNav # jaký použít výchozí renderer (úplně výchozí je list)
+

@@ -2,21 +2,31 @@
 // source: C:\xampp\htdocs\BPIS\app\AdminModule/templates/Record/list.latte
 
 // prolog Latte\Macros\CoreMacros
-list($_b, $_g, $_l) = $template->initialize('2162175353', 'html')
+list($_b, $_g, $_l) = $template->initialize('3910282058', 'html')
 ;
 // prolog Latte\Macros\BlockMacros
 //
 // block headerH1
 //
-if (!function_exists($_b->blocks['headerH1'][] = '_lba5928fe8df_headerH1')) { function _lba5928fe8df_headerH1($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
-?>Hstorie záznamů<?php
+if (!function_exists($_b->blocks['headerH1'][] = '_lb90016ac2b3_headerH1')) { function _lb90016ac2b3_headerH1($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+?>Historie záznamů<?php
 }}
 
 //
 // block content
 //
-if (!function_exists($_b->blocks['content'][] = '_lbf974058140_content')) { function _lbf974058140_content($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
-;$_l->tmp = $_control->getComponent("timeLine"); if ($_l->tmp instanceof Nette\Application\UI\IRenderable) $_l->tmp->redrawControl(NULL, FALSE); $_l->tmp->render() ;
+if (!function_exists($_b->blocks['content'][] = '_lb2fb7064e4a_content')) { function _lb2fb7064e4a_content($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+?><div class="row">
+	<div class="col s9">
+		<a title="Nový záznam" class="right-align btn-floating btn-large waves-effect waves-light blue" href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Record:add"), ENT_COMPAT) ?>
+"><i class="mdi-content-add"></i></a>
+	</div>
+	<div class="col s3">
+		<a class="waves-effect waves-light btn-large right-align grey" title="Tabulkový výpis" href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Record:default"), ENT_COMPAT) ?>
+"><i class="mdi-editor-format-align-justify"></i></a>
+	</div>
+</div>
+<?php $_l->tmp = $_control->getComponent("timeLine"); if ($_l->tmp instanceof Nette\Application\UI\IRenderable) $_l->tmp->redrawControl(NULL, FALSE); $_l->tmp->render() ;
 }}
 
 //

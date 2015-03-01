@@ -2,20 +2,20 @@
 // source: C:\xampp\htdocs\BPIS\app\AdminModule/templates/Borrowing/default.latte
 
 // prolog Latte\Macros\CoreMacros
-list($_b, $_g, $_l) = $template->initialize('7789815974', 'html')
+list($_b, $_g, $_l) = $template->initialize('0765096142', 'html')
 ;
 // prolog Latte\Macros\BlockMacros
 //
 // block headerH1
 //
-if (!function_exists($_b->blocks['headerH1'][] = '_lbee7a0c8401_headerH1')) { function _lbee7a0c8401_headerH1($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+if (!function_exists($_b->blocks['headerH1'][] = '_lb78b46d9551_headerH1')) { function _lb78b46d9551_headerH1($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ?>Přehled výpujček<?php
 }}
 
 //
 // block content
 //
-if (!function_exists($_b->blocks['content'][] = '_lb5fa2b0f6b7_content')) { function _lb5fa2b0f6b7_content($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+if (!function_exists($_b->blocks['content'][] = '_lb4b0a4bcb63_content')) { function _lb4b0a4bcb63_content($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ?><div class="row">
 <a title="Nová stránka" class="right-align btn-floating btn-large waves-effect waves-light blue" href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Borrowing:add"), ENT_COMPAT) ?>
 "><i class="mdi-content-add"></i></a>
@@ -53,14 +53,14 @@ if (!function_exists($_b->blocks['content'][] = '_lb5fa2b0f6b7_content')) { func
 			</td>
 
 			<td>
-<?php if (!$borrowing->vraceno) { ?>
-					<a title="Vráceno zpět" class="btn-floating waves-effect waves-light light-blue lighten-1" href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Borrowing:giveback", array($borrowing->id)), ENT_COMPAT) ?>
+<?php if (!$borrowing->vraceno && $borrowing->uzivatel_id == $user->getId()) { ?>
+					<a title="Vrátit zpět" class="btn-floating waves-effect waves-light light-blue lighten-1" href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Borrowing:giveback", array($borrowing->id)), ENT_COMPAT) ?>
 "><i class="mdi-content-reply"></i></a>
 <?php } ?>
-				<a title="Vráceno zpět" class="btn-floating waves-effect waves-light light-green accent-3" href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Borrowing:delete", array($borrowing->id)), ENT_COMPAT) ?>
+				<a title="Smazat" class="btn-floating waves-effect waves-light red" href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Borrowing:delete", array($borrowing->id)), ENT_COMPAT) ?>
+"><i class="mdi-action-delete"></i></a>
+				<a title="Upravit" class="btn-floating waves-effect waves-light light-green accent-3 " href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Borrowing:edit", array($borrowing->id)), ENT_COMPAT) ?>
 "><i class="mdi-editor-mode-edit"></i></a>
-				<a title="Vráceno zpět" class="btn-floating waves-effect waves-light  red" href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Borrowing:edit", array($borrowing->id)), ENT_COMPAT) ?>
-"><i class="mdi-image-portrait"></i></a>
 			</td>
 		</tr>
 <?php $iterations++; } ?>

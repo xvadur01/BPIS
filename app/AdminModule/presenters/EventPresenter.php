@@ -91,7 +91,7 @@ class EventPresenter extends BasePresenter {
 		foreach ($terms as $term) {
 			$datetime = new \DateTime($term['cas']);
 			$pick = ($date == $datetime ? TRUE : FALSE);
-			$formDates[$datetime->format('Y-m-d')][] = array("id" => $term->id, "cas" => $datetime->format('H:i'),"pick" => $pick);
+			$formDates[$datetime->format('Y-m-d')][$term->id] = array("id" => $term->id, "cas" => $datetime->format('H:i'),"pick" => $pick);
 		}
 		$i = 0;
 		foreach ($formDates as $date => $times) {
@@ -115,24 +115,36 @@ class EventPresenter extends BasePresenter {
 	public function renderDefault() {
 		if($this->user->isInRole('admin'))
 		{
-			$this->template->events = $this->eventManager->getTable();
+			$this->template->events = $this->eventManager->getTable()->order(\App\Model\EventManager::COLUMN_ID.' DESC');
 		}
 		else
 		{
-			$terms = $this->termManager->getUserEvents($this->user->getId());
+			$terms = $this->termManager->getUserEvents($this->user->getId())->order(\App\Model\EventManager::COLUMN_ID.' DESC');
 			$events = array();
 			foreach ($terms as $term)
 			{
 				$events[] = $term['udalost_id'];
 			}
-			$this->template->events = $this->eventManager->gets($events);
+			$this->template->events = $this->eventManager->gets($events)->order(\App\Model\EventManager::COLUMN_ID.' DESC');
 		}
 	}
 
 	public function renderList()
 	{
-		$this->template->testr = "test";
-		$this->data = $this->eventManager->getTable();
+		if($this->user->isInRole('admin'))
+		{
+			$this->data = $this->eventManager->getTable()->order(\App\Model\EventManager::COLUMN_ID.' DESC');
+		}
+		else
+		{
+			$terms = $this->termManager->getUserEvents($this->user->getId())->order(\App\Model\EventManager::COLUMN_ID.' DESC');
+			$events = array();
+			foreach ($terms as $term)
+			{
+				$events[] = $term['udalost_id'];
+			}
+			$this->data = $this->eventManager->gets($events)->order(\App\Model\EventManager::COLUMN_ID.' DESC');
+		}
 		$this->type = "event";
 	}
 
@@ -256,14 +268,15 @@ class EventPresenter extends BasePresenter {
 		$removeEvent = callback($this, 'EventFormRemoveElementClicked');
 		$form->addHidden('id', null);
 		$form->addHidden('uzivatel_id', null);
+		$form->addHidden('pocet_upozorneni', null);
         $form->addText('nazev', 'Název:')
             ->setRequired();
-		$form->addText('popis', 'Popis:')->getControlPrototype()->setId('editor');
-
+		//$form->addText('popis', 'Popis:')->getControlPrototype()->setId('editor');
+		$form->addTextArea('popis', 'Popis:')->getControlPrototype()->setClass('materialize-textarea');
 		$form->addText('misto', 'Místo:')
             ->setRequired();
 		$form->addTextArea('zapis', 'Zápis:')->getControlPrototype()->setClass('materialize-textarea');
-		$form->addText('pocet_upozorneni', 'Počet upozornění:');
+
 
 		$dates = $form->addDynamic('dates', function (Container $container) use ($removeEvent) {
 				$container->addText('datum', 'Datum:', 20, 20)->getControlPrototype()->setClass('datepicker');
@@ -273,27 +286,22 @@ class EventPresenter extends BasePresenter {
 						$time->addHidden('id', null);
                         $time->addText('cas', 'Čas')->getControlPrototype()->setClass('clockpicker');
 						$time->addCheckbox('pick',"Finální čas");
-                        $removeBtn = $time->addSubmit('remove', 'Smazat čas')
+                        $removeBtn = $time->addSubmit('remove', 'Odebrat čas')
                             ->setValidationScope(false);
                         $removeBtn->onClick[] = $removeEvent;
                     },
-                    1
+                    0
                 );
-				$times->addSubmit('add', 'Add next time')
+				$times->addSubmit('add', 'Přidat nový čas')
 					->setValidationScope(FALSE)
 					->onClick[] = callback($this, 'EventFormAddElementClicked');
 
-			 $container->addSubmit('remove', 'Remove date')
+			 $container->addSubmit('remove', 'Odebrat datum')
 				->setValidationScope(FALSE) # disables validation
 				->onClick[] = $removeEvent;
-		},1);
-
-
-
-
+		},0);
         $form->addSubmit('send', 'Odeslat')
 				->onClick[] = callback($this, 'eventSucceeded');
-
 
 		$dates->addSubmit('add', 'Add next date')
         ->setValidationScope(FALSE)
@@ -316,6 +324,7 @@ class EventPresenter extends BasePresenter {
 		}
 		else
 		{
+			$event['pocet_upozorneni'] = 2;
 			$event = $this->eventManager->add($event);
 			$event = $event->toArray();
 			$this->flashMessage('Událost byla vložena', 'success');
@@ -325,9 +334,9 @@ class EventPresenter extends BasePresenter {
 		$values = $button->form->values;
 		$term = array('udalost_id' => $event['id'], 'uzivatel_id' => $event['uzivatel_id']);
 		$termsId = array();
-		foreach ($values['dates'] as $date)
+		foreach ($values['dates'] as $dateKey => $date)
 		{
-			foreach ($date['times'] as $time)
+			foreach ($date['times'] as $timeKey => $time)
 			{
 				if(isset($time['cas']) && !empty($time['cas']))
 				{
@@ -345,7 +354,7 @@ class EventPresenter extends BasePresenter {
 						$addedTerm = $this->termManager->add($term);
 						$termsId[] = $addedTerm->id;
 					}
-					if($time['pick'])
+					if($time['pick'] || isset($_POST['dates'][$dateKey]['times'][$timeKey]['pick']))
 					{
 						$event['datum'] = $datetime->format('Y-m-d H:i:s');
 						$this->eventManager->edit($event);
@@ -353,7 +362,6 @@ class EventPresenter extends BasePresenter {
 				}
 			}
 		}
-
 		//delete remove term
 		$eventTerm = $this->termManager->getTermOfEvent($event['uzivatel_id'], $event['id']);
 		foreach ($eventTerm as $term) {

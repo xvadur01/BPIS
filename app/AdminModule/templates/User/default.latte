@@ -1,35 +1,53 @@
 {block headerH1}Přeled uživatelů{/block}
 
 {block content}
-
-<div class="row">
-	<a n:href="User:add" title="Nový uživatel" class="right-align btn-floating btn-large waves-effect waves-light blue"><i class="mdi-content-add"></i></a>
-</div>
+{if $user->isInRole('admin')}
+	<div class="row">
+		<a n:href="User:add" title="Nový uživatel" class="right-align btn-floating btn-large waves-effect waves-light blue"><i class="mdi-content-add"></i></a>
+	</div>
+{/if}
 <table class=" striped responsive-table">
 	<tr>
-		<th>id</th>
-		<th>login</th>
+		{if $user->isInRole('admin')}
+			<th>id</th>
+			<th>login</th>
+		{/if}
 		<th>prijmeni</th>
 		<th>jmeno</th>
-		<th>role</th>
+		{if $user->isInRole('admin')}
+			<th>role</th>
+		{/if}
 		<th>telefon</th>
 		<th>email</th>
 		<th>pracovna</th>
 		<th></th>
 	</tr>
 
-{foreach $users as $user}
-		<td>{$user->id}</td>
-		<td>{$user->login}</td>
-		<td>{$user->prijmeni}</td>
-		<td>{$user->jmeno}</td>
-		<td>{$user->role}</td>
-		<td>{$user->telefon}</td>
-		<td>{$user->email}</td>
-		<td>{$user->pracovna}</td>
+{foreach $users as $oneUser}
+	{if $user->isInRole('admin')}
+		<td>{$oneUser->id}</td>
+		<td>{$oneUser->login}</td>
+	{/if}
+		<td>{$oneUser->prijmeni}</td>
+		<td>{$oneUser->jmeno}</td>
+	{if $user->isInRole('admin')}
+		<td>{$oneUser->role}</td>
+	{/if}
+		<td>{$oneUser->telefon}</td>
+		<td>{$oneUser->email}</td>
+		<td>{$oneUser->pracovna}</td>
 		<td>
-			<a n:href="User:delete $user->id" title="Smazat uživatele" class="btn-floating waves-effect waves-light  red"><i class="mdi-action-delete"></i></a>
-			<a n:href="User:edit $user->id" title="Upravit uživatele" class="btn-floating waves-effect waves-light light-green accent-3"><i class="mdi-editor-mode-edit"></i></a>
+			{if $user->isInRole('admin') || $user->getId() == $oneUser->id}
+				<a n:href="User:delete $oneUser->id" title="Smazat uživatele" class="btn-floating waves-effect waves-light  red">
+					<i class="mdi-action-delete"></i>
+				</a>
+				<a n:href="User:edit $oneUser->id" title="Upravit uživatele" class="btn-floating waves-effect waves-light light-green accent-3">
+					<i class="mdi-editor-mode-edit"></i>
+				</a>
+			{/if}
+			<a n:href="User:detail $oneUser->id" title="Detail uživatele" class="btn-floating waves-effect waves-light light-blue accent-3">
+					<i class="mdi-action-account-box"></i>
+			</a>
 		</td>
 	</tr>
 {/foreach}

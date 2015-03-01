@@ -2,27 +2,27 @@
 // source: C:\xampp\htdocs\BPIS\app\AdminModule/templates/@layoutAdmin.latte
 
 // prolog Latte\Macros\CoreMacros
-list($_b, $_g, $_l) = $template->initialize('0107573599', 'html')
+list($_b, $_g, $_l) = $template->initialize('9723097080', 'html')
 ;
 // prolog Latte\Macros\BlockMacros
 //
 // block head
 //
-if (!function_exists($_b->blocks['head'][] = '_lbd7751cb673_head')) { function _lbd7751cb673_head($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+if (!function_exists($_b->blocks['head'][] = '_lbc4b7e15435_head')) { function _lbc4b7e15435_head($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ;
 }}
 
 //
 // block headerH1
 //
-if (!function_exists($_b->blocks['headerH1'][] = '_lbd5b1c3bf0f_headerH1')) { function _lbd5b1c3bf0f_headerH1($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+if (!function_exists($_b->blocks['headerH1'][] = '_lbe657a37551_headerH1')) { function _lbe657a37551_headerH1($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ;
 }}
 
 //
 // block scripts
 //
-if (!function_exists($_b->blocks['scripts'][] = '_lbf6fc0622bc_scripts')) { function _lbf6fc0622bc_scripts($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+if (!function_exists($_b->blocks['scripts'][] = '_lbccbef79bb1_scripts')) { function _lbccbef79bb1_scripts($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ?>	<script src="<?php echo Latte\Runtime\Filters::escapeHtml(Latte\Runtime\Filters::safeUrl($basePath), ENT_COMPAT) ?>/js/jquery-2.1.3.min.js"></script>
 	<script src="<?php echo Latte\Runtime\Filters::escapeHtml(Latte\Runtime\Filters::safeUrl($basePath), ENT_COMPAT) ?>/js/netteForms.js"></script>
 	<script src="<?php echo Latte\Runtime\Filters::escapeHtml(Latte\Runtime\Filters::safeUrl($basePath), ENT_COMPAT) ?>/js/main.js"></script>
@@ -145,11 +145,19 @@ call_user_func(reset($_b->blocks['head']), $_b, get_defined_vars())  ?>
 <?php $_l->tmp = $_control->getComponent("menu"); if ($_l->tmp instanceof Nette\Application\UI\IRenderable) $_l->tmp->redrawControl(NULL, FALSE); $_l->tmp->renderBootstrapNav() ?>
 	</header>
 	<main>
-	<div class="container col s12 m9 l10 ">
+	<div class="container col s12 m10 l11 ">
 		<div class="row">
-			<div class="col s10 m10 l10">
-<?php $iterations = 0; foreach ($flashes as $flash) { ?>				<div class="card-panel tea"><span class=""><?php echo Latte\Runtime\Filters::escapeHtml($flash->message, ENT_NOQUOTES) ?></span></div>
+			<div class="col s12">
+<?php $iterations = 0; foreach ($flashes as $flash) { if ($flash->type  == 'success') { ?>
+						<div class="card-panel tea light-green accent-1 ">
+							<i class="mdi-action-done"></i>
+<?php } else { ?>
+						<div class="card-panel tea">
+<?php } ?>
+					<span><?php echo Latte\Runtime\Filters::escapeHtml($flash->message, ENT_NOQUOTES) ?></span>
+					</div>
 <?php $iterations++; } ?>
+
 			</div>
 		</div>
 <?php Latte\Macros\BlockMacros::callBlock($_b, 'content', $template->getParameters()) ?>
@@ -158,17 +166,7 @@ call_user_func(reset($_b->blocks['head']), $_b, get_defined_vars())  ?>
 	<footer class="page-footer">
 		<div class="container">
 		  <div class="row">
-			<div class="col l6 s12">
-			  <h5 class="white-text">Footer Content</h5>
-			  <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
-			</div>
-			<div class="col l4 offset-l2 s12">
-			  <h5 class="white-text">Links</h5>
-			  <ul>
-				<li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
-			  </ul>
-			</div>
-		  </div>
+					  </div>
 		</div>
 		<div class="footer-copyright">
 		  <div class="container">

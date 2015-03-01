@@ -2,31 +2,36 @@
 // source: C:\xampp\htdocs\BPIS\app\AdminModule/templates/Event/default.latte
 
 // prolog Latte\Macros\CoreMacros
-list($_b, $_g, $_l) = $template->initialize('0702146590', 'html')
+list($_b, $_g, $_l) = $template->initialize('7701210268', 'html')
 ;
 // prolog Latte\Macros\BlockMacros
 //
 // block headerH1
 //
-if (!function_exists($_b->blocks['headerH1'][] = '_lb3947f245a0_headerH1')) { function _lb3947f245a0_headerH1($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+if (!function_exists($_b->blocks['headerH1'][] = '_lbbf1c4ec96c_headerH1')) { function _lbbf1c4ec96c_headerH1($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ?>Přehled událostí<?php
 }}
 
 //
 // block content
 //
-if (!function_exists($_b->blocks['content'][] = '_lbb0c807ffed_content')) { function _lbb0c807ffed_content($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
-?><a href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Event:list"), ENT_COMPAT) ?>
-">list</a>
-
-<div class="row">
-	<a title="Nová událost" class="right-align btn-floating btn-large waves-effect waves-light blue" href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Event:add"), ENT_COMPAT) ?>
+if (!function_exists($_b->blocks['content'][] = '_lba2472e8749_content')) { function _lba2472e8749_content($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+?><div class="row">
+	<div class="col s9">
+		<a title="Nová událost" class="right-align btn-floating btn-large waves-effect waves-light blue" href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Event:add"), ENT_COMPAT) ?>
 "><i class="mdi-content-add"></i></a>
+	</div>
+	<div class="col s3">
+		<a class="waves-effect waves-light btn-large right-align grey" title="TimeLine výpis" href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Event:list"), ENT_COMPAT) ?>
+"><i class="mdi-action-question-answer"></i></a>
+	</div>
 </div>
+
 <table class=" striped responsive-table">
 	<tr>
 		<th>id</th>
 		<th>název</th>
+		<th>popis</th>
 		<th>datum konání</th>
 		<th>zápis</th>
 		<th>vytvořil</th>
@@ -37,6 +42,7 @@ if (!function_exists($_b->blocks['content'][] = '_lbb0c807ffed_content')) { func
 <?php $iterations = 0; foreach ($events as $event) { ?>
 		<td><?php echo Latte\Runtime\Filters::escapeHtml($event->id, ENT_NOQUOTES) ?></td>
 		<td><?php echo Latte\Runtime\Filters::escapeHtml($event->nazev, ENT_NOQUOTES) ?></td>
+		<td><?php echo Latte\Runtime\Filters::escapeHtml($template->striptags($template->truncate($event->popis, 500)), ENT_NOQUOTES) ?></td>
 		<td>
 <?php if ($event->datum) { ?>
 				<?php echo Latte\Runtime\Filters::escapeHtml($template->date($event->datum, '%d.%m.%Y'), ENT_NOQUOTES) ?>
@@ -81,5 +87,6 @@ if (empty($_l->extends) && !empty($_control->snippetMode)) {
 //
 if ($_l->extends) { ob_end_clean(); return $template->renderChildTemplate($_l->extends, get_defined_vars()); }
 call_user_func(reset($_b->blocks['headerH1']), $_b, get_defined_vars())  ?>
+
 
 <?php call_user_func(reset($_b->blocks['content']), $_b, get_defined_vars()) ; 

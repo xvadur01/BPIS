@@ -46,11 +46,11 @@ class BorrowingPresenter extends BasePresenter {
 	public function renderDefault() {
 		if($this->user->isInRole('admin'))
 		{
-			$this->template->borrowings = $this->borrowingManager->getTable();
+			$this->template->borrowings = $this->borrowingManager->getTable()->order(\App\Model\BorrowingManager::COLUMN_DATE.' DESC');
 		}
 		else
 		{
-			$this->template->borrowings = $this->borrowingManager->getUserBorrow($this->user->getId());
+			$this->template->borrowings = $this->borrowingManager->getUserBorrow($this->user->getId())->order(\App\Model\BorrowingManager::COLUMN_DATE.' DESC');
 		}
 	}
 

@@ -1,20 +1,51 @@
 <ul class="timeline">
 {foreach $data as $record}
-	<li>
+	{if $iterator->isOdd()}
+		<li>
+	{else}
+		<li class="timeline-inverted">
+	{/if}
+			{if $record->splneno}
+				<div class="timeline-badge  green lighten-0">
+					<i class="mdi-action-done"></i>
+				</div>
+			{elseif $record->datum_splneni <  new \DateTime() }
+				<div class="timeline-badge  red lighten-0">
+					<i class="mdi-alert-error"></i>
+				</div>
+			{else}
+				<div class="timeline-badge  blue lighten-0">
+					<i class="mdi-action-event"></i>
+				</div>
+			{/if}
 
-		<div class="timeline-badge  blue lighten-0"><i class="mdi-action-done"></i>
-		</div>
 		<div class="timeline-panel">
 			<div class="timeline-heading">
 				<h4 class="timeline-title">{$record->nazev}</h4>
 				<p>
-					<small class="text-muted"><i class="glyphicon glyphicon-time"></i>{$record->datum|date:'%d.%m.%Y'}</small>
+					<small class="text-muted">Datum zahájení:</small> <i class="glyphicon glyphicon-time">{$record->datum|date:'%d.%m.%Y'}</i>
+					<br>
+					<small class="text-muted">Předpokládané datum ukončení:</small> <i class="glyphicon glyphicon-time">{$record->datum_splneni|date:'%d.%m.%Y'}</i>
 				</p>
 			</div>
 			<div class="timeline-body">
-				<p>{$record->popis|noescape}</p>
+				<p>{$record->popis|truncate:700|noescape}</p>
 			</div>
+			{if $record->uzivatel_id == $user->getId()}
+				<div>
+					{if !$record->splneno}
+						<a href="{plink :Admin:Record:finish $record->id}" title="Dokončit" class="btn-floating waves-effect waves-light  light-blue"><i class="mdi-action-done"></i></a>
+					{/if}
+					<a href="{plink :Admin:Record:delete $record->id}" title="Smazat záznam" class="btn-floating waves-effect waves-light  red"><i class="mdi-action-delete"></i></a>
+					<a href="{plink :Admin:Record:edit $record->id}" title="Upravit záznam" class="btn-floating waves-effect waves-light light-green accent-3"><i class="mdi-editor-mode-edit"></i></a>
+				</div>
+			{/if}
+
+
 		</div>
 	</li>
 {/foreach}
 </ul>
+
+
+
