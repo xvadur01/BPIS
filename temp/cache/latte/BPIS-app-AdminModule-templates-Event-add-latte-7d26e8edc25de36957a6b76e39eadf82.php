@@ -2,20 +2,20 @@
 // source: C:\xampp\htdocs\BPIS\app\AdminModule/templates/Event/add.latte
 
 // prolog Latte\Macros\CoreMacros
-list($_b, $_g, $_l) = $template->initialize('8892093636', 'html')
+list($_b, $_g, $_l) = $template->initialize('2702290941', 'html')
 ;
 // prolog Latte\Macros\BlockMacros
 //
 // block headerH1
 //
-if (!function_exists($_b->blocks['headerH1'][] = '_lbd30924a29a_headerH1')) { function _lbd30924a29a_headerH1($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+if (!function_exists($_b->blocks['headerH1'][] = '_lbcfb57d9ee6_headerH1')) { function _lbcfb57d9ee6_headerH1($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ?>Nová událost<?php
 }}
 
 //
 // block scripts
 //
-if (!function_exists($_b->blocks['scripts'][] = '_lb23105cf089_scripts')) { function _lb23105cf089_scripts($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+if (!function_exists($_b->blocks['scripts'][] = '_lb31e666899d_scripts')) { function _lb31e666899d_scripts($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ?> <?php Latte\Macros\BlockMacros::callBlockParent($_b, 'scripts', get_defined_vars()) ?>  
 <script type="text/javascript">
 
@@ -30,7 +30,7 @@ if (!function_exists($_b->blocks['scripts'][] = '_lb23105cf089_scripts')) { func
 
 		});
 
-		$('.time-input input').click(function(){
+		/*$('.time-input input').click(function(){
 			$(this).parent().addClass('active2');
 		});
 
@@ -38,16 +38,20 @@ if (!function_exists($_b->blocks['scripts'][] = '_lb23105cf089_scripts')) { func
 			$(this).find('label:first').addClass('active');
 			$(this).find('label:first').click();
 			$(this).removeClass('active2');
-		});
+		});*/
 
-	/*$("form input:checkbox").click(function(){
-			$("form input:checkbox").attr ( "checked" , false );
+		$("form input:checkbox").click(function(){
 			if(this.checked)
 			{
+				$("form input:checkbox").attr ( "checked" , false );
 				this.checked = true;
 			}
+			else
+			{
+				$("form input:checkbox").attr ( "checked" , false );
 
-		});*/
+			}
+		});
 
 
 	});
@@ -58,7 +62,7 @@ if (!function_exists($_b->blocks['scripts'][] = '_lb23105cf089_scripts')) { func
 //
 // block content
 //
-if (!function_exists($_b->blocks['content'][] = '_lbc3184b8c16_content')) { function _lbc3184b8c16_content($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+if (!function_exists($_b->blocks['content'][] = '_lb40c79c3673_content')) { function _lb40c79c3673_content($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ;Nette\Bridges\FormsLatte\FormMacros::renderFormBegin($form = $_form = $_control["eventForm"], array()) ?>
 
 <div class="row">
@@ -93,46 +97,46 @@ if (!function_exists($_b->blocks['content'][] = '_lbc3184b8c16_content')) { func
 
 	</div>
 </div>
-
-
-<div class="row">
+<h5>Vyhovující termíny:</h5>
+	<div class="row">
 <?php $iterations = 0; foreach ($form['dates']->containers as $dateid => $user) { ?>
-	<div class="col s12 l3 z-depth-2 card" >
-		<div class="col offset-s3 offset-l5 ">
-			<?php echo $_form["dates-$dateid-remove"]->getControl()->addAttributes(array('class'=>'btn btn-flat')) ?>
-
-		</div>
-		<div class="input-field col s12">
-			<?php echo Latte\Runtime\Filters::escapeHtml($user['datum']->label, ENT_NOQUOTES) ;echo Latte\Runtime\Filters::escapeHtml($user['datum']->control, ENT_NOQUOTES) ?>
-
-		</div>
-		<div class="col s12">
-<?php $iterations = 0; foreach ($user['times']->containers as $timeid => $time) { ?>
-				<div class="col input-field s12">
-					<?php $_input = is_object($time['pick']) ? $time['pick'] : $_form[$time['pick']]; echo $_input->getControlPart("") ?>
-
-					<?php $_input = is_object($time['pick']) ? $time['pick'] : $_form[$time['pick']]; if ($_label = $_input->getLabelPart("")) echo $_label  ?>
-
-				</div>
-				<div class="col input-field s6 time-input">
-						<?php echo Latte\Runtime\Filters::escapeHtml($time['cas']->label, ENT_NOQUOTES) ;echo Latte\Runtime\Filters::escapeHtml($time['cas']->control, ENT_NOQUOTES) ?>
-
-
-				</div>
-				<div class="col s6">
-					<?php echo $_form["dates-$dateid-times-$timeid-remove"]->getControl()->addAttributes(array('class'=>'btn btn-flat')) ?>
-
-				</div>
-<?php $iterations++; } ?>
-			<div class="col offset-s4 ">
-				<?php echo $_form["dates-$dateid-times-add"]->getControl()->addAttributes(array('class'=>'btn btn-flat')) ?>
+		<div class="col s12 m3 l3 z-depth-2 eventcard" >
+			<div class="col s12">
+				<?php echo $_form["dates-$dateid-remove"]->getControl()->addAttributes(array('class'=>'btn btn-flat eventbutton')) ?>
 
 			</div>
+			<div class="input-field col s12">
+				<?php echo Latte\Runtime\Filters::escapeHtml($user['datum']->label, ENT_NOQUOTES) ;echo Latte\Runtime\Filters::escapeHtml($user['datum']->control, ENT_NOQUOTES) ?>
+
+			</div>
+			<div class="col s12">
+<?php $iterations = 0; foreach ($user['times']->containers as $timeid => $time) { ?>
+					<div class="col input-field s12 checkBox">
+						<?php $_input = is_object($time['pick']) ? $time['pick'] : $_form[$time['pick']]; echo $_input->getControlPart("") ?>
+
+						<?php $_input = is_object($time['pick']) ? $time['pick'] : $_form[$time['pick']]; if ($_label = $_input->getLabelPart("")) echo $_label  ?>
+
+					</div>
+					<div class="col input-field s6 time-input">
+							<?php echo Latte\Runtime\Filters::escapeHtml($time['cas']->label, ENT_NOQUOTES) ;echo Latte\Runtime\Filters::escapeHtml($time['cas']->control, ENT_NOQUOTES) ?>
+
+							<?php echo Latte\Runtime\Filters::escapeHtml($time['id']->label, ENT_NOQUOTES) ;echo Latte\Runtime\Filters::escapeHtml($time['id']->control, ENT_NOQUOTES) ?>
+
+					</div>
+					<div class="col s6">
+						<?php echo $_form["dates-$dateid-times-$timeid-remove"]->getControl()->addAttributes(array('class'=>'btn btn-flat eventRemoveTime')) ?>
+
+					</div>
+<?php $iterations++; } ?>
+				<div class="col s12">
+					<?php echo $_form["dates-$dateid-times-add"]->getControl()->addAttributes(array('class'=>'btn btn-flat eventbutton')) ?>
+
+				</div>
+			</div>
 		</div>
-	</div>
 <?php $iterations++; } ?>
 
-</div>
+	</div>
 <div class='row'>
 	<?php echo $_form["dates-add"]->getControl()->addAttributes(array('class'=>'btn btn-default')) ?>
 

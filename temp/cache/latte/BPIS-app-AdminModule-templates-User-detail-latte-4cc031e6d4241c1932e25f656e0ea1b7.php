@@ -2,30 +2,45 @@
 // source: C:\xampp\htdocs\BPIS\app\AdminModule/templates/User/detail.latte
 
 // prolog Latte\Macros\CoreMacros
-list($_b, $_g, $_l) = $template->initialize('3070057998', 'html')
+list($_b, $_g, $_l) = $template->initialize('2632701943', 'html')
 ;
 // prolog Latte\Macros\BlockMacros
 //
 // block headerH1
 //
-if (!function_exists($_b->blocks['headerH1'][] = '_lb5d0d753603_headerH1')) { function _lb5d0d753603_headerH1($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
-?>Detail uživatele<?php
+if (!function_exists($_b->blocks['headerH1'][] = '_lb4a8af749d8_headerH1')) { function _lb4a8af749d8_headerH1($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+?><i>Detail uživatele:</i> <?php echo Latte\Runtime\Filters::escapeHtml($userData['prijmeni'], ENT_NOQUOTES) ?>
+ <?php echo Latte\Runtime\Filters::escapeHtml($userData['jmeno'], ENT_NOQUOTES) ;
+}}
+
+//
+// block scripts
+//
+if (!function_exists($_b->blocks['scripts'][] = '_lb9f374043f8_scripts')) { function _lb9f374043f8_scripts($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+?> <?php Latte\Macros\BlockMacros::callBlockParent($_b, 'scripts', get_defined_vars()) ?>  
+	<script type="text/javascript">
+	$(document).ready(function(){
+		$('.scrollspy').scrollSpy();
+	});
+	</script>
+<?php
 }}
 
 //
 // block content
 //
-if (!function_exists($_b->blocks['content'][] = '_lb9e6b676780_content')) { function _lb9e6b676780_content($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+if (!function_exists($_b->blocks['content'][] = '_lb4be2177b50_content')) { function _lb4be2177b50_content($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ?><div class="row">
-	<div class="col s12 m6 l4 card-panel grey lighten-5 z-depth-1">
+	<div  id="personalInformation" class="col s12 m6 l4 card-panel grey lighten-5 z-depth-1 section scrollspy">
 		<h5>Osobní infomace</h5>
 		<div class="col s10">
 			<div class="section">
 				<span>
-					<i>Přijmení a jméno:</i>
+					<i class="grey-text">Přijmení a jméno:</i>
 				</span>
 				<br>
-				<span class="blue-text"><?php echo Latte\Runtime\Filters::escapeHtml($userData['prijmeni'], ENT_NOQUOTES) ;echo Latte\Runtime\Filters::escapeHtml($userData['jmeno'], ENT_NOQUOTES) ?></span>
+				<span class="blue-text"><?php echo Latte\Runtime\Filters::escapeHtml($userData['prijmeni'], ENT_NOQUOTES) ?>
+ <?php echo Latte\Runtime\Filters::escapeHtml($userData['jmeno'], ENT_NOQUOTES) ?></span>
 			</div>
 		</div>
 		<div class="col s2 right-align section">
@@ -38,7 +53,7 @@ if (!function_exists($_b->blocks['content'][] = '_lb9e6b676780_content')) { func
 		<div class="col s12">
 			<div class="section">
 			<span>
-				<i>Telefon:</i>
+				<i class="grey-text">Telefon:</i>
 			</span>
 			<br>
 			<span class="blue-text"><?php echo Latte\Runtime\Filters::escapeHtml($userData['telefon'], ENT_NOQUOTES) ?></span>
@@ -48,7 +63,7 @@ if (!function_exists($_b->blocks['content'][] = '_lb9e6b676780_content')) { func
 		<div class="col s12">
 			<div class="section">
 			<span>
-				<i>Email:</i>
+				<i class="grey-text">Email:</i>
 			</span>
 			<br>
 			<span class="blue-text"><?php echo Latte\Runtime\Filters::escapeHtml($userData['email'], ENT_NOQUOTES) ?></span>
@@ -58,31 +73,45 @@ if (!function_exists($_b->blocks['content'][] = '_lb9e6b676780_content')) { func
 		<div class="col s12">
 			<div class="section">
 			<span>
-				<i>Pracovna:</i>
+				<i class="grey-text">Pracovna:</i>
 			</span>
 			<br>
 			<span class="blue-text"><?php echo Latte\Runtime\Filters::escapeHtml($userData['pracovna'], ENT_NOQUOTES) ?></span>
 			</div>
 		</div>
 	</div>
-	<div class="col s12 m5 l7 offset-m1 offset-l1 card-panel">
-			<h5>Výpujčky</h5>
+
+	<div class="col s10 m4 offset-m2">
+		<h5>Navigace</h5>
+		<ul class="section table-of-contents">
+			<li><a href="#personalInformation">Osobní infomace</a></li>
+			<li><a href="#borrowing">Výpujčky</a></li>
+			<li><a href="#records">Záznamy</a></li>
+			<li><a href="#events">Události</a></li>
+		</ul>
+	</div>
+	<div id="borrowing" class="col s12 card-panel section scrollspy">
+			<h5 >Výpujčky</h5>
 <?php if (count($borrowing)) { ?>
 
 <?php $iterations = 0; foreach ($borrowing as $borrow) { ?>
-	<div class="card small col s11 l5 orange accent-1">
+	<div class="card medium col s12  l3  accent-1">
 			<div class="card-content">
-			  <span class="card-title activator grey-text text-darken-4"><?php echo Latte\Runtime\Filters::escapeHtml($borrow['nazev'], ENT_NOQUOTES) ?> <i class="mdi-navigation-more-vert right"></i></span>
+				<span class="card-title activator grey-text text-darken-4"><?php echo Latte\Runtime\Filters::escapeHtml($borrow['nazev'], ENT_NOQUOTES) ?> <i class="mdi-navigation-more-vert right"></i></span><br>
+				<span class=" white-text text-darken-4">
+				<i class="grey-text" >Datum vypůjčení: </i>
+				<span class="grey-text  text-darken-4"><?php echo Latte\Runtime\Filters::escapeHtml($template->date($borrow->datum, '%d.%m.%Y'), ENT_NOQUOTES) ?></span>
 			</div>
-			<div class="card-reveal orange accent-1">
+			<div class="card-reveal  accent-1">
 			  <span class="card-title black-text text-darken-4"><?php echo Latte\Runtime\Filters::escapeHtml($borrow['nazev'], ENT_NOQUOTES) ?><i class="mdi-navigation-close right"></i></span>
-			  <p class="black-text"><?php echo Latte\Runtime\Filters::escapeHtml($borrow['nazev'], ENT_NOQUOTES) ?>
-,<?php echo Latte\Runtime\Filters::escapeHtml($borrow['jmeno'], ENT_NOQUOTES) ?>
-,<?php echo Latte\Runtime\Filters::escapeHtml($borrow['prijmeni'], ENT_NOQUOTES) ?></p>
-			  <a href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Borrowing:giveBack", array($borrow['id'], 'backlink' => $presenter->storeRequest())), ENT_COMPAT) ?>
-">Vrátit</a>
-<?php if ($user->isInRole('admin') ||  $user->getId() == $userData->id) { ?>
-				<a title="Upravit uživatele" class="btn-floating waves-effect waves-light light-green accent-3" href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Borrowing:edit", array($borrow['id'])), ENT_COMPAT) ?>
+			  <br><i class="grey-text" >Vypůjčeno od: </i><br>
+			  <span class="black-text"><?php echo Latte\Runtime\Filters::escapeHtml($borrow['prijmeni'], ENT_NOQUOTES) ?>
+ <?php echo Latte\Runtime\Filters::escapeHtml($borrow['jmeno'], ENT_NOQUOTES) ?></span><br>
+<?php if ($user->isInRole('admin') ||  $user->getId() == $userData->id) { if (!$borrow->vraceno) { ?>
+					<a title="Vrátit zpět" class="ajax btn-floating waves-effect waves-light light-blue lighten-1" href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Borrowing:giveback", array($borrow->id, 'backlink' => $presenter->storeRequest())), ENT_COMPAT) ?>
+"><i class="mdi-content-reply"></i></a>
+<?php } ?>
+				<a title="Upravit výpujčku" class="btn-floating waves-effect waves-light light-green accent-3" href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Borrowing:edit", array($borrow['id'])), ENT_COMPAT) ?>
 "><i class="mdi-editor-mode-edit"></i></a>
 <?php } ?>
 			</div>
@@ -101,11 +130,11 @@ if (!function_exists($_b->blocks['content'][] = '_lb9e6b676780_content')) { func
 	</div>
 </div>
 	<div class ="row">
-		<div class="col s12 m12 l6 card-panel">
+		<div id="records" class="col s12 card-panel section scrollspy">
 			<h5>Záznamy</h5>
 <?php $_l->tmp = $_control->getComponent("timeLineRecord"); if ($_l->tmp instanceof Nette\Application\UI\IRenderable) $_l->tmp->redrawControl(NULL, FALSE); $_l->tmp->render() ?>
 		</div>
-		<div class="col s12 m12 l5 offset-l1 card-panel">
+		<div id="events" class="col s12 card-panel section scrollspy">
 			<h5>Události</h5>
 <?php $_l->tmp = $_control->getComponent("timeLineEvent"); if ($_l->tmp instanceof Nette\Application\UI\IRenderable) $_l->tmp->redrawControl(NULL, FALSE); $_l->tmp->render() ?>
 		</div>
@@ -134,5 +163,7 @@ if (empty($_l->extends) && !empty($_control->snippetMode)) {
 //
 if ($_l->extends) { ob_end_clean(); return $template->renderChildTemplate($_l->extends, get_defined_vars()); }
 call_user_func(reset($_b->blocks['headerH1']), $_b, get_defined_vars())  ?>
+
+<?php call_user_func(reset($_b->blocks['scripts']), $_b, get_defined_vars())  ?>
 
 <?php call_user_func(reset($_b->blocks['content']), $_b, get_defined_vars()) ; 

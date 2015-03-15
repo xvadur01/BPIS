@@ -1,4 +1,4 @@
-{block headerH1}Přeled uživatelů{/block}
+{block headerH1}Přehled dostupných událostím{/block}
 {block scripts}
 {include #parent}  {* include parent #scripts block *}
 <script type="text/javascript">
@@ -10,7 +10,7 @@
 </script>
 {/block}
 {block content}
-
+<h5>Možné události na, které je možno uživatele pozvat.</h5>
 {form newUserEventsForm}
 	<div class="row">
 		<div class="input-field">
@@ -31,5 +31,4 @@
 				{input send class=>'btn btn-default'}
 		</div>
 	</div>
-
-	{/form}
+{/form}

@@ -1,26 +1,62 @@
-{* Latte template *}
 {block headerH1}BPIS{/block}
-{block content}
+{block scripts}
+{include #parent}  {* include parent #scripts block *}
+<script type="text/javascript">
+	$(document).ready(function() {
 
+		$( ".open" ).click(function() {
+			$( this ).parents( ".card" ).addClass( "medium");
+		});
+		$( ".close" ).click(function() {
+			$( this ).parents( ".card" ).removeClass( "medium");
+		});
+
+	});
+</script>
+{/block}
+{block content}
 <div class="row">
 	<div class="col s12 m4">
 		<h5>Nejnovější události</h5>
 		{if count($newestEvent)}
 			{foreach $newestEvent as $event}
-				<div class="card small blue">
+				<div class="card  light-blue lighten-1">
 					<div class="card-content">
-					  <span class="card-title activator white-text text-darken-4">{$event['nazev']} <i class="mdi-navigation-more-vert right"></i></span>
+						<span class="card-title activator white-text text-darken-4">{$event['nazev']}
+							<i class="open mdi-navigation-more-vert right"></i>
+						</span><br>
+						<span class=" white-text text-darken-4">
+							<i>Datum: </i>
+						</span>
+						{if $event->datum}
+							<span class=" white-text text-darken-4">{$event->datum|date:'%d.%m.%Y %H:%M'}</span>
+						{else}
+							<span class=" white-text text-darken-4">ještě není určeno</span>
+						{/if}
 					</div>
-					<div class="card-reveal blue s12 m6 l6">
-						<span class="card-title white-text text-darken-4"><a class="white-text text-darken-4" n:href="Event:detail,$event['id']">{$event['nazev']}</a><i class="mdi-navigation-close right"></i></span>
-					  <p class="white-text">{$event['popis']}</p>
+					<div class="card-reveal  blue s12 m6 l6">
+						<span class="card-title white-text text-darken-4">
+							<a class="white-text text-darken-4" n:href="Event:detail,$event['id']">{$event['nazev']}</a>
+							<span class="white-text">{$event['datum']|date:'%d.%m.%Y %H:%M'}</span><i class="close mdi-navigation-close right"></i>
+						</span>
+						<span class=" white-text text-darken-4"><i>Pořadatel: </i></span>
+						<span class=" white-text text-darken-4">{$event->prijmeni} {$event->jmeno}</span>
+						<br><span class=" white-text text-darken-4">
+							<i>Datum: </i>
+						</span>
+						{if $event->datum}
+							<span class=" white-text text-darken-4">{$event->datum|date:'%d.%m.%Y  %H:%M'}</span>
+						{else}
+							<span class=" white-text text-darken-4">ještě není určeno</span>
+						{/if}
+						<p class="white-text">{$event['popis']|truncate:350|striptags}</p>
 					</div>
 				</div>
 			{/foreach}
 		{else}
 			<div class="card small">
 				<div class="card-content">
-				  <span class="card-title activator grey-text text-darken-4">Žádná nová událost</span>
+					<span class="card-title activator grey-text text-darken-4">Žádná nová událost</span>
 				</div>
 			</div>
 		{/if}
@@ -28,50 +64,87 @@
 	<div class="col s12 m4">
 		<h5>Nejbližší události</h5>
 		{if count($closestEvent)}
-		{foreach $closestEvent as $event}
-			<div class="card small blue">
-				<div class="card-content">
-				  <span class="card-title activator white-text text-darken-4">{$event['nazev']} <i class="mdi-navigation-more-vert right"></i></span>
+			{foreach $closestEvent as $event}
+				<div class="card light-blue lighten-1">
+					<div class="card-content">
+						<span class="card-title activator white-text text-darken-4">{$event['nazev']}
+							<i class="open mdi-navigation-more-vert right"></i>
+						</span><br>
+						<span class=" white-text text-darken-4">
+							<i>Datum: </i>
+						</span>
+						{if $event->datum}
+							<span class=" white-text text-darken-4">{$event->datum|date:'%d.%m.%Y %H:%M'}</span>
+						{else}
+							<span class=" white-text text-darken-4">ještě není určeno</span>
+						{/if}
+					</div>
+					<div class="card-reveal  blue s12 m6 l6">
+						<span class="card-title white-text text-darken-4">
+							<a class="white-text text-darken-4" n:href="Event:detail,$event['id']">{$event['nazev']}</a>
+							<span class="white-text">{$event['datum']|date:'%d.%m.%Y %H:%M'}</span>
+							<i class="close mdi-navigation-close right"></i>
+						</span>
+						<span class=" white-text text-darken-4"><i>Pořadatel: </i></span>
+						<span class=" white-text text-darken-4">{$event->prijmeni} {$event->jmeno}</span>
+						<br><span class=" white-text text-darken-4">
+							<i>Datum: </i>
+						</span>
+						{if $event->datum}
+							<span class=" white-text text-darken-4">{$event->datum|date:'%d.%m.%Y  %H:%M'}</span>
+						{else}
+							<span class=" white-text text-darken-4">ještě není určeno</span>
+						{/if}
+						<p class="white-text">{$event['popis']|truncate:350|striptags}</p>
+					</div>
+
 				</div>
-				<div class="card-reveal blue s12 m6 l6">
-				 	<span class="card-title white-text text-darken-4"><a class="white-text text-darken-4" n:href="Event:detail,$event['id']">{$event['nazev']}</a><i class="mdi-navigation-close right"></i></span>
-					<p class="white-text">{$event['popis']}</p>
-				</div>
-			</div>
-		{/foreach}
+			{/foreach}
 		{else}
 			<div class="card small">
 				<div class="card-content">
-				  <span class="card-title activator grey-text text-darken-4">Žádná nadcházející událost</span>
+					<span class="card-title activator grey-text text-darken-4">Žádná nadcházející událost</span>
 				</div>
 			</div>
 		{/if}
 	</div>
-<div class="col s12 m4">
-	<h5>Aktulání výpujčky</h5>
-	{if count($borrowing)}
-{foreach $borrowing as $borrow}
-	<div class="card small blue">
-			<div class="card-content">
-			  <span class="card-title activator white-text text-darken-4">{$borrow['nazev']} <i class="mdi-navigation-more-vert right"></i></span>
-			</div>
-			<div class="card-reveal blue s12 m6 l6">
-			  <span class="card-title white-text text-darken-4">{$borrow['nazev']}<i class="mdi-navigation-close right"></i></span>
-			  <p class="white-text">{$borrow['nazev']},{$borrow['jmeno']},{$borrow['prijmeni']}</p>
-			  <a n:href="Borrowing:giveBack,$borrow['id'], backlink => $presenter->storeRequest()">Vrátit</a>
-			</div>
-		</div>
+	<div class="col s12 m4">
+		<h5>Aktuální výpůjčky</h5>
+		{if count($borrowing)}
+			{foreach $borrowing as $borrow}
+				<div class="card medium light-blue">
+					<div class="card-content">
+						<span class="card-title activator white-text text-darken-4">{$borrow['nazev']} <i class="mdi-navigation-more-vert right"></i></span>
+						<br><i class="white-text" >Datum vypůjčení: </i>
+						<span class="white-text  text-darken-4">{$borrow->datum|date:'%d.%m.%Y'}</span>
+					</div>
+					<div class="card-reveal blue  lighten-1 s12 m6 l6">
+						<span class="card-title white-text text-darken-4">{$borrow['nazev']}<i class="mdi-navigation-close right"></i></span>
+						<p class="white-text"><i>Datum vypůjčení:</i> </p>
+						<p class="white-text  text-darken-4">{$borrow->datum|date:'%d.%m.%Y'}</p>
+						<p class="white-text" ><i>Vypůjčeno od: </i></p>
+						<p class="white-text">{$borrow['prijmeni']} {$borrow['jmeno']}</p>
+						{if $user->isInRole('admin') ||  $user->getId() == $userData->id}
+							<p>
+							{if !$borrow->vraceno}
+								<a n:href="Borrowing:giveback $borrow->id, backlink => $presenter->storeRequest()" title="Vrátit zpět" class="ajax btn-floating waves-effect waves-light light-blue lighten-1"><i class="mdi-content-reply"></i></a>
+								{/if}
+							<a n:href="Borrowing:edit $borrow['id']" title="Upravit výpujčku" class="btn-floating waves-effect waves-light light-green accent-3"><i class="mdi-editor-mode-edit"></i></a>
+							</p>
+						{/if}
+					</div>
+				</div>
 
-	{/foreach}
-	{else}
-		<div class="card small">
-			<div class="card-content">
-			  <span class="card-title activator grey-text text-darken-4">Žádná výpujčka</span>
-			  <a n:href="Borrowing:add">Nova</a>
+			{/foreach}
+		{else}
+			<div class="card small">
+				<div class="card-content">
+					<span class="card-title activator grey-text text-darken-4">Žádná výpůjčka</span>
+					<a n:href="Borrowing:add">Nova</a>
+				</div>
 			</div>
-		</div>
-	{/if}
-</div>
+		{/if}
+	</div>
 </div>
 
 <div class="row">

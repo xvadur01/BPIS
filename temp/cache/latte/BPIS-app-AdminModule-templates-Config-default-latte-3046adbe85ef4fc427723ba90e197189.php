@@ -2,20 +2,20 @@
 // source: C:\xampp\htdocs\BPIS\app\AdminModule/templates/Config/default.latte
 
 // prolog Latte\Macros\CoreMacros
-list($_b, $_g, $_l) = $template->initialize('9356537353', 'html')
+list($_b, $_g, $_l) = $template->initialize('8846928681', 'html')
 ;
 // prolog Latte\Macros\BlockMacros
 //
 // block headerH1
 //
-if (!function_exists($_b->blocks['headerH1'][] = '_lbcf28e447a5_headerH1')) { function _lbcf28e447a5_headerH1($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+if (!function_exists($_b->blocks['headerH1'][] = '_lbb5559f3fcb_headerH1')) { function _lbb5559f3fcb_headerH1($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ?>Nastavení systému<?php
 }}
 
 //
 // block scripts
 //
-if (!function_exists($_b->blocks['scripts'][] = '_lb03c0eb91b6_scripts')) { function _lb03c0eb91b6_scripts($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+if (!function_exists($_b->blocks['scripts'][] = '_lbcba767314f_scripts')) { function _lbcba767314f_scripts($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ?> <?php Latte\Macros\BlockMacros::callBlockParent($_b, 'scripts', get_defined_vars()) ?>  
 <script src="<?php echo Latte\Runtime\Filters::escapeHtml(Latte\Runtime\Filters::safeUrl($basePath), ENT_COMPAT) ?>/js/ckeditor/ckeditor.js"></script>
 <script type="text/javascript">
@@ -28,7 +28,7 @@ if (!function_exists($_b->blocks['scripts'][] = '_lb03c0eb91b6_scripts')) { func
 //
 // block content
 //
-if (!function_exists($_b->blocks['content'][] = '_lbeaf8fd5041_content')) { function _lbeaf8fd5041_content($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+if (!function_exists($_b->blocks['content'][] = '_lba19d40e555_content')) { function _lba19d40e555_content($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ;$_l->tmp = $_control->getComponent("configForm"); if ($_l->tmp instanceof Nette\Application\UI\IRenderable) $_l->tmp->redrawControl(NULL, FALSE); $_l->tmp->render() ;
 }}
 

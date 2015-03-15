@@ -2,6 +2,7 @@
     list-style: none;
     padding: 20px 0 20px;
     position: relative;
+	margin-bottom: 150px;
 }
 .timeline:before {
     top: 0;
@@ -14,7 +15,11 @@
     margin-left: -1.5px;
 }
 .timeline > li {
-    margin-bottom: 20px;
+    margin-bottom: -90px;
+    position: relative;
+}
+.share .timeline > li {
+    margin-bottom: -40px;
     position: relative;
 }
 .timeline > li:before, .timeline > li:after {
@@ -121,10 +126,16 @@
 .timeline-body > p + p {
     margin-top: 5px;
 }
-@media (max-width: 767px) {
+@media (max-width: 1200px) {
     ul.timeline:before {
         left: 40px;
     }
+	.timeline > li {
+		margin-bottom: 20px;
+	}
+	.share .timeline > li {
+		margin-bottom: 20px;
+	}
     ul.timeline > li > .timeline-panel {
         width: calc(100% - 90px);
         width: -moz-calc(100% - 90px);

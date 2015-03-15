@@ -11,11 +11,11 @@
 </div>
 <table class=" striped responsive-table">
 	<tr>
-		<th>id</th>
-		<th>nazev</th>
-		<th>popis</th>
-		<th>datum</th>
-		<th>datupm splneni</th>
+		<th>Id</th>
+		<th>Název</th>
+		<th>Popis</th>
+		<th>Datum</th>
+		<th>Datupm splnění</th>
 		<th></th>
 	</tr>
 {if $records}
@@ -24,10 +24,23 @@
 			<td>{$record->nazev}</td>
 			<td>{$record->popis|truncate:500|striptags}</td>
 			<td>{$record->datum|date:'%d.%m.%Y'}</td>
-			<td>{$record->datum_splneni|date:'%d.%m.%Y'}</td>
 			<td>
-				<a n:href="Record:delete $record->id" title="Smazat záznam" class="btn-floating waves-effect waves-light  red"><i class="mdi-action-delete"></i></a>
-				<a n:href="Record:edit $record->id" title="Upravit záznam" class="btn-floating waves-effect waves-light light-green accent-3"><i class="mdi-editor-mode-edit"></i></a>
+				{if $record->datum_splneni}
+					{$record->datum_splneni|date:'%d.%m.%Y'}
+				{else}
+					Není zadáno
+				{/if}
+			</td>
+			<td>
+				{if $record->uzivatel_id == $user->getId()}
+					{if !$record->splneno}
+						<a n:href="Record:finish $record->id" title="Dokončit" class="btn-floating waves-effect waves-light  light-blue"><i class="mdi-action-done"></i></a>
+					{/if}
+					<a n:href="Record:delete $record->id" title="Smazat záznam" class="btn-floating waves-effect waves-light  red"><i class="mdi-action-delete"></i></a>
+					<a n:href="Record:edit $record->id" title="Upravit záznam" class="btn-floating waves-effect waves-light light-green accent-3"><i class="mdi-editor-mode-edit"></i></a>
+				{/if}
+				<a n:href="Record:detail $record->id" title="Detail záznamu" class="btn-floating waves-effect waves-light orange"><i class="mdi-action-subject"></i></a>
+
 			</td>
 		</tr>
 	{/foreach}

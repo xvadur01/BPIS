@@ -2,7 +2,7 @@
 // source: C:\xampp\htdocs\BPIS\app\components\EventPlanning/EventPlanningControl.latte
 
 // prolog Latte\Macros\CoreMacros
-list($_b, $_g, $_l) = $template->initialize('7274302330', 'html')
+list($_b, $_g, $_l) = $template->initialize('7064155183', 'html')
 ;
 // prolog Nette\Bridges\ApplicationLatte\UIMacros
 
@@ -15,6 +15,7 @@ if (empty($_l->extends) && !empty($_control->snippetMode)) {
 // main template
 //
 ?>
+<h5>Přehled možných termínů</h5>
 <table class="striped bordered">
 <tr>
 	<th>
@@ -69,6 +70,9 @@ if (empty($_l->extends) && !empty($_control->snippetMode)) {
 					<?php echo Latte\Runtime\Filters::escapeHtml($term['id']->control, ENT_NOQUOTES) ?>
  <?php echo Latte\Runtime\Filters::escapeHtml($term['id']->label, ENT_NOQUOTES) ?>
 
+					<?php echo Latte\Runtime\Filters::escapeHtml($term['time']->control, ENT_NOQUOTES) ?>
+ <?php echo Latte\Runtime\Filters::escapeHtml($term['time']->label, ENT_NOQUOTES) ?>
+
 					<?php $_input = is_object($term['pick']) ? $term['pick'] : $_form[$term['pick']]; echo $_input->getControlPart("") ?>
  <?php $_input = is_object($term['pick']) ? $term['pick'] : $_form[$term['pick']]; if ($_label = $_input->getLabelPart("")) echo $_label  ?>
 
@@ -76,7 +80,10 @@ if (empty($_l->extends) && !empty($_control->snippetMode)) {
 <?php $iterations++; } ?>
 		<tr>
 		<tr>
-			<td colspan="0" class="right-align">
+			<td colspan="100%" class="right-align">
+<?php if ($eventUserId == $presenter->user->getId()) { ?>
+					<span>Jste pořadatel události, výběrem termínu určíte termín konání akce.</span>
+<?php } ?>
 				<?php if ($_label = $_form["send"]->getLabel()) echo $_label  ?>
 
 				<?php echo $_form["send"]->getControl()->addAttributes(array('class'=>'btn btn-default')) ?>

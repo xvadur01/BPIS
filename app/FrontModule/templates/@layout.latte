@@ -7,14 +7,16 @@
 <html>
 <head>
 	<meta charset="utf-8">
+	{$config['metadata']|noescape}
 
-	<title>{ifset #title}{include title|striptags} | {/ifset}Nette Sandbox</title>
+	<title>{ifset $page->titulek}{$page->titulek} | {/ifset}{$config['titulek']}</title>
 	<link href="{$basePath}/css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+	<link href="{$basePath}/css/materialize.aditional.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 	<link rel="stylesheet" media="screen,projection,tv" href="{$basePath}/css/screen.css">
 	<link rel="stylesheet" media="print" href="{$basePath}/css/print.css">
 	  <!-- CSS  -->
 
-	<link rel="shortcut icon" href="{$basePath}/favicon.ico">
+	{*<link rel="shortcut icon" href="{$basePath}/favicon.ico">*}
 	{block head}{/block}
 </head>
 
@@ -22,31 +24,29 @@
 	<script> document.documentElement.className+=' js' </script>
 	<header>
 	<!-- Dropdown Structure -->
-	<ul id="dropdown1" class="dropdown-content">
-		{if $user->loggedIn}
-			<li>
+	<ul id="dropdown1" class=" dropdown-content">
+		<li>{if $user->loggedIn}
 				<a n:href=":Admin:User:edit, $user->getId()">Osobní údaje</a>
+			{/if}
 			</li>
-		{/if}
+		<li class="divider"></li>
 		<li>{if $user->loggedIn}
 				<a n:href=":Front:Sign:out">Odhlásit</a>
 			{else}
-				<a n:href=":Front:Sign:in">Přihlásit</a>
+				<a n:href=":Admin:Admin:default">Přihlásit</a>
 			{/if}
 		</li>
 	</ul>
-	<nav class="top-nav">
-	<div class="container">
+	<nav class="top-nav lighten-1">
 			<div class="nav-wrapper">
 				<div class="col s12">
-					<a href="" class="brand-logo"><h1>{block headerH1}{/block}</h1></a>
-						<ul class="right side-nav">
+					<a class="brand-logo"><h1>{block headerH1}{/block}</h1></a>
+					<ul class="right  hide-on-med-and-down">
 						  <!-- Dropdown Trigger -->
 						  <li><a class="dropdown-button" href="#!" data-activates="dropdown1">{if $user->loggedIn}{$user->getIdentity()->login}{/if}<i class="mdi-navigation-arrow-drop-down right"></i></a></li>
 						</ul>
 				</div>
 			</div>
-	</div>
 	</nav>
 	<div class="container">
 		<a class="button-collapse top-nav full" data-activates="nav-mobile" href="#">
@@ -89,7 +89,7 @@
 
 	{block scripts}
 	<script src="{$basePath}/js/jquery.js"></script>
-	<script src="{$basePath}/js/netteForms.js"></script>
+	<script src="{$basePath}/js/nette.ajax.js"></script>
 	<script src="{$basePath}/js/main.js"></script>
 	<script src="{$basePath}/js/materialize.min.js"></script>
 

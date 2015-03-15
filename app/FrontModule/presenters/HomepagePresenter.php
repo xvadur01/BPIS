@@ -17,16 +17,15 @@ class HomepagePresenter extends BasePresenter
 	private $userManager;
 	/** @var \Todo\BorrowingManager */
 	private $recordManager;
-	/** @var \App\Model\ConfigManager */
-	private $configManager;
+
 
 	function __construct(\App\Model\EventManager $eventManager,  \App\Model\TermManager $termManager, \App\Model\UserManager $userManager,
-						\App\Model\ConfigManager $configManager, \App\Model\RecordManager $recordManager)
+						 \App\Model\RecordManager $recordManager)
 	{
 		$this->eventManager = $eventManager;
 		$this->termManager = $termManager;
 		$this->userManager = $userManager;
-		$this->configManager = $configManager;
+
 		$this->recordManager = $recordManager;
 
     }
@@ -57,6 +56,7 @@ class HomepagePresenter extends BasePresenter
 			{
 				$mailer->send($mail);
 			}
+			$this->eventManager->edit(array('id' => $event->id, 'pocet_upozorneni' => $event->pocet_upozorneni--));
 		}
 
 		$events = $this->eventManager->getEventsInOneDays();
@@ -78,7 +78,7 @@ class HomepagePresenter extends BasePresenter
 			{
 				$mailer->send($mail);
 			}
-
+			$this->eventManager->edit(array('id' => $event->id, 'pocet_upozorneni' => $event->pocet_upozorneni--));
 		}
 
 	}
@@ -98,6 +98,6 @@ class HomepagePresenter extends BasePresenter
 			$this->template->page = $this->frontpageManager->getFirstAtiveFronPage()->fetch();
 
 		}
-		$this->template->test = $this->configManager->getTable();
+
 	}
 }

@@ -1,36 +1,56 @@
 <?php
-
 namespace AdminModule;
+
 use \Nette,
 	\App\Model;
 use Smf\Menu;
-class BasePresenter extends \Nette\Application\UI\Presenter {
-	/** @var Menu\Control\Factory */
-    protected $menuFactory;
-	public function injectMenuFactory(Menu\Control\Factory $factory)
-    {
-        $this->menuFactory = $factory;
-    }
-    public function beforeRender() {
-        $this->setLayout('layoutAdmin');
-    }
 
-	public function startup()
-	{
+/**
+ * Base Presenter
+ */
+class BasePresenter extends \Nette\Application\UI\Presenter {
+
+	/** @var Menu\Control\Factory */
+	protected $menuFactory;
+
+	/**
+	 * function to inject instance Menu Factory
+	 * @param \Smf\Menu\Control\Factory $factory
+	 */
+	public function injectMenuFactory(Menu\Control\Factory $factory) {
+		$this->menuFactory = $factory;
+	}
+
+	/**
+	 * Before render default set admin template.
+	 */
+	public function beforeRender() {
+		$this->setLayout('layoutAdmin');
+	}
+
+	/**
+	 * Startup check if user is login.
+	 */
+	public function startup() {
 		parent::startup();
-        if (!$this->user->isLoggedIn()) {
-            if ($this->user->logoutReason === \Nette\Security\IUserStorage::INACTIVITY) {
-                $this->flashMessage('You have been signed out due to inactivity. Please sign in again.');
-            }
-            $this->redirect(':Front:Sign:in', array('backlink' => $this->storeRequest()));
-        }
+		if (!$this->user->isLoggedIn()) {
+			if ($this->user->logoutReason === \Nette\Security\IUserStorage::INACTIVITY) {
+				$this->flashMessage('Pro nečinost došlo k odhlášení. Prosím přihlašte se znovu.');
+			}
+			$this->redirect(':Front:Sign:in', array('backlink' => $this->storeRequest()));
+		}
 		$this->template->titleColor = "";
 		$this->template->title = "";
 	}
-	protected function form() {
-        $form = new \Nette\Application\UI\Form;
 
-       // setup form rendering
+	/**
+	 * Prepare form renderer for CSS framework.
+	 * @return \Nette\Application\UI\Form
+	 */
+	protected function form() {
+		$form = new \Nette\Application\UI\Form;
+
+		// setup form rendering
 		$renderer = $form->getRenderer();
 		$renderer->wrappers['controls']['container'] = NULL;
 		$renderer->wrappers['pair']['container'] = 'div class="row input-field col s12"';
@@ -39,82 +59,81 @@ class BasePresenter extends \Nette\Application\UI\Presenter {
 		$renderer->wrappers['label']['container'] = '';
 		$renderer->wrappers['control']['description'] = 'span class=help-block';
 		$renderer->wrappers['control']['errorcontainer'] = 'span class=help-block';
-		$renderer->wrappers['control']['.submit'] = 'btn btn-default';
+		$renderer->wrappers['control']['.submit'] = 'btn btn-default blue white-text';
 		// make form and controls compatible with Twitter Bootstrap
 		$form->getElementPrototype()->class('col s12');
 		foreach ($form->getControls() as $control) {
 			if ($control instanceof Controls\Button) {
-			$control->getControlPrototype()->addClass(empty($usedPrimary) ? 'btn btn-primary' : 'btn btn-default');
-			$usedPrimary = TRUE;
+				$control->getControlPrototype()->addClass(empty($usedPrimary) ? 'btn btn-primary' : 'btn btn-default');
+				$usedPrimary = TRUE;
 			} elseif ($control instanceof \Controls\TextBase || $control instanceof \Controls\SelectBox || $control instanceof \Controls\MultiSelectBox) {
-			$control->getControlPrototype()->addClass('form-control');
+				$control->getControlPrototype()->addClass('form-control');
 			} elseif ($control instanceof \Controls\Checkbox || $control instanceof \Controls\CheckboxList || $control instanceof \Controls\RadioList) {
 
 				$control->getSeparatorPrototype()->setName('div')->addClass($control->getControlPrototype()->type);
 			}
 		}
 
-        return $form;
+		return $form;
 	}
 
+	/**
+	 * Hadle to log out.
+	 */
 	public function handleLogOut() {
-        $this->user->logout();
-        $this->flashMessage('Byl jste odhlášen', 'info');
-        $this->redirect(':Front:Homepage:default');
+		$this->user->logout();
+		$this->flashMessage('Byl jste odhlášen', 'info');
+		$this->redirect(':Front:Homepage:default');
+	}
 
-    }
-
-	protected function createComponentMenu()
-    {
-        $menu = $this->menuFactory->createControl();
-        $root = $menu->getRoot();
-		$root->setChildrenAttributes(array('class' => 'side-nav fixed','id' => 'nav-mobile'));
+	/**
+	 * Create navigate menu.
+	 * @return  Smf\Menu
+	 */
+	protected function createComponentMenu() {
+		$menu = $this->menuFactory->createControl();
+		$root = $menu->getRoot();
+		$root->setChildrenAttributes(array('class' => 'side-nav fixed', 'id' => 'nav-mobile'));
 
 		$root->addChild('home', array(
 			'label' => 'Home',
-			'link'  => 'Admin:default',
-        ));
+			'link' => 'Admin:default',
+		));
 
-		if($this->user->isInRole('admin'))
-		{
+		if ($this->user->isInRole('admin')) {
 			$root->addChild('Frontpage', array(
 				'label' => 'Veřejná část',
-				'link'  => 'Frontpage:default',
+				'link' => 'Frontpage:default',
 			));
 		}
-		if($this->user->isInRole('admin'))
-		{
+		if ($this->user->isInRole('admin')) {
 			$root->addChild('Config', array(
 				'label' => 'Nastavení systému',
-				'link'  => 'Config:default',
+				'link' => 'Config:default',
 			));
 		}
 
 		$root->addChild('borrowing', array(
-			'label' => 'Výpujčky',
-			'link'  => 'Borrowing:default',
-        ));
+			'label' => 'Výpůjčky',
+			'link' => 'Borrowing:default',
+		));
 
 		$root->addChild('records', array(
 			'label' => 'Záznamy',
-			'link'  => 'Record:list',
-        ));
+			'link' => 'Record:list',
+		));
 
 		$root->addChild('events', array(
 			'label' => 'Události',
-			'link'  => 'Event:list',
-        ));
+			'link' => 'Event:list',
+		));
 
 
 		$root->addChild('users', array(
 			'label' => 'Uživatelé',
-			'link'  => 'User:default',
+			'link' => 'User:default',
 		));
-
-
-
-
-        return $menu;
-    }
+		return $menu;
+	}
 
 }

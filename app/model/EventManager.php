@@ -66,8 +66,9 @@ class EventManager extends BaseManager
 	 */
 	public function getNewestUserEvent($userId,$limit = 3)
 	{
-		return $this->connection->query('SELECT E.*,T.cas,T.vyhovuje FROM udalost AS E'
+		return $this->connection->query('SELECT E.*,T.cas,T.vyhovuje,U.jmeno,U.prijmeni FROM udalost AS E'
 				. ' JOIN termin AS T ON E.id = T.udalost_id'
+				. ' JOIN uzivatel AS U ON E.uzivatel_id = U.id'
 				. ' WHERE T.uzivatel_id = ? GROUP BY E.id  ORDER BY E.id DESC LIMIT ?',$userId,$limit);
 	}
 
@@ -85,16 +86,17 @@ class EventManager extends BaseManager
 	}
 	public function getEventsInOneDays()
 	{
-		return $this->connection->table(self::TABLE_NAME)->where(self::COLUMN_COUNT_ALERT,1)
+		return $this->connection->table(self::TABLE_NAME)->where(self::COLUMN_COUNT_ALERT .'> 0')
 								->where(self::COLUMN_DATE . ' IS NOT NULL')
 								->where(self::COLUMN_DATE . ' < NOW() + INTERVAL 1 DAY');
 	}
 	public function getClosestUserEvent($userId)
 	{
-		return $this->connection->query('SELECT E.*,T.cas,T.vyhovuje FROM udalost AS E'
+		return $this->connection->query('SELECT E.*,T.cas,T.vyhovuje,U.jmeno,U.prijmeni FROM udalost AS E'
 				. ' JOIN termin AS T ON E.id = T.udalost_id'
+				. ' JOIN uzivatel AS U ON E.uzivatel_id = U.id'
 				. ' WHERE T.uzivatel_id = ? AND E.datum > NOW() GROUP BY E.id ORDER BY E.datum DESC LIMIT 3',$userId);
 
 	}
-	
+
 }

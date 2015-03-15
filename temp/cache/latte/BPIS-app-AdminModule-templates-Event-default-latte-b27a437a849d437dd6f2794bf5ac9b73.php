@@ -2,20 +2,20 @@
 // source: C:\xampp\htdocs\BPIS\app\AdminModule/templates/Event/default.latte
 
 // prolog Latte\Macros\CoreMacros
-list($_b, $_g, $_l) = $template->initialize('7701210268', 'html')
+list($_b, $_g, $_l) = $template->initialize('6362157944', 'html')
 ;
 // prolog Latte\Macros\BlockMacros
 //
 // block headerH1
 //
-if (!function_exists($_b->blocks['headerH1'][] = '_lbbf1c4ec96c_headerH1')) { function _lbbf1c4ec96c_headerH1($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+if (!function_exists($_b->blocks['headerH1'][] = '_lb0ec7188e1e_headerH1')) { function _lb0ec7188e1e_headerH1($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ?>Přehled událostí<?php
 }}
 
 //
 // block content
 //
-if (!function_exists($_b->blocks['content'][] = '_lba2472e8749_content')) { function _lba2472e8749_content($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+if (!function_exists($_b->blocks['content'][] = '_lba6160702d4_content')) { function _lba6160702d4_content($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ?><div class="row">
 	<div class="col s9">
 		<a title="Nová událost" class="right-align btn-floating btn-large waves-effect waves-light blue" href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Event:add"), ENT_COMPAT) ?>
@@ -29,13 +29,13 @@ if (!function_exists($_b->blocks['content'][] = '_lba2472e8749_content')) { func
 
 <table class=" striped responsive-table">
 	<tr>
-		<th>id</th>
-		<th>název</th>
-		<th>popis</th>
-		<th>datum konání</th>
-		<th>zápis</th>
-		<th>vytvořil</th>
-		<th>počet upozornění</th>
+		<th>Id</th>
+		<th>Název</th>
+		<th>Popis</th>
+		<th>Datum konání</th>
+		<th>Zápis</th>
+		<th>Vytvořil</th>
+		<th>Počet upozornění</th>
 		<th></th>
 	</tr>
 
@@ -45,7 +45,7 @@ if (!function_exists($_b->blocks['content'][] = '_lba2472e8749_content')) { func
 		<td><?php echo Latte\Runtime\Filters::escapeHtml($template->striptags($template->truncate($event->popis, 500)), ENT_NOQUOTES) ?></td>
 		<td>
 <?php if ($event->datum) { ?>
-				<?php echo Latte\Runtime\Filters::escapeHtml($template->date($event->datum, '%d.%m.%Y'), ENT_NOQUOTES) ?>
+				<?php echo Latte\Runtime\Filters::escapeHtml($template->date($event->datum, '%d.%m.%Y %H:%M'), ENT_NOQUOTES) ?>
 
 <?php } else { ?>
 				Datum konání není určen
@@ -55,10 +55,13 @@ if (!function_exists($_b->blocks['content'][] = '_lba2472e8749_content')) { func
 		<td><?php echo Latte\Runtime\Filters::escapeHtml($event->ref('uzivatel','uzivatel_id')->prijmeni, ENT_NOQUOTES) ?></td>
 		<td><?php echo Latte\Runtime\Filters::escapeHtml($event->pocet_upozorneni, ENT_NOQUOTES) ?></td>
 		<td>
-			<a title="Smazat událost" class="btn-floating waves-effect waves-light  red" href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Event:delete", array($event->id)), ENT_COMPAT) ?>
+<?php if ($event->uzivatel_id == $user->getId() || $user->isInRole('admin')) { ?>
+			<a title="Smazat událost" class="btn-floating waves-effect waves-light  red" href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Event:delete", array($event->id, 'backlink' => $presenter->storeRequest())), ENT_COMPAT) ?>
 "><i class="mdi-action-delete"></i></a>
 			<a title="Upravit událost" class="btn-floating waves-effect waves-light light-green accent-3" href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Event:edit", array($event->id)), ENT_COMPAT) ?>
 "><i class="mdi-editor-mode-edit"></i></a>
+<?php } ?>
+			<a href="<?php echo Latte\Runtime\Filters::escapeHtml($_presenter->link("Event:detail", array($event->id)), ENT_COMPAT) ?>" title="Detail záznamu" class="btn-floating waves-effect waves-light orange"><i class="mdi-action-subject"></i></a>
 		</td>
 	</tr>
 <?php $iterations++; } ?>

@@ -2,51 +2,60 @@
 
 namespace AdminModule;
 
+/**
+ * ConfigPresenter
+ */
 class ConfigPresenter extends BasePresenter {
 
 	/** @var \Todo\ConfigManager */
 	private $configManager;
 
-
-    function __construct(\App\Model\ConfigManager $configManager) {
+	function __construct(\App\Model\ConfigManager $configManager) {
 		$this->configManager = $configManager;
-    }
-
-	public function renderDefault() {
-		$this->template->config = $this->configManager->getTable();
 	}
 
-	protected function createComponentConfigForm()
-    {
-        $form = $this->form();
+	/**
+	 * Render default. Load all pages to table.
+	 */
+	public function renderDefault() {
+		$this['configForm']->setDefaults($this->configManager->getTable()->limit(1)->fetch());
+	}
+
+	/**
+	 * Create form to add and edit page.
+	 */
+	protected function createComponentConfigForm() {
+		$form = $this->form();
 		$form->addHidden('id', null);
 
-        $form->addText('titulek', 'Titulek:')
-            ->setRequired('Zadejte prosím titulek');
+		$form->addText('titulek', 'Titulek:')
+				->setRequired('Zadejte prosím titulek');
 
 		$form->addTextArea('popis', 'Popis:')
-            ->setRequired('Zadejte prosím popis')
-			->getControlPrototype()->setId('editor');
-		
+				->setRequired('Zadejte prosím popis')
+				->getControlPrototype()->setClass('materialize-textarea');
+
 		$form->addTextArea('metadata', 'Metadata:')
-            ->setRequired('Zadejte prosím metadata')
-				->getControlPrototype()->setClass('materialize-textarea');;
+				->setRequired('Zadejte prosím metadata')
+				->getControlPrototype()->setClass('materialize-textarea');
 
-        $form->addSubmit('send', 'Odeslat');
-        $form->onSuccess[] = $this->configFormSucceeded;
-        return $form;
-    }
+		$form->addSubmit('send', 'Odeslat');
+		$form->onSuccess[] = $this->configFormSucceeded;
+		return $form;
+	}
 
-    public function configFormSucceeded($form)
-    {
-
-        $values = $form->getValues();
+	/**
+	 * Function serve succeed congig form.
+	 */
+	public function configFormSucceeded($form) {
+		$values = $form->getValues();
 		if ($values['id']) {
 			$this->configManager->edit($values);
-        } else {
-            $this->configManager->add($values);
-        }
-        $this->flashMessage('Nastavení bylo uloženo', 'success');
-        $this->redirect('Config:default');
-    }
+		} else {
+			$this->configManager->add($values);
+		}
+		$this->flashMessage('Nastavení bylo uloženo', 'success');
+		$this->redirect('Config:default');
+	}
+
 }

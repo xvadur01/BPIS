@@ -2,20 +2,20 @@
 // source: C:\xampp\htdocs\BPIS\app\AdminModule/templates/Borrowing/add.latte
 
 // prolog Latte\Macros\CoreMacros
-list($_b, $_g, $_l) = $template->initialize('1187629210', 'html')
+list($_b, $_g, $_l) = $template->initialize('5440433322', 'html')
 ;
 // prolog Latte\Macros\BlockMacros
 //
 // block headerH1
 //
-if (!function_exists($_b->blocks['headerH1'][] = '_lb8a3b05a688_headerH1')) { function _lb8a3b05a688_headerH1($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+if (!function_exists($_b->blocks['headerH1'][] = '_lb8bb1245bb4_headerH1')) { function _lb8bb1245bb4_headerH1($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ?>Nová výpůjčka<?php
 }}
 
 //
 // block content
 //
-if (!function_exists($_b->blocks['content'][] = '_lb32874b31ea_content')) { function _lb32874b31ea_content($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+if (!function_exists($_b->blocks['content'][] = '_lb6d895dfdf0_content')) { function _lb6d895dfdf0_content($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ;$_l->tmp = $_control->getComponent("borrowingForm"); if ($_l->tmp instanceof Nette\Application\UI\IRenderable) $_l->tmp->redrawControl(NULL, FALSE); $_l->tmp->render() ;
 }}
 

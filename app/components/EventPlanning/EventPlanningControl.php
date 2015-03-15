@@ -74,15 +74,23 @@ class EventPlanningControl extends UI\Control
 			{
 				foreach ($terms as $term)
 				{
-					$form['times'][$i]->setValues(array("pick" => $term['vyhovuje'],"id" => $term['id']));
+					if($this->presenter->user->getId() == $this->event->uzivatel_id)
+					{
+						$form['times'][$i]->setValues(array("pick" => ($this->event->datum == $term['cas'] ? TRUE:FALSE),"id" => $term['id'],"time" => $term['cas']));
+					}
+					else
+					{
+						$form['times'][$i]->setValues(array("pick" => $term['vyhovuje'],"id" => $term['id'],"time" => $term['cas']));
+					}
 					$i++;
 				}
 			}
 		}
-		$form->setValues(array("id" => $this->getEventId()));
+		$form->setValues(array("id" => $this->getEventId(),"userId" => $this->eventManager->get($this->getEventId())->uzivatel_id));
 		$this->template->formUserId = $this->userId;
 		$this->template->users = $Users;
 		$this->template->eventUserId = $this->event->uzivatel_id;
+		$this->template->event = $this->event;
 		$this->template->isForm = boolval($i);
 		$this->template->data = $data;
 		$this->template->render(__DIR__ . '/EventPlanningControl.latte');
@@ -94,9 +102,11 @@ class EventPlanningControl extends UI\Control
         $form = new Nette\Application\UI\Form;
 		$removeEvent = callback($this, 'EventFormRemoveElementClicked');
 		$form->addHidden("id");
+		$form->addHidden("userId");
 		$dates = $form->addDynamic('times',
                     function (Container $time) use ($removeEvent) {
 						$time->addHidden('id', null);
+						$time->addHidden('time', null);
 						$time->addCheckbox('pick',"");
 						$time->addSubmit('remove', 'Remove date')
 						->setValidationScope(FALSE) # disables validation
@@ -113,16 +123,29 @@ class EventPlanningControl extends UI\Control
         $values = $form->getValues();
 		foreach ($values['times'] as $time)
 		{
-			$term = array(
-					"id" => $time['id'],
-					"vyhovuje" => $time['pick'],
-					);
-			if($term['id'])
+			if($this->presenter->user->getId() == $values['userId'])
 			{
-				$this->termManager->edit($term);
+				if($time['pick'])
+				{
+				$item = array(
+						"id" => $values['id'],
+						"datum" => $time['time'],
+						);
+				$this->eventManager->edit($item);
+				}
+			}
+			else
+			{
+				$term = array(
+						"id" => $time['id'],
+						"vyhovuje" => $time['pick'],
+						);
+				if($term['id'])
+				{
+					$this->termManager->edit($term);
+				}
 			}
 		}
-
 		$this->getPresenter()->flashMessage('Změny byly uloženy', 'success');
 		$this->getPresenter()->redirect(':Admin:Event:detail',array( 'id' => $values['id']));
     }

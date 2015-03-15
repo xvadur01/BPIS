@@ -16,7 +16,7 @@ class ConfigManager extends BaseManager
 
 	public function getTable()
 	{
-		return $this->connection->table(self::TABLE_NAME)->fetch();
+		return $this->connection->table(self::TABLE_NAME);
 	}
 
 	/**

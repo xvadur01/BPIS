@@ -19,17 +19,16 @@ abstract class BasePresenter extends \Nette\Application\UI\Presenter
 
 	/** @var \Todo\FrontpageManager */
 	protected $frontpageManager;
-	public function injectFrontpageManager(\App\Model\FrontpageManager $frontpageManager)
+	/** @var \App\Model\ConfigManager */
+	private $configManager;
+	public function injectFrontpageManager(\App\Model\FrontpageManager $frontpageManager,\App\Model\ConfigManager $configManager)
     {
         $this->frontpageManager = $frontpageManager;
+		$this->configManager = $configManager;
     }
-
-    function __construct(\App\Model\FrontpageManager $frontpageManager) {
-		$this->frontpageManager = $frontpageManager;
-    }
-
 
 	public function beforeRender() {
+		$this->template->config = $this->configManager->getTable()->limit(1)->fetch();
         $this->setLayout('layout');
     }
 

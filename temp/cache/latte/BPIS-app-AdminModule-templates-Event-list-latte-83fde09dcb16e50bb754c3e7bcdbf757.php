@@ -2,20 +2,20 @@
 // source: C:\xampp\htdocs\BPIS\app\AdminModule/templates/Event/list.latte
 
 // prolog Latte\Macros\CoreMacros
-list($_b, $_g, $_l) = $template->initialize('3609927157', 'html')
+list($_b, $_g, $_l) = $template->initialize('9219302059', 'html')
 ;
 // prolog Latte\Macros\BlockMacros
 //
 // block headerH1
 //
-if (!function_exists($_b->blocks['headerH1'][] = '_lbfc9834a0e0_headerH1')) { function _lbfc9834a0e0_headerH1($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+if (!function_exists($_b->blocks['headerH1'][] = '_lb681b7c47e6_headerH1')) { function _lb681b7c47e6_headerH1($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ?>Historie událostí<?php
 }}
 
 //
 // block content
 //
-if (!function_exists($_b->blocks['content'][] = '_lbe933fd02ff_content')) { function _lbe933fd02ff_content($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+if (!function_exists($_b->blocks['content'][] = '_lb1e2a8822e4_content')) { function _lb1e2a8822e4_content($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ?><div class="row">
 	<div class="col s9">
 		<a title="Nová událost" class="right-align btn-floating btn-large waves-effect waves-light blue" href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Event:add"), ENT_COMPAT) ?>

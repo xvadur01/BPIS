@@ -14,6 +14,12 @@
 
 		});
 
+		$('#editor').each(function () {
+			//$(this).on('blur', function(){ CKEDITOR.instances. textAreaClientId.updateElement();})
+			var $textarea = $(this);
+			$textarea.val(CKEDITOR.instances[$textarea.attr('name')].getData());
+		 });
+
 		/*$('.time-input input').click(function(){
 			$(this).parent().addClass('active2');
 		});
@@ -40,10 +46,10 @@
 
 	});
 </script>
-{*<script src="{$basePath}/js/ckeditor/ckeditor.js"></script>
+<script src="{$basePath}/js/ckeditor/ckeditor.js"></script>
 <script type="text/javascript">
 	CKEDITOR.replace( 'editor' );
-</script>*}
+</script>
 {/block}
 {block content}
 {form eventForm}
@@ -72,31 +78,32 @@
 	</div>
 </div>
 
-
+<h5>Vyhovující termíny:</h5>
 <div class="row">
 {foreach $form['dates']->containers as $dateid => $user}
-	<div class="col s12 l3 z-depth-2 card" >
-		<div class="col offset-s3 offset-l5 ">
-			{input dates-$dateid-remove class=>'btn btn-flat'}
+		<div class="col s12 m3 l3 z-depth-2 eventcard" >
+			<div class="col s12">
+				{input dates-$dateid-remove class=>'btn btn-flat eventbutton'}
 		</div>
 		<div class="input-field col s12">
 			{$user['datum']->label}{$user['datum']->control}
 		</div>
 		<div class="col s12">
 			{foreach $user['times']->containers as $timeid => $time}
-				<div class="col input-field s12">
-					{input $time['pick']:} {label $time['pick']: /}
+					<div class="col input-field s12 checkBox">
+						{input $time['pick']: }
+						{label $time['pick']: /}
 				</div>
 				<div class="col input-field s6 time-input">
 						{$time['cas']->label}{$time['cas']->control}
-
+							{$time['id']->label}{$time['id']->control}
 				</div>
 				<div class="col s6">
-					{input dates-$dateid-times-$timeid-remove class=>'btn btn-flat'}
+						{input dates-$dateid-times-$timeid-remove class=>'btn btn-flat eventRemoveTime'}
 				</div>
 			{/foreach}
-			<div class="col offset-s4 ">
-				{input dates-$dateid-times-add class=>'btn btn-flat'}
+				<div class="col s12">
+					{input dates-$dateid-times-add class=>'btn btn-flat eventbutton'}
 			</div>
 		</div>
 	</div>

@@ -1,9 +1,12 @@
 <?php
-
 namespace AdminModule;
 use \Nette\Application\UI\Form as Form;
 use \Nette\Forms\Container;
 use \Nette\Forms\Controls\SubmitButton;
+
+/**
+ * Front Page Presenter
+ */
 class EventPresenter extends BasePresenter {
 
 	/** @var \Todo\EventManager */
@@ -12,7 +15,13 @@ class EventPresenter extends BasePresenter {
 	private $termManager;
 	/** @var \Todo\UserManager */
 	private $userManager;
-
+	/** @persistent */
+	public $backlink = '';
+	/**
+	 * @var data
+	 * @var type
+	 * variable for time line
+	 */
 	protected $data;
 	protected $type;
 	protected $eventId;
@@ -25,6 +34,10 @@ class EventPresenter extends BasePresenter {
 		$this->userManager = $userManager;
     }
 
+	/**
+	 * Create component event planing.
+	 * @return \EventPlanningControl
+	 */
 	protected function createComponentEventPlaning()
     {
 		$eventPlanning = new \EventPlanningControl($this->eventManager, $this->termManager, $this->userManager);
@@ -33,6 +46,10 @@ class EventPresenter extends BasePresenter {
         return $eventPlanning;
     }
 
+	/**
+	 * Create component event planing.
+	 * @return \TimeLineControl
+	 */
     protected function createComponentTimeLine()
     {
 		$timeLine = new \TimeLineControl();
@@ -41,14 +58,24 @@ class EventPresenter extends BasePresenter {
         return $timeLine;
     }
 
+	/**
+	 * Action delele event.
+	 * @param type $eventId
+	 */
 	public function actionDelete($eventId)
     {
 		$this->termManager->deleteByEvent($eventId);
 		$this->eventManager->delete($eventId);
 		$this->flashMessage('událost byla úspěšně smazána.', 'success');
+		$this->restoreRequest($this->backlink);
         $this->redirect('Event:default');
     }
 
+	/**
+	 * Action invite users to event.
+	 * @param type $idEvent
+	 * @param type $user_id
+	 */
 	public function actionUsers($idEvent,$user_id)
     {
 		$this->users = $this->userManager->getTable();
@@ -63,18 +90,18 @@ class EventPresenter extends BasePresenter {
         $this['usersEventForm']->setDefaults($defaultValues);
     }
 
+	/**
+	 * Render users. Load all users.
+	 */
 	public function renderUsers()
     {
 		$this->template->users = $this->users;
     }
 
-	public function actionGiveback($eventId)
-    {
-        $event = $this->eventManager->giveBack($eventId);
-		$this->flashMessage('Vec byla navracena.', 'success');
-        $this->redirect('Event:default');
-    }
-
+	/**
+	 * Action edit event. Fill form to edit event.
+	 * @param type $eventId
+	 */
 	public function actionEdit($eventId)
     {
 		$form = $this['eventForm'];
@@ -111,7 +138,9 @@ class EventPresenter extends BasePresenter {
 
 
     }
-
+	/**
+	 * Render default. Load users evet
+	 */
 	public function renderDefault() {
 		if($this->user->isInRole('admin'))
 		{
@@ -129,6 +158,9 @@ class EventPresenter extends BasePresenter {
 		}
 	}
 
+	/**
+	 * Render list of event. Load users event / admin load all events to time line.
+	 */
 	public function renderList()
 	{
 		if($this->user->isInRole('admin'))
@@ -148,33 +180,37 @@ class EventPresenter extends BasePresenter {
 		$this->type = "event";
 	}
 
-	public function getTermOfEvent($idUser, $idEvent)
-	{
-		return $this->connection->table(self::TABLE_NAME)->where(self::COLUMN_USER,$idUser)->where(self::COLUMN_EVENT,$idEvent);
-	}
-
 	/**
-	 * get active pages
-	 * @return void
+	 * Render event detail.
+	 * @param type $id
 	 */
-	public function getUsersOfEvent($idEvent)
-	{
-		return $this->connection->table(self::TABLE_NAME)->where(self::COLUMN_EVENT,$idEvent)->group(self::COLUMN_USER);
-	}
-
 	public function renderDetail($id)
 	{
 		$this->eventId = $id;
 		$event = $this->eventManager->get($id);
 		$this->template->title = $event->nazev;
 		$this->template->event = $event;
+		$this->template->userRef = $event->ref('uzivatel');
 		$this->template->terms = $this->termManager->getTermOfEvent($event->uzivatel_id,$id);
 		$this->template->users = $this->termManager->getUsersOfEvent($id);
 	}
+	public function renderAdd()
+	{
+		$this->template->form = $this->template->_form = $this["eventForm"];
+	}
 
+	/**
+	 * function add new element to form
+	 * @param SubmitButton $button
+	 */
 	public function EventFormAddElementClicked(SubmitButton $button)
 	{
+
 		$button->parent->createOne();
+		$this->template->form = $this->template->_form = $this['eventForm'];
+
+		$this->redrawControl('itemsList');
+
 
 		// $users = $button->parent;
 
@@ -185,19 +221,28 @@ class EventPresenter extends BasePresenter {
 		//}
 	}
 
+
+
+	/**
+	 * function remove  element from form
+	 * @param SubmitButton $button
+	 */
 	public function EventFormRemoveElementClicked(SubmitButton $button)
 	{
 		// first parent is container
 		// second parent is it's replicator
 
-		if($button->parent->components['id']->value)
+		if(isset($button->parent->components['id']) && $button->parent->components['id']->value)
 		{
 			$this->termManager->delete($button->parent->components['id']->value);
 		}
 		$users = $button->parent->parent;
 
 		$users->remove($button->parent, TRUE);
+		$this->template->form = $this->template->_form = $this['eventForm'];
+		$this->redrawControl('itemsList');
 	}
+
 
 	protected function createComponentUsersEventForm()
     {
@@ -216,6 +261,7 @@ class EventPresenter extends BasePresenter {
     {
 		$values = $form->getValues();
 		$termsEvent = $this->termManager->getTermOfEvent($values['user_id'],$values['id']);
+
 		foreach ($values['select'] as $userID => $allow)
 		{
 			if($allow === FALSE && $userID != $values['user_id'])
@@ -224,7 +270,7 @@ class EventPresenter extends BasePresenter {
 			}
 			elseif($userID != $values['user_id'])
 			{
-				$termsUser = $this->termManager->getTermOfEvent($values['id'],$userID);
+				$termsUser = $this->termManager->getTermOfEvent($userID,$values['id'])->fetchAll();
 				$allowTerm = array();
 				foreach ($termsEvent as $termEvent)
 				{
@@ -270,11 +316,11 @@ class EventPresenter extends BasePresenter {
 		$form->addHidden('uzivatel_id', null);
 		$form->addHidden('pocet_upozorneni', null);
         $form->addText('nazev', 'Název:')
-            ->setRequired();
-		//$form->addText('popis', 'Popis:')->getControlPrototype()->setId('editor');
+            ->setRequired('Zadejte název.');
+		//$form->addTextArea('popis', 'Popis:')->getControlPrototype()->setId('editor');
 		$form->addTextArea('popis', 'Popis:')->getControlPrototype()->setClass('materialize-textarea');
 		$form->addText('misto', 'Místo:')
-            ->setRequired();
+            ->setRequired('Zadejte místo konání.');
 		$form->addTextArea('zapis', 'Zápis:')->getControlPrototype()->setClass('materialize-textarea');
 
 
@@ -287,8 +333,8 @@ class EventPresenter extends BasePresenter {
                         $time->addText('cas', 'Čas')->getControlPrototype()->setClass('clockpicker');
 						$time->addCheckbox('pick',"Finální čas");
                         $removeBtn = $time->addSubmit('remove', 'Odebrat čas')
-                            ->setValidationScope(false);
-                        $removeBtn->onClick[] = $removeEvent;
+                            ->setValidationScope(false)
+							->onClick[] = $removeEvent;
                     },
                     0
                 );
@@ -303,7 +349,7 @@ class EventPresenter extends BasePresenter {
         $form->addSubmit('send', 'Odeslat')
 				->onClick[] = callback($this, 'eventSucceeded');
 
-		$dates->addSubmit('add', 'Add next date')
+		$dates->addSubmit('add', 'Přidat další datum')
         ->setValidationScope(FALSE)
         ->onClick[] = callback($this, 'EventFormAddElementClicked');
 		$form->setDefaults(array("uzivatel_id" => $this->user->getId()));
@@ -332,7 +378,7 @@ class EventPresenter extends BasePresenter {
 
 
 		$values = $button->form->values;
-		$term = array('udalost_id' => $event['id'], 'uzivatel_id' => $event['uzivatel_id']);
+		$term = array('udalost_id' => $event['id'], 'uzivatel_id' => $event['uzivatel_id'], 'vyhovuje' => '1' );
 		$termsId = array();
 		foreach ($values['dates'] as $dateKey => $date)
 		{

@@ -1,15 +1,24 @@
-{block headerH1}Detail uživatele{/block}
+{block headerH1}<i>Detail uživatele:</i> {$userData['prijmeni']} {$userData['jmeno']}{/block}
+{block scripts}
+ {include #parent}  {* include parent #scripts block *}
+	<script type="text/javascript">
+	$(document).ready(function(){
+		$('.scrollspy').scrollSpy();
+	});
+	</script>
+{/block}
+
 {block content}
 <div class="row">
-	<div class="col s12 m6 l4 card-panel grey lighten-5 z-depth-1">
+	<div  id="personalInformation" class="col s12 m6 l4 card-panel grey lighten-5 z-depth-1 section scrollspy">
 		<h5>Osobní infomace</h5>
 		<div class="col s10">
 			<div class="section">
 				<span>
-					<i>Přijmení a jméno:</i>
+					<i class="grey-text">Přijmení a jméno:</i>
 				</span>
 				<br>
-				<span class="blue-text">{$userData['prijmeni']}{$userData['jmeno']}</span>
+				<span class="blue-text">{$userData['prijmeni']} {$userData['jmeno']}</span>
 			</div>
 		</div>
 		<div class="col s2 right-align section">
@@ -21,7 +30,7 @@
 		<div class="col s12">
 			<div class="section">
 			<span>
-				<i>Telefon:</i>
+				<i class="grey-text">Telefon:</i>
 			</span>
 			<br>
 			<span class="blue-text">{$userData['telefon']}</span>
@@ -31,7 +40,7 @@
 		<div class="col s12">
 			<div class="section">
 			<span>
-				<i>Email:</i>
+				<i class="grey-text">Email:</i>
 			</span>
 			<br>
 			<span class="blue-text">{$userData['email']}</span>
@@ -41,29 +50,47 @@
 		<div class="col s12">
 			<div class="section">
 			<span>
-				<i>Pracovna:</i>
+				<i class="grey-text">Pracovna:</i>
 			</span>
 			<br>
 			<span class="blue-text">{$userData['pracovna']}</span>
 			</div>
 		</div>
 	</div>
-	<div class="col s12 m5 l7 offset-m1 offset-l1 card-panel">
-			<h5>Výpujčky</h5>
+
+	<div class="col s10 m4 offset-m2">
+		<h5>Navigace</h5>
+		<ul class="section table-of-contents">
+			<li><a href="#personalInformation">Osobní infomace</a></li>
+			<li><a href="#borrowing">Výpujčky</a></li>
+			<li><a href="#records">Záznamy</a></li>
+			<li><a href="#events">Události</a></li>
+		</ul>
+	</div>
+	<div id="borrowing" class="col s12 card-panel section scrollspy">
+			<h5 >Výpujčky</h5>
 	{if count($borrowing)}
 
 	{foreach $borrowing as $borrow}
-	<div class="card small col s11 l5 orange accent-1">
+	<div class="card medium col s12  l3  accent-1">
 			<div class="card-content">
-			  <span class="card-title activator grey-text text-darken-4">{$borrow['nazev']} <i class="mdi-navigation-more-vert right"></i></span>
+				<span class="card-title activator grey-text text-darken-4">{$borrow['nazev']} <i class="mdi-navigation-more-vert right"></i></span><br>
+				<span class=" white-text text-darken-4">
+				<i class="grey-text" >Datum vypůjčení: </i>
+				<span class="grey-text  text-darken-4">{$borrow->datum|date:'%d.%m.%Y'}</span>
 			</div>
-			<div class="card-reveal orange accent-1">
+			<div class="card-reveal  accent-1">
 			  <span class="card-title black-text text-darken-4">{$borrow['nazev']}<i class="mdi-navigation-close right"></i></span>
-			  <p class="black-text">{$borrow['nazev']},{$borrow['jmeno']},{$borrow['prijmeni']}</p>
-			  <a n:href="Borrowing:giveBack,$borrow['id'], backlink => $presenter->storeRequest()">Vrátit</a>
-			  {if $user->isInRole('admin') ||  $user->getId() == $userData->id}
-				<a n:href="Borrowing:edit $borrow['id']" title="Upravit uživatele" class="btn-floating waves-effect waves-light light-green accent-3"><i class="mdi-editor-mode-edit"></i></a>
+			  <br><i class="white-text" >Datum vypůjčení: </i><br>
+			  <span class="white-text  text-darken-4">{$borrow->datum|date:'%d.%m.%Y'}</span>
+			  <br><i class="grey-text" >Vypůjčeno od: </i><br>
+			  <span class="black-text">{$borrow['prijmeni']} {$borrow['jmeno']}</span><br>
+			{if $user->isInRole('admin') ||  $user->getId() == $userData->id}
+				{if !$borrow->vraceno}
+					<a n:href="Borrowing:giveback $borrow->id, backlink => $presenter->storeRequest()" title="Vrátit zpět" class="ajax btn-floating waves-effect waves-light light-blue lighten-1"><i class="mdi-content-reply"></i></a>
 				{/if}
+				<a n:href="Borrowing:edit $borrow['id']" title="Upravit výpujčku" class="btn-floating waves-effect waves-light light-green accent-3"><i class="mdi-editor-mode-edit"></i></a>
+			{/if}
 			</div>
 		</div>
 
@@ -80,11 +107,11 @@
 	</div>
 </div>
 	<div class ="row">
-		<div class="col s12 m12 l6 card-panel">
+		<div id="records" class="col s12 card-panel section scrollspy">
 			<h5>Záznamy</h5>
 			{control timeLineRecord}
 		</div>
-		<div class="col s12 m12 l5 offset-l1 card-panel">
+		<div id="events" class="col s12 card-panel section scrollspy">
 			<h5>Události</h5>
 			{control timeLineEvent}
 		</div>

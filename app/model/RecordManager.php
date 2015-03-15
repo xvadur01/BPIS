@@ -52,4 +52,13 @@ class RecordManager extends BaseManager
 	{
 		return $this->connection->table(self::TABLE_NAME)->where(self::COLUMN_USER_ID, $userId);
 	}
+	/**
+	 * delete
+	 * @param  $item associative array
+	 * @return void
+	 */
+	public function delete($id)
+	{
+		$this->connection->table(self::TABLE_NAME)->where(self::COLUMN_ID, $id)->delete();
+	}
 }

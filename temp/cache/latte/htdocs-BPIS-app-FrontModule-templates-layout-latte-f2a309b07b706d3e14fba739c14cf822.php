@@ -2,29 +2,29 @@
 // source: C:\xampp\htdocs\BPIS\app\FrontModule/templates/@layout.latte
 
 // prolog Latte\Macros\CoreMacros
-list($_b, $_g, $_l) = $template->initialize('4210166561', 'html')
+list($_b, $_g, $_l) = $template->initialize('4979712959', 'html')
 ;
 // prolog Latte\Macros\BlockMacros
 //
 // block head
 //
-if (!function_exists($_b->blocks['head'][] = '_lb5b7368c3ac_head')) { function _lb5b7368c3ac_head($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+if (!function_exists($_b->blocks['head'][] = '_lb12691dde3c_head')) { function _lb12691dde3c_head($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ;
 }}
 
 //
 // block headerH1
 //
-if (!function_exists($_b->blocks['headerH1'][] = '_lba2aac0f874_headerH1')) { function _lba2aac0f874_headerH1($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+if (!function_exists($_b->blocks['headerH1'][] = '_lb8ceb4a0159_headerH1')) { function _lb8ceb4a0159_headerH1($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ;
 }}
 
 //
 // block scripts
 //
-if (!function_exists($_b->blocks['scripts'][] = '_lbd35c5229a9_scripts')) { function _lbd35c5229a9_scripts($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+if (!function_exists($_b->blocks['scripts'][] = '_lbcb35ff541d_scripts')) { function _lbcb35ff541d_scripts($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ?>	<script src="<?php echo Latte\Runtime\Filters::escapeHtml(Latte\Runtime\Filters::safeUrl($basePath), ENT_COMPAT) ?>/js/jquery.js"></script>
-	<script src="<?php echo Latte\Runtime\Filters::escapeHtml(Latte\Runtime\Filters::safeUrl($basePath), ENT_COMPAT) ?>/js/netteForms.js"></script>
+	<script src="<?php echo Latte\Runtime\Filters::escapeHtml(Latte\Runtime\Filters::safeUrl($basePath), ENT_COMPAT) ?>/js/nette.ajax.js"></script>
 	<script src="<?php echo Latte\Runtime\Filters::escapeHtml(Latte\Runtime\Filters::safeUrl($basePath), ENT_COMPAT) ?>/js/main.js"></script>
 	<script src="<?php echo Latte\Runtime\Filters::escapeHtml(Latte\Runtime\Filters::safeUrl($basePath), ENT_COMPAT) ?>/js/materialize.min.js"></script>
 
@@ -76,16 +76,18 @@ if (empty($_l->extends) && !empty($_control->snippetMode)) {
 <html>
 <head>
 	<meta charset="utf-8">
+	<?php echo $config['metadata'] ?>
 
-	<title><?php if (isset($_b->blocks["title"])) { ob_start(); Latte\Macros\BlockMacros::callBlock($_b, 'title', $template->getParameters()); echo $template->striptags(ob_get_clean()) ?>
- | <?php } ?>Nette Sandbox</title>
+
+	<title><?php if (isset($page->titulek)) { echo Latte\Runtime\Filters::escapeHtml($page->titulek, ENT_NOQUOTES) ?>
+ | <?php } echo Latte\Runtime\Filters::escapeHtml($config['titulek'], ENT_NOQUOTES) ?></title>
 	<link href="<?php echo Latte\Runtime\Filters::escapeHtml(Latte\Runtime\Filters::safeUrl($basePath), ENT_COMPAT) ?>/css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection">
+	<link href="<?php echo Latte\Runtime\Filters::escapeHtml(Latte\Runtime\Filters::safeUrl($basePath), ENT_COMPAT) ?>/css/materialize.aditional.css" type="text/css" rel="stylesheet" media="screen,projection">
 	<link rel="stylesheet" media="screen,projection,tv" href="<?php echo Latte\Runtime\Filters::escapeHtml(Latte\Runtime\Filters::safeUrl($basePath), ENT_COMPAT) ?>/css/screen.css">
 	<link rel="stylesheet" media="print" href="<?php echo Latte\Runtime\Filters::escapeHtml(Latte\Runtime\Filters::safeUrl($basePath), ENT_COMPAT) ?>/css/print.css">
 	  <!-- CSS  -->
 
-	<link rel="shortcut icon" href="<?php echo Latte\Runtime\Filters::escapeHtml(Latte\Runtime\Filters::safeUrl($basePath), ENT_COMPAT) ?>/favicon.ico">
-	<?php if ($_l->extends) { ob_end_clean(); return $template->renderChildTemplate($_l->extends, get_defined_vars()); }
+		<?php if ($_l->extends) { ob_end_clean(); return $template->renderChildTemplate($_l->extends, get_defined_vars()); }
 call_user_func(reset($_b->blocks['head']), $_b, get_defined_vars())  ?>
 
 </head>
@@ -94,35 +96,34 @@ call_user_func(reset($_b->blocks['head']), $_b, get_defined_vars())  ?>
 	<script> document.documentElement.className+=' js' </script>
 	<header>
 	<!-- Dropdown Structure -->
-	<ul id="dropdown1" class="dropdown-content">
-<?php if ($user->loggedIn) { ?>
-			<li>
+	<ul id="dropdown1" class=" dropdown-content">
+		<li><?php if ($user->loggedIn) { ?>
+
 				<a href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link(":Admin:User:edit", array($user->getId())), ENT_COMPAT) ?>
 ">Osobní údaje</a>
-			</li>
 <?php } ?>
+			</li>
+		<li class="divider"></li>
 		<li><?php if ($user->loggedIn) { ?>
 
 				<a href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link(":Front:Sign:out"), ENT_COMPAT) ?>
 ">Odhlásit</a>
 <?php } else { ?>
-				<a href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link(":Front:Sign:in"), ENT_COMPAT) ?>
+				<a href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link(":Admin:Admin:default"), ENT_COMPAT) ?>
 ">Přihlásit</a>
 <?php } ?>
 		</li>
 	</ul>
-	<nav class="top-nav">
-	<div class="container">
+	<nav class="top-nav lighten-1">
 			<div class="nav-wrapper">
 				<div class="col s12">
-					<a href="" class="brand-logo"><h1><?php call_user_func(reset($_b->blocks['headerH1']), $_b, get_defined_vars())  ?></h1></a>
-						<ul class="right side-nav">
+					<a class="brand-logo"><h1><?php call_user_func(reset($_b->blocks['headerH1']), $_b, get_defined_vars())  ?></h1></a>
+					<ul class="right  hide-on-med-and-down">
 						  <!-- Dropdown Trigger -->
 						  <li><a class="dropdown-button" href="#!" data-activates="dropdown1"><?php if ($user->loggedIn) { echo Latte\Runtime\Filters::escapeHtml($user->getIdentity()->login, ENT_NOQUOTES) ;} ?><i class="mdi-navigation-arrow-drop-down right"></i></a></li>
 						</ul>
 				</div>
 			</div>
-	</div>
 	</nav>
 	<div class="container">
 		<a class="button-collapse top-nav full" data-activates="nav-mobile" href="#">

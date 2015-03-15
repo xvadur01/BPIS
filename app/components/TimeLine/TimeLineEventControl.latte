@@ -27,12 +27,19 @@
 				{/if}
 				<p>
 					{if $event->datum}
-						<small class="text-muted"><i class="glyphicon glyphicon-time">Datum konání: </i></small>{$event->datum|date:'%d.%m.%Y'}
+						<small class="text-muted"><i class="glyphicon glyphicon-time">Datum konání: </i></small>{$event->datum|date:'%d.%m.%Y %H:%M'}
 					{/if}
 				</p>
 			</div>
 			<div class="timeline-body">
 				<p>{$event->popis|truncate:500|striptags}</p>
+			</div>
+			<div>
+				{if $event->uzivatel_id == $user->getId() || $user->isInRole('admin')}
+					<a href="{plink :Admin:Event:delete  $event->id, backlink => $presenter->storeRequest()}" title="Smazat událost" class="btn-floating waves-effect waves-light  red"><i class="mdi-action-delete"></i></a>
+					<a href="{plink :Admin:Event:edit  $event->id}" title="Upravit událost" class="btn-floating waves-effect waves-light light-green accent-3"><i class="mdi-editor-mode-edit"></i></a>
+				{/if}
+				<a href="{plink Event:detail $event->id}" title="Detail záznamu" class="btn-floating waves-effect waves-light orange"><i class="mdi-action-subject"></i></a>
 			</div>
 		</div>
 	</li>

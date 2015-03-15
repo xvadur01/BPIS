@@ -2,7 +2,7 @@
 // source: C:\xampp\htdocs\BPIS\app\components\TimeLine/TimeLineEventControl.latte
 
 // prolog Latte\Macros\CoreMacros
-list($_b, $_g, $_l) = $template->initialize('2570447330', 'html')
+list($_b, $_g, $_l) = $template->initialize('7797845544', 'html')
 ;
 // prolog Nette\Bridges\ApplicationLatte\UIMacros
 
@@ -43,13 +43,20 @@ if (empty($_l->extends) && !empty($_control->snippetMode)) {
 <?php } ?>
 				<p>
 <?php if ($event->datum) { ?>
-						<small class="text-muted"><i class="glyphicon glyphicon-time">Datum konání: </i></small><?php echo Latte\Runtime\Filters::escapeHtml($template->date($event->datum, '%d.%m.%Y'), ENT_NOQUOTES) ?>
+						<small class="text-muted"><i class="glyphicon glyphicon-time">Datum konání: </i></small><?php echo Latte\Runtime\Filters::escapeHtml($template->date($event->datum, '%d.%m.%Y %H:%M'), ENT_NOQUOTES) ?>
 
 <?php } ?>
 				</p>
 			</div>
 			<div class="timeline-body">
 				<p><?php echo Latte\Runtime\Filters::escapeHtml($template->striptags($template->truncate($event->popis, 500)), ENT_NOQUOTES) ?></p>
+			</div>
+			<div>
+<?php if ($event->uzivatel_id == $user->getId() || $user->isInRole('admin')) { ?>
+					<a href="<?php echo Latte\Runtime\Filters::escapeHtml($_presenter->link(":Admin:Event:delete", array($event->id, 'backlink' => $presenter->storeRequest())), ENT_COMPAT) ?>" title="Smazat událost" class="btn-floating waves-effect waves-light  red"><i class="mdi-action-delete"></i></a>
+					<a href="<?php echo Latte\Runtime\Filters::escapeHtml($_presenter->link(":Admin:Event:edit", array($event->id)), ENT_COMPAT) ?>" title="Upravit událost" class="btn-floating waves-effect waves-light light-green accent-3"><i class="mdi-editor-mode-edit"></i></a>
+<?php } ?>
+				<a href="<?php echo Latte\Runtime\Filters::escapeHtml($_presenter->link("Event:detail", array($event->id)), ENT_COMPAT) ?>" title="Detail záznamu" class="btn-floating waves-effect waves-light orange"><i class="mdi-action-subject"></i></a>
 			</div>
 		</div>
 	</li>

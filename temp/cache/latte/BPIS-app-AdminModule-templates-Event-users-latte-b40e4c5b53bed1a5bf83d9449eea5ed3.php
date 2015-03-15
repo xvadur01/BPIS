@@ -2,20 +2,20 @@
 // source: C:\xampp\htdocs\BPIS\app\AdminModule/templates/Event/users.latte
 
 // prolog Latte\Macros\CoreMacros
-list($_b, $_g, $_l) = $template->initialize('1036844752', 'html')
+list($_b, $_g, $_l) = $template->initialize('7726027156', 'html')
 ;
 // prolog Latte\Macros\BlockMacros
 //
 // block headerH1
 //
-if (!function_exists($_b->blocks['headerH1'][] = '_lbdb8a68259d_headerH1')) { function _lbdb8a68259d_headerH1($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+if (!function_exists($_b->blocks['headerH1'][] = '_lbf8002bc075_headerH1')) { function _lbf8002bc075_headerH1($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ?>Pozvání uživalů k události<?php
 }}
 
 //
 // block scripts
 //
-if (!function_exists($_b->blocks['scripts'][] = '_lba6738086f6_scripts')) { function _lba6738086f6_scripts($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+if (!function_exists($_b->blocks['scripts'][] = '_lb68ca0f7c5c_scripts')) { function _lb68ca0f7c5c_scripts($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ;Latte\Macros\BlockMacros::callBlockParent($_b, 'scripts', get_defined_vars()) ?>  
 <script type="text/javascript">
 
@@ -37,7 +37,7 @@ if (!function_exists($_b->blocks['scripts'][] = '_lba6738086f6_scripts')) { func
 //
 // block content
 //
-if (!function_exists($_b->blocks['content'][] = '_lb200953d604_content')) { function _lb200953d604_content($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+if (!function_exists($_b->blocks['content'][] = '_lb954e502be7_content')) { function _lb954e502be7_content($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ;Nette\Bridges\FormsLatte\FormMacros::renderFormBegin($form = $_form = $_control["usersEventForm"], array()) ?>
 
 

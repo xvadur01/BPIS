@@ -1,0 +1,47 @@
+{block headerH1}Přehled výpujček{/block}
+{block content}
+
+<div class="row">
+<a n:href="Borrowing:add $userId" title="Nová výpujčka" class="right-align btn-floating btn-large waves-effect waves-light blue"><i class="mdi-content-add"></i></a>
+</div>
+{snippet borrowTable}
+<table class=" striped responsive-table">
+	<thead>
+	<tr>
+		<th>Položka</th>
+		<th>Od</th>
+		<th>Datum vypůjčení</th>
+		<th>Kdo</th>
+		<th>Navráceno</th>
+	</tr>
+	</thead>
+		{if $borrowings}
+			<tbody>
+			{foreach $borrowings as $borrowing}
+				<tr>
+					<td>{$borrowing->nazev}</td>
+					<td>{$borrowing->prijmeni} {$borrowing->jmeno}</td>
+					<td>{$borrowing->datum|date:'%d.%m.%Y'}</td>
+					<td>{$borrowing->ref('uzivatel','uzivatel_id')->prijmeni} {$borrowing->jmeno}</td>
+					<td>
+						{if $borrowing->vraceno}
+							<span class="btn-floating green accent-2"><i class="mdi-action-verified-user"></i></span>
+						{else}
+							<span class="btn-floating red lighten-4"><i class="mdi-image-timer"></i></span>
+						{/if}
+					</td>
+					<td>
+						{if !$borrowing->vraceno && $borrowing->uzivatel_id == $user->getId()}
+							<a n:href="Borrowing:giveback $borrowing->id" title="Vrátit zpět" class="ajax btn-floating waves-effect waves-light light-blue lighten-1"><i class="mdi-content-reply"></i></a>
+						{/if}
+						{if $user->isInRole('admin') || $borrowing->uzivatel_id == $user->getId()}
+							<a n:href="Borrowing:delete $borrowing->id" title="Smazat" class="btn-floating waves-effect waves-light red"><i class="mdi-action-delete"></i></a>
+							<a n:href="Borrowing:edit $borrowing->id" title="Upravit" class="btn-floating waves-effect waves-light light-green accent-3 "><i class="mdi-editor-mode-edit"></i></a>
+						{/if}
+					</td>
+				</tr>
+			{/foreach}
+			</tbody>
+		{/if}
+</table>
+{/snippet}

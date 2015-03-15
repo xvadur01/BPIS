@@ -12,13 +12,13 @@
 
 <table class=" striped responsive-table">
 	<tr>
-		<th>id</th>
-		<th>název</th>
-		<th>popis</th>
-		<th>datum konání</th>
-		<th>zápis</th>
-		<th>vytvořil</th>
-		<th>počet upozornění</th>
+		<th>Id</th>
+		<th>Název</th>
+		<th>Popis</th>
+		<th>Datum konání</th>
+		<th>Zápis</th>
+		<th>Vytvořil</th>
+		<th>Počet upozornění</th>
 		<th></th>
 	</tr>
 
@@ -28,7 +28,7 @@
 		<td>{$event->popis|truncate:500|striptags}</td>
 		<td>
 			{if $event->datum}
-				{$event->datum|date:'%d.%m.%Y'}
+				{$event->datum|date:'%d.%m.%Y %H:%M'}
 			{else}
 				Datum konání není určen
 			{/if}
@@ -37,8 +37,11 @@
 		<td>{$event->ref('uzivatel','uzivatel_id')->prijmeni}</td>
 		<td>{$event->pocet_upozorneni}</td>
 		<td>
-			<a n:href="Event:delete $event->id" title="Smazat událost" class="btn-floating waves-effect waves-light  red"><i class="mdi-action-delete"></i></a>
+		{if $event->uzivatel_id == $user->getId() || $user->isInRole('admin')}
+			<a n:href="Event:delete $event->id, backlink => $presenter->storeRequest()" title="Smazat událost" class="btn-floating waves-effect waves-light  red"><i class="mdi-action-delete"></i></a>
 			<a n:href="Event:edit $event->id" title="Upravit událost" class="btn-floating waves-effect waves-light light-green accent-3"><i class="mdi-editor-mode-edit"></i></a>
+		{/if}
+			<a href="{plink Event:detail $event->id}" title="Detail záznamu" class="btn-floating waves-effect waves-light orange"><i class="mdi-action-subject"></i></a>
 		</td>
 	</tr>
 {/foreach}

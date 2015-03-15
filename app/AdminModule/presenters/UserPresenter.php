@@ -107,13 +107,16 @@ class UserPresenter extends BasePresenter {
 			->addRule(Form::EMAIL, 'Musí obsahovat email')
             ->setRequired();
 
-		$roles = array(
-			'admin' => 'Adminstrátor',
-			'user' => 'Běžný uživatel',
-		);
-		$form->addSelect('role', 'Role:', $roles)
-			->getControlPrototype()->setClass('labelNoabsolute')
-			->setPrompt('Zvolte roli');
+		if($this->user->isInRole('admin'))
+		{
+			$roles = array(
+				'admin' => 'Adminstrátor',
+				'user' => 'Běžný uživatel',
+			);
+			$form->addSelect('role', 'Role:', $roles)
+				->getControlPrototype()->setClass('labelNoabsolute')
+				->setPrompt('Zvolte roli');
+		}
 		$form->addText('pracovna', 'Pracovna:');
 
         $form->addSubmit('send', 'Odeslat');
@@ -145,7 +148,7 @@ class UserPresenter extends BasePresenter {
 			$user = $this->userManager->add($values);
 			$id = $user['id'];
 		}
-        $this->flashMessage('Uzivatel byl vlozen', 'success');
+        $this->flashMessage("Uživatel {$values['prijmeni']} byl vytvořen", 'success');
         $this->redirect('User:newUserEvents',array('id' => $id));
     }
 
@@ -153,7 +156,7 @@ class UserPresenter extends BasePresenter {
     {
         $form = $this->form();
 		$form->addHidden('id', null);
-		if(in_array('admin',$this->user->getRoles()))
+		if($this->user->isInRole('admin'))
 		{
 			$form->addText('login', 'Login:')
             ->addRule(Form::FILLED, 'Zadejte login.');
@@ -164,25 +167,27 @@ class UserPresenter extends BasePresenter {
 		}
 
         $form->addText('jmeno', 'Jmeno:')
-            ->setRequired();
+            ->setRequired('Zadejte jméno.');
 
 		$form->addText('prijmeni', 'Přijmení:')
-            ->setRequired();
+            ->setRequired('Zadejte příjmení.');
 
 		$form->addText('telefon', 'telefon:')
-            ->setRequired();
+            ->setRequired('Zadejte telefon.');
 
 		$form->addText('email', 'Email:')
 			->addRule(Form::EMAIL, 'Musí obsahovat email')
-            ->setRequired();
-
-		$roles = array(
-			'admin' => 'Adminstrátor',
-			'user' => 'Běžný uživatel',
-		);
-		$form->addSelect('role', 'Role:', $roles)
-			->getControlPrototype()->setClass('labelNoabsolute')
-			->setPrompt('Zvolte roli');
+            ->setRequired('Zadejte email.');
+		if($this->user->isInRole('admin'))
+		{
+			$roles = array(
+				'admin' => 'Adminstrátor',
+				'user' => 'Běžný uživatel',
+			);
+			$form->addSelect('role', 'Role:', $roles)
+				->getControlPrototype()->setClass('labelNoabsolute')
+				->setPrompt('Zvolte roli');
+		}
 		$form->addText('pracovna', 'Pracovna:');
 
         $form->addSubmit('send', 'Odeslat');
@@ -213,7 +218,7 @@ class UserPresenter extends BasePresenter {
 		{
 			$this->userManager->add($values);
 		}
-        $this->flashMessage('Uzivatel byl vlozen', 'success');
+        $this->flashMessage("Uživatel {$values['prijmeni']} byl upraven", 'success');
         $this->redirect('User:default');
     }
 
@@ -267,7 +272,7 @@ class UserPresenter extends BasePresenter {
 				}
 			}
 		}
-		$this->flashMessage('Změny byly uloženy', 'success');
+		$this->flashMessage('Vytvoření uživatele bylo dokončeno.', 'success');
 		$this->redirect('User:default');
     }
 }

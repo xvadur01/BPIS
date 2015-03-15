@@ -1,49 +1,58 @@
 {* Latte template *}
-{block headerH1}Přehled výpujček{/block}
+{block headerH1}Přehled výpůjček{/block}
 {block content}
 
 <div class="row">
-<a n:href="Borrowing:add" title="Nová stránka" class="right-align btn-floating btn-large waves-effect waves-light blue"><i class="mdi-content-add"></i></a>
+<a n:href="Borrowing:add" title="Nová výpujčka" class="right-align btn-floating btn-large waves-effect waves-light blue"><i class="mdi-content-add"></i></a>
 </div>
+{snippet borrowTable}
 <table class=" striped responsive-table">
 	<thead>
 	<tr>
 		<th>Položka</th>
 		<th>Od</th>
 		<th>Datum vypůjčení</th>
+		<th>Datum navrácení</th>
 		{if $user->isInRole('admin')}
 			<th>Kdo</th>
 		{/if}
 		<th>Navráceno</th>
 	</tr>
 	</thead>
-{if $borrowings}
-	<tbody>
-	{foreach $borrowings as $borrowing}
-		<tr>
-			<td>{$borrowing->nazev}</td>
-			<td>{$borrowing->prijmeni} {$borrowing->jmeno}</td>
-			<td>{$borrowing->datum|date:'%d.%m.%Y'}</td>
-			{if $user->isInRole('admin')}
-				<td>{$borrowing->ref('uzivatel','uzivatel_id')->prijmeni} {$borrowing->jmeno}</td>
-			{/if}
-			<td>
-				{if $borrowing->vraceno}
-					<span class="btn-floating green accent-2"><i class="mdi-action-verified-user"></i></span>
-				{else}
-					<span class="btn-floating red lighten-4"><i class="mdi-image-timer"></i></span>
-				{/if}
-			</td>
+		{if $borrowings}
+			<tbody>
+			{foreach $borrowings as $borrowing}
+				<tr>
+					<td>{$borrowing->nazev}</td>
+					<td>{$borrowing->prijmeni} {$borrowing->jmeno}</td>
+					<td>{$borrowing->datum|date:'%d.%m.%Y'}</td>
+					{if $borrowing->datum_navraceni}
+						<td>{$borrowing->datum_navraceni|date:'%d.%m.%Y'}</td>
+					{else}
+						<td></td>
+					{/if}
 
-			<td>
-				{if !$borrowing->vraceno && $borrowing->uzivatel_id == $user->getId()}
-					<a n:href="Borrowing:giveback $borrowing->id" title="Vrátit zpět" class="btn-floating waves-effect waves-light light-blue lighten-1"><i class="mdi-content-reply"></i></a>
-				{/if}
-				<a n:href="Borrowing:delete $borrowing->id" title="Smazat" class="btn-floating waves-effect waves-light red"><i class="mdi-action-delete"></i></a>
-				<a n:href="Borrowing:edit $borrowing->id" title="Upravit" class="btn-floating waves-effect waves-light light-green accent-3 "><i class="mdi-editor-mode-edit"></i></a>
-			</td>
-		</tr>
-	{/foreach}
-	</tbody>
-{/if}
+					{if $user->isInRole('admin')}
+						<td><a n:href="Borrowing:userborrowing $borrowing->uzivatel_id"> {$borrowing->ref('uzivatel','uzivatel_id')->prijmeni} {$borrowing->jmeno}</a></td>
+					{/if}
+					<td>
+						{if $borrowing->vraceno}
+							<span title="{$borrowing->datum_navraceni|date:'%d.%m.%Y'}"  class="btn-floating green accent-2"><i class="mdi-action-verified-user"></i></span>
+						{else}
+							<span class="btn-floating red lighten-4"><i class="mdi-image-timer"></i></span>
+						{/if}
+					</td>
+
+					<td>
+						{if !$borrowing->vraceno && $borrowing->uzivatel_id == $user->getId()}
+							<a n:href="Borrowing:giveback $borrowing->id" title="Vrátit zpět" class="ajax btn-floating waves-effect waves-light light-blue lighten-1"><i class="mdi-content-reply"></i></a>
+						{/if}
+						<a n:href="Borrowing:delete $borrowing->id" title="Smazat" class="btn-floating waves-effect waves-light red"><i class="mdi-action-delete"></i></a>
+						<a n:href="Borrowing:edit $borrowing->id" title="Upravit" class="btn-floating waves-effect waves-light light-green accent-3 "><i class="mdi-editor-mode-edit"></i></a>
+					</td>
+				</tr>
+			{/foreach}
+			</tbody>
+		{/if}
 </table>
+{/snippet}

@@ -14,7 +14,7 @@
 
 		});
 
-		$('.time-input input').click(function(){
+		/*$('.time-input input').click(function(){
 			$(this).parent().addClass('active2');
 		});
 
@@ -22,16 +22,20 @@
 			$(this).find('label:first').addClass('active');
 			$(this).find('label:first').click();
 			$(this).removeClass('active2');
-		});
+		});*/
 
-	/*$("form input:checkbox").click(function(){
-			$("form input:checkbox").attr ( "checked" , false );
+		$("form input:checkbox").click(function(){
 			if(this.checked)
 			{
+				$("form input:checkbox").attr ( "checked" , false );
 				this.checked = true;
 			}
+			else
+			{
+				$("form input:checkbox").attr ( "checked" , false );
 
-		});*/
+			}
+		});
 
 
 	});
@@ -39,8 +43,7 @@
 {*<script src="{$basePath}/js/ckeditor/ckeditor.js"></script>
 <script type="text/javascript">
 	CKEDITOR.replace( 'editor' );
-</script>
-  *}
+</script>*}
 {/block}
 {block content}
 {form eventForm}
@@ -68,39 +71,41 @@
 		{input zapis}
 	</div>
 </div>
-
-
-<div class="row">
-{foreach $form['dates']->containers as $dateid => $user}
-	<div class="col s12 l3 z-depth-2 card" >
-		<div class="col offset-s3 offset-l5 ">
-			{input dates-$dateid-remove class=>'btn btn-flat'}
-		</div>
-		<div class="input-field col s12">
-			{$user['datum']->label}{$user['datum']->control}
-		</div>
-		<div class="col s12">
-			{foreach $user['times']->containers as $timeid => $time}
-				<div class="col input-field s12">
-					{input $time['pick']: }
-					{label $time['pick']: /}
+{* ajax znemozni datepicker
+{snippet itemsList}*}
+<h5>Vyhovující termíny:</h5>
+	<div class="row">
+	{foreach $form['dates']->containers as $dateid => $user}
+		<div class="col s12 m3 l3 z-depth-2 eventcard" >
+			<div class="col s12">
+				{input dates-$dateid-remove class=>'btn btn-flat eventbutton'}
+			</div>
+			<div class="input-field col s12">
+				{$user['datum']->label}{$user['datum']->control}
+			</div>
+			<div class="col s12">
+				{foreach $user['times']->containers as $timeid => $time}
+					<div class="col input-field s12 checkBox">
+						{input $time['pick']: }
+						{label $time['pick']: /}
+					</div>
+					<div class="col input-field s6 time-input">
+							{$time['cas']->label}{$time['cas']->control}
+							{$time['id']->label}{$time['id']->control}
+					</div>
+					<div class="col s6">
+						{input dates-$dateid-times-$timeid-remove class=>'btn btn-flat eventRemoveTime'}
+					</div>
+				{/foreach}
+				<div class="col s12">
+					{input dates-$dateid-times-add class=>'btn btn-flat eventbutton'}
 				</div>
-				<div class="col input-field s6 time-input">
-						{$time['cas']->label}{$time['cas']->control}
-
-				</div>
-				<div class="col s6">
-					{input dates-$dateid-times-$timeid-remove class=>'btn btn-flat'}
-				</div>
-			{/foreach}
-			<div class="col offset-s4 ">
-				{input dates-$dateid-times-add class=>'btn btn-flat'}
 			</div>
 		</div>
-	</div>
-{/foreach}
+	{/foreach}
 
-</div>
+	</div>
+{*{/snippet}*}
 <div class='row'>
 	{input dates-add class=>'btn btn-default'}
 </div>

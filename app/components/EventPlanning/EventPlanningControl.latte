@@ -1,3 +1,4 @@
+<h5>Přehled možných termínů</h5>
 <table class="striped bordered">
 <tr>
 	<th>
@@ -53,12 +54,16 @@
 			{foreach $form['times']->containers as $term}
 				<td class="center-align">
 					{$term['id']->control} {$term['id']->label}
+					{$term['time']->control} {$term['time']->label}
 					{input $term['pick']:} {label $term['pick']: /}
 				</td>
 			{/foreach}
 		<tr>
 		<tr>
-			<td colspan="0" class="right-align">
+			<td colspan="100%" class="right-align">
+				{if $eventUserId == $presenter->user->getId()}
+					<span>Jste pořadatel události, výběrem termínu určíte termín konání akce.</span>
+				{/if}
 				{label send /}
 				{input send class=>'btn btn-default'}
 			</td>

@@ -9,7 +9,7 @@
 				<div class="timeline-badge  green lighten-0">
 					<i class="mdi-action-done"></i>
 				</div>
-			{elseif $record->datum_splneni <  new \DateTime() }
+			{elseif $record->datum_splneni && $record->datum_splneni <  new \DateTime() }
 				<div class="timeline-badge  red lighten-0">
 					<i class="mdi-alert-error"></i>
 				</div>
@@ -21,7 +21,7 @@
 
 		<div class="timeline-panel">
 			<div class="timeline-heading">
-				<h4 class="timeline-title">{$record->nazev}</h4>
+				<a href="{plink Record:detail $record->id}"><h4 class="timeline-title">{$record->nazev}</h4></a>
 				<p>
 					<small class="text-muted">Datum zahájení:</small> <i class="glyphicon glyphicon-time">{$record->datum|date:'%d.%m.%Y'}</i>
 					<br>
@@ -31,17 +31,16 @@
 			<div class="timeline-body">
 				<p>{$record->popis|truncate:700|noescape}</p>
 			</div>
-			{if $record->uzivatel_id == $user->getId()}
-				<div>
+			<div>
+				{if $record->uzivatel_id == $user->getId()}
 					{if !$record->splneno}
-						<a href="{plink :Admin:Record:finish $record->id}" title="Dokončit" class="btn-floating waves-effect waves-light  light-blue"><i class="mdi-action-done"></i></a>
+						<a href="{plink :Admin:Record:finish $record->id, backlink => $presenter->storeRequest()}" title="Dokončit" class="btn-floating waves-effect waves-light  light-blue"><i class="mdi-action-done"></i></a>
 					{/if}
-					<a href="{plink :Admin:Record:delete $record->id}" title="Smazat záznam" class="btn-floating waves-effect waves-light  red"><i class="mdi-action-delete"></i></a>
+					<a href="{plink :Admin:Record:delete $record->id, backlink => $presenter->storeRequest()}" title="Smazat záznam" class="btn-floating waves-effect waves-light  red"><i class="mdi-action-delete"></i></a>
 					<a href="{plink :Admin:Record:edit $record->id}" title="Upravit záznam" class="btn-floating waves-effect waves-light light-green accent-3"><i class="mdi-editor-mode-edit"></i></a>
-				</div>
-			{/if}
-
-
+				{/if}
+				<a href="{plink :Admin:Record:detail $record->id}" title="Detail záznamu" class="btn-floating waves-effect waves-light orange"><i class="mdi-action-subject"></i></a>
+			</div>
 		</div>
 	</li>
 {/foreach}
