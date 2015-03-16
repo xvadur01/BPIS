@@ -1,3 +1,20 @@
+<?php
+// source: C:\xampp\htdocs\BPIS\app\FrontModule/templates/Homepage/cron.latte
+
+// prolog Latte\Macros\CoreMacros
+list($_b, $_g, $_l) = $template->initialize('7174739381', 'html')
+;
+// prolog Nette\Bridges\ApplicationLatte\UIMacros
+
+// snippets support
+if (empty($_l->extends) && !empty($_control->snippetMode)) {
+	return Nette\Bridges\ApplicationLatte\UIMacros::renderSnippets($_control, $_b, get_defined_vars());
+}
+
+//
+// main template
+//
+?>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -62,11 +79,11 @@
 
 	<div class="content">
 		<div class="header">
-			<h1><i>Událost:</i> {$event->nazev}</h1>
+			<h1><i>Událost:</i> <?php echo Latte\Runtime\Filters::escapeHtml($event->nazev, ENT_NOQUOTES) ?></h1>
 		</div>
 		<div class="text">
 			<p>Dobrý den,</p>
-			<p>dne {$event['datum']|date:'%d.%m.%Y %H:%M'} se uskuteční událost:</p>
+			<p>dne <?php echo Latte\Runtime\Filters::escapeHtml($template->date($event['datum'], '%d.%m.%Y %H:%M'), ENT_NOQUOTES) ?> se uskuteční událost:</p>
 			<div class="event">
 				<div>
 					<div class="section">
@@ -74,7 +91,7 @@
 						<i class="grey-text">Název akce:</i>
 						</span>
 						<br>
-						<span class="blue-text">{$event->nazev}</span>
+						<span class="blue-text"><?php echo Latte\Runtime\Filters::escapeHtml($event->nazev, ENT_NOQUOTES) ?></span>
 					</div>
 				</div>
 				<div class="divider"></div>
@@ -84,7 +101,8 @@
 						<i class="grey-text">Organizátor:</i>
 						</span>
 						<br>
-						<span class="blue-text">{$eventUser->prijmeni} {$eventUser->jmeno}</span>
+						<span class="blue-text"><?php echo Latte\Runtime\Filters::escapeHtml($eventUser->prijmeni, ENT_NOQUOTES) ?>
+ <?php echo Latte\Runtime\Filters::escapeHtml($eventUser->jmeno, ENT_NOQUOTES) ?></span>
 					</div>
 				</div>
 				<div class="divider"></div>
@@ -94,17 +112,7 @@
 						<i class="grey-text">Datum konání:</i>
 						</span>
 						<br>
-						<span class="blue-text">{$event->datum}</span>
-					</div>
-				</div>
-				<div class="divider"></div>
-				<div>
-					<div class="section">
-						<span>
-						<i class="grey-text">Místo konání:</i>
-						</span>
-						<br>
-						<span class="blue-text">{$event->misto}</span>
+						<span class="blue-text"><?php echo Latte\Runtime\Filters::escapeHtml($event->datum, ENT_NOQUOTES) ?></span>
 					</div>
 				</div>
 				<div class="divider"></div>
@@ -114,7 +122,7 @@
 						<i class="grey-text">popis akce:</i>
 						</span>
 						<br>
-						<span class="blue-text">{$event->popis}</span>
+						<span class="blue-text"><?php echo Latte\Runtime\Filters::escapeHtml($event->popis, ENT_NOQUOTES) ?></span>
 					</div>
 				</div>
 

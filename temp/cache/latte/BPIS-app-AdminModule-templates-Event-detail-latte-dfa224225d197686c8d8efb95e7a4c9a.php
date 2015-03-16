@@ -2,20 +2,20 @@
 // source: C:\xampp\htdocs\BPIS\app\AdminModule/templates/Event/detail.latte
 
 // prolog Latte\Macros\CoreMacros
-list($_b, $_g, $_l) = $template->initialize('0958445079', 'html')
+list($_b, $_g, $_l) = $template->initialize('1664230910', 'html')
 ;
 // prolog Latte\Macros\BlockMacros
 //
 // block headerH1
 //
-if (!function_exists($_b->blocks['headerH1'][] = '_lb8b9413d7c1_headerH1')) { function _lb8b9413d7c1_headerH1($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+if (!function_exists($_b->blocks['headerH1'][] = '_lba72f7e9613_headerH1')) { function _lba72f7e9613_headerH1($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ?><i>Událost:</i> <?php echo Latte\Runtime\Filters::escapeHtml($event->nazev, ENT_NOQUOTES) ;
 }}
 
 //
 // block scripts
 //
-if (!function_exists($_b->blocks['scripts'][] = '_lb2332d23bda_scripts')) { function _lb2332d23bda_scripts($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+if (!function_exists($_b->blocks['scripts'][] = '_lb415cdface5_scripts')) { function _lb415cdface5_scripts($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ;Latte\Macros\BlockMacros::callBlockParent($_b, 'scripts', get_defined_vars()) ?>  
 <?php if ($event->uzivatel_id == $user->getId()) { ?>
 	<script type="text/javascript">
@@ -42,7 +42,7 @@ if (!function_exists($_b->blocks['scripts'][] = '_lb2332d23bda_scripts')) { func
 //
 // block content
 //
-if (!function_exists($_b->blocks['content'][] = '_lb6e43cbbf68_content')) { function _lb6e43cbbf68_content($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+if (!function_exists($_b->blocks['content'][] = '_lbbf09f3ec57_content')) { function _lbbf09f3ec57_content($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ?><div class="event row">
 	<div class="col s12 card">
 		<p><i>Pořadatel:</i></p>

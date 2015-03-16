@@ -39,6 +39,7 @@ class HomepagePresenter extends BasePresenter
 		foreach ($events as $key => $event) {
 			$params = array(
 				'event' => $event,
+				'eventUser' => $event->ref('uzivatel'),
 			);
 			$mail = new Message;
 			$mail->setFrom('Franta <franta@example.com>')
@@ -47,40 +48,44 @@ class HomepagePresenter extends BasePresenter
 			$find = FALSE;
 			foreach ($eventUsers as $user) {
 				$find = TRUE;
-				$this->template->event = $event;
 				$mail->addTo((string)$user->ref('uzivatel','uzivatel_id')->email);
 			}
 
-			$mail->setBody($latte->renderToString(__DIR__ . '/../templates/Homepage/emailEventSevenday.latte', $params));
+			$mail->setHTMLBody($latte->renderToString(__DIR__ . '/../templates/Homepage/emailEventSevenday.latte', $params));
 			if($find)
 			{
 				$mailer->send($mail);
 			}
-			$this->eventManager->edit(array('id' => $event->id, 'pocet_upozorneni' => $event->pocet_upozorneni--));
+			$this->eventManager->edit(array('id' => $event->id, 'pocet_upozorneni' => $event->pocet_upozorneni-1));
 		}
-
 		$events = $this->eventManager->getEventsInOneDays();
 		foreach ($events as $key => $event) {
 			$params = array(
 				'event' => $event,
+				'eventUser' => $event->ref('uzivatel'),
 			);
 			$mail = new Message;
 			$mail->setFrom('Franta <franta@example.com>')
 					->setSubject('Upozornění na blížící se akci');
+
 			$eventUsers = $this->termManager->getUsersOfEvent($event->id)->where(\App\Model\TermManager::COLUMN_ALLOW,1);
+
 			$find = FALSE;
 			foreach ($eventUsers as $user) {
 				$find = TRUE;
 				$mail->addTo((string)$user->ref('uzivatel','uzivatel_id')->email);
 			}
-			$mail->setBody($latte->renderToString(__DIR__ . '/../templates/Homepage/emailEventOneday.latte', $params));
+			$mail->setHTMLBody($latte->renderToString(__DIR__ . '/../templates/Homepage/emailEventOneday.latte', $params));
 			if($find)
 			{
 				$mailer->send($mail);
 			}
-			$this->eventManager->edit(array('id' => $event->id, 'pocet_upozorneni' => $event->pocet_upozorneni--));
+			$this->eventManager->edit(array('id' => $event->id, 'pocet_upozorneni' => $event->pocet_upozorneni-1));
 		}
-
+	}
+	public function renderCron() {
+			$this->template->event = $this->eventManager->get(25);
+			$this->template->eventUser = $this->eventManager->get(25)->ref('uzivatel');
 	}
 
 	public function renderSitemap() {

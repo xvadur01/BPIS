@@ -2,27 +2,27 @@
 // source: C:\xampp\htdocs\BPIS\app\FrontModule/templates/@layout.latte
 
 // prolog Latte\Macros\CoreMacros
-list($_b, $_g, $_l) = $template->initialize('4979712959', 'html')
+list($_b, $_g, $_l) = $template->initialize('8559173904', 'html')
 ;
 // prolog Latte\Macros\BlockMacros
 //
 // block head
 //
-if (!function_exists($_b->blocks['head'][] = '_lb12691dde3c_head')) { function _lb12691dde3c_head($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+if (!function_exists($_b->blocks['head'][] = '_lbffca3ea426_head')) { function _lbffca3ea426_head($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ;
 }}
 
 //
 // block headerH1
 //
-if (!function_exists($_b->blocks['headerH1'][] = '_lb8ceb4a0159_headerH1')) { function _lb8ceb4a0159_headerH1($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+if (!function_exists($_b->blocks['headerH1'][] = '_lb5ce5f43b65_headerH1')) { function _lb5ce5f43b65_headerH1($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ;
 }}
 
 //
 // block scripts
 //
-if (!function_exists($_b->blocks['scripts'][] = '_lbcb35ff541d_scripts')) { function _lbcb35ff541d_scripts($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+if (!function_exists($_b->blocks['scripts'][] = '_lb048feaf344_scripts')) { function _lb048feaf344_scripts($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ?>	<script src="<?php echo Latte\Runtime\Filters::escapeHtml(Latte\Runtime\Filters::safeUrl($basePath), ENT_COMPAT) ?>/js/jquery.js"></script>
 	<script src="<?php echo Latte\Runtime\Filters::escapeHtml(Latte\Runtime\Filters::safeUrl($basePath), ENT_COMPAT) ?>/js/nette.ajax.js"></script>
 	<script src="<?php echo Latte\Runtime\Filters::escapeHtml(Latte\Runtime\Filters::safeUrl($basePath), ENT_COMPAT) ?>/js/main.js"></script>

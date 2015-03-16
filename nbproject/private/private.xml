@@ -5,12 +5,21 @@
         <group>
             <file>file:/C:/xampp/htdocs/BPIS/app/AdminModule/templates/Event/edit.latte</file>
             <file>file:/C:/xampp/htdocs/BPIS/app/model/TermManager.php</file>
-            <file>file:/C:/xampp/htdocs/BPIS/app/components/EventPlanning/EventPlanningControl.php</file>
             <file>file:/C:/xampp/htdocs/BPIS/app/components/EventPlanning/EventPlanningControl.latte</file>
+            <file>file:/C:/xampp/htdocs/BPIS/app/model/EventManager.php</file>
             <file>file:/C:/xampp/htdocs/BPIS/app/AdminModule/templates/Event/add.latte</file>
-            <file>file:/C:/xampp/htdocs/BPIS/app/AdminModule/presenters/EventPresenter.php</file>
             <file>file:/C:/xampp/htdocs/BPIS/app/AdminModule/templates/Event/default.latte</file>
+            <file>file:/C:/xampp/htdocs/BPIS/app/FrontModule/templates/Homepage/emailEventSevenday.latte</file>
+            <file>file:/C:/xampp/htdocs/BPIS/app/FrontModule/templates/Homepage/default.latte</file>
+            <file>file:/C:/xampp/htdocs/BPIS/app/FrontModule/presenters/SignPresenter.php</file>
+            <file>file:/C:/xampp/htdocs/BPIS/app/AdminModule/templates/Event/detail.latte</file>
             <file>file:/C:/xampp/htdocs/BPIS/app/components/TimeLine/TimeLineEventControl.latte</file>
+            <file>file:/C:/xampp/htdocs/BPIS/app/components/EventPlanning/EventPlanningControl.php</file>
+            <file>file:/C:/xampp/htdocs/BPIS/app/AdminModule/presenters/EventPresenter.php</file>
+            <file>file:/C:/xampp/htdocs/BPIS/app/FrontModule/templates/Homepage/cron.latte</file>
+            <file>file:/C:/xampp/htdocs/BPIS/app/FrontModule/templates/@layout.latte</file>
+            <file>file:/C:/xampp/htdocs/BPIS/app/FrontModule/templates/Homepage/emailEventOneday.latte</file>
+            <file>file:/C:/xampp/htdocs/BPIS/app/FrontModule/presenters/HomepagePresenter.php</file>
         </group>
     </open-files>
 </project-private>

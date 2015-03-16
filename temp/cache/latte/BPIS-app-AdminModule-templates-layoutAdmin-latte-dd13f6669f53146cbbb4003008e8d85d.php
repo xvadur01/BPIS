@@ -2,27 +2,27 @@
 // source: C:\xampp\htdocs\BPIS\app\AdminModule/templates/@layoutAdmin.latte
 
 // prolog Latte\Macros\CoreMacros
-list($_b, $_g, $_l) = $template->initialize('8293535926', 'html')
+list($_b, $_g, $_l) = $template->initialize('0123257398', 'html')
 ;
 // prolog Latte\Macros\BlockMacros
 //
 // block head
 //
-if (!function_exists($_b->blocks['head'][] = '_lb85a1361864_head')) { function _lb85a1361864_head($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+if (!function_exists($_b->blocks['head'][] = '_lb672a509333_head')) { function _lb672a509333_head($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ;
 }}
 
 //
 // block headerH1
 //
-if (!function_exists($_b->blocks['headerH1'][] = '_lbeca948f870_headerH1')) { function _lbeca948f870_headerH1($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+if (!function_exists($_b->blocks['headerH1'][] = '_lb095bdb0ce7_headerH1')) { function _lb095bdb0ce7_headerH1($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ;
 }}
 
 //
 // block _flashMessage
 //
-if (!function_exists($_b->blocks['_flashMessage'][] = '_lb18588507ae__flashMessage')) { function _lb18588507ae__flashMessage($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v; $_control->redrawControl('flashMessage', FALSE)
+if (!function_exists($_b->blocks['_flashMessage'][] = '_lbe717a50c9f__flashMessage')) { function _lbe717a50c9f__flashMessage($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v; $_control->redrawControl('flashMessage', FALSE)
 ?>			<div class="row">
 				<div class="col s12">
 <?php $iterations = 0; foreach ($flashes as $flash) { if ($flash->type  == 'success') { ?>
@@ -43,7 +43,7 @@ if (!function_exists($_b->blocks['_flashMessage'][] = '_lb18588507ae__flashMessa
 //
 // block scripts
 //
-if (!function_exists($_b->blocks['scripts'][] = '_lbbc5f244ca3_scripts')) { function _lbbc5f244ca3_scripts($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+if (!function_exists($_b->blocks['scripts'][] = '_lb976f85e425_scripts')) { function _lb976f85e425_scripts($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ?>	<script src="<?php echo Latte\Runtime\Filters::escapeHtml(Latte\Runtime\Filters::safeUrl($basePath), ENT_COMPAT) ?>/js/jquery-2.1.3.min.js"></script>
 	<script src="<?php echo Latte\Runtime\Filters::escapeHtml(Latte\Runtime\Filters::safeUrl($basePath), ENT_COMPAT) ?>/js/netteForms.js"></script>
 	<script src="<?php echo Latte\Runtime\Filters::escapeHtml(Latte\Runtime\Filters::safeUrl($basePath), ENT_COMPAT) ?>/js/nette.ajax.js"></script>

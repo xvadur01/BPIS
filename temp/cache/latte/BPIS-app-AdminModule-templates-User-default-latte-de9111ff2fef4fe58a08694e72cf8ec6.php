@@ -2,20 +2,20 @@
 // source: C:\xampp\htdocs\BPIS\app\AdminModule/templates/User/default.latte
 
 // prolog Latte\Macros\CoreMacros
-list($_b, $_g, $_l) = $template->initialize('2744793240', 'html')
+list($_b, $_g, $_l) = $template->initialize('5346680680', 'html')
 ;
 // prolog Latte\Macros\BlockMacros
 //
 // block headerH1
 //
-if (!function_exists($_b->blocks['headerH1'][] = '_lb6b11e2b7a0_headerH1')) { function _lb6b11e2b7a0_headerH1($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+if (!function_exists($_b->blocks['headerH1'][] = '_lba4be69bcf9_headerH1')) { function _lba4be69bcf9_headerH1($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ?>Přeled uživatelů<?php
 }}
 
 //
 // block content
 //
-if (!function_exists($_b->blocks['content'][] = '_lbb0feebc956_content')) { function _lbb0feebc956_content($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+if (!function_exists($_b->blocks['content'][] = '_lb4cfb8dc90f_content')) { function _lb4cfb8dc90f_content($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ;if ($user->isInRole('admin')) { ?>
 	<div class="row">
 		<a title="Nový uživatel" class="right-align btn-floating btn-large waves-effect waves-light blue" href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("User:add"), ENT_COMPAT) ?>

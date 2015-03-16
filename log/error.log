@@ -1,4 +1,0 @@
-[2015-03-15 09-53-18] PHP Notice: Undefined variable: userData in C:\xampp\htdocs\BPIS\temp\cache\latte\BPIS-app-AdminModule-templates-Admin-default-latte-75db61f291520caf5366a45c93cc430a.php:119  @  http://192.168.0.103/BPIS/www/admin/
-[2015-03-15 09-53-18] PHP Notice: Trying to get property of non-object in C:\xampp\htdocs\BPIS\temp\cache\latte\BPIS-app-AdminModule-templates-Admin-default-latte-75db61f291520caf5366a45c93cc430a.php:119  @  http://192.168.0.103/BPIS/www/admin/
-[2015-03-15 09-53-21] PHP Notice: Undefined variable: userData in C:\xampp\htdocs\BPIS\temp\cache\latte\BPIS-app-AdminModule-templates-Admin-default-latte-75db61f291520caf5366a45c93cc430a.php:119  @  http://192.168.0.103/BPIS/www/admin/
-[2015-03-15 09-53-21] PHP Notice: Trying to get property of non-object in C:\xampp\htdocs\BPIS\temp\cache\latte\BPIS-app-AdminModule-templates-Admin-default-latte-75db61f291520caf5366a45c93cc430a.php:119  @  http://192.168.0.103/BPIS/www/admin/

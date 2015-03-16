@@ -2,7 +2,7 @@
 // source: C:\xampp\htdocs\BPIS\app\components\EventPlanning/EventPlanningControl.latte
 
 // prolog Latte\Macros\CoreMacros
-list($_b, $_g, $_l) = $template->initialize('7064155183', 'html')
+list($_b, $_g, $_l) = $template->initialize('0791839946', 'html')
 ;
 // prolog Nette\Bridges\ApplicationLatte\UIMacros
 

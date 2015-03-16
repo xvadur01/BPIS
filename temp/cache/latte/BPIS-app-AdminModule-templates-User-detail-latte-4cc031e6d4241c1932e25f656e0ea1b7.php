@@ -2,13 +2,13 @@
 // source: C:\xampp\htdocs\BPIS\app\AdminModule/templates/User/detail.latte
 
 // prolog Latte\Macros\CoreMacros
-list($_b, $_g, $_l) = $template->initialize('2632701943', 'html')
+list($_b, $_g, $_l) = $template->initialize('0951138797', 'html')
 ;
 // prolog Latte\Macros\BlockMacros
 //
 // block headerH1
 //
-if (!function_exists($_b->blocks['headerH1'][] = '_lb4a8af749d8_headerH1')) { function _lb4a8af749d8_headerH1($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+if (!function_exists($_b->blocks['headerH1'][] = '_lb62043f8533_headerH1')) { function _lb62043f8533_headerH1($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ?><i>Detail uživatele:</i> <?php echo Latte\Runtime\Filters::escapeHtml($userData['prijmeni'], ENT_NOQUOTES) ?>
  <?php echo Latte\Runtime\Filters::escapeHtml($userData['jmeno'], ENT_NOQUOTES) ;
 }}
@@ -16,7 +16,7 @@ if (!function_exists($_b->blocks['headerH1'][] = '_lb4a8af749d8_headerH1')) { fu
 //
 // block scripts
 //
-if (!function_exists($_b->blocks['scripts'][] = '_lb9f374043f8_scripts')) { function _lb9f374043f8_scripts($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+if (!function_exists($_b->blocks['scripts'][] = '_lbb0ebd53523_scripts')) { function _lbb0ebd53523_scripts($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ?> <?php Latte\Macros\BlockMacros::callBlockParent($_b, 'scripts', get_defined_vars()) ?>  
 	<script type="text/javascript">
 	$(document).ready(function(){
@@ -29,7 +29,7 @@ if (!function_exists($_b->blocks['scripts'][] = '_lb9f374043f8_scripts')) { func
 //
 // block content
 //
-if (!function_exists($_b->blocks['content'][] = '_lb4be2177b50_content')) { function _lb4be2177b50_content($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+if (!function_exists($_b->blocks['content'][] = '_lbe52f78e0d7_content')) { function _lbe52f78e0d7_content($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ?><div class="row">
 	<div  id="personalInformation" class="col s12 m6 l4 card-panel grey lighten-5 z-depth-1 section scrollspy">
 		<h5>Osobní infomace</h5>
@@ -104,6 +104,8 @@ if (!function_exists($_b->blocks['content'][] = '_lb4be2177b50_content')) { func
 			</div>
 			<div class="card-reveal  accent-1">
 			  <span class="card-title black-text text-darken-4"><?php echo Latte\Runtime\Filters::escapeHtml($borrow['nazev'], ENT_NOQUOTES) ?><i class="mdi-navigation-close right"></i></span>
+			  <br><i class="white-text" >Datum vypůjčení: </i><br>
+			  <span class="white-text  text-darken-4"><?php echo Latte\Runtime\Filters::escapeHtml($template->date($borrow->datum, '%d.%m.%Y'), ENT_NOQUOTES) ?></span>
 			  <br><i class="grey-text" >Vypůjčeno od: </i><br>
 			  <span class="black-text"><?php echo Latte\Runtime\Filters::escapeHtml($borrow['prijmeni'], ENT_NOQUOTES) ?>
  <?php echo Latte\Runtime\Filters::escapeHtml($borrow['jmeno'], ENT_NOQUOTES) ?></span><br>
