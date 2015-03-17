@@ -84,8 +84,8 @@ class HomepagePresenter extends BasePresenter
 		}
 	}
 	public function renderCron() {
-			$this->template->event = $this->eventManager->get(25);
-			$this->template->eventUser = $this->eventManager->get(25)->ref('uzivatel');
+			$this->template->event = $this->eventManager->get(23);
+			$this->template->eventUser = $this->eventManager->get(23)->ref('uzivatel');
 	}
 
 	public function renderSitemap() {

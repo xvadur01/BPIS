@@ -135,7 +135,7 @@ class EventPresenter extends BasePresenter {
 						"misto" =>$event['misto'],"nazev" => $event['nazev'],
 						"pocet_upozorneni" => $event['pocet_upozorneni'],
 						"zapis" => $event['zapis'],"uzivatel_id" => $event['uzivatel_id']));
-
+		$this->template->form = $this->template->_form = $form;
 
     }
 	/**

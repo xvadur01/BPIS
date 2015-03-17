@@ -1,6 +1,6 @@
 {block headerH1}Nová událost{/block}
 {block scripts}
- {include #parent}  {* include parent #scripts block *}
+{include #parent}  {* include parent #scripts block *}
 <script type="text/javascript">
 
 	$(document).ready(function()
@@ -33,10 +33,8 @@
 			else
 			{
 				$("form input:checkbox").attr ( "checked" , false );
-
 			}
 		});
-
 
 	});
 </script>
@@ -71,14 +69,14 @@
 		{input zapis}
 	</div>
 </div>
-{* ajax znemozni datepicker
-{snippet itemsList}*}
+{* ajax znemozni datepicker*}
+{snippet itemsList}
 <h5>Vyhovující termíny:</h5>
 	<div class="row">
 	{foreach $form['dates']->containers as $dateid => $user}
 		<div class="col s12 m3 l3 z-depth-2 eventcard" >
 			<div class="col s12">
-				{input dates-$dateid-remove class=>'btn btn-flat eventbutton'}
+				{input dates-$dateid-remove class=>'ajax btn btn-flat eventbutton'}
 			</div>
 			<div class="input-field col s12">
 				{$user['datum']->label}{$user['datum']->control}
@@ -94,20 +92,20 @@
 							{$time['id']->label}{$time['id']->control}
 					</div>
 					<div class="col s6">
-						{input dates-$dateid-times-$timeid-remove class=>'btn btn-flat eventRemoveTime'}
+						{input dates-$dateid-times-$timeid-remove class=>'ajax btn btn-flat eventRemoveTime'}
 					</div>
 				{/foreach}
 				<div class="col s12">
-					{input dates-$dateid-times-add class=>'btn btn-flat eventbutton'}
+					{input dates-$dateid-times-add class=>'ajax btn btn-flat eventbutton'}
 				</div>
 			</div>
 		</div>
 	{/foreach}
 
 	</div>
-{*{/snippet}*}
+{/snippet}
 <div class='row'>
-	{input dates-add class=>'btn btn-default'}
+	{input dates-add class=>'ajax btn btn-default'}
 </div>
 <div class='row right-align'>
 	{label send /}

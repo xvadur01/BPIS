@@ -2,32 +2,32 @@
 // source: C:\xampp\htdocs\BPIS\app\AdminModule/templates/@layoutAdmin.latte
 
 // prolog Latte\Macros\CoreMacros
-list($_b, $_g, $_l) = $template->initialize('0123257398', 'html')
+list($_b, $_g, $_l) = $template->initialize('0380979106', 'html')
 ;
 // prolog Latte\Macros\BlockMacros
 //
 // block head
 //
-if (!function_exists($_b->blocks['head'][] = '_lb672a509333_head')) { function _lb672a509333_head($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+if (!function_exists($_b->blocks['head'][] = '_lb343d273ad0_head')) { function _lb343d273ad0_head($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ;
 }}
 
 //
 // block headerH1
 //
-if (!function_exists($_b->blocks['headerH1'][] = '_lb095bdb0ce7_headerH1')) { function _lb095bdb0ce7_headerH1($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+if (!function_exists($_b->blocks['headerH1'][] = '_lb1a8f6c3303_headerH1')) { function _lb1a8f6c3303_headerH1($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ;
 }}
 
 //
 // block _flashMessage
 //
-if (!function_exists($_b->blocks['_flashMessage'][] = '_lbe717a50c9f__flashMessage')) { function _lbe717a50c9f__flashMessage($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v; $_control->redrawControl('flashMessage', FALSE)
+if (!function_exists($_b->blocks['_flashMessage'][] = '_lbd2847ad111__flashMessage')) { function _lbd2847ad111__flashMessage($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v; $_control->redrawControl('flashMessage', FALSE)
 ?>			<div class="row">
 				<div class="col s12">
 <?php $iterations = 0; foreach ($flashes as $flash) { if ($flash->type  == 'success') { ?>
 							<div class="card-panel tea light-green accent-1 ">
-								<i class="mdi-action-done"></i>
+								<i class="small mdi-action-done"></i>
 <?php } else { ?>
 							<div class="card-panel tea">
 <?php } ?>
@@ -43,7 +43,7 @@ if (!function_exists($_b->blocks['_flashMessage'][] = '_lbe717a50c9f__flashMessa
 //
 // block scripts
 //
-if (!function_exists($_b->blocks['scripts'][] = '_lb976f85e425_scripts')) { function _lb976f85e425_scripts($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+if (!function_exists($_b->blocks['scripts'][] = '_lb1b09182e3c_scripts')) { function _lb1b09182e3c_scripts($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ?>	<script src="<?php echo Latte\Runtime\Filters::escapeHtml(Latte\Runtime\Filters::safeUrl($basePath), ENT_COMPAT) ?>/js/jquery-2.1.3.min.js"></script>
 	<script src="<?php echo Latte\Runtime\Filters::escapeHtml(Latte\Runtime\Filters::safeUrl($basePath), ENT_COMPAT) ?>/js/netteForms.js"></script>
 	<script src="<?php echo Latte\Runtime\Filters::escapeHtml(Latte\Runtime\Filters::safeUrl($basePath), ENT_COMPAT) ?>/js/nette.ajax.js"></script>
