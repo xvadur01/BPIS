@@ -1,21 +1,21 @@
 <?php
-// source: C:\xampp\htdocs\BPIS\app\AdminModule/templates/Record/edit.latte
+// source: C:\xampp\htdocs\BPIS\app\AdminModule/templates/FrontPage/edit.latte
 
 // prolog Latte\Macros\CoreMacros
-list($_b, $_g, $_l) = $template->initialize('0054117107', 'html')
+list($_b, $_g, $_l) = $template->initialize('7695684186', 'html')
 ;
 // prolog Latte\Macros\BlockMacros
 //
 // block headerH1
 //
-if (!function_exists($_b->blocks['headerH1'][] = '_lb87d2935082_headerH1')) { function _lb87d2935082_headerH1($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
-?>Upravit záznam<?php
+if (!function_exists($_b->blocks['headerH1'][] = '_lb9d5afbcaa0_headerH1')) { function _lb9d5afbcaa0_headerH1($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+?>Úprava stránky<?php
 }}
 
 //
 // block scripts
 //
-if (!function_exists($_b->blocks['scripts'][] = '_lb18ec20851d_scripts')) { function _lb18ec20851d_scripts($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+if (!function_exists($_b->blocks['scripts'][] = '_lbfcdd32372a_scripts')) { function _lbfcdd32372a_scripts($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ?> <?php Latte\Macros\BlockMacros::callBlockParent($_b, 'scripts', get_defined_vars()) ?>  
 <script src="<?php echo Latte\Runtime\Filters::escapeHtml(Latte\Runtime\Filters::safeUrl($basePath), ENT_COMPAT) ?>/js/ckeditor/ckeditor.js"></script>
 <script type="text/javascript" src="<?php echo Latte\Runtime\Filters::escapeHtml(Latte\Runtime\Filters::safeUrl($basePath), ENT_COMPAT) ?>/elfinder/js/elfinder.min.js"></script>
@@ -37,8 +37,8 @@ if (!function_exists($_b->blocks['scripts'][] = '_lb18ec20851d_scripts')) { func
 //
 // block content
 //
-if (!function_exists($_b->blocks['content'][] = '_lbb5f03cbba5_content')) { function _lbb5f03cbba5_content($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
-;$_l->tmp = $_control->getComponent("recordForm"); if ($_l->tmp instanceof Nette\Application\UI\IRenderable) $_l->tmp->redrawControl(NULL, FALSE); $_l->tmp->render() ;
+if (!function_exists($_b->blocks['content'][] = '_lb728dd46e28_content')) { function _lb728dd46e28_content($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+;$_l->tmp = $_control->getComponent("frontPageForm"); if ($_l->tmp instanceof Nette\Application\UI\IRenderable) $_l->tmp->redrawControl(NULL, FALSE); $_l->tmp->render() ;
 }}
 
 //
@@ -64,4 +64,6 @@ if (empty($_l->extends) && !empty($_control->snippetMode)) {
 if ($_l->extends) { ob_end_clean(); return $template->renderChildTemplate($_l->extends, get_defined_vars()); }
 call_user_func(reset($_b->blocks['headerH1']), $_b, get_defined_vars())  ?>
 
-<?php call_user_func(reset($_b->blocks['scripts']), $_b, get_defined_vars()) ; call_user_func(reset($_b->blocks['content']), $_b, get_defined_vars()) ; 
+<?php call_user_func(reset($_b->blocks['scripts']), $_b, get_defined_vars())  ?>
+
+<?php call_user_func(reset($_b->blocks['content']), $_b, get_defined_vars()) ; 

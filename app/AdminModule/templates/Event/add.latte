@@ -39,8 +39,18 @@
 	});
 </script>
 {*<script src="{$basePath}/js/ckeditor/ckeditor.js"></script>
+<script type="text/javascript" src="{$basePath}/elfinder/js/elfinder.min.js"></script>
 <script type="text/javascript">
-	CKEDITOR.replace( 'editor' );
+	   $().ready(function() {
+        var elf = $('#elfinder').elfinder({
+            // lang: 'ru',             // language (OPTIONAL)
+            url : {$basePath}+'/elfinder/php/connector.php'  // connector URL (REQUIRED)
+        }).elfinder('instance');
+    });
+	CKEDITOR.replace( 'editor', {
+    filebrowserBrowseUrl : {$basePath}+'/elfinder/elfinder.html', // eg. 'includes/elFinder/elfinder.html'
+    uiColor : '#9AB8F3'
+});
 </script>*}
 {/block}
 {block content}
