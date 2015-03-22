@@ -33,7 +33,7 @@ class BorrowingPresenter extends BasePresenter {
 		{
 			$this->userId = $this->user->getId();
 		}
-		$this['borrowingForm']->setDefaults(array("uzivatel_id" => $this->userId));
+		$this['borrowingForm']->setDefaults(array("user_id" => $this->userId));
 	}
 
 	/**
@@ -76,8 +76,8 @@ class BorrowingPresenter extends BasePresenter {
 			$this->redirect('Borrowing:default');
 		}
 		$borrowing = $borrowing->toArray();
-		$date = new \DateTime($borrowing['datum']);
-		$borrowing['datum'] = $date->format('d F, Y');
+		$date = new \DateTime($borrowing['date']);
+		$borrowing['date'] = $date->format('d. m. yy');
 
         $this['borrowingForm']->setDefaults($borrowing);
 	}
@@ -120,19 +120,19 @@ class BorrowingPresenter extends BasePresenter {
 	protected function createComponentBorrowingForm() {
 		$form = $this->form();
 		$form->addHidden('id', null);
-		$form->addHidden('uzivatel_id', null);
-		$form->addText('nazev', 'Název:')
+		$form->addHidden('user_id', null);
+		$form->addText('title', 'Název:')
 				->setRequired('Zadejte název.');
 
-		$form->addText('jmeno', 'Jméno:')
+		$form->addText('name', 'Jméno:')
 				->setRequired('Zadejte jméno.');
 
-		$form->addText('prijmeni', 'Příjmení:')
+		$form->addText('surname', 'Příjmení:')
 				->setRequired('Zadejte příjmení.');
-		$form->addText('datum', 'Datum:', 20, 20)->getControlPrototype()->setClass('datepicker');
+		$form->addText('date', 'Datum:', 20, 20)->getControlPrototype()->setClass('datepicker');
 
         $form->addSubmit('send', 'Odeslat');
-		$form->setDefaults(array("uzivatel_id" => $this->user->getId()));
+		$form->setDefaults(array("user_id" => $this->user->getId()));
 		$form->onSuccess[] = $this->borrowingSucceeded;
 		return $form;
 	}
@@ -142,8 +142,8 @@ class BorrowingPresenter extends BasePresenter {
 	 */
 	public function borrowingSucceeded($form) {
 		$values = $form->getValues();
-		$date = new \DateTime($values['datum']);
-		$values['datum'] = $date->format('Y-m-d H:i:s');
+		$date = \DateTime::createFromFormat('dd. mm. YYYY', $values['date']);
+		$values['date'] = $date->format('Y-m-d H:i:s');
 		if ($values['id']) {
 			$this->borrowingManager->edit($values);
 		} else {

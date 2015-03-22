@@ -2,7 +2,7 @@
 // source: C:\xampp\htdocs\BPIS\app\components\EventPlanning/EventPlanningControl.latte
 
 // prolog Latte\Macros\CoreMacros
-list($_b, $_g, $_l) = $template->initialize('0791839946', 'html')
+list($_b, $_g, $_l) = $template->initialize('6514246212', 'html')
 ;
 // prolog Nette\Bridges\ApplicationLatte\UIMacros
 
@@ -42,11 +42,11 @@ if (empty($_l->extends) && !empty($_control->snippetMode)) {
 <?php $iterations = 0; foreach ($data as $id => $user) { if ($id != $formUserId) { ?>
 	<tr>
 		<td class="center-align" >
-			<?php echo Latte\Runtime\Filters::escapeHtml($users[$id]['prijmeni'], ENT_NOQUOTES) ?>
- <?php echo Latte\Runtime\Filters::escapeHtml($users[$id]['jmeno'], ENT_NOQUOTES) ?>
+			<?php echo Latte\Runtime\Filters::escapeHtml($users[$id]['surname'], ENT_NOQUOTES) ?>
+ <?php echo Latte\Runtime\Filters::escapeHtml($users[$id]['name'], ENT_NOQUOTES) ?>
 
 		</td>
-<?php $iterations = 0; foreach ($user as $term) { $iterations = 0; foreach ($term as $times) { $iterations = 0; foreach ($times as $time) { if ($time['vyhovuje']) { ?>
+<?php $iterations = 0; foreach ($user as $term) { $iterations = 0; foreach ($term as $times) { $iterations = 0; foreach ($times as $time) { if ($time['confirm']) { ?>
 						<td class="green accent-1 center-align">
 						<i class="mdi-action-done"></i>
 <?php } else { ?>
@@ -63,8 +63,8 @@ if (empty($_l->extends) && !empty($_control->snippetMode)) {
 	<?php Nette\Bridges\FormsLatte\FormMacros::renderFormBegin($form = $_form = $_control["eventPlanningForm"], array()) ?>
 
 		<tr>
-			<td class="center-align"><?php echo Latte\Runtime\Filters::escapeHtml($users[$formUserId]['prijmeni'], ENT_NOQUOTES) ?>
- <?php echo Latte\Runtime\Filters::escapeHtml($users[$formUserId]['jmeno'], ENT_NOQUOTES) ?></td>
+			<td class="center-align"><?php echo Latte\Runtime\Filters::escapeHtml($users[$formUserId]['surname'], ENT_NOQUOTES) ?>
+ <?php echo Latte\Runtime\Filters::escapeHtml($users[$formUserId]['name'], ENT_NOQUOTES) ?></td>
 <?php $iterations = 0; foreach ($form['times']->containers as $term) { ?>
 				<td class="center-align">
 					<?php echo Latte\Runtime\Filters::escapeHtml($term['id']->control, ENT_NOQUOTES) ?>

@@ -8,7 +8,7 @@
 <head>
 	<meta charset="utf-8">
 
-	<title>{ifset #title}{include title|striptags} | {/ifset}Nette Sandbox</title>
+	<title>{ifset #title}{include title|striptags} | {/ifset}</title>
 	<!-- CSS  -->
 	<link href="{$basePath}/css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 	<link href="{$basePath}/css/materialize.aditional.css" type="text/css" rel="stylesheet" media="screen,projection"/>
@@ -21,7 +21,7 @@
 	<link rel="stylesheet" media="screen,projection,tv" href="{$basePath}/css/dateTimePicker.css">
 	-->
 	<link rel="stylesheet" type="text/css" media="screen" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/themes/smoothness/jquery-ui.css" />
-	<link rel="stylesheet" type="text/css" media="screen" href="css/elfinder.min.css">
+	<link rel="stylesheet" type="text/css" media="screen" href="{$basePath}/elfinder/css/elfinder.min.css">
 	{block head}{/block}
 </head>
 
@@ -31,10 +31,15 @@
 	<header>
 	<!-- Dropdown Structure -->
 	<ul id="dropdown1" class=" dropdown-content">
-		<li>{if $user->loggedIn}
+		{if $user->loggedIn}
+			<li>
+				<a n:href=":Front:Homepage:default">Veřejná část</a>
+			</li>
+			<li class="divider"></li>
+			<li>
 				<a n:href=":Admin:User:edit, $user->getId()">Osobní údaje</a>
-			{/if}
-		</li>
+			</li>
+		{/if}
 		<li class="divider"></li>
 		<li>{if $user->loggedIn}
 				<a n:href=":Front:Sign:out">Odhlásit</a>
@@ -106,6 +111,8 @@
     </footer>
 	{block scripts}
 	<script src="{$basePath}/js/jquery-2.1.3.min.js"></script>
+	<script src="http://code.jquery.com/jquery-1.9.0.js"></script>
+	<script src="http://code.jquery.com/jquery-migrate-1.0.0.js"></script>
 	<script src="{$basePath}/js/netteForms.js"></script>
 	<script src="{$basePath}/js/nette.ajax.js"></script>
 	<script src="{$basePath}/js/main.js"></script>
@@ -113,6 +120,7 @@
 	{*<script src="{$basePath}/js/jquery-clockpicker.min.js"></script>*}
 	<script src="{$basePath}/js/clockpicker.js"></script>
 	<script src="{$basePath}/js/live-form-validation.js"></script>
+	<script src="{$basePath}/js/cs.js"></script>
 	{*<script src="{$basePath}/js/jqueryUi.js"></script>
 	<script src="{$basePath}/js/moment.js"></script>
 	<script src="{$basePath}/js/timepickerAddon.js"></script>*}
@@ -243,10 +251,6 @@
 		millisecText: 'Milisekundy',
 		};
 		$.timepicker.setDefaults($.timepicker.regional['cs']);
-
-
-
-
 	*}
 </script>
 	{/block}

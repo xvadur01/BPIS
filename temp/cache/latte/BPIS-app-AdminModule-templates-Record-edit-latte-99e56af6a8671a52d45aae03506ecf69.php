@@ -2,20 +2,20 @@
 // source: C:\xampp\htdocs\BPIS\app\AdminModule/templates/Record/edit.latte
 
 // prolog Latte\Macros\CoreMacros
-list($_b, $_g, $_l) = $template->initialize('0054117107', 'html')
+list($_b, $_g, $_l) = $template->initialize('9437109251', 'html')
 ;
 // prolog Latte\Macros\BlockMacros
 //
 // block headerH1
 //
-if (!function_exists($_b->blocks['headerH1'][] = '_lb87d2935082_headerH1')) { function _lb87d2935082_headerH1($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+if (!function_exists($_b->blocks['headerH1'][] = '_lbe9c90b5c16_headerH1')) { function _lbe9c90b5c16_headerH1($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ?>Upravit záznam<?php
 }}
 
 //
 // block scripts
 //
-if (!function_exists($_b->blocks['scripts'][] = '_lb18ec20851d_scripts')) { function _lb18ec20851d_scripts($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+if (!function_exists($_b->blocks['scripts'][] = '_lbb93f20bf80_scripts')) { function _lbb93f20bf80_scripts($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ?> <?php Latte\Macros\BlockMacros::callBlockParent($_b, 'scripts', get_defined_vars()) ?>  
 <script src="<?php echo Latte\Runtime\Filters::escapeHtml(Latte\Runtime\Filters::safeUrl($basePath), ENT_COMPAT) ?>/js/ckeditor/ckeditor.js"></script>
 <script type="text/javascript" src="<?php echo Latte\Runtime\Filters::escapeHtml(Latte\Runtime\Filters::safeUrl($basePath), ENT_COMPAT) ?>/elfinder/js/elfinder.min.js"></script>
@@ -37,7 +37,7 @@ if (!function_exists($_b->blocks['scripts'][] = '_lb18ec20851d_scripts')) { func
 //
 // block content
 //
-if (!function_exists($_b->blocks['content'][] = '_lbb5f03cbba5_content')) { function _lbb5f03cbba5_content($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+if (!function_exists($_b->blocks['content'][] = '_lb7c40e8997d_content')) { function _lb7c40e8997d_content($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ;$_l->tmp = $_control->getComponent("recordForm"); if ($_l->tmp instanceof Nette\Application\UI\IRenderable) $_l->tmp->redrawControl(NULL, FALSE); $_l->tmp->render() ;
 }}
 

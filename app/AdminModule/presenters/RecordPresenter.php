@@ -29,7 +29,7 @@ class RecordPresenter extends BasePresenter {
 	public function actionDelete($recordId)
     {
 		$record = $this->recordManager->get($recordId);
-		if($this->user->isInRole('admin') || $record->uzivatel_id == $this->user->getId())
+		if($this->user->isInRole('admin') || $record->user_id == $this->user->getId())
 		{
 			$this->recordManager->delete($recordId);
 			$this->flashMessage('Záznam byl úspěšně smazán.', 'success');
@@ -44,7 +44,7 @@ class RecordPresenter extends BasePresenter {
 	public function actionFinish($recordId)
     {
 		$record = $this->recordManager->get($recordId);
-		if($this->user->isInRole('admin') || $record->uzivatel_id == $this->user->getId())
+		if($this->user->isInRole('admin') || $record->user_id == $this->user->getId())
 		{
 			$data = array('id' =>$recordId, 'splneno' => 1 );
 			$this->recordManager->edit($data);
@@ -64,7 +64,7 @@ class RecordPresenter extends BasePresenter {
             $this->error('Záznam nebyl nalezen.');
 			$this->redirect('Record:list');
         }
-		if(!$this->user->isInRole('admin') && $record->uzivatel_id != $this->user->getId())
+		if(!$this->user->isInRole('admin') && $record->user_id != $this->user->getId())
 		{
 			$this->flashMessage('Na danou akci nemáte opřávnění.', 'error');
 			$this->restoreRequest($this->backlink);
@@ -72,10 +72,10 @@ class RecordPresenter extends BasePresenter {
 		}
 
 		$record = $record->toArray();
-		$date = new \DateTime($record['datum']);
-		$record['datum'] = $date->format('d F, Y');
-		$date = new \DateTime($record['datum_splneni']);
-		$record['datum_splneni'] = $date->format('d F, Y');
+		$date = new \DateTime($record['date']);
+		$record['date'] = $date->format('d. m. yy');
+		$date = new \DateTime($record['date_done']);
+		$record['date_done'] = $date->format('d. m. yy');
 
         $this['recordForm']->setDefaults($record);
     }
@@ -99,7 +99,7 @@ class RecordPresenter extends BasePresenter {
 	{
 		$record = $this->recordManager->get($id);
 		$this->template->record = $record;
-		$this->template->userRef = $record->ref('uzivatel');
+		$this->template->userRef = $record->ref('user');
 	}
 
 	public function renderList($own = null)
@@ -119,19 +119,19 @@ class RecordPresenter extends BasePresenter {
     {
         $form = $this->form();
 		$form->addHidden('id', null);
-		$form->addHidden('uzivatel_id', null);
-        $form->addText('nazev', 'Název:')
+		$form->addHidden('user_id', null);
+        $form->addText('name', 'Název:')
             ->setRequired('Zadejte název.');
 
-		$form->addTextArea('popis', 'Popis:')
+		$form->addTextArea('description', 'Popis:')
             ->setRequired('Zadejte popis.')
 			->getControlPrototype()->setId('editor');
 
-		$form->addText('datum', 'Datum:', 30, 30)->getControlPrototype()->setClass('datepicker');
-		$form->addText('datum_splneni', 'Datum splnění:', 30, 30)->getControlPrototype()->setClass('datepicker');
+		$form->addText('date', 'Datum:', 30, 30)->getControlPrototype()->setClass('datepicker');
+		$form->addText('date_done', 'Datum splnění:', 30, 30)->getControlPrototype()->setClass('datepicker');
 
         $form->addSubmit('send', 'Odeslat');
-		$form->setDefaults(array("uzivatel_id" => $this->user->getId()));
+		$form->setDefaults(array("user_id" => $this->user->getId()));
         $form->onSuccess[] = $this->frontRecordSucceeded;
         return $form;
     }
@@ -140,17 +140,17 @@ class RecordPresenter extends BasePresenter {
     {
 
         $values = $form->getValues();
+		$date = \DateTime::createFromFormat('dd. mm. YYYY', $values['date']);
+		$values['date'] = $date->format('Y-m-d H:i:s');
+		$date = \DateTime::createFromFormat('dd. mm. YYYY', $values['date_done']);
 
-		$date = new \DateTime($values['datum']);
-		$values['datum'] = $date->format('Y-m-d H:i:s');
-		$date = new \DateTime($values['datum_splneni']);
-		if($values['datum_splneni'])
+		if($values['date_done'])
 		{
-			$values['datum_splneni'] = $date->format('Y-m-d H:i:s');
+			$values['date_done'] = $date->format('Y-m-d H:i:s');
 		}
 		else
 		{
-			unset ($values['datum_splneni']);
+			unset ($values['date_done']);
 		}
 		if ($values['id']) {
 			$this->recordManager->edit($values);

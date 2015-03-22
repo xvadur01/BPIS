@@ -49,17 +49,20 @@ class FrontPagePresenter extends BasePresenter {
 		$form = $this->form();
 		$form->addHidden('id', null);
 
-		$form->addText('titulek', 'Titulek:')
+		$form->addText('title', 'Titulek:')
 				->setRequired('Zadejte titulek.');
 
-		$form->addText('nadpis', 'Nadpis:')
+		$form->addText('topic', 'Nadpis:')
 				->setRequired('Zadejte nadpis.');
 
 		$form->addTextArea('text', 'Text:')
 				->setRequired('Zadejte obsah stránky.')
 				->getControlPrototype()->setId('editor');
 
-		$form->addCheckbox('aktivni', 'Zobrazovat:')->getControlPrototype()->class('checkbox');
+		$form->addText('weight', 'Vaha:')
+				->setRequired('Zadejte vahu.');
+
+		$form->addCheckbox('active', 'Zobrazovat:')->getControlPrototype()->class('checkbox');
 
 		$form->addSubmit('send', 'Odeslat');
 		$form->onSuccess[] = $this->frontPageFormSucceeded;
@@ -72,7 +75,7 @@ class FrontPagePresenter extends BasePresenter {
 	public function frontPageFormSucceeded($form) {
 
 		$values = $form->getValues();
-		$values['url'] = \Nette\Utils\Strings::webalize($values['nadpis']);
+		$values['url'] = \Nette\Utils\Strings::webalize($values['topic']);
 		if ($values['id']) {
 			$this->frontpageManager->edit($values);
 		} else {

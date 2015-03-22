@@ -21,19 +21,19 @@
 {if $records}
 	{foreach $records as $record}
 			<td>{$record->id}</td>
-			<td>{$record->nazev}</td>
-			<td>{$record->popis|truncate:500|striptags}</td>
-			<td>{$record->datum|date:'%d.%m.%Y'}</td>
+			<td>{$record->name}</td>
+			<td>{$record->description|truncate:500|striptags}</td>
+			<td>{$record->date|date:'%d.%m.%Y'}</td>
 			<td>
-				{if $record->datum_splneni}
-					{$record->datum_splneni|date:'%d.%m.%Y'}
+				{if $record->date_done}
+					{$record->date_done|date:'%d.%m.%Y'}
 				{else}
 					Není zadáno
 				{/if}
 			</td>
 			<td>
-				{if $record->uzivatel_id == $user->getId()}
-					{if !$record->splneno}
+				{if $record->user_id == $user->getId()}
+					{if !$record->done}
 						<a n:href="Record:finish $record->id" title="Dokončit" class="btn-floating waves-effect waves-light  light-blue"><i class="mdi-action-done"></i></a>
 					{/if}
 					<a n:href="Record:delete $record->id" title="Smazat záznam" class="btn-floating waves-effect waves-light  red"><i class="mdi-action-delete"></i></a>

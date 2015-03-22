@@ -6,9 +6,10 @@ namespace App\Model;
 class FrontpageManager extends BaseManager
 {
 	const
-		TABLE_NAME = 'stranky',
+		TABLE_NAME = 'front_page',
 		COLUMN_ID = 'id',
-		COLUMN_ACTIVE = 'aktivni',
+		COLUMN_ACTIVE = 'active',
+		COLUMN_WEIGHT = 'weight',
 		COLUMN_URL = 'url';
 
 
@@ -39,7 +40,7 @@ class FrontpageManager extends BaseManager
 
 	public function getAtiveFronPage()
 	{
-		return $this->connection->table(self::TABLE_NAME)->where(self::COLUMN_ACTIVE);
+		return $this->connection->table(self::TABLE_NAME)->where(self::COLUMN_ACTIVE)->order(self::COLUMN_WEIGHT . " DESC");
 	}
 		/**
 	 * get all data from table
@@ -48,7 +49,7 @@ class FrontpageManager extends BaseManager
 
 	public function getTable()
 	{
-		return $this->connection->table(self::TABLE_NAME);
+		return $this->connection->table(self::TABLE_NAME)->order(self::COLUMN_WEIGHT . " DESC");
 	}
 
 	public function get($id)

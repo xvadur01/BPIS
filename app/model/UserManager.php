@@ -13,12 +13,12 @@ use \Nette,
 class UserManager extends BaseManager implements Nette\Security\IAuthenticator
 {
 	const
-		TABLE_NAME = 'uzivatel',
+		TABLE_NAME = 'user',
 		COLUMN_ID = 'id',
 		COLUMN_NAME = 'login',
-		COLUMN_PASSWORD_HASH = 'heslo',
-		COLUMN_USER_NAME = 'jmeno',
-		COLUMN_USER_SURNAME = 'prijmeni',
+		COLUMN_PASSWORD_HASH = 'pass',
+		COLUMN_USER_NAME = 'name',
+		COLUMN_USER_SURNAME = 'surname',
 		COLUMN_ROLE = 'role';
 
 

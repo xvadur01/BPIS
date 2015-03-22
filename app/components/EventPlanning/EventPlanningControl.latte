@@ -26,12 +26,12 @@
 	{if $id != $formUserId }
 	<tr>
 		<td class="center-align" >
-			{$users[$id]['prijmeni']} {$users[$id]['jmeno']}
+			{$users[$id]['surname']} {$users[$id]['name']}
 		</td>
 		{foreach $user as $term}
 			{foreach $term as $times}
 				{foreach $times as $time}
-					{if $time['vyhovuje']}
+					{if $time['confirm']}
 						<td class="green accent-1 center-align">
 						<i class="mdi-action-done"></i>
 					{else}
@@ -50,7 +50,7 @@
 {if $isForm}
 	{form eventPlanningForm}
 		<tr>
-			<td class="center-align">{$users[$formUserId]['prijmeni']} {$users[$formUserId]['jmeno']}</td>
+			<td class="center-align">{$users[$formUserId]['surname']} {$users[$formUserId]['name']}</td>
 			{foreach $form['times']->containers as $term}
 				<td class="center-align">
 					{$term['id']->control} {$term['id']->label}

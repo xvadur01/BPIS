@@ -5,11 +5,11 @@
 	{else}
 		<li class="timeline-inverted">
 	{/if}
-		{if !$event->datum}
+		{if !$event->date}
 			<div class="timeline-badge  blue lighten-0">
 					?
 			</div>
-		{elseif $event->datum >  new \DateTime() }
+		{elseif $event->date >  new \DateTime() }
 				<div class="timeline-badge  green lighten-0">
 					<i class="mdi-action-event"></i>
 				</div>
@@ -21,21 +21,21 @@
 
 		<div class="timeline-panel">
 			<div class="timeline-heading">
-				<a href="{plink Event:detail $event->id}"><h4 class="timeline-title">{$event->nazev}</h4></a>
+				<a href="{plink Event:detail $event->id}"><h4 class="timeline-title">{$event->name}</h4></a>
 				{if $type == 'event'}
-					<span><small class="text-muted">Organizátor: </small>{$event->ref('uzivatel','uzivatel_id')->prijmeni} </span>
+					<span><small class="text-muted">Organizátor: </small>{$event->ref('user','user_id')->surname} </span>
 				{/if}
 				<p>
-					{if $event->datum}
-						<small class="text-muted"><i class="glyphicon glyphicon-time">Datum konání: </i></small>{$event->datum|date:'%d.%m.%Y %H:%M'}
+					{if $event->date}
+						<small class="text-muted"><i class="glyphicon glyphicon-time">Datum konání: </i></small>{$event->date|date:'%d.%m.%Y %H:%M'}
 					{/if}
 				</p>
 			</div>
 			<div class="timeline-body">
-				<p>{$event->popis|truncate:500|striptags}</p>
+				<p>{$event->description|truncate:500|striptags}</p>
 			</div>
 			<div>
-				{if $event->uzivatel_id == $user->getId() || $user->isInRole('admin')}
+				{if $event->user_id == $user->getId() || $user->isInRole('admin')}
 					<a href="{plink :Admin:Event:delete  $event->id, backlink => $presenter->storeRequest()}" title="Smazat událost" class="btn-floating waves-effect waves-light  red"><i class="mdi-action-delete"></i></a>
 					<a href="{plink :Admin:Event:edit  $event->id}" title="Upravit událost" class="btn-floating waves-effect waves-light light-green accent-3"><i class="mdi-editor-mode-edit"></i></a>
 				{/if}

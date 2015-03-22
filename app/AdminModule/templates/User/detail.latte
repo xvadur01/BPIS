@@ -1,4 +1,4 @@
-{block headerH1}<i>Detail uživatele:</i> {$userData['prijmeni']} {$userData['jmeno']}{/block}
+{block headerH1}<i>Detail uživatele:</i> {$userData['surname']} {$userData['name']}{/block}
 {block scripts}
  {include #parent}  {* include parent #scripts block *}
 	<script type="text/javascript">
@@ -18,7 +18,7 @@
 					<i class="grey-text">Přijmení a jméno:</i>
 				</span>
 				<br>
-				<span class="blue-text">{$userData['prijmeni']} {$userData['jmeno']}</span>
+				<span class="blue-text">{$userData['surname']} {$userData['name']}</span>
 			</div>
 		</div>
 		<div class="col s2 right-align section">
@@ -33,7 +33,7 @@
 				<i class="grey-text">Telefon:</i>
 			</span>
 			<br>
-			<span class="blue-text">{$userData['telefon']}</span>
+			<span class="blue-text">{$userData['phone']}</span>
 			</div>
 		</div>
 		<div class="col s12 divider"></div>
@@ -53,7 +53,7 @@
 				<i class="grey-text">Pracovna:</i>
 			</span>
 			<br>
-			<span class="blue-text">{$userData['pracovna']}</span>
+			<span class="blue-text">{$userData['office']}</span>
 			</div>
 		</div>
 	</div>
@@ -74,19 +74,19 @@
 	{foreach $borrowing as $borrow}
 	<div class="card medium col s12  l3  accent-1">
 			<div class="card-content">
-				<span class="card-title activator grey-text text-darken-4">{$borrow['nazev']} <i class="mdi-navigation-more-vert right"></i></span><br>
+				<span class="card-title activator grey-text text-darken-4">{$borrow['title']} <i class="mdi-navigation-more-vert right"></i></span><br>
 				<span class=" white-text text-darken-4">
 				<i class="grey-text" >Datum vypůjčení: </i>
-				<span class="grey-text  text-darken-4">{$borrow->datum|date:'%d.%m.%Y'}</span>
+				<span class="grey-text  text-darken-4">{$borrow->date|date:'%d.%m.%Y'}</span>
 			</div>
 			<div class="card-reveal  accent-1">
-			  <span class="card-title black-text text-darken-4">{$borrow['nazev']}<i class="mdi-navigation-close right"></i></span>
+			  <span class="card-title black-text text-darken-4">{$borrow['title']}<i class="mdi-navigation-close right"></i></span>
 			  <br><i class="white-text" >Datum vypůjčení: </i><br>
-			  <span class="white-text  text-darken-4">{$borrow->datum|date:'%d.%m.%Y'}</span>
+			  <span class="white-text  text-darken-4">{$borrow->date|date:'%d.%m.%Y'}</span>
 			  <br><i class="grey-text" >Vypůjčeno od: </i><br>
-			  <span class="black-text">{$borrow['prijmeni']} {$borrow['jmeno']}</span><br>
+			  <span class="black-text">{$borrow['surname']} {$borrow['name']}</span><br>
 			{if $user->isInRole('admin') ||  $user->getId() == $userData->id}
-				{if !$borrow->vraceno}
+				{if !$borrow->give_back}
 					<a n:href="Borrowing:giveback $borrow->id, backlink => $presenter->storeRequest()" title="Vrátit zpět" class="ajax btn-floating waves-effect waves-light light-blue lighten-1"><i class="mdi-content-reply"></i></a>
 				{/if}
 				<a n:href="Borrowing:edit $borrow['id']" title="Upravit výpujčku" class="btn-floating waves-effect waves-light light-green accent-3"><i class="mdi-editor-mode-edit"></i></a>

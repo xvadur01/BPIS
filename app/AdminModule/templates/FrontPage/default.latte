@@ -7,7 +7,7 @@
 
 <table class=" striped table-condensed">
 	<tr>
-		<th>Id</th>
+		<th>Vaha</th>
 		<th>Titulek</th>
 		<th>Nadpis</th>
 		<th>Text</th>
@@ -16,12 +16,12 @@
 	</tr>
 
 {foreach $pages as $page}
-		<td>{$page->id}</td>
-		<td>{$page->titulek}</td>
-		<td>{$page->nadpis}</td>
+		<td>{$page->weight}</td>
+		<td>{$page->title}</td>
+		<td>{$page->topic}</td>
 		<td>{$page->text|truncate:500|striptags}</td>
 		<td>
-			{if $page->aktivni}
+			{if $page->active}
 				<span class="btn-floating green accent-2"><i class=" mdi-communication-invert-colors-on"></i></span>
 			{else}
 				<span class="btn-floating red lighten-4"><i class="mdi-communication-invert-colors-off"></i></span>

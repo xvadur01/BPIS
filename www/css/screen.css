@@ -22,7 +22,19 @@ div.flash {
 	margin: 1em 0;
 }
 .brand-logo{
-	margin-left: 10%;
+	margin-left: 20%;
+}
+.logo{
+	margin: 0;
+	padding: 0;
+	background: white !important;
+}
+
+.logo .brand-logo{
+	background: white url('../images/FIT.jpg') no-repeat 50% 20% ;
+	height: 150px;
+	margin: 0;
+	margin-bottom: 10px;
 }
 main{
 	min-height: 750px;
@@ -82,7 +94,12 @@ main{
 .card.small{
 	height: 200px;
 }
-
+.dropdown-button{
+	width: 150px;
+}
+#dropdown1{
+	min-height: 100%;
+}
 @media only screen and (max-width : 1500px) {
 	.eventcard {
 		width: 45% !important;

@@ -54,15 +54,15 @@ class EventPlanningControl extends UI\Control
 		$Users = array();
 		foreach ($terms as $term)
 		{
-				$Users[$term['uzivatel_id']] = $this->userManager->get($term['uzivatel_id']);
-				$datetime = new \DateTime($term['cas']);
-				if(empty($this->userId) ||  $this->userId != $term['uzivatel_id'])
+				$Users[$term['user_id']] = $this->userManager->get($term['user_id']);
+				$datetime = new \DateTime($term['time']);
+				if(empty($this->userId) ||  $this->userId != $term['user_id'])
 				{
-					$data[$term['uzivatel_id']][$datetime->format('d.m.Y')][$datetime->format('H:i:s')][] = $term->toArray();
+					$data[$term['user_id']][$datetime->format('d.m.Y')][$datetime->format('H:i:s')][] = $term->toArray();
 				}
 				else
 				{
-					$data[$term['uzivatel_id']][$datetime->format('d.m.Y')][$datetime->format('H:i:s')][] = $term->toArray();
+					$data[$term['user_id']][$datetime->format('d.m.Y')][$datetime->format('H:i:s')][] = $term->toArray();
 					$dataUser[$datetime->format('d.m.Y')][$datetime->format('H:i:s')][] = $term->toArray();
 				}
 		}
@@ -74,22 +74,22 @@ class EventPlanningControl extends UI\Control
 			{
 				foreach ($terms as $term)
 				{
-					if($this->presenter->user->getId() == $this->event->uzivatel_id)
+					if($this->presenter->user->getId() == $this->event->user_id)
 					{
-						$form['times'][$i]->setValues(array("pick" => ($this->event->datum == $term['cas'] ? TRUE:FALSE),"id" => $term['id'],"time" => $term['cas']));
+						$form['times'][$i]->setValues(array("pick" => ($this->event->date == $term['time'] ? TRUE:FALSE),"id" => $term['id'],"time" => $term['time']));
 					}
 					else
 					{
-						$form['times'][$i]->setValues(array("pick" => $term['vyhovuje'],"id" => $term['id'],"time" => $term['cas']));
+						$form['times'][$i]->setValues(array("pick" => $term['confirm'],"id" => $term['id'],"time" => $term['time']));
 					}
 					$i++;
 				}
 			}
 		}
-		$form->setValues(array("id" => $this->getEventId(),"userId" => $this->eventManager->get($this->getEventId())->uzivatel_id));
+		$form->setValues(array("id" => $this->getEventId(),"userId" => $this->eventManager->get($this->getEventId())->user_id));
 		$this->template->formUserId = $this->userId;
 		$this->template->users = $Users;
-		$this->template->eventUserId = $this->event->uzivatel_id;
+		$this->template->eventUserId = $this->event->user_id;
 		$this->template->event = $this->event;
 		$this->template->isForm = boolval($i);
 		$this->template->data = $data;
@@ -129,7 +129,7 @@ class EventPlanningControl extends UI\Control
 				{
 				$item = array(
 						"id" => $values['id'],
-						"datum" => $time['time'],
+						"date" => $time['time'],
 						);
 				$this->eventManager->edit($item);
 				}
@@ -138,7 +138,7 @@ class EventPlanningControl extends UI\Control
 			{
 				$term = array(
 						"id" => $time['id'],
-						"vyhovuje" => $time['pick'],
+						"confirm" => $time['pick'],
 						);
 				if($term['id'])
 				{

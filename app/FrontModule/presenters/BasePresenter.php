@@ -74,10 +74,16 @@ abstract class BasePresenter extends \Nette\Application\UI\Presenter
 
 		$frontPage = $this->frontpageManager->getAtiveFronPage();
 
+		$logo = $root->addChild('home', array(
+			'label' => '',
+			'link' => 'Homepage:default',
+		));
+		$logo->setAttribute('class','logo')->setLinkAttribute('class', 'brand-logo');
+				//addAttribute('class','test');
 		foreach ($frontPage as $page)
 		{
-			$root->addChild($page->titulek, array(
-				'label' => $page->titulek,
+			$root->addChild($page->title, array(
+				'label' => $page->title,
 				'link'  => array('Homepage:default', array('id' => $page->id))
 			));
 		}

@@ -2,20 +2,20 @@
 // source: C:\xampp\htdocs\BPIS\app\FrontModule/templates/Sign/in.latte
 
 // prolog Latte\Macros\CoreMacros
-list($_b, $_g, $_l) = $template->initialize('0852457499', 'html')
+list($_b, $_g, $_l) = $template->initialize('3626688053', 'html')
 ;
 // prolog Latte\Macros\BlockMacros
 //
 // block headerH1
 //
-if (!function_exists($_b->blocks['headerH1'][] = '_lb526d6ffe96_headerH1')) { function _lb526d6ffe96_headerH1($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+if (!function_exists($_b->blocks['headerH1'][] = '_lb655baa8b3c_headerH1')) { function _lb655baa8b3c_headerH1($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ?>Přihlášení<?php
 }}
 
 //
 // block content
 //
-if (!function_exists($_b->blocks['content'][] = '_lb3c24871141_content')) { function _lb3c24871141_content($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+if (!function_exists($_b->blocks['content'][] = '_lb52322b5d2b_content')) { function _lb52322b5d2b_content($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ;$_l->tmp = $_control->getComponent("signInForm"); if ($_l->tmp instanceof Nette\Application\UI\IRenderable) $_l->tmp->redrawControl(NULL, FALSE); $_l->tmp->render() ;
 }}
 

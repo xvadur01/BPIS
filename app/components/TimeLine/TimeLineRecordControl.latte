@@ -5,11 +5,11 @@
 	{else}
 		<li class="timeline-inverted">
 	{/if}
-			{if $record->splneno}
+			{if $record->done}
 				<div class="timeline-badge  green lighten-0">
 					<i class="mdi-action-done"></i>
 				</div>
-			{elseif $record->datum_splneni && $record->datum_splneni <  new \DateTime() }
+			{elseif $record->date_done && $record->date_done <  new \DateTime() }
 				<div class="timeline-badge  red lighten-0">
 					<i class="mdi-alert-error"></i>
 				</div>
@@ -21,19 +21,19 @@
 
 		<div class="timeline-panel">
 			<div class="timeline-heading">
-				<a href="{plink Record:detail $record->id}"><h4 class="timeline-title">{$record->nazev}</h4></a>
+				<a href="{plink Record:detail $record->id}"><h4 class="timeline-title">{$record->name}</h4></a>
 				<p>
-					<small class="text-muted">Datum zahájení:</small> <i class="glyphicon glyphicon-time">{$record->datum|date:'%d.%m.%Y'}</i>
+					<small class="text-muted">Datum zahájení:</small> <i class="glyphicon glyphicon-time">{$record->date|date:'%d.%m.%Y'}</i>
 					<br>
-					<small class="text-muted">Předpokládané datum ukončení:</small> <i class="glyphicon glyphicon-time">{$record->datum_splneni|date:'%d.%m.%Y'}</i>
+					<small class="text-muted">Předpokládané datum ukončení:</small> <i class="glyphicon glyphicon-time">{$record->date_done|date:'%d.%m.%Y'}</i>
 				</p>
 			</div>
 			<div class="timeline-body">
-				<p>{$record->popis|truncate:700|noescape}</p>
+				<p>{$record->description|truncate:700|noescape}</p>
 			</div>
 			<div>
-				{if $record->uzivatel_id == $user->getId()}
-					{if !$record->splneno}
+				{if $record->user_id == $user->getId()}
+					{if !$record->done}
 						<a href="{plink :Admin:Record:finish $record->id, backlink => $presenter->storeRequest()}" title="Dokončit" class="btn-floating waves-effect waves-light  light-blue"><i class="mdi-action-done"></i></a>
 					{/if}
 					<a href="{plink :Admin:Record:delete $record->id, backlink => $presenter->storeRequest()}" title="Smazat záznam" class="btn-floating waves-effect waves-light  red"><i class="mdi-action-delete"></i></a>

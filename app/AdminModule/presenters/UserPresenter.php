@@ -32,20 +32,26 @@ class UserPresenter extends BasePresenter {
 
 	public function actionDelete($userId)
     {
-		$this->userManager->delete($userId);
-		$this->flashMessage('stranka byla úspěšně smazána.', 'success');
-        $this->redirect('Frontuser:default');
+		if($this->user->isInRole('admin'))
+		{
+			$this->userManager->delete($userId);
+			$this->flashMessage('Uživatel byl úspěšně smazán.', 'success');
+		}
+        $this->redirect('User:default');
     }
 
 	public function actionEdit($userId)
     {
-        $user = $this->userManager->get($userId);
-        if (!$user) {
-            $this->error('Strana nebyla nalezena');
+		$user = $this->userManager->get($userId);
+		if (!$user) {
+            $this->error('Uživatel nebyl nalezen.');
 			$this->redirect('User:default');
         }
+		if(!$this->user->isInRole('admin') && $user->id != $this->user->getId())
+		{
+			$this->redirect('User:default');
+		}
 		$user = $user->toArray();
-
         $this['editUserForm']->setDefaults($user);
     }
 
@@ -66,9 +72,21 @@ class UserPresenter extends BasePresenter {
     }
 
 	public function renderDetail($id) {
+		$result = $this->eventManager->getNewestUserEvent($id,100);
+		foreach ($result as $event) {
+			if(!$this->user->isInRole('admin') && $event->user_id != $this->user->getId())
+			{
+				$terms = $this->termManager->getTermOfEvent($this->user->getId(),$id)->fetch();
+				if(!$terms)
+				{
+					continue;
+				}
+			}
+			$dataEvent[] = $event;
+		}
+		$this->dataEvent = $dataEvent;
 		$this->template->userData = $this->userManager->get($id);
 		$this->template->borrowing = $this->borrowingManager->getUserBorrow($id)->order(\App\Model\BorrowingManager::COLUMN_ID.' DESC');
-		$this->dataEvent = $this->eventManager->getNewestUserEvent($id,100);
 		$this->dataRecord = $this->recordManager->getUserRecord($id)->order(\App\Model\RecordManager::COLUMN_ID.' DESC');
 	}
 
@@ -86,21 +104,21 @@ class UserPresenter extends BasePresenter {
 		$form->addText('login', 'Login:')
             ->addRule(Form::FILLED, 'Zadejte login.');
 
-		$form->addPassword('heslo', 'Heslo:')
+		$form->addPassword('pass', 'Heslo:')
             ->addRule(Form::MIN_LENGTH, 'Heslo musí mít alespoň %d znaků', 6)
 			->addRule(Form::PATTERN, 'Musí obsahovat číslici', '.*[0-9].*');
 
 		$form->addPassword('2ndpass', 'Heslo pro kontrolu')
                 ->addRule(Form::FILLED, 'Zadejte heslo ještě jednou pro kontrolu')
-				->addRule(Form::EQUAL, 'Zadané hesla se neshodují', $form['heslo']); ;
+				->addRule(Form::EQUAL, 'Zadané hesla se neshodují', $form['pass']); ;
 
-        $form->addText('jmeno', 'Jmeno:')
+        $form->addText('name', 'Jmeno:')
             ->setRequired();
 
-		$form->addText('prijmeni', 'Přijmení:')
+		$form->addText('surname', 'Přijmení:')
             ->setRequired();
 
-		$form->addText('telefon', 'telefon:')
+		$form->addText('phone', 'telefon:')
             ->setRequired();
 
 		$form->addText('email', 'Email:')
@@ -117,7 +135,7 @@ class UserPresenter extends BasePresenter {
 				->getControlPrototype()->setClass('labelNoabsolute')
 				->setPrompt('Zvolte roli');
 		}
-		$form->addText('pracovna', 'Pracovna:');
+		$form->addText('office', 'Pracovna:');
 
         $form->addSubmit('send', 'Odeslat');
 		$form->onValidate[] = callback($this, 'validateLogin');
@@ -135,7 +153,7 @@ class UserPresenter extends BasePresenter {
     {
 
         $values = $form->getValues();
-		$values['heslo'] = Passwords::hash($values['heslo']);
+		$values['pass'] = Passwords::hash($values['pass']);
 		unset($values['2ndpass']);
 
 		if($values['id'])
@@ -148,7 +166,7 @@ class UserPresenter extends BasePresenter {
 			$user = $this->userManager->add($values);
 			$id = $user['id'];
 		}
-        $this->flashMessage("Uživatel {$values['prijmeni']} byl vytvořen", 'success');
+        $this->flashMessage("Uživatel {$values['surname']} byl vytvořen", 'success');
         $this->redirect('User:newUserEvents',array('id' => $id));
     }
 
@@ -166,13 +184,13 @@ class UserPresenter extends BasePresenter {
 			$form->addText('login', 'Login:')->setDisabled();
 		}
 
-        $form->addText('jmeno', 'Jmeno:')
+        $form->addText('name', 'Jmeno:')
             ->setRequired('Zadejte jméno.');
 
-		$form->addText('prijmeni', 'Přijmení:')
+		$form->addText('surname', 'Přijmení:')
             ->setRequired('Zadejte příjmení.');
 
-		$form->addText('telefon', 'telefon:')
+		$form->addText('phone', 'telefon:')
             ->setRequired('Zadejte telefon.');
 
 		$form->addText('email', 'Email:')
@@ -188,7 +206,7 @@ class UserPresenter extends BasePresenter {
 				->getControlPrototype()->setClass('labelNoabsolute')
 				->setPrompt('Zvolte roli');
 		}
-		$form->addText('pracovna', 'Pracovna:');
+		$form->addText('office', 'Pracovna:');
 
         $form->addSubmit('send', 'Odeslat');
 		$form->onValidate[] = callback($this, 'validateEditUser');
@@ -218,7 +236,7 @@ class UserPresenter extends BasePresenter {
 		{
 			$this->userManager->add($values);
 		}
-        $this->flashMessage("Uživatel {$values['prijmeni']} byl upraven", 'success');
+        $this->flashMessage("Uživatel {$values['surname']} byl upraven", 'success');
         $this->redirect('User:default');
     }
 
@@ -228,8 +246,8 @@ class UserPresenter extends BasePresenter {
 		$form = $this['newUserEventsForm'];
 		foreach ($events as $event)
 		{
-			$form['events'][$event['id']]->setValues(array("event_id" => $event['id'],"event_user_id" => $event['uzivatel_id']));
-			$form['events'][$event['id']]['pick']->caption = $event['nazev'];
+			$form['events'][$event['id']]->setValues(array("event_id" => $event['id'],"event_user_id" => $event['user_id']));
+			$form['events'][$event['id']]['pick']->caption = $event['name'];
 		}
 
 		$form->setValues(array("user_id" => $id));
@@ -265,8 +283,8 @@ class UserPresenter extends BasePresenter {
 				$terms = $this->termManager->getTermOfEvent($event['event_user_id'], $event['event_id']);
 				foreach ($terms as $key => $term) {
 					$term = $term->toArray();
-					$term['uzivatel_id'] = $values['user_id'];
-					$term['vyhovuje'] = null;
+					$term['user_id'] = $values['user_id'];
+					$term['confirm'] = null;
 					unset($term['id']);
 					$this->termManager->add($term);
 				}

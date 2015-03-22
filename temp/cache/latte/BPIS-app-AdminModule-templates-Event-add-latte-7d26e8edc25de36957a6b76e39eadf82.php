@@ -2,20 +2,20 @@
 // source: C:\xampp\htdocs\BPIS\app\AdminModule/templates/Event/add.latte
 
 // prolog Latte\Macros\CoreMacros
-list($_b, $_g, $_l) = $template->initialize('3685693836', 'html')
+list($_b, $_g, $_l) = $template->initialize('6003146572', 'html')
 ;
 // prolog Latte\Macros\BlockMacros
 //
 // block headerH1
 //
-if (!function_exists($_b->blocks['headerH1'][] = '_lb6eee1a81f6_headerH1')) { function _lb6eee1a81f6_headerH1($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+if (!function_exists($_b->blocks['headerH1'][] = '_lb5eb19c7316_headerH1')) { function _lb5eb19c7316_headerH1($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ?>Nová událost<?php
 }}
 
 //
 // block scripts
 //
-if (!function_exists($_b->blocks['scripts'][] = '_lb9ea2313671_scripts')) { function _lb9ea2313671_scripts($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+if (!function_exists($_b->blocks['scripts'][] = '_lbdd76455c19_scripts')) { function _lbdd76455c19_scripts($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ;Latte\Macros\BlockMacros::callBlockParent($_b, 'scripts', get_defined_vars()) ?>  
 <script type="text/javascript">
 
@@ -60,38 +60,38 @@ if (!function_exists($_b->blocks['scripts'][] = '_lb9ea2313671_scripts')) { func
 //
 // block content
 //
-if (!function_exists($_b->blocks['content'][] = '_lb6fd8d42e06_content')) { function _lb6fd8d42e06_content($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+if (!function_exists($_b->blocks['content'][] = '_lb4d43dcf551_content')) { function _lb4d43dcf551_content($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ;Nette\Bridges\FormsLatte\FormMacros::renderFormBegin($form = $_form = $_control["eventForm"], array()) ?>
 
 <div class="row">
 	<div class="input-field">
-		<?php if ($_label = $_form["nazev"]->getLabel()) echo $_label  ?>
+		<?php if ($_label = $_form["name"]->getLabel()) echo $_label  ?>
 
-		<?php echo $_form["nazev"]->getControl() ?>
+		<?php echo $_form["name"]->getControl() ?>
 
 	</div>
 </div>
 <div class="row">
 	<div class="input-field">
-		<?php if ($_label = $_form["popis"]->getLabel()) echo $_label  ?>
+		<?php if ($_label = $_form["description"]->getLabel()) echo $_label  ?>
 
-		<?php echo $_form["popis"]->getControl() ?>
+		<?php echo $_form["description"]->getControl() ?>
 
 	</div>
 </div>
 <div class="row">
 	<div class="s12 input-field">
-		<?php echo $_form["misto"]->getControl() ?>
+		<?php echo $_form["place"]->getControl() ?>
 
-		<?php if ($_label = $_form["misto"]->getLabel()) echo $_label  ?>
+		<?php if ($_label = $_form["place"]->getLabel()) echo $_label  ?>
 
 	</div>
 </div>
 <div class="row">
 	<div class="input-field">
-		<?php if ($_label = $_form["zapis"]->getLabel()) echo $_label  ?>
+		<?php if ($_label = $_form["record"]->getLabel()) echo $_label  ?>
 
-		<?php echo $_form["zapis"]->getControl() ?>
+		<?php echo $_form["record"]->getControl() ?>
 
 	</div>
 </div>
@@ -114,7 +114,7 @@ if (!function_exists($_b->blocks['content'][] = '_lb6fd8d42e06_content')) { func
 //
 // block _itemsList
 //
-if (!function_exists($_b->blocks['_itemsList'][] = '_lb97bc260ed2__itemsList')) { function _lb97bc260ed2__itemsList($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v; $_control->redrawControl('itemsList', FALSE)
+if (!function_exists($_b->blocks['_itemsList'][] = '_lbab30200535__itemsList')) { function _lbab30200535__itemsList($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v; $_control->redrawControl('itemsList', FALSE)
 ?><h5>Vyhovující termíny:</h5>
 	<div class="row">
 <?php $iterations = 0; foreach ($form['dates']->containers as $dateid => $user) { ?>
@@ -124,7 +124,7 @@ if (!function_exists($_b->blocks['_itemsList'][] = '_lb97bc260ed2__itemsList')) 
 
 			</div>
 			<div class="input-field col s12">
-				<?php echo Latte\Runtime\Filters::escapeHtml($user['datum']->label, ENT_NOQUOTES) ;echo Latte\Runtime\Filters::escapeHtml($user['datum']->control, ENT_NOQUOTES) ?>
+				<?php echo Latte\Runtime\Filters::escapeHtml($user['date']->label, ENT_NOQUOTES) ;echo Latte\Runtime\Filters::escapeHtml($user['date']->control, ENT_NOQUOTES) ?>
 
 			</div>
 			<div class="col s12">
@@ -136,7 +136,7 @@ if (!function_exists($_b->blocks['_itemsList'][] = '_lb97bc260ed2__itemsList')) 
 
 					</div>
 					<div class="col input-field s6 time-input">
-							<?php echo Latte\Runtime\Filters::escapeHtml($time['cas']->label, ENT_NOQUOTES) ;echo Latte\Runtime\Filters::escapeHtml($time['cas']->control, ENT_NOQUOTES) ?>
+							<?php echo Latte\Runtime\Filters::escapeHtml($time['time']->label, ENT_NOQUOTES) ;echo Latte\Runtime\Filters::escapeHtml($time['time']->control, ENT_NOQUOTES) ?>
 
 							<?php echo Latte\Runtime\Filters::escapeHtml($time['id']->label, ENT_NOQUOTES) ;echo Latte\Runtime\Filters::escapeHtml($time['id']->control, ENT_NOQUOTES) ?>
 

@@ -1,8 +1,8 @@
-{block headerH1}<i>Záznam:</i> {$record->nazev}{/block}
+{block headerH1}<i>Záznam:</i> {$record->name}{/block}
 {block content}
 <div class="event row">
 
-	{if $record->uzivatel_id == $user->getId() || $user->isInRole('admin')}
+	{if $record->user_id == $user->getId() || $user->isInRole('admin')}
 		<div class="col s12">
 			<a n:href="Record:delete $record->id, backlink => $presenter->storeRequest()" title="Smazat záznam" class="btn-floating waves-effect waves-light  red"><i class="mdi-action-delete"></i></a>
 			<a n:href="Record:edit $record->id" title="Upravit záznam" class="btn-floating waves-effect waves-light light-green accent-3"><i class="mdi-editor-mode-edit"></i></a>
@@ -11,18 +11,18 @@
 
 	<div class="col s12 m3 card">
 		<p><i>Řešitel:</i></p>
-		<p>{$userRef->prijmeni}  {$userRef->jmeno} <p>
+		<p>{$userRef->surname}  {$userRef->name} <p>
 	</div>
 	<div class="col s12 m3 card">
 		<p><i>Datum zahájení:</i></p>
-		<p>{$record->datum|date:'%d.%m.%Y'}<p>
+		<p>{$record->date|date:'%d.%m.%Y'}<p>
 	</div>
 	<div class="col s12 m3 card">
 		<p><i>Datum předpokládaného ukončení:</i></p>
-		<p>{$record->datum_splneni|date:'%d.%m.%Y'}<p>
+		<p>{$record->date_done|date:'%d.%m.%Y'}<p>
 	</div>
 	<div class="col s12 card">
 		<p><i>Popis:</i></p>
-		<p>{$record->popis|noescape}<p>
+		<p>{$record->description|noescape}<p>
 	</div>
 </div>

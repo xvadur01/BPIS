@@ -57,26 +57,26 @@
 {form eventForm}
 <div class="row">
 	<div class="input-field">
-		{label nazev}{/label}
-		{input nazev}
+		{label name}{/label}
+		{input name}
 	</div>
 </div>
 <div class="row">
 	<div class="input-field">
-		{label popis}{/label}
-		{input popis}
+		{label description}{/label}
+		{input description}
 	</div>
 </div>
 <div class="row">
 	<div class="s12 input-field">
-		{input misto}
-		{label misto/}
+		{input place}
+		{label place/}
 	</div>
 </div>
 <div class="row">
 	<div class="input-field">
-		{label zapis}{/label}
-		{input zapis}
+		{label record}{/label}
+		{input record}
 	</div>
 </div>
 {* ajax znemozni datepicker*}
@@ -89,7 +89,7 @@
 				{input dates-$dateid-remove class=>'ajax btn btn-flat eventbutton'}
 			</div>
 			<div class="input-field col s12">
-				{$user['datum']->label}{$user['datum']->control}
+				{$user['date']->label}{$user['date']->control}
 			</div>
 			<div class="col s12">
 				{foreach $user['times']->containers as $timeid => $time}
@@ -98,7 +98,7 @@
 						{label $time['pick']: /}
 					</div>
 					<div class="col input-field s6 time-input">
-							{$time['cas']->label}{$time['cas']->control}
+							{$time['time']->label}{$time['time']->control}
 							{$time['id']->label}{$time['id']->control}
 					</div>
 					<div class="col s6">

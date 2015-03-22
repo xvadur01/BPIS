@@ -7,11 +7,11 @@ use Nette;
 class BorrowingManager extends BaseManager
 {
 	const
-		TABLE_NAME = 'vypujcka',
+		TABLE_NAME = 'borrowing',
 		COLUMN_ID = 'id',
-		COLUMN_USER_ID = 'uzivatel_id',
-		COLUMN_GIVE_BACK = 'vraceno',
-		COLUMN_DATE = 'datum';
+		COLUMN_USER_ID = 'user_id',
+		COLUMN_GIVE_BACK = 'give_back',
+		COLUMN_DATE = 'date';
 
 		/**
 	 * get all data from table
@@ -54,7 +54,7 @@ class BorrowingManager extends BaseManager
 	 */
 	public function giveBack($id)
 	{
-		$this->connection->table(self::TABLE_NAME)->where(self::COLUMN_ID, $id)->update(array("vraceno" => 1,"datum_navraceni" => date('Y-m-d H:i:s')));
+		$this->connection->table(self::TABLE_NAME)->where(self::COLUMN_ID, $id)->update(array("give_back" => 1,"date_give_back" => date('Y-m-d H:i:s')));
 	}
 	/**
 	 * getUserBorrow

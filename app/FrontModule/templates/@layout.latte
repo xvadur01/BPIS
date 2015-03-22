@@ -9,7 +9,7 @@
 	<meta charset="utf-8">
 	{$config['metadata']|noescape}
 
-	<title>{ifset $page->titulek}{$page->titulek} | {/ifset}{$config['titulek']}</title>
+	<title>{ifset $page->title}{$page->title} | {/ifset}{$config['title']}</title>
 	<link href="{$basePath}/css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 	<link href="{$basePath}/css/materialize.aditional.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 	<link rel="stylesheet" media="screen,projection,tv" href="{$basePath}/css/screen.css">
@@ -24,11 +24,16 @@
 	<script> document.documentElement.className+=' js' </script>
 	<header>
 	<!-- Dropdown Structure -->
-	<ul id="dropdown1" class=" dropdown-content">
-		<li>{if $user->loggedIn}
-				<a n:href=":Admin:User:edit, $user->getId()">Osobní údaje</a>
-			{/if}
+	<ul id="dropdown1" class="dropdown-content">
+		{if $user->loggedIn}
+			<li>
+				<a n:href=":Admin:Admin:default">Administrace</a>
 			</li>
+			<li class="divider"></li>
+			<li>
+				<a n:href=":Admin:User:edit, $user->getId()">Osobní údaje</a>
+			</li>
+		{/if}
 		<li class="divider"></li>
 		<li>{if $user->loggedIn}
 				<a n:href=":Front:Sign:out">Odhlásit</a>
@@ -37,7 +42,7 @@
 			{/if}
 		</li>
 	</ul>
-	<nav class="top-nav lighten-1">
+	<nav class="top-nav lighten-1 blue darken-2">
 			<div class="nav-wrapper">
 				<div class="col s12">
 					<a class="brand-logo"><h1>{block headerH1}{/block}</h1></a>
@@ -65,7 +70,7 @@
 			{include content}
 		</div>
 	</main>
-	<footer class="page-footer">
+	<footer class="page-footer blue darken-2">
 		<div class="container">
 		  <div class="row">
 			{*<div class="col l6 s12">
@@ -92,6 +97,7 @@
 	<script src="{$basePath}/js/nette.ajax.js"></script>
 	<script src="{$basePath}/js/main.js"></script>
 	<script src="{$basePath}/js/materialize.min.js"></script>
+	<script src="{$basePath}/js/clockpicker.js"></script>
 
 	<script type="text/javascript">
 		$(document).ready(function()

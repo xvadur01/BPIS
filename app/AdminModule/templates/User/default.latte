@@ -28,14 +28,14 @@
 		<td>{$oneUser->id}</td>
 		<td>{$oneUser->login}</td>
 	{/if}
-		<td>{$oneUser->prijmeni}</td>
-		<td>{$oneUser->jmeno}</td>
+		<td>{$oneUser->surname}</td>
+		<td>{$oneUser->name}</td>
 	{if $user->isInRole('admin')}
 		<td>{$oneUser->role}</td>
 	{/if}
-		<td>{$oneUser->telefon}</td>
+		<td>{$oneUser->phone}</td>
 		<td>{$oneUser->email}</td>
-		<td>{$oneUser->pracovna}</td>
+		<td>{$oneUser->office}</td>
 		<td>
 			{if $user->isInRole('admin') || $user->getId() == $oneUser->id}
 				<a n:href="User:delete $oneUser->id" title="Smazat uživatele" class="btn-floating waves-effect waves-light  red">

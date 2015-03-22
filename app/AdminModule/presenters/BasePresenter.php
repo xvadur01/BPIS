@@ -95,11 +95,11 @@ class BasePresenter extends \Nette\Application\UI\Presenter {
 		$root = $menu->getRoot();
 		$root->setChildrenAttributes(array('class' => 'side-nav fixed', 'id' => 'nav-mobile'));
 
-		$root->addChild('home', array(
-			'label' => 'Home',
+		$logo = $root->addChild('home', array(
+			'label' => '',
 			'link' => 'Admin:default',
 		));
-
+		$logo->setAttribute('class','logo')->setLinkAttribute('class', 'brand-logo');
 		if ($this->user->isInRole('admin')) {
 			$root->addChild('Frontpage', array(
 				'label' => 'Veřejná část',

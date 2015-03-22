@@ -2,20 +2,20 @@
 // source: C:\xampp\htdocs\BPIS\app\AdminModule/templates/FrontPage/default.latte
 
 // prolog Latte\Macros\CoreMacros
-list($_b, $_g, $_l) = $template->initialize('5302117844', 'html')
+list($_b, $_g, $_l) = $template->initialize('8088629633', 'html')
 ;
 // prolog Latte\Macros\BlockMacros
 //
 // block headerH1
 //
-if (!function_exists($_b->blocks['headerH1'][] = '_lbaf4047ed2e_headerH1')) { function _lbaf4047ed2e_headerH1($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+if (!function_exists($_b->blocks['headerH1'][] = '_lbe59347a21b_headerH1')) { function _lbe59347a21b_headerH1($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ?>Přehled věřejných stránek<?php
 }}
 
 //
 // block content
 //
-if (!function_exists($_b->blocks['content'][] = '_lb25ac4cee9e_content')) { function _lb25ac4cee9e_content($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+if (!function_exists($_b->blocks['content'][] = '_lb64d021c6f6_content')) { function _lb64d021c6f6_content($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ?><div class="row">
 <a title="Nová stránka" class="right-align btn-floating btn-large waves-effect waves-light blue" href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("FrontPage:add"), ENT_COMPAT) ?>
 "><i class="mdi-content-add"></i></a>
@@ -23,7 +23,7 @@ if (!function_exists($_b->blocks['content'][] = '_lb25ac4cee9e_content')) { func
 
 <table class=" striped table-condensed">
 	<tr>
-		<th>Id</th>
+		<th>Vaha</th>
 		<th>Titulek</th>
 		<th>Nadpis</th>
 		<th>Text</th>
@@ -32,12 +32,12 @@ if (!function_exists($_b->blocks['content'][] = '_lb25ac4cee9e_content')) { func
 	</tr>
 
 <?php $iterations = 0; foreach ($pages as $page) { ?>
-		<td><?php echo Latte\Runtime\Filters::escapeHtml($page->id, ENT_NOQUOTES) ?></td>
-		<td><?php echo Latte\Runtime\Filters::escapeHtml($page->titulek, ENT_NOQUOTES) ?></td>
-		<td><?php echo Latte\Runtime\Filters::escapeHtml($page->nadpis, ENT_NOQUOTES) ?></td>
+		<td><?php echo Latte\Runtime\Filters::escapeHtml($page->weight, ENT_NOQUOTES) ?></td>
+		<td><?php echo Latte\Runtime\Filters::escapeHtml($page->title, ENT_NOQUOTES) ?></td>
+		<td><?php echo Latte\Runtime\Filters::escapeHtml($page->topic, ENT_NOQUOTES) ?></td>
 		<td><?php echo Latte\Runtime\Filters::escapeHtml($template->striptags($template->truncate($page->text, 500)), ENT_NOQUOTES) ?></td>
 		<td>
-<?php if ($page->aktivni) { ?>
+<?php if ($page->active) { ?>
 				<span class="btn-floating green accent-2"><i class=" mdi-communication-invert-colors-on"></i></span>
 <?php } else { ?>
 				<span class="btn-floating red lighten-4"><i class="mdi-communication-invert-colors-off"></i></span>

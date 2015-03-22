@@ -2,31 +2,32 @@
 // source: C:\xampp\htdocs\BPIS\app\FrontModule/templates/@layout.latte
 
 // prolog Latte\Macros\CoreMacros
-list($_b, $_g, $_l) = $template->initialize('8559173904', 'html')
+list($_b, $_g, $_l) = $template->initialize('6424964441', 'html')
 ;
 // prolog Latte\Macros\BlockMacros
 //
 // block head
 //
-if (!function_exists($_b->blocks['head'][] = '_lbffca3ea426_head')) { function _lbffca3ea426_head($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+if (!function_exists($_b->blocks['head'][] = '_lb123ae8355e_head')) { function _lb123ae8355e_head($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ;
 }}
 
 //
 // block headerH1
 //
-if (!function_exists($_b->blocks['headerH1'][] = '_lb5ce5f43b65_headerH1')) { function _lb5ce5f43b65_headerH1($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+if (!function_exists($_b->blocks['headerH1'][] = '_lbf3fef797ed_headerH1')) { function _lbf3fef797ed_headerH1($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ;
 }}
 
 //
 // block scripts
 //
-if (!function_exists($_b->blocks['scripts'][] = '_lb048feaf344_scripts')) { function _lb048feaf344_scripts($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+if (!function_exists($_b->blocks['scripts'][] = '_lb63e7ded44d_scripts')) { function _lb63e7ded44d_scripts($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ?>	<script src="<?php echo Latte\Runtime\Filters::escapeHtml(Latte\Runtime\Filters::safeUrl($basePath), ENT_COMPAT) ?>/js/jquery.js"></script>
 	<script src="<?php echo Latte\Runtime\Filters::escapeHtml(Latte\Runtime\Filters::safeUrl($basePath), ENT_COMPAT) ?>/js/nette.ajax.js"></script>
 	<script src="<?php echo Latte\Runtime\Filters::escapeHtml(Latte\Runtime\Filters::safeUrl($basePath), ENT_COMPAT) ?>/js/main.js"></script>
 	<script src="<?php echo Latte\Runtime\Filters::escapeHtml(Latte\Runtime\Filters::safeUrl($basePath), ENT_COMPAT) ?>/js/materialize.min.js"></script>
+	<script src="<?php echo Latte\Runtime\Filters::escapeHtml(Latte\Runtime\Filters::safeUrl($basePath), ENT_COMPAT) ?>/js/clockpicker.js"></script>
 
 	<script type="text/javascript">
 		$(document).ready(function()
@@ -79,8 +80,8 @@ if (empty($_l->extends) && !empty($_control->snippetMode)) {
 	<?php echo $config['metadata'] ?>
 
 
-	<title><?php if (isset($page->titulek)) { echo Latte\Runtime\Filters::escapeHtml($page->titulek, ENT_NOQUOTES) ?>
- | <?php } echo Latte\Runtime\Filters::escapeHtml($config['titulek'], ENT_NOQUOTES) ?></title>
+	<title><?php if (isset($page->title)) { echo Latte\Runtime\Filters::escapeHtml($page->title, ENT_NOQUOTES) ?>
+ | <?php } echo Latte\Runtime\Filters::escapeHtml($config['title'], ENT_NOQUOTES) ?></title>
 	<link href="<?php echo Latte\Runtime\Filters::escapeHtml(Latte\Runtime\Filters::safeUrl($basePath), ENT_COMPAT) ?>/css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection">
 	<link href="<?php echo Latte\Runtime\Filters::escapeHtml(Latte\Runtime\Filters::safeUrl($basePath), ENT_COMPAT) ?>/css/materialize.aditional.css" type="text/css" rel="stylesheet" media="screen,projection">
 	<link rel="stylesheet" media="screen,projection,tv" href="<?php echo Latte\Runtime\Filters::escapeHtml(Latte\Runtime\Filters::safeUrl($basePath), ENT_COMPAT) ?>/css/screen.css">
@@ -96,13 +97,18 @@ call_user_func(reset($_b->blocks['head']), $_b, get_defined_vars())  ?>
 	<script> document.documentElement.className+=' js' </script>
 	<header>
 	<!-- Dropdown Structure -->
-	<ul id="dropdown1" class=" dropdown-content">
-		<li><?php if ($user->loggedIn) { ?>
-
+	<ul id="dropdown1" class="dropdown-content">
+<?php if ($user->loggedIn) { ?>
+			<li>
+				<a href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link(":Admin:Admin:default"), ENT_COMPAT) ?>
+">Administrace</a>
+			</li>
+			<li class="divider"></li>
+			<li>
 				<a href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link(":Admin:User:edit", array($user->getId())), ENT_COMPAT) ?>
 ">Osobní údaje</a>
-<?php } ?>
 			</li>
+<?php } ?>
 		<li class="divider"></li>
 		<li><?php if ($user->loggedIn) { ?>
 
@@ -114,7 +120,7 @@ call_user_func(reset($_b->blocks['head']), $_b, get_defined_vars())  ?>
 <?php } ?>
 		</li>
 	</ul>
-	<nav class="top-nav lighten-1">
+	<nav class="top-nav lighten-1 blue darken-2">
 			<div class="nav-wrapper">
 				<div class="col s12">
 					<a class="brand-logo"><h1><?php call_user_func(reset($_b->blocks['headerH1']), $_b, get_defined_vars())  ?></h1></a>
@@ -143,7 +149,7 @@ call_user_func(reset($_b->blocks['head']), $_b, get_defined_vars())  ?>
 <?php Latte\Macros\BlockMacros::callBlock($_b, 'content', $template->getParameters()) ?>
 		</div>
 	</main>
-	<footer class="page-footer">
+	<footer class="page-footer blue darken-2">
 		<div class="container">
 		  <div class="row">
 					  </div>

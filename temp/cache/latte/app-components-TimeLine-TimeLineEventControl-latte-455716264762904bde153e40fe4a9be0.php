@@ -2,7 +2,7 @@
 // source: C:\xampp\htdocs\BPIS\app\components\TimeLine/TimeLineEventControl.latte
 
 // prolog Latte\Macros\CoreMacros
-list($_b, $_g, $_l) = $template->initialize('8418741762', 'html')
+list($_b, $_g, $_l) = $template->initialize('5176569289', 'html')
 ;
 // prolog Nette\Bridges\ApplicationLatte\UIMacros
 
@@ -20,11 +20,11 @@ if (empty($_l->extends) && !empty($_control->snippetMode)) {
 		<li>
 <?php } else { ?>
 		<li class="timeline-inverted">
-<?php } if (!$event->datum) { ?>
+<?php } if (!$event->date) { ?>
 			<div class="timeline-badge  blue lighten-0">
 					?
 			</div>
-<?php } elseif ($event->datum >  new \DateTime()) { ?>
+<?php } elseif ($event->date >  new \DateTime()) { ?>
 				<div class="timeline-badge  green lighten-0">
 					<i class="mdi-action-event"></i>
 				</div>
@@ -37,22 +37,22 @@ if (empty($_l->extends) && !empty($_control->snippetMode)) {
 		<div class="timeline-panel">
 			<div class="timeline-heading">
 				<a href="<?php echo Latte\Runtime\Filters::escapeHtml($_presenter->link("Event:detail", array($event->id)), ENT_COMPAT) ?>
-"><h4 class="timeline-title"><?php echo Latte\Runtime\Filters::escapeHtml($event->nazev, ENT_NOQUOTES) ?></h4></a>
+"><h4 class="timeline-title"><?php echo Latte\Runtime\Filters::escapeHtml($event->name, ENT_NOQUOTES) ?></h4></a>
 <?php if ($type == 'event') { ?>
-					<span><small class="text-muted">Organizátor: </small><?php echo Latte\Runtime\Filters::escapeHtml($event->ref('uzivatel','uzivatel_id')->prijmeni, ENT_NOQUOTES) ?> </span>
+					<span><small class="text-muted">Organizátor: </small><?php echo Latte\Runtime\Filters::escapeHtml($event->ref('user','user_id')->surname, ENT_NOQUOTES) ?> </span>
 <?php } ?>
 				<p>
-<?php if ($event->datum) { ?>
-						<small class="text-muted"><i class="glyphicon glyphicon-time">Datum konání: </i></small><?php echo Latte\Runtime\Filters::escapeHtml($template->date($event->datum, '%d.%m.%Y %H:%M'), ENT_NOQUOTES) ?>
+<?php if ($event->date) { ?>
+						<small class="text-muted"><i class="glyphicon glyphicon-time">Datum konání: </i></small><?php echo Latte\Runtime\Filters::escapeHtml($template->date($event->date, '%d.%m.%Y %H:%M'), ENT_NOQUOTES) ?>
 
 <?php } ?>
 				</p>
 			</div>
 			<div class="timeline-body">
-				<p><?php echo Latte\Runtime\Filters::escapeHtml($template->striptags($template->truncate($event->popis, 500)), ENT_NOQUOTES) ?></p>
+				<p><?php echo Latte\Runtime\Filters::escapeHtml($template->striptags($template->truncate($event->description, 500)), ENT_NOQUOTES) ?></p>
 			</div>
 			<div>
-<?php if ($event->uzivatel_id == $user->getId() || $user->isInRole('admin')) { ?>
+<?php if ($event->user_id == $user->getId() || $user->isInRole('admin')) { ?>
 					<a href="<?php echo Latte\Runtime\Filters::escapeHtml($_presenter->link(":Admin:Event:delete", array($event->id, 'backlink' => $presenter->storeRequest())), ENT_COMPAT) ?>" title="Smazat událost" class="btn-floating waves-effect waves-light  red"><i class="mdi-action-delete"></i></a>
 					<a href="<?php echo Latte\Runtime\Filters::escapeHtml($_presenter->link(":Admin:Event:edit", array($event->id)), ENT_COMPAT) ?>" title="Upravit událost" class="btn-floating waves-effect waves-light light-green accent-3"><i class="mdi-editor-mode-edit"></i></a>
 <?php } ?>

@@ -1,7 +1,7 @@
-{block headerH1}<i>Událost:</i> {$event->nazev}{/block}
+{block headerH1}<i>Událost:</i> {$event->name}{/block}
 {block scripts}
 {include #parent}  {* include parent #scripts block *}
-{if $event->uzivatel_id == $user->getId()}
+{if $event->user_id == $user->getId()}
 	<script type="text/javascript">
 
 		$(document).ready(function()
@@ -26,24 +26,24 @@
 <div class="event row">
 	<div class="col s12 card">
 		<p><i>Pořadatel:</i></p>
-		<p>{$userRef->prijmeni} {$userRef->jmeno}</p>
+		<p>{$userRef->surname} {$userRef->name}</p>
 
 	</div>
 	<div class="col s12 card">
 		<p><i>Datum konání:</i></p>
-		{if $event->datum}
-			<p>{$event->datum|date:'%d.%m.%Y %H:%M'}<p>
+		{if $event->date}
+			<p>{$event->date|date:'%d.%m.%Y %H:%M'}<p>
 		{else}
 			<p>Datum prozatím není určen.<p>
 		{/if}
 	</div>
 	<div class="col s12 card">
 		<p><i>Popis:</i></p>
-		<p>{$event->popis}<p>
+		<p>{$event->description}<p>
 	</div>
 	<div class="col s12 card">
 		<p><i>Zápis:</i></p>
-		<p>{$event->zapis}<p>
+		<p>{$event->record}<p>
 	</div>
 </div>
 <div class="eventTable row col s12">

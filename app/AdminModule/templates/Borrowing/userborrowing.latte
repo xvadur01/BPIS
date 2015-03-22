@@ -9,9 +9,9 @@
 	<thead>
 	<tr>
 		<th>Položka</th>
-		<th>Od</th>
-		<th>Datum vypůjčení</th>
 		<th>Kdo</th>
+		<th>Datum vypůjčení</th>
+		<th>od</th>
 		<th>Navráceno</th>
 	</tr>
 	</thead>
@@ -19,10 +19,10 @@
 			<tbody>
 			{foreach $borrowings as $borrowing}
 				<tr>
-					<td>{$borrowing->nazev}</td>
-					<td>{$borrowing->prijmeni} {$borrowing->jmeno}</td>
-					<td>{$borrowing->datum|date:'%d.%m.%Y'}</td>
-					<td>{$borrowing->ref('uzivatel','uzivatel_id')->prijmeni} {$borrowing->jmeno}</td>
+					<td>{$borrowing->title}</td>
+					<td>{$borrowing->surname} {$borrowing->name}</td>
+					<td>{$borrowing->date|date:'%d.%m.%Y'}</td>
+					<td>{$borrowing->ref('user','user_id')->surname} {$borrowing->ref('user','userl_id')->name}</td>
 					<td>
 						{if $borrowing->vraceno}
 							<span class="btn-floating green accent-2"><i class="mdi-action-verified-user"></i></span>
@@ -31,12 +31,12 @@
 						{/if}
 					</td>
 					<td>
-						{if !$borrowing->vraceno && $borrowing->uzivatel_id == $user->getId()}
-							<a n:href="Borrowing:giveback $borrowing->id" title="Vrátit zpět" class="ajax btn-floating waves-effect waves-light light-blue lighten-1"><i class="mdi-content-reply"></i></a>
+						{if !$borrowing->give_back && $borrowing->user_id == $user->getId()}
+							<a n:href="Borrowing:giveback $borrowing->id" title="Give back" class="ajax btn-floating waves-effect waves-light light-blue lighten-1"><i class="mdi-content-reply"></i></a>
 						{/if}
-						{if $user->isInRole('admin') || $borrowing->uzivatel_id == $user->getId()}
-							<a n:href="Borrowing:delete $borrowing->id" title="Smazat" class="btn-floating waves-effect waves-light red"><i class="mdi-action-delete"></i></a>
-							<a n:href="Borrowing:edit $borrowing->id" title="Upravit" class="btn-floating waves-effect waves-light light-green accent-3 "><i class="mdi-editor-mode-edit"></i></a>
+						{if $user->isInRole('admin') || $borrowing->user_id == $user->getId()}
+							<a n:href="Borrowing:delete $borrowing->id" title="Delete" class="btn-floating waves-effect waves-light red"><i class="mdi-action-delete"></i></a>
+							<a n:href="Borrowing:edit $borrowing->id" title="Edit" class="btn-floating waves-effect waves-light light-green accent-3 "><i class="mdi-editor-mode-edit"></i></a>
 						{/if}
 					</td>
 				</tr>

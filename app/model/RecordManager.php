@@ -6,10 +6,10 @@ namespace App\Model;
 class RecordManager extends BaseManager
 {
 	const
-		TABLE_NAME = 'zaznam',
+		TABLE_NAME = 'record',
 		COLUMN_ID = 'id',
-		COLUMN_USER_ID = 'uzivatel_id',
-		COLUMN_DATE = 'datum';
+		COLUMN_USER_ID = 'user_id',
+		COLUMN_DATE = 'date';
 		/**
 	 * get all data from table
 	 * @return void

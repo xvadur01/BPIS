@@ -29,7 +29,23 @@ class HomepagePresenter extends BasePresenter
 		$this->recordManager = $recordManager;
 
     }
-
+	public function actionDefault($id = null)
+	{
+		if($id)
+		{
+			$page =  $this->frontpageManager->get($id);
+			if($page->active || $this->user->isInRole('admin'))
+			{
+				$this->template->page = $page;
+			}
+			else {
+				$this->redirect(':Front:Homepage:');
+			}
+		}
+		else {
+			$this->template->page = $this->frontpageManager->getFirstAtiveFronPage()->fetch();
+		}
+	}
 	public function actionCron()
 	{
 		$mailer = new SendmailMailer;
@@ -39,16 +55,16 @@ class HomepagePresenter extends BasePresenter
 		foreach ($events as $key => $event) {
 			$params = array(
 				'event' => $event,
-				'eventUser' => $event->ref('uzivatel'),
+				'eventUser' => $event->ref('user'),
 			);
 			$mail = new Message;
-			$mail->setFrom('Franta <franta@example.com>')
+			$mail->setFrom('Informační systém')
 					->setSubject('Upozornění na blížící se akci');
 			$eventUsers = $this->termManager->getUsersOfEvent($event->id);
 			$find = FALSE;
 			foreach ($eventUsers as $user) {
 				$find = TRUE;
-				$mail->addTo((string)$user->ref('uzivatel','uzivatel_id')->email);
+				$mail->addTo((string)$user->ref('user','user_id')->email);
 			}
 
 			$mail->setHTMLBody($latte->renderToString(__DIR__ . '/../templates/Homepage/emailEventSevenday.latte', $params));
@@ -56,16 +72,16 @@ class HomepagePresenter extends BasePresenter
 			{
 				$mailer->send($mail);
 			}
-			$this->eventManager->edit(array('id' => $event->id, 'pocet_upozorneni' => $event->pocet_upozorneni-1));
+			$this->eventManager->edit(array('id' => $event->id, 'number_alert' => $event->number_alert-1));
 		}
 		$events = $this->eventManager->getEventsInOneDays();
 		foreach ($events as $key => $event) {
 			$params = array(
 				'event' => $event,
-				'eventUser' => $event->ref('uzivatel'),
+				'eventUser' => $event->ref('user'),
 			);
 			$mail = new Message;
-			$mail->setFrom('Franta <franta@example.com>')
+			$mail->setFrom('Informační systém')
 					->setSubject('Upozornění na blížící se akci');
 
 			$eventUsers = $this->termManager->getUsersOfEvent($event->id)->where(\App\Model\TermManager::COLUMN_ALLOW,1);
@@ -73,36 +89,22 @@ class HomepagePresenter extends BasePresenter
 			$find = FALSE;
 			foreach ($eventUsers as $user) {
 				$find = TRUE;
-				$mail->addTo((string)$user->ref('uzivatel','uzivatel_id')->email);
+				$mail->addTo((string)$user->ref('user','user_id')->email);
 			}
 			$mail->setHTMLBody($latte->renderToString(__DIR__ . '/../templates/Homepage/emailEventOneday.latte', $params));
 			if($find)
 			{
 				$mailer->send($mail);
 			}
-			$this->eventManager->edit(array('id' => $event->id, 'pocet_upozorneni' => $event->pocet_upozorneni-1));
+			$this->eventManager->edit(array('id' => $event->id, 'number_alert' => $event->number_alert-1));
 		}
 	}
 	public function renderCron() {
 			$this->template->event = $this->eventManager->get(23);
-			$this->template->eventUser = $this->eventManager->get(23)->ref('uzivatel');
+			$this->template->eventUser = $this->eventManager->get(23)->ref('user');
 	}
 
 	public function renderSitemap() {
 			$this->template->sitemap = $this->frontpageManager->getTable();
-	}
-
-	public function renderDefault($id = null)
-	{
-		if($id)
-		{
-			$this->template->page = $this->frontpageManager->get($id);
-
-		}
-		else {
-			$this->template->page = $this->frontpageManager->getFirstAtiveFronPage()->fetch();
-
-		}
-
 	}
 }

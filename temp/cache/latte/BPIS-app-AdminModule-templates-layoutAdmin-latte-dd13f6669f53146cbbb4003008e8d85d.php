@@ -2,27 +2,27 @@
 // source: C:\xampp\htdocs\BPIS\app\AdminModule/templates/@layoutAdmin.latte
 
 // prolog Latte\Macros\CoreMacros
-list($_b, $_g, $_l) = $template->initialize('5280660115', 'html')
+list($_b, $_g, $_l) = $template->initialize('5462937122', 'html')
 ;
 // prolog Latte\Macros\BlockMacros
 //
 // block head
 //
-if (!function_exists($_b->blocks['head'][] = '_lba28bbe3084_head')) { function _lba28bbe3084_head($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+if (!function_exists($_b->blocks['head'][] = '_lb143c0e0509_head')) { function _lb143c0e0509_head($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ;
 }}
 
 //
 // block headerH1
 //
-if (!function_exists($_b->blocks['headerH1'][] = '_lbea93724f28_headerH1')) { function _lbea93724f28_headerH1($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+if (!function_exists($_b->blocks['headerH1'][] = '_lb31fdb11751_headerH1')) { function _lb31fdb11751_headerH1($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ;
 }}
 
 //
 // block _flashMessage
 //
-if (!function_exists($_b->blocks['_flashMessage'][] = '_lb6e2a57c587__flashMessage')) { function _lb6e2a57c587__flashMessage($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v; $_control->redrawControl('flashMessage', FALSE)
+if (!function_exists($_b->blocks['_flashMessage'][] = '_lbcc3c747818__flashMessage')) { function _lbcc3c747818__flashMessage($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v; $_control->redrawControl('flashMessage', FALSE)
 ?>			<div class="row">
 				<div class="col s12">
 <?php $iterations = 0; foreach ($flashes as $flash) { if ($flash->type  == 'success') { ?>
@@ -43,14 +43,17 @@ if (!function_exists($_b->blocks['_flashMessage'][] = '_lb6e2a57c587__flashMessa
 //
 // block scripts
 //
-if (!function_exists($_b->blocks['scripts'][] = '_lb7b8fb0fa91_scripts')) { function _lb7b8fb0fa91_scripts($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+if (!function_exists($_b->blocks['scripts'][] = '_lbf49de2ff72_scripts')) { function _lbf49de2ff72_scripts($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ?>	<script src="<?php echo Latte\Runtime\Filters::escapeHtml(Latte\Runtime\Filters::safeUrl($basePath), ENT_COMPAT) ?>/js/jquery-2.1.3.min.js"></script>
+	<script src="http://code.jquery.com/jquery-1.9.0.js"></script>
+	<script src="http://code.jquery.com/jquery-migrate-1.0.0.js"></script>
 	<script src="<?php echo Latte\Runtime\Filters::escapeHtml(Latte\Runtime\Filters::safeUrl($basePath), ENT_COMPAT) ?>/js/netteForms.js"></script>
 	<script src="<?php echo Latte\Runtime\Filters::escapeHtml(Latte\Runtime\Filters::safeUrl($basePath), ENT_COMPAT) ?>/js/nette.ajax.js"></script>
 	<script src="<?php echo Latte\Runtime\Filters::escapeHtml(Latte\Runtime\Filters::safeUrl($basePath), ENT_COMPAT) ?>/js/main.js"></script>
 	<script src="<?php echo Latte\Runtime\Filters::escapeHtml(Latte\Runtime\Filters::safeUrl($basePath), ENT_COMPAT) ?>/js/materialize.min.js"></script>
 		<script src="<?php echo Latte\Runtime\Filters::escapeHtml(Latte\Runtime\Filters::safeUrl($basePath), ENT_COMPAT) ?>/js/clockpicker.js"></script>
 	<script src="<?php echo Latte\Runtime\Filters::escapeHtml(Latte\Runtime\Filters::safeUrl($basePath), ENT_COMPAT) ?>/js/live-form-validation.js"></script>
+	<script src="<?php echo Latte\Runtime\Filters::escapeHtml(Latte\Runtime\Filters::safeUrl($basePath), ENT_COMPAT) ?>/js/cs.js"></script>
 	
 
 	<script type="text/javascript">
@@ -107,7 +110,7 @@ if (empty($_l->extends) && !empty($_control->snippetMode)) {
 	<meta charset="utf-8">
 
 	<title><?php if (isset($_b->blocks["title"])) { ob_start(); Latte\Macros\BlockMacros::callBlock($_b, 'title', $template->getParameters()); echo $template->striptags(ob_get_clean()) ?>
- | <?php } ?>Nette Sandbox</title>
+ | <?php } ?></title>
 	<!-- CSS  -->
 	<link href="<?php echo Latte\Runtime\Filters::escapeHtml(Latte\Runtime\Filters::safeUrl($basePath), ENT_COMPAT) ?>/css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection">
 	<link href="<?php echo Latte\Runtime\Filters::escapeHtml(Latte\Runtime\Filters::safeUrl($basePath), ENT_COMPAT) ?>/css/materialize.aditional.css" type="text/css" rel="stylesheet" media="screen,projection">
@@ -120,7 +123,7 @@ if (empty($_l->extends) && !empty($_control->snippetMode)) {
 	<link rel="stylesheet" media="screen,projection,tv" href="<?php echo Latte\Runtime\Filters::escapeHtmlComment($basePath) ?>/css/dateTimePicker.css">
 	-->
 	<link rel="stylesheet" type="text/css" media="screen" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/themes/smoothness/jquery-ui.css">
-	<link rel="stylesheet" type="text/css" media="screen" href="css/elfinder.min.css">
+	<link rel="stylesheet" type="text/css" media="screen" href="<?php echo Latte\Runtime\Filters::escapeHtml(Latte\Runtime\Filters::safeUrl($basePath), ENT_COMPAT) ?>/elfinder/css/elfinder.min.css">
 	<?php if ($_l->extends) { ob_end_clean(); return $template->renderChildTemplate($_l->extends, get_defined_vars()); }
 call_user_func(reset($_b->blocks['head']), $_b, get_defined_vars())  ?>
 
@@ -132,12 +135,17 @@ call_user_func(reset($_b->blocks['head']), $_b, get_defined_vars())  ?>
 	<header>
 	<!-- Dropdown Structure -->
 	<ul id="dropdown1" class=" dropdown-content">
-		<li><?php if ($user->loggedIn) { ?>
-
+<?php if ($user->loggedIn) { ?>
+			<li>
+				<a href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link(":Front:Homepage:default"), ENT_COMPAT) ?>
+">Veřejná část</a>
+			</li>
+			<li class="divider"></li>
+			<li>
 				<a href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link(":Admin:User:edit", array($user->getId())), ENT_COMPAT) ?>
 ">Osobní údaje</a>
+			</li>
 <?php } ?>
-		</li>
 		<li class="divider"></li>
 		<li><?php if ($user->loggedIn) { ?>
 

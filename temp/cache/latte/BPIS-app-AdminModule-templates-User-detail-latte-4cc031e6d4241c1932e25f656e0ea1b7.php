@@ -2,21 +2,21 @@
 // source: C:\xampp\htdocs\BPIS\app\AdminModule/templates/User/detail.latte
 
 // prolog Latte\Macros\CoreMacros
-list($_b, $_g, $_l) = $template->initialize('0951138797', 'html')
+list($_b, $_g, $_l) = $template->initialize('2330082583', 'html')
 ;
 // prolog Latte\Macros\BlockMacros
 //
 // block headerH1
 //
-if (!function_exists($_b->blocks['headerH1'][] = '_lb62043f8533_headerH1')) { function _lb62043f8533_headerH1($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
-?><i>Detail uživatele:</i> <?php echo Latte\Runtime\Filters::escapeHtml($userData['prijmeni'], ENT_NOQUOTES) ?>
- <?php echo Latte\Runtime\Filters::escapeHtml($userData['jmeno'], ENT_NOQUOTES) ;
+if (!function_exists($_b->blocks['headerH1'][] = '_lbe5bf3c06c1_headerH1')) { function _lbe5bf3c06c1_headerH1($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+?><i>Detail uživatele:</i> <?php echo Latte\Runtime\Filters::escapeHtml($userData['surname'], ENT_NOQUOTES) ?>
+ <?php echo Latte\Runtime\Filters::escapeHtml($userData['name'], ENT_NOQUOTES) ;
 }}
 
 //
 // block scripts
 //
-if (!function_exists($_b->blocks['scripts'][] = '_lbb0ebd53523_scripts')) { function _lbb0ebd53523_scripts($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+if (!function_exists($_b->blocks['scripts'][] = '_lbca4f630dcf_scripts')) { function _lbca4f630dcf_scripts($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ?> <?php Latte\Macros\BlockMacros::callBlockParent($_b, 'scripts', get_defined_vars()) ?>  
 	<script type="text/javascript">
 	$(document).ready(function(){
@@ -29,7 +29,7 @@ if (!function_exists($_b->blocks['scripts'][] = '_lbb0ebd53523_scripts')) { func
 //
 // block content
 //
-if (!function_exists($_b->blocks['content'][] = '_lbe52f78e0d7_content')) { function _lbe52f78e0d7_content($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+if (!function_exists($_b->blocks['content'][] = '_lbe799324914_content')) { function _lbe799324914_content($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ?><div class="row">
 	<div  id="personalInformation" class="col s12 m6 l4 card-panel grey lighten-5 z-depth-1 section scrollspy">
 		<h5>Osobní infomace</h5>
@@ -39,8 +39,8 @@ if (!function_exists($_b->blocks['content'][] = '_lbe52f78e0d7_content')) { func
 					<i class="grey-text">Přijmení a jméno:</i>
 				</span>
 				<br>
-				<span class="blue-text"><?php echo Latte\Runtime\Filters::escapeHtml($userData['prijmeni'], ENT_NOQUOTES) ?>
- <?php echo Latte\Runtime\Filters::escapeHtml($userData['jmeno'], ENT_NOQUOTES) ?></span>
+				<span class="blue-text"><?php echo Latte\Runtime\Filters::escapeHtml($userData['surname'], ENT_NOQUOTES) ?>
+ <?php echo Latte\Runtime\Filters::escapeHtml($userData['name'], ENT_NOQUOTES) ?></span>
 			</div>
 		</div>
 		<div class="col s2 right-align section">
@@ -56,7 +56,7 @@ if (!function_exists($_b->blocks['content'][] = '_lbe52f78e0d7_content')) { func
 				<i class="grey-text">Telefon:</i>
 			</span>
 			<br>
-			<span class="blue-text"><?php echo Latte\Runtime\Filters::escapeHtml($userData['telefon'], ENT_NOQUOTES) ?></span>
+			<span class="blue-text"><?php echo Latte\Runtime\Filters::escapeHtml($userData['phone'], ENT_NOQUOTES) ?></span>
 			</div>
 		</div>
 		<div class="col s12 divider"></div>
@@ -76,7 +76,7 @@ if (!function_exists($_b->blocks['content'][] = '_lbe52f78e0d7_content')) { func
 				<i class="grey-text">Pracovna:</i>
 			</span>
 			<br>
-			<span class="blue-text"><?php echo Latte\Runtime\Filters::escapeHtml($userData['pracovna'], ENT_NOQUOTES) ?></span>
+			<span class="blue-text"><?php echo Latte\Runtime\Filters::escapeHtml($userData['office'], ENT_NOQUOTES) ?></span>
 			</div>
 		</div>
 	</div>
@@ -97,19 +97,19 @@ if (!function_exists($_b->blocks['content'][] = '_lbe52f78e0d7_content')) { func
 <?php $iterations = 0; foreach ($borrowing as $borrow) { ?>
 	<div class="card medium col s12  l3  accent-1">
 			<div class="card-content">
-				<span class="card-title activator grey-text text-darken-4"><?php echo Latte\Runtime\Filters::escapeHtml($borrow['nazev'], ENT_NOQUOTES) ?> <i class="mdi-navigation-more-vert right"></i></span><br>
+				<span class="card-title activator grey-text text-darken-4"><?php echo Latte\Runtime\Filters::escapeHtml($borrow['title'], ENT_NOQUOTES) ?> <i class="mdi-navigation-more-vert right"></i></span><br>
 				<span class=" white-text text-darken-4">
 				<i class="grey-text" >Datum vypůjčení: </i>
-				<span class="grey-text  text-darken-4"><?php echo Latte\Runtime\Filters::escapeHtml($template->date($borrow->datum, '%d.%m.%Y'), ENT_NOQUOTES) ?></span>
+				<span class="grey-text  text-darken-4"><?php echo Latte\Runtime\Filters::escapeHtml($template->date($borrow->date, '%d.%m.%Y'), ENT_NOQUOTES) ?></span>
 			</div>
 			<div class="card-reveal  accent-1">
-			  <span class="card-title black-text text-darken-4"><?php echo Latte\Runtime\Filters::escapeHtml($borrow['nazev'], ENT_NOQUOTES) ?><i class="mdi-navigation-close right"></i></span>
+			  <span class="card-title black-text text-darken-4"><?php echo Latte\Runtime\Filters::escapeHtml($borrow['title'], ENT_NOQUOTES) ?><i class="mdi-navigation-close right"></i></span>
 			  <br><i class="white-text" >Datum vypůjčení: </i><br>
-			  <span class="white-text  text-darken-4"><?php echo Latte\Runtime\Filters::escapeHtml($template->date($borrow->datum, '%d.%m.%Y'), ENT_NOQUOTES) ?></span>
+			  <span class="white-text  text-darken-4"><?php echo Latte\Runtime\Filters::escapeHtml($template->date($borrow->date, '%d.%m.%Y'), ENT_NOQUOTES) ?></span>
 			  <br><i class="grey-text" >Vypůjčeno od: </i><br>
-			  <span class="black-text"><?php echo Latte\Runtime\Filters::escapeHtml($borrow['prijmeni'], ENT_NOQUOTES) ?>
- <?php echo Latte\Runtime\Filters::escapeHtml($borrow['jmeno'], ENT_NOQUOTES) ?></span><br>
-<?php if ($user->isInRole('admin') ||  $user->getId() == $userData->id) { if (!$borrow->vraceno) { ?>
+			  <span class="black-text"><?php echo Latte\Runtime\Filters::escapeHtml($borrow['surname'], ENT_NOQUOTES) ?>
+ <?php echo Latte\Runtime\Filters::escapeHtml($borrow['name'], ENT_NOQUOTES) ?></span><br>
+<?php if ($user->isInRole('admin') ||  $user->getId() == $userData->id) { if (!$borrow->give_back) { ?>
 					<a title="Vrátit zpět" class="ajax btn-floating waves-effect waves-light light-blue lighten-1" href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Borrowing:giveback", array($borrow->id, 'backlink' => $presenter->storeRequest())), ENT_COMPAT) ?>
 "><i class="mdi-content-reply"></i></a>
 <?php } ?>

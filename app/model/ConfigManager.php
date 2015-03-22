@@ -6,7 +6,7 @@ namespace App\Model;
 class ConfigManager extends BaseManager
 {
 	const
-		TABLE_NAME = 'nastaveni_systemu',
+		TABLE_NAME = 'config',
 		COLUMN_ID = 'id';
 
 		/**

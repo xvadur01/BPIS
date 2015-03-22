@@ -6,10 +6,10 @@ namespace App\Model;
 class EventManager extends BaseManager
 {
 	const
-	TABLE_NAME = 'udalost',
+	TABLE_NAME = 'event',
 	COLUMN_ID = 'id',
-	COLUMN_DATE = 'datum',
-	COLUMN_COUNT_ALERT = 'pocet_upozorneni';
+	COLUMN_DATE = 'date',
+	COLUMN_COUNT_ALERT = 'number_alert';
 
 		/**
 	 * get all data from table
@@ -66,15 +66,15 @@ class EventManager extends BaseManager
 	 */
 	public function getNewestUserEvent($userId,$limit = 3)
 	{
-		return $this->connection->query('SELECT E.*,T.cas,T.vyhovuje,U.jmeno,U.prijmeni FROM udalost AS E'
-				. ' JOIN termin AS T ON E.id = T.udalost_id'
-				. ' JOIN uzivatel AS U ON E.uzivatel_id = U.id'
-				. ' WHERE T.uzivatel_id = ? GROUP BY E.id  ORDER BY E.id DESC LIMIT ?',$userId,$limit);
+		return $this->connection->query('SELECT E.*,T.time,T.confirm,U.name as uname,U.surname FROM event AS E'
+				. ' JOIN term AS T ON E.id = T.event_id'
+				. ' JOIN user AS U ON E.user_id = U.id'
+				. ' WHERE T.user_id = ? GROUP BY E.id  ORDER BY E.id DESC LIMIT ?',$userId,$limit);
 	}
 
 	public function getFutureEvents()
 	{
-		return $this->connection->table(self::TABLE_NAME)->where('datum > NOW() OR datum IS NULL');
+		return $this->connection->table(self::TABLE_NAME)->where('date > NOW() OR date IS NULL');
 
 	}
 	public function getEventsInSevenDays()
@@ -92,10 +92,10 @@ class EventManager extends BaseManager
 	}
 	public function getClosestUserEvent($userId)
 	{
-		return $this->connection->query('SELECT E.*,T.cas,T.vyhovuje,U.jmeno,U.prijmeni FROM udalost AS E'
-				. ' JOIN termin AS T ON E.id = T.udalost_id'
-				. ' JOIN uzivatel AS U ON E.uzivatel_id = U.id'
-				. ' WHERE T.uzivatel_id = ? AND E.datum > NOW() GROUP BY E.id ORDER BY E.datum DESC LIMIT 3',$userId);
+		return $this->connection->query('SELECT E.*,T.time,T.confirm,U.name as uname,U.surname FROM event AS E'
+				. ' JOIN term AS T ON E.id = T.event_id'
+				. ' JOIN user AS U ON E.user_id = U.id'
+				. ' WHERE T.user_id = ? AND E.date > NOW() GROUP BY E.id ORDER BY E.date DESC LIMIT 3',$userId);
 
 	}
 

@@ -10,11 +10,11 @@
 	<thead>
 	<tr>
 		<th>Položka</th>
-		<th>Od</th>
+		<th>Kdo</th>
 		<th>Datum vypůjčení</th>
 		<th>Datum navrácení</th>
 		{if $user->isInRole('admin')}
-			<th>Kdo</th>
+			<th>Od</th>
 		{/if}
 		<th>Navráceno</th>
 	</tr>
@@ -23,32 +23,32 @@
 			<tbody>
 			{foreach $borrowings as $borrowing}
 				<tr>
-					<td>{$borrowing->nazev}</td>
-					<td>{$borrowing->prijmeni} {$borrowing->jmeno}</td>
-					<td>{$borrowing->datum|date:'%d.%m.%Y'}</td>
-					{if $borrowing->datum_navraceni}
-						<td>{$borrowing->datum_navraceni|date:'%d.%m.%Y'}</td>
+					<td>{$borrowing->title}</td>
+					<td>{$borrowing->surname} {$borrowing->name}</td>
+					<td>{$borrowing->date|date:'%d.%m.%Y'}</td>
+					{if $borrowing->date_give_back}
+						<td>{$borrowing->date_give_back|date:'%d.%m.%Y'}</td>
 					{else}
 						<td></td>
 					{/if}
 
 					{if $user->isInRole('admin')}
-						<td><a n:href="Borrowing:userborrowing $borrowing->uzivatel_id"> {$borrowing->ref('uzivatel','uzivatel_id')->prijmeni} {$borrowing->jmeno}</a></td>
+						<td><a n:href="Borrowing:userborrowing $borrowing->user_id"> {$borrowing->ref('user','user_id')->surname}{$borrowing->ref('user','user_id')->name}</a></td>
 					{/if}
 					<td>
-						{if $borrowing->vraceno}
-							<span title="{$borrowing->datum_navraceni|date:'%d.%m.%Y'}"  class="btn-floating green accent-2"><i class="mdi-action-verified-user"></i></span>
+						{if $borrowing->give_back}
+							<span title="{$borrowing->date_give_back|date:'%d.%m.%Y'}"  class="btn-floating green accent-2"><i class="mdi-action-verified-user"></i></span>
 						{else}
 							<span class="btn-floating red lighten-4"><i class="mdi-image-timer"></i></span>
 						{/if}
 					</td>
 
 					<td>
-						{if !$borrowing->vraceno && $borrowing->uzivatel_id == $user->getId()}
-							<a n:href="Borrowing:giveback $borrowing->id" title="Vrátit zpět" class="ajax btn-floating waves-effect waves-light light-blue lighten-1"><i class="mdi-content-reply"></i></a>
+						{if !$borrowing->give_back && $borrowing->user_id == $user->getId()}
+							<a n:href="Borrowing:giveback $borrowing->id" title="Give back" class="ajax btn-floating waves-effect waves-light light-blue lighten-1"><i class="mdi-content-reply"></i></a>
 						{/if}
-						<a n:href="Borrowing:delete $borrowing->id" title="Smazat" class="btn-floating waves-effect waves-light red"><i class="mdi-action-delete"></i></a>
-						<a n:href="Borrowing:edit $borrowing->id" title="Upravit" class="btn-floating waves-effect waves-light light-green accent-3 "><i class="mdi-editor-mode-edit"></i></a>
+						<a n:href="Borrowing:delete $borrowing->id" title="Delete" class="btn-floating waves-effect waves-light red"><i class="mdi-action-delete"></i></a>
+						<a n:href="Borrowing:edit $borrowing->id" title="Edit" class="btn-floating waves-effect waves-light light-green accent-3 "><i class="mdi-editor-mode-edit"></i></a>
 					</td>
 				</tr>
 			{/foreach}

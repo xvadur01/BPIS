@@ -7,11 +7,11 @@ namespace App\Model;
 class TermManager extends BaseManager
 {
 	const
-		TABLE_NAME = 'termin',
+		TABLE_NAME = 'term',
 		COLUMN_ID = 'id',
-		COLUMN_USER = '	uzivatel_id',
-		COLUMN_EVENT = 'udalost_id',
-		COLUMN_ALLOW = 'vyhovuje';
+		COLUMN_USER = 'user_id',
+		COLUMN_EVENT = 'event_id',
+		COLUMN_ALLOW = 'confirm';
 
 
 	public function get($id)

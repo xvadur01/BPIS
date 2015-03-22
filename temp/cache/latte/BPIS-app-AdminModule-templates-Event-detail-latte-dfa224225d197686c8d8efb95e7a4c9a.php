@@ -2,22 +2,22 @@
 // source: C:\xampp\htdocs\BPIS\app\AdminModule/templates/Event/detail.latte
 
 // prolog Latte\Macros\CoreMacros
-list($_b, $_g, $_l) = $template->initialize('1664230910', 'html')
+list($_b, $_g, $_l) = $template->initialize('9514619362', 'html')
 ;
 // prolog Latte\Macros\BlockMacros
 //
 // block headerH1
 //
-if (!function_exists($_b->blocks['headerH1'][] = '_lba72f7e9613_headerH1')) { function _lba72f7e9613_headerH1($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
-?><i>Událost:</i> <?php echo Latte\Runtime\Filters::escapeHtml($event->nazev, ENT_NOQUOTES) ;
+if (!function_exists($_b->blocks['headerH1'][] = '_lb99d1795891_headerH1')) { function _lb99d1795891_headerH1($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+?><i>Událost:</i> <?php echo Latte\Runtime\Filters::escapeHtml($event->name, ENT_NOQUOTES) ;
 }}
 
 //
 // block scripts
 //
-if (!function_exists($_b->blocks['scripts'][] = '_lb415cdface5_scripts')) { function _lb415cdface5_scripts($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+if (!function_exists($_b->blocks['scripts'][] = '_lbb2b8a20277_scripts')) { function _lbb2b8a20277_scripts($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ;Latte\Macros\BlockMacros::callBlockParent($_b, 'scripts', get_defined_vars()) ?>  
-<?php if ($event->uzivatel_id == $user->getId()) { ?>
+<?php if ($event->user_id == $user->getId()) { ?>
 	<script type="text/javascript">
 
 		$(document).ready(function()
@@ -42,29 +42,29 @@ if (!function_exists($_b->blocks['scripts'][] = '_lb415cdface5_scripts')) { func
 //
 // block content
 //
-if (!function_exists($_b->blocks['content'][] = '_lbbf09f3ec57_content')) { function _lbbf09f3ec57_content($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+if (!function_exists($_b->blocks['content'][] = '_lb0f40dab32f_content')) { function _lb0f40dab32f_content($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ?><div class="event row">
 	<div class="col s12 card">
 		<p><i>Pořadatel:</i></p>
-		<p><?php echo Latte\Runtime\Filters::escapeHtml($userRef->prijmeni, ENT_NOQUOTES) ?>
- <?php echo Latte\Runtime\Filters::escapeHtml($userRef->jmeno, ENT_NOQUOTES) ?></p>
+		<p><?php echo Latte\Runtime\Filters::escapeHtml($userRef->surname, ENT_NOQUOTES) ?>
+ <?php echo Latte\Runtime\Filters::escapeHtml($userRef->name, ENT_NOQUOTES) ?></p>
 
 	</div>
 	<div class="col s12 card">
 		<p><i>Datum konání:</i></p>
-<?php if ($event->datum) { ?>
-			<p><?php echo Latte\Runtime\Filters::escapeHtml($template->date($event->datum, '%d.%m.%Y %H:%M'), ENT_NOQUOTES) ?><p>
+<?php if ($event->date) { ?>
+			<p><?php echo Latte\Runtime\Filters::escapeHtml($template->date($event->date, '%d.%m.%Y %H:%M'), ENT_NOQUOTES) ?><p>
 <?php } else { ?>
 			<p>Datum prozatím není určen.<p>
 <?php } ?>
 	</div>
 	<div class="col s12 card">
 		<p><i>Popis:</i></p>
-		<p><?php echo Latte\Runtime\Filters::escapeHtml($event->popis, ENT_NOQUOTES) ?><p>
+		<p><?php echo Latte\Runtime\Filters::escapeHtml($event->description, ENT_NOQUOTES) ?><p>
 	</div>
 	<div class="col s12 card">
 		<p><i>Zápis:</i></p>
-		<p><?php echo Latte\Runtime\Filters::escapeHtml($event->zapis, ENT_NOQUOTES) ?><p>
+		<p><?php echo Latte\Runtime\Filters::escapeHtml($event->record, ENT_NOQUOTES) ?><p>
 	</div>
 </div>
 <div class="eventTable row col s12">

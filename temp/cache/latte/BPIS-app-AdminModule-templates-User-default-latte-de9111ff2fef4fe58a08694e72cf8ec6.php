@@ -2,20 +2,20 @@
 // source: C:\xampp\htdocs\BPIS\app\AdminModule/templates/User/default.latte
 
 // prolog Latte\Macros\CoreMacros
-list($_b, $_g, $_l) = $template->initialize('5346680680', 'html')
+list($_b, $_g, $_l) = $template->initialize('1993750369', 'html')
 ;
 // prolog Latte\Macros\BlockMacros
 //
 // block headerH1
 //
-if (!function_exists($_b->blocks['headerH1'][] = '_lba4be69bcf9_headerH1')) { function _lba4be69bcf9_headerH1($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+if (!function_exists($_b->blocks['headerH1'][] = '_lb1e2a0f008b_headerH1')) { function _lb1e2a0f008b_headerH1($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ?>Přeled uživatelů<?php
 }}
 
 //
 // block content
 //
-if (!function_exists($_b->blocks['content'][] = '_lb4cfb8dc90f_content')) { function _lb4cfb8dc90f_content($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+if (!function_exists($_b->blocks['content'][] = '_lba7e2f9ce5d_content')) { function _lba7e2f9ce5d_content($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ;if ($user->isInRole('admin')) { ?>
 	<div class="row">
 		<a title="Nový uživatel" class="right-align btn-floating btn-large waves-effect waves-light blue" href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("User:add"), ENT_COMPAT) ?>
@@ -43,14 +43,14 @@ if (!function_exists($_b->blocks['content'][] = '_lb4cfb8dc90f_content')) { func
 		<td><?php echo Latte\Runtime\Filters::escapeHtml($oneUser->id, ENT_NOQUOTES) ?></td>
 		<td><?php echo Latte\Runtime\Filters::escapeHtml($oneUser->login, ENT_NOQUOTES) ?></td>
 <?php } ?>
-		<td><?php echo Latte\Runtime\Filters::escapeHtml($oneUser->prijmeni, ENT_NOQUOTES) ?></td>
-		<td><?php echo Latte\Runtime\Filters::escapeHtml($oneUser->jmeno, ENT_NOQUOTES) ?></td>
+		<td><?php echo Latte\Runtime\Filters::escapeHtml($oneUser->surname, ENT_NOQUOTES) ?></td>
+		<td><?php echo Latte\Runtime\Filters::escapeHtml($oneUser->name, ENT_NOQUOTES) ?></td>
 <?php if ($user->isInRole('admin')) { ?>
 		<td><?php echo Latte\Runtime\Filters::escapeHtml($oneUser->role, ENT_NOQUOTES) ?></td>
 <?php } ?>
-		<td><?php echo Latte\Runtime\Filters::escapeHtml($oneUser->telefon, ENT_NOQUOTES) ?></td>
+		<td><?php echo Latte\Runtime\Filters::escapeHtml($oneUser->phone, ENT_NOQUOTES) ?></td>
 		<td><?php echo Latte\Runtime\Filters::escapeHtml($oneUser->email, ENT_NOQUOTES) ?></td>
-		<td><?php echo Latte\Runtime\Filters::escapeHtml($oneUser->pracovna, ENT_NOQUOTES) ?></td>
+		<td><?php echo Latte\Runtime\Filters::escapeHtml($oneUser->office, ENT_NOQUOTES) ?></td>
 		<td>
 <?php if ($user->isInRole('admin') || $user->getId() == $oneUser->id) { ?>
 				<a title="Smazat uživatele" class="btn-floating waves-effect waves-light  red" href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("User:delete", array($oneUser->id)), ENT_COMPAT) ?>
