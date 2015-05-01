@@ -9,11 +9,10 @@
 <table class=" striped responsive-table">
 	<tr>
 		{if $user->isInRole('admin')}
-			<th>id</th>
 			<th>login</th>
 		{/if}
-		<th>prijmeni</th>
-		<th>jmeno</th>
+		<th>příjmení</th>
+		<th>jméno</th>
 		{if $user->isInRole('admin')}
 			<th>role</th>
 		{/if}
@@ -25,7 +24,6 @@
 
 {foreach $users as $oneUser}
 	{if $user->isInRole('admin')}
-		<td>{$oneUser->id}</td>
 		<td>{$oneUser->login}</td>
 	{/if}
 		<td>{$oneUser->surname}</td>
@@ -37,14 +35,17 @@
 		<td>{$oneUser->email}</td>
 		<td>{$oneUser->office}</td>
 		<td>
-			{if $user->isInRole('admin') || $user->getId() == $oneUser->id}
-				<a n:href="User:delete $oneUser->id" title="Smazat uživatele" class="btn-floating waves-effect waves-light  red">
-					<i class="mdi-action-delete"></i>
-				</a>
-				<a n:href="User:edit $oneUser->id" title="Upravit uživatele" class="btn-floating waves-effect waves-light light-green accent-3">
-					<i class="mdi-editor-mode-edit"></i>
-				</a>
-			{/if}
+
+				{if $user->isInRole('admin')}
+					<a n:href="User:delete $oneUser->id" title="Smazat uživatele" class="btn-floating waves-effect waves-light  red">
+						<i class="mdi-action-delete"></i>
+					</a>
+				{/if}
+				{if $user->getId() == $oneUser->id || $user->isInRole('admin')}
+					<a n:href="User:edit $oneUser->id" title="Upravit uživatele" class="btn-floating waves-effect waves-light light-green accent-3">
+						<i class="mdi-editor-mode-edit"></i>
+					</a>
+				{/if}
 			<a n:href="User:detail $oneUser->id" title="Detail uživatele" class="btn-floating waves-effect waves-light light-blue accent-3">
 					<i class="mdi-action-account-box"></i>
 			</a>

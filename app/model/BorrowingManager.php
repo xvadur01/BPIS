@@ -10,7 +10,7 @@ class BorrowingManager extends BaseManager
 		TABLE_NAME = 'borrowing',
 		COLUMN_ID = 'id',
 		COLUMN_USER_ID = 'user_id',
-		COLUMN_GIVE_BACK = 'give_back',
+		COLUMN_GIVE_BACK = 'date_give_back',
 		COLUMN_DATE = 'date';
 
 		/**
@@ -54,7 +54,7 @@ class BorrowingManager extends BaseManager
 	 */
 	public function giveBack($id)
 	{
-		$this->connection->table(self::TABLE_NAME)->where(self::COLUMN_ID, $id)->update(array("give_back" => 1,"date_give_back" => date('Y-m-d H:i:s')));
+		$this->connection->table(self::TABLE_NAME)->where(self::COLUMN_ID, $id)->update(array("date_give_back" => date('Y-m-d H:i:s')));
 	}
 	/**
 	 * getUserBorrow

@@ -18,19 +18,14 @@ class BorrowingPresenter extends BasePresenter {
 	/** @persistent */
 	public $userId;
 
-
 	function __construct(\App\Model\BorrowingManager $borrowingManager) {
 		$this->borrowingManager = $borrowingManager;
 	}
 
-	public function actionAdd($userId = null)
-	{
-		if($userId)
-		{
+	public function actionAdd($userId = null) {
+		if ($userId) {
 			$this->userId = $userId;
-		}
-		else
-		{
+		} else {
 			$this->userId = $this->user->getId();
 		}
 		$this['borrowingForm']->setDefaults(array("user_id" => $this->userId));
@@ -53,16 +48,13 @@ class BorrowingPresenter extends BasePresenter {
 	public function actionGiveback($borrowingId) {
 		$borrowing = $this->borrowingManager->giveBack($borrowingId);
 		$this->flashMessage('Věc byla navrácena.', 'success');
-		if($this->isAjax())
-		{
+		if ($this->isAjax()) {
 			$this->redrawControl('flashMessage');
 			$this->redrawControl('borrowTable');
-		}
-		else {
+		} else {
 			$this->restoreRequest($this->backlink);
 			$this->redirect('Borrowing:default');
 		}
-
 	}
 
 	/**
@@ -77,9 +69,9 @@ class BorrowingPresenter extends BasePresenter {
 		}
 		$borrowing = $borrowing->toArray();
 		$date = new \DateTime($borrowing['date']);
-		$borrowing['date'] = $date->format('d. m. yy');
+		$borrowing['date'] = $date->format('d. m. Y');
 
-        $this['borrowingForm']->setDefaults($borrowing);
+		$this['borrowingForm']->setDefaults($borrowing);
 	}
 
 	/**
@@ -92,7 +84,6 @@ class BorrowingPresenter extends BasePresenter {
 		} else {
 			$this->template->borrowings = $this->borrowingManager->getUserBorrow($this->user->getId())->order(\App\Model\BorrowingManager::COLUMN_DATE . ' DESC');
 		}
-
 	}
 
 	/**
@@ -131,7 +122,7 @@ class BorrowingPresenter extends BasePresenter {
 				->setRequired('Zadejte příjmení.');
 		$form->addText('date', 'Datum:', 20, 20)->getControlPrototype()->setClass('datepicker');
 
-        $form->addSubmit('send', 'Odeslat');
+		$form->addSubmit('send', 'Odeslat');
 		$form->setDefaults(array("user_id" => $this->user->getId()));
 		$form->onSuccess[] = $this->borrowingSucceeded;
 		return $form;
@@ -142,7 +133,7 @@ class BorrowingPresenter extends BasePresenter {
 	 */
 	public function borrowingSucceeded($form) {
 		$values = $form->getValues();
-		$date = \DateTime::createFromFormat('dd. mm. YYYY', $values['date']);
+		$date = new \DateTime($_REQUEST['date_submit']);
 		$values['date'] = $date->format('Y-m-d H:i:s');
 		if ($values['id']) {
 			$this->borrowingManager->edit($values);

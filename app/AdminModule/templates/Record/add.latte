@@ -6,13 +6,11 @@
 <script type="text/javascript">
 	   $().ready(function() {
         var elf = $('#elfinder').elfinder({
-            // lang: 'ru',             // language (OPTIONAL)
             url : {$basePath}+'/elfinder/php/connector.php'  // connector URL (REQUIRED)
         }).elfinder('instance');
     });
 	CKEDITOR.replace( 'editor', {
     filebrowserBrowseUrl : {$basePath}+'/elfinder/elfinder.html', // eg. 'includes/elFinder/elfinder.html'
-    uiColor : '#9AB8F3'
 });
 </script>
 {/block}

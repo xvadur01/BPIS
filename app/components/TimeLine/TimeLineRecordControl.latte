@@ -6,15 +6,15 @@
 		<li class="timeline-inverted">
 	{/if}
 			{if $record->done}
-				<div class="timeline-badge  green lighten-0">
+				<div title="Záznam ukončen" class="timeline-badge  green lighten-0">
 					<i class="mdi-action-done"></i>
 				</div>
 			{elseif $record->date_done && $record->date_done <  new \DateTime() }
-				<div class="timeline-badge  red lighten-0">
+				<div title="Záznam v prodlevě" class="timeline-badge  red lighten-0">
 					<i class="mdi-alert-error"></i>
 				</div>
 			{else}
-				<div class="timeline-badge  blue lighten-0">
+				<div title="Záznam v řešení" class="timeline-badge  blue lighten-0">
 					<i class="mdi-action-event"></i>
 				</div>
 			{/if}

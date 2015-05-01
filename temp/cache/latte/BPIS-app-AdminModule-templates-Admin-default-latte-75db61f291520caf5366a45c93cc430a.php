@@ -2,31 +2,29 @@
 // source: C:\xampp\htdocs\BPIS\app\AdminModule/templates/Admin/default.latte
 
 // prolog Latte\Macros\CoreMacros
-list($_b, $_g, $_l) = $template->initialize('7959617169', 'html')
+list($_b, $_g, $_l) = $template->initialize('6209682721', 'html')
 ;
 // prolog Latte\Macros\BlockMacros
 //
 // block headerH1
 //
-if (!function_exists($_b->blocks['headerH1'][] = '_lb19af4ce06a_headerH1')) { function _lb19af4ce06a_headerH1($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+if (!function_exists($_b->blocks['headerH1'][] = '_lb486013370b_headerH1')) { function _lb486013370b_headerH1($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ?>BPIS<?php
 }}
 
 //
 // block scripts
 //
-if (!function_exists($_b->blocks['scripts'][] = '_lbcb21920d03_scripts')) { function _lbcb21920d03_scripts($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
-;Latte\Macros\BlockMacros::callBlockParent($_b, 'scripts', get_defined_vars()) ?>  
+if (!function_exists($_b->blocks['scripts'][] = '_lb95e61b9231_scripts')) { function _lb95e61b9231_scripts($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+;Latte\Macros\BlockMacros::callBlockParent($_b, 'scripts', get_defined_vars()) ?>
 <script type="text/javascript">
-	$(document).ready(function() {
-
-		$( ".open" ).click(function() {
-			$( this ).parents( ".card" ).addClass( "medium");
+	$(document).ready(function () {
+		$(".open").click(function () {
+			$(this).parents(".card").addClass("medium");
 		});
-		$( ".close" ).click(function() {
-			$( this ).parents( ".card" ).removeClass( "medium");
+		$(".close").click(function () {
+			$(this).parents(".card").removeClass("medium");
 		});
-
 	});
 </script>
 <?php
@@ -35,9 +33,9 @@ if (!function_exists($_b->blocks['scripts'][] = '_lbcb21920d03_scripts')) { func
 //
 // block content
 //
-if (!function_exists($_b->blocks['content'][] = '_lb95b22a6edb_content')) { function _lb95b22a6edb_content($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+if (!function_exists($_b->blocks['content'][] = '_lb5ecb4624f9_content')) { function _lb5ecb4624f9_content($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ?><div class="row">
-	<div class="col s12 m4">
+	<div class="col s12 m6 l4">
 		<h5>Nejnovější události</h5>
 <?php if (count($newestEvent)) { $iterations = 0; foreach ($newestEvent as $event) { ?>
 				<div class="card  light-blue lighten-1">
@@ -83,7 +81,7 @@ if (!function_exists($_b->blocks['content'][] = '_lb95b22a6edb_content')) { func
 			</div>
 <?php } ?>
 	</div>
-	<div class="col s12 m4">
+	<div class="col s12 m6 l4">
 		<h5>Nejbližší události</h5>
 <?php if (count($closestEvent)) { $iterations = 0; foreach ($closestEvent as $event) { ?>
 				<div class="card light-blue lighten-1">
@@ -131,29 +129,29 @@ if (!function_exists($_b->blocks['content'][] = '_lb95b22a6edb_content')) { func
 			</div>
 <?php } ?>
 	</div>
-	<div class="col s12 m4">
+	<div class="col s12 m6 l4">
 		<h5>Aktuální výpůjčky</h5>
 <?php if (count($borrowing)) { $iterations = 0; foreach ($borrowing as $borrow) { ?>
 				<div class="card medium light-blue">
 					<div class="card-content">
 						<span class="card-title activator white-text text-darken-4"><?php echo Latte\Runtime\Filters::escapeHtml($borrow['title'], ENT_NOQUOTES) ?> <i class="mdi-navigation-more-vert right"></i></span>
-						<br><i class="white-text" >Datum vypůjčení: </i>
+						<br><i class="white-text" >Datum zapůjčení: </i>
 						<span class="white-text  text-darken-4"><?php echo Latte\Runtime\Filters::escapeHtml($template->date($borrow->date, '%d.%m.%Y'), ENT_NOQUOTES) ?></span>
 					</div>
 					<div class="card-reveal blue  lighten-1 s12 m6 l6">
 						<span class="card-title white-text text-darken-4"><?php echo Latte\Runtime\Filters::escapeHtml($borrow['title'], ENT_NOQUOTES) ?><i class="mdi-navigation-close right"></i></span>
-						<p class="white-text"><i>Datum vypůjčení:</i> </p>
+						<p class="white-text"><i>Datum zapůjčení:</i> </p>
 						<p class="white-text  text-darken-4"><?php echo Latte\Runtime\Filters::escapeHtml($template->date($borrow->date, '%d.%m.%Y'), ENT_NOQUOTES) ?></p>
-						<p class="white-text" ><i>Vypůjčeno od: </i></p>
+						<p class="white-text" ><i>Zapůjčeno: </i></p>
 						<p class="white-text"><?php echo Latte\Runtime\Filters::escapeHtml($borrow['surname'], ENT_NOQUOTES) ?>
  <?php echo Latte\Runtime\Filters::escapeHtml($borrow['name'], ENT_NOQUOTES) ?></p>
-<?php if ($user->isInRole('admin') ||  $user->getId() == $userData->id) { ?>
+<?php if ($user->isInRole('admin') ||  $user->getId() == $borrow->user_id) { ?>
 							<p>
-<?php if (!$borrow->vraceno) { ?>
-								<a title="Vrátit zpět" class="ajax btn-floating waves-effect waves-light light-blue lighten-1" href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Borrowing:giveback", array($borrow->id, 'backlink' => $presenter->storeRequest())), ENT_COMPAT) ?>
+<?php if (!$borrow->date_give_back) { ?>
+									<a title="Vrátit zpět" class="ajax btn-floating waves-effect waves-light light-blue lighten-1" href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Borrowing:giveback", array($borrow->id, 'backlink' => $presenter->storeRequest())), ENT_COMPAT) ?>
 "><i class="mdi-content-reply"></i></a>
 <?php } ?>
-							<a title="Upravit výpujčku" class="btn-floating waves-effect waves-light light-green accent-3" href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Borrowing:edit", array($borrow['id'])), ENT_COMPAT) ?>
+								<a title="Upravit výpujčku" class="btn-floating waves-effect waves-light light-green accent-3" href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Borrowing:edit", array($borrow['id'])), ENT_COMPAT) ?>
 "><i class="mdi-editor-mode-edit"></i></a>
 							</p>
 <?php } ?>

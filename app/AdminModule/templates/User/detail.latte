@@ -71,28 +71,28 @@
 			<h5 >Výpujčky</h5>
 	{if count($borrowing)}
 
-	{foreach $borrowing as $borrow}
-	<div class="card medium col s12  l3  accent-1">
-			<div class="card-content">
-				<span class="card-title activator grey-text text-darken-4">{$borrow['title']} <i class="mdi-navigation-more-vert right"></i></span><br>
-				<span class=" white-text text-darken-4">
-				<i class="grey-text" >Datum vypůjčení: </i>
-				<span class="grey-text  text-darken-4">{$borrow->date|date:'%d.%m.%Y'}</span>
-			</div>
-			<div class="card-reveal  accent-1">
-			  <span class="card-title black-text text-darken-4">{$borrow['title']}<i class="mdi-navigation-close right"></i></span>
-			  <br><i class="white-text" >Datum vypůjčení: </i><br>
-			  <span class="white-text  text-darken-4">{$borrow->date|date:'%d.%m.%Y'}</span>
-			  <br><i class="grey-text" >Vypůjčeno od: </i><br>
-			  <span class="black-text">{$borrow['surname']} {$borrow['name']}</span><br>
-			{if $user->isInRole('admin') ||  $user->getId() == $userData->id}
-				{if !$borrow->give_back}
-					<a n:href="Borrowing:giveback $borrow->id, backlink => $presenter->storeRequest()" title="Vrátit zpět" class="ajax btn-floating waves-effect waves-light light-blue lighten-1"><i class="mdi-content-reply"></i></a>
+		{foreach $borrowing as $borrow}
+		<div class="card medium col s12  l3  accent-1">
+				<div class="card-content">
+					<span class="card-title activator grey-text text-darken-4">{$borrow['title']} <i class="mdi-navigation-more-vert right"></i></span><br>
+					<span class=" white-text text-darken-4">
+					<i class="grey-text" >Datum vypůjčení: </i>
+					<span class="grey-text  text-darken-4">{$borrow->date|date:'%d.%m.%Y'}</span>
+				</div>
+				<div class="card-reveal  accent-1">
+				  <span class="card-title black-text text-darken-4">{$borrow['title']}<i class="mdi-navigation-close right"></i></span>
+				  <br><i class="white-text" >Datum vypůjčení: </i><br>
+				  <span class="white-text  text-darken-4">{$borrow->date|date:'%d.%m.%Y'}</span>
+				  <br><i class="grey-text" >Vypůjčeno od: </i><br>
+				  <span class="black-text">{$borrow['surname']} {$borrow['name']}</span><br>
+				{if $user->isInRole('admin') ||  $user->getId() == $userData->id}
+					{if !$borrow->date_give_back}
+						<a n:href="Borrowing:giveback $borrow->id, backlink => $presenter->storeRequest()" title="Vrátit zpět" class="ajax btn-floating waves-effect waves-light light-blue lighten-1"><i class="mdi-content-reply"></i></a>
+					{/if}
+					<a n:href="Borrowing:edit $borrow['id']" title="Upravit výpujčku" class="btn-floating waves-effect waves-light light-green accent-3"><i class="mdi-editor-mode-edit"></i></a>
 				{/if}
-				<a n:href="Borrowing:edit $borrow['id']" title="Upravit výpujčku" class="btn-floating waves-effect waves-light light-green accent-3"><i class="mdi-editor-mode-edit"></i></a>
-			{/if}
+				</div>
 			</div>
-		</div>
 
 	{/foreach}
 	{else}

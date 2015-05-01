@@ -2,46 +2,46 @@
 {block content}
 
 <div class="row">
-<a n:href="Borrowing:add $userId" title="Nová výpujčka" class="right-align btn-floating btn-large waves-effect waves-light blue"><i class="mdi-content-add"></i></a>
+	<a n:href="Borrowing:add $userId" title="Nová výpujčka" class="right-align btn-floating btn-large waves-effect waves-light blue"><i class="mdi-content-add"></i></a>
 </div>
 {snippet borrowTable}
-<table class=" striped responsive-table">
-	<thead>
-	<tr>
-		<th>Položka</th>
-		<th>Kdo</th>
-		<th>Datum vypůjčení</th>
-		<th>od</th>
-		<th>Navráceno</th>
-	</tr>
-	</thead>
+	<table class=" striped responsive-table">
+		<thead>
+			<tr>
+				<th>Položka</th>
+				<th>Kdo</th>
+				<th>Datum vypůjčení</th>
+				<th>Od</th>
+				<th>Navráceno</th>
+			</tr>
+		</thead>
 		{if $borrowings}
 			<tbody>
-			{foreach $borrowings as $borrowing}
-				<tr>
-					<td>{$borrowing->title}</td>
-					<td>{$borrowing->surname} {$borrowing->name}</td>
-					<td>{$borrowing->date|date:'%d.%m.%Y'}</td>
-					<td>{$borrowing->ref('user','user_id')->surname} {$borrowing->ref('user','userl_id')->name}</td>
-					<td>
-						{if $borrowing->vraceno}
-							<span class="btn-floating green accent-2"><i class="mdi-action-verified-user"></i></span>
-						{else}
-							<span class="btn-floating red lighten-4"><i class="mdi-image-timer"></i></span>
-						{/if}
-					</td>
-					<td>
-						{if !$borrowing->give_back && $borrowing->user_id == $user->getId()}
-							<a n:href="Borrowing:giveback $borrowing->id" title="Give back" class="ajax btn-floating waves-effect waves-light light-blue lighten-1"><i class="mdi-content-reply"></i></a>
-						{/if}
-						{if $user->isInRole('admin') || $borrowing->user_id == $user->getId()}
-							<a n:href="Borrowing:delete $borrowing->id" title="Delete" class="btn-floating waves-effect waves-light red"><i class="mdi-action-delete"></i></a>
-							<a n:href="Borrowing:edit $borrowing->id" title="Edit" class="btn-floating waves-effect waves-light light-green accent-3 "><i class="mdi-editor-mode-edit"></i></a>
-						{/if}
-					</td>
-				</tr>
-			{/foreach}
+				{foreach $borrowings as $borrowing}
+					<tr>
+						<td>{$borrowing->title}</td>
+						<td>{$borrowing->surname} {$borrowing->name}</td>
+						<td>{$borrowing->date|date:'%d.%m.%Y'}</td>
+						<td>{$borrowing->ref('user','user_id')->surname} {$borrowing->ref('user','user_id')->name}</td>
+						<td>
+							{if $borrowing->date_give_back}
+								<span title="Navráceno {$borrowing->date_give_back|date:'%d.%m.%Y'}"  class="btn-floating green accent-2"><i class="mdi-action-verified-user"></i></span>
+								{else}
+								<span class="btn-floating red lighten-4" title="Nenavráceno" ><i class="mdi-image-timer"></i></span>
+								{/if}
+						</td>
+						<td>
+							{if !$borrowing->date_give_back && ( $user->isInRole('admin') || $borrowing->user_id == $user->getId())}
+								<a n:href="Borrowing:giveback $borrowing->id" title="Give back" class="ajax btn-floating waves-effect waves-light light-blue lighten-1"><i class="mdi-content-reply"></i></a>
+								{/if}
+								{if $user->isInRole('admin') || $borrowing->user_id == $user->getId()}
+								<a n:href="Borrowing:delete $borrowing->id" title="Delete" class="btn-floating waves-effect waves-light red"><i class="mdi-action-delete"></i></a>
+								<a n:href="Borrowing:edit $borrowing->id" title="Edit" class="btn-floating waves-effect waves-light light-green accent-3 "><i class="mdi-editor-mode-edit"></i></a>
+								{/if}
+						</td>
+					</tr>
+				{/foreach}
 			</tbody>
 		{/if}
-</table>
+	</table>
 {/snippet}

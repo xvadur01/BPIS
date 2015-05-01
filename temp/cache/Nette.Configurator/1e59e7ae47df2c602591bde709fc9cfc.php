@@ -256,7 +256,7 @@ class SystemContainer extends Nette\DI\Container
 	public function createServiceApplication()
 	{
 		$service = new Nette\Application\Application($this->getService('nette.presenterFactory'), $this->getService('router'), $this->getService('httpRequest'), $this->getService('httpResponse'));
-		$service->catchExceptions = FALSE;
+		$service->catchExceptions = TRUE;
 		$service->errorPresenter = 'Error';
 		Nette\Bridges\ApplicationTracy\RoutingPanel::initializePanel($service);
 		Tracy\Debugger::getBar()->addPanel(new Nette\Bridges\ApplicationTracy\RoutingPanel($this->getService('router'), $this->getService('httpRequest'), $this->getService('nette.presenterFactory')));

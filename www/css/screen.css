@@ -100,6 +100,9 @@ main{
 #dropdown1{
 	min-height: 100%;
 }
+h1 {
+	font-size: 3.5vw !important;
+}
 @media only screen and (max-width : 1500px) {
 	.eventcard {
 		width: 45% !important;
@@ -120,13 +123,13 @@ main{
 
 @media only screen and (max-width : 992px) {
 	nav .nav-wrapper h1 {
-		font-size: 35px;
+		font-size: 3.3vw !important;
 	}
 	ul.side-nav.fixed li a{
 		font-size: 2vw;
 	}
 	.brand-logo{
-		margin-left: 35%;
+		margin-left: 45%;
 	}
  }
 
@@ -135,12 +138,13 @@ main{
 		width: 90% !important;
 	}
 	.brand-logo{
-		margin-left: 40%;
+		margin-left: 45%;
+		font-size: 3.2vw !important;
 	}
  }
  @media only screen and (max-width : 600px) {
 	nav .nav-wrapper h1 {
-      font-size: 3vw; }
+      font-size: 3vw !important; }
 	ul.side-nav.fixed li a{
 	  font-size: 3vw;
 	}
@@ -148,7 +152,8 @@ main{
  }
  @media only screen and (max-width : 550px) {
 	nav .nav-wrapper h1 {
-      font-size: 3.5vw; }
+		display: inline !important;;
+		font-size: 3.5vw !important; }
 	.eventcard {
 		width: inherit !important;
 	}
@@ -159,8 +164,12 @@ main{
 
  @media only screen and (max-width : 400px) {
 	nav .nav-wrapper h1 {
-      font-size: 4vw; }
+		display: inline !important;;
+		font-size: 4.2vw !important; }
 	ul.side-nav.fixed li a{
 	  font-size: 4vw;
+	}
+	.brand-logo{
+		margin-left: 50%;
 	}
  }

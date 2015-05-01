@@ -1,22 +1,24 @@
 <?php
-// source: C:\xampp\htdocs\BPIS\app\FrontModule/templates/Sign/in.latte
+// source: C:\xampp\htdocs\BPIS\app\FrontModule/templates/Error/500.latte
 
 // prolog Latte\Macros\CoreMacros
-list($_b, $_g, $_l) = $template->initialize('3626688053', 'html')
+list($_b, $_g, $_l) = $template->initialize('9220710773', 'html')
 ;
 // prolog Latte\Macros\BlockMacros
 //
 // block headerH1
 //
-if (!function_exists($_b->blocks['headerH1'][] = '_lb655baa8b3c_headerH1')) { function _lb655baa8b3c_headerH1($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
-?>Přihlášení<?php
+if (!function_exists($_b->blocks['headerH1'][] = '_lb33f25923c7_headerH1')) { function _lb33f25923c7_headerH1($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+?>500 - Internal Server Error<?php
 }}
 
 //
 // block content
 //
-if (!function_exists($_b->blocks['content'][] = '_lb52322b5d2b_content')) { function _lb52322b5d2b_content($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
-;$_l->tmp = $_control->getComponent("signInForm"); if ($_l->tmp instanceof Nette\Application\UI\IRenderable) $_l->tmp->redrawControl(NULL, FALSE); $_l->tmp->render() ;
+if (!function_exists($_b->blocks['content'][] = '_lb2fd6076d61_content')) { function _lb2fd6076d61_content($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+?><p>Omlouváme se, máme tam chybu.</p>
+</script>
+<?php
 }}
 
 //

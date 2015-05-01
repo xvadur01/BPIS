@@ -2,7 +2,7 @@
 // source: C:\xampp\htdocs\BPIS\app\components\TimeLine/TimeLineRecordControl.latte
 
 // prolog Latte\Macros\CoreMacros
-list($_b, $_g, $_l) = $template->initialize('1499067637', 'html')
+list($_b, $_g, $_l) = $template->initialize('5680982858', 'html')
 ;
 // prolog Nette\Bridges\ApplicationLatte\UIMacros
 
@@ -21,15 +21,15 @@ if (empty($_l->extends) && !empty($_control->snippetMode)) {
 <?php } else { ?>
 		<li class="timeline-inverted">
 <?php } if ($record->done) { ?>
-				<div class="timeline-badge  green lighten-0">
+				<div title="Záznam ukončen" class="timeline-badge  green lighten-0">
 					<i class="mdi-action-done"></i>
 				</div>
 <?php } elseif ($record->date_done && $record->date_done <  new \DateTime()) { ?>
-				<div class="timeline-badge  red lighten-0">
+				<div title="Záznam v prodlevě" class="timeline-badge  red lighten-0">
 					<i class="mdi-alert-error"></i>
 				</div>
 <?php } else { ?>
-				<div class="timeline-badge  blue lighten-0">
+				<div title="Záznam v řešení" class="timeline-badge  blue lighten-0">
 					<i class="mdi-action-event"></i>
 				</div>
 <?php } ?>

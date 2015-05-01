@@ -33,18 +33,18 @@
 					{/if}
 
 					{if $user->isInRole('admin')}
-						<td><a n:href="Borrowing:userborrowing $borrowing->user_id"> {$borrowing->ref('user','user_id')->surname}{$borrowing->ref('user','user_id')->name}</a></td>
+						<td><a n:href="Borrowing:userborrowing $borrowing->user_id"> {$borrowing->ref('user','user_id')->surname} {$borrowing->ref('user','user_id')->name}</a></td>
 					{/if}
 					<td>
-						{if $borrowing->give_back}
-							<span title="{$borrowing->date_give_back|date:'%d.%m.%Y'}"  class="btn-floating green accent-2"><i class="mdi-action-verified-user"></i></span>
+						{if $borrowing->date_give_back}
+							<span title="Navráceno {$borrowing->date_give_back|date:'%d.%m.%Y'}"  class="btn-floating green accent-2"><i class="mdi-action-verified-user"></i></span>
 						{else}
-							<span class="btn-floating red lighten-4"><i class="mdi-image-timer"></i></span>
+							<span class="btn-floating red lighten-4" title="Nenavráceno" ><i class="mdi-image-timer"></i></span>
 						{/if}
 					</td>
 
 					<td>
-						{if !$borrowing->give_back && $borrowing->user_id == $user->getId()}
+						{if !$borrowing->date_give_back && $borrowing->user_id == $user->getId()}
 							<a n:href="Borrowing:giveback $borrowing->id" title="Give back" class="ajax btn-floating waves-effect waves-light light-blue lighten-1"><i class="mdi-content-reply"></i></a>
 						{/if}
 						<a n:href="Borrowing:delete $borrowing->id" title="Delete" class="btn-floating waves-effect waves-light red"><i class="mdi-action-delete"></i></a>

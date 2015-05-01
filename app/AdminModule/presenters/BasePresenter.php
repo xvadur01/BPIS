@@ -39,8 +39,6 @@ class BasePresenter extends \Nette\Application\UI\Presenter {
 			}
 			$this->redirect(':Front:Sign:in', array('backlink' => $this->storeRequest()));
 		}
-		$this->template->titleColor = "";
-		$this->template->title = "";
 	}
 
 	/**

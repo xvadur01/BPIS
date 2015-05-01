@@ -1,6 +1,5 @@
 {block headerH1}Přehled záznamů{/block}
 {block content}
-
 <div class="row">
 	<div class="col s9">
 		<a n:href="Record:add" title="Nový záznam" class="right-align btn-floating btn-large waves-effect waves-light blue"><i class="mdi-content-add"></i></a>
@@ -11,16 +10,14 @@
 </div>
 <table class=" striped responsive-table">
 	<tr>
-		<th>Id</th>
 		<th>Název</th>
 		<th>Popis</th>
 		<th>Datum</th>
 		<th>Datupm splnění</th>
 		<th></th>
 	</tr>
-{if $records}
-	{foreach $records as $record}
-			<td>{$record->id}</td>
+	{if $records}
+		{foreach $records as $record}
 			<td>{$record->name}</td>
 			<td>{$record->description|truncate:500|striptags}</td>
 			<td>{$record->date|date:'%d.%m.%Y'}</td>
@@ -35,12 +32,11 @@
 				{if $record->user_id == $user->getId()}
 					{if !$record->done}
 						<a n:href="Record:finish $record->id" title="Dokončit" class="btn-floating waves-effect waves-light  light-blue"><i class="mdi-action-done"></i></a>
-					{/if}
+						{/if}
 					<a n:href="Record:delete $record->id" title="Smazat záznam" class="btn-floating waves-effect waves-light  red"><i class="mdi-action-delete"></i></a>
 					<a n:href="Record:edit $record->id" title="Upravit záznam" class="btn-floating waves-effect waves-light light-green accent-3"><i class="mdi-editor-mode-edit"></i></a>
-				{/if}
+					{/if}
 				<a n:href="Record:detail $record->id" title="Detail záznamu" class="btn-floating waves-effect waves-light orange"><i class="mdi-action-subject"></i></a>
-
 			</td>
 		</tr>
 	{/foreach}

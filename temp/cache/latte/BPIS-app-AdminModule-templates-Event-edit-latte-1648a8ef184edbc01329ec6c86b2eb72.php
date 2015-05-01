@@ -2,20 +2,20 @@
 // source: C:\xampp\htdocs\BPIS\app\AdminModule/templates/Event/edit.latte
 
 // prolog Latte\Macros\CoreMacros
-list($_b, $_g, $_l) = $template->initialize('7535458398', 'html')
+list($_b, $_g, $_l) = $template->initialize('5909363108', 'html')
 ;
 // prolog Latte\Macros\BlockMacros
 //
 // block headerH1
 //
-if (!function_exists($_b->blocks['headerH1'][] = '_lb4f5ba6e7eb_headerH1')) { function _lb4f5ba6e7eb_headerH1($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+if (!function_exists($_b->blocks['headerH1'][] = '_lbe88a687017_headerH1')) { function _lbe88a687017_headerH1($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ?>Upravit Událost<?php
 }}
 
 //
 // block scripts
 //
-if (!function_exists($_b->blocks['scripts'][] = '_lb89280a8fb3_scripts')) { function _lb89280a8fb3_scripts($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+if (!function_exists($_b->blocks['scripts'][] = '_lbfe882f8be8_scripts')) { function _lbfe882f8be8_scripts($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ?> <?php Latte\Macros\BlockMacros::callBlockParent($_b, 'scripts', get_defined_vars()) ?>  
 <script type="text/javascript">
 
@@ -58,7 +58,11 @@ if (!function_exists($_b->blocks['scripts'][] = '_lb89280a8fb3_scripts')) { func
 
 			}
 		});
+		jQuery.extend( jQuery.fn.pickadate.defaults, {
+			format: 'd. mm. yyyy',
+			formatSubmit: 'd. mm. yyyy',
 
+		});
 
 	});
 </script>
@@ -82,7 +86,7 @@ if (!function_exists($_b->blocks['scripts'][] = '_lb89280a8fb3_scripts')) { func
 //
 // block content
 //
-if (!function_exists($_b->blocks['content'][] = '_lb8eee9600ee_content')) { function _lb8eee9600ee_content($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+if (!function_exists($_b->blocks['content'][] = '_lb7808e9a1f2_content')) { function _lb7808e9a1f2_content($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ;Nette\Bridges\FormsLatte\FormMacros::renderFormBegin($form = $_form = $_control["eventForm"], array()) ?>
 
 <div class="row">
@@ -136,7 +140,7 @@ if (!function_exists($_b->blocks['content'][] = '_lb8eee9600ee_content')) { func
 //
 // block _itemsList
 //
-if (!function_exists($_b->blocks['_itemsList'][] = '_lb5224bb3e4c__itemsList')) { function _lb5224bb3e4c__itemsList($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v; $_control->redrawControl('itemsList', FALSE)
+if (!function_exists($_b->blocks['_itemsList'][] = '_lb72e75ea136__itemsList')) { function _lb72e75ea136__itemsList($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v; $_control->redrawControl('itemsList', FALSE)
 ?><h5>Vyhovující termíny:</h5>
 <div class="row">
 <?php $iterations = 0; foreach ($form['dates']->containers as $dateid => $user) { ?>

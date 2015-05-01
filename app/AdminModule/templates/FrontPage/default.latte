@@ -22,9 +22,9 @@
 		<td>{$page->text|truncate:500|striptags}</td>
 		<td>
 			{if $page->active}
-				<span class="btn-floating green accent-2"><i class=" mdi-communication-invert-colors-on"></i></span>
+				<span class="btn-floating green accent-2" title="Aktivní"><i class=" mdi-communication-invert-colors-on"></i></span>
 			{else}
-				<span class="btn-floating red lighten-4"><i class="mdi-communication-invert-colors-off"></i></span>
+				<span class="btn-floating red lighten-4" title="Skryto"><i class="mdi-communication-invert-colors-off"></i></span>
 			{/if}
 		</td>
 		<td>

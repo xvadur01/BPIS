@@ -1,4 +1,5 @@
 <ul class="timeline">
+{if count($data)}
 {foreach $data as $event}
 	{if $iterator->isOdd()}
 		<li>
@@ -6,15 +7,15 @@
 		<li class="timeline-inverted">
 	{/if}
 		{if !$event->date}
-			<div class="timeline-badge  blue lighten-0">
+			<div title="Plánování události" class="timeline-badge  blue lighten-0">
 					?
 			</div>
 		{elseif $event->date >  new \DateTime() }
-				<div class="timeline-badge  green lighten-0">
+				<div title="Naplánovaná událost" class="timeline-badge  green lighten-0">
 					<i class="mdi-action-event"></i>
 				</div>
 		{else}
-			<div class="timeline-badge grey">
+			<div title="Uskutečněná událost" class="timeline-badge grey">
 				<i class="mdi-action-done"></i>
 			</div>
 		{/if}
@@ -44,4 +45,5 @@
 		</div>
 	</li>
 {/foreach}
+{/if}
 </ul>

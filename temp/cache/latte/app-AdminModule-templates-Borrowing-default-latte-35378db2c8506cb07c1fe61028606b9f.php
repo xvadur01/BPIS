@@ -2,20 +2,20 @@
 // source: C:\xampp\htdocs\BPIS\app\AdminModule/templates/Borrowing/default.latte
 
 // prolog Latte\Macros\CoreMacros
-list($_b, $_g, $_l) = $template->initialize('9258475900', 'html')
+list($_b, $_g, $_l) = $template->initialize('8837434033', 'html')
 ;
 // prolog Latte\Macros\BlockMacros
 //
 // block headerH1
 //
-if (!function_exists($_b->blocks['headerH1'][] = '_lb7f2ae9b680_headerH1')) { function _lb7f2ae9b680_headerH1($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+if (!function_exists($_b->blocks['headerH1'][] = '_lb0232c337fa_headerH1')) { function _lb0232c337fa_headerH1($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ?>Přehled výpůjček<?php
 }}
 
 //
 // block content
 //
-if (!function_exists($_b->blocks['content'][] = '_lbafec9992e2_content')) { function _lbafec9992e2_content($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+if (!function_exists($_b->blocks['content'][] = '_lb7cd25420dc_content')) { function _lb7cd25420dc_content($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ?><div class="row">
 <a title="Nová výpujčka" class="right-align btn-floating btn-large waves-effect waves-light blue" href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Borrowing:add"), ENT_COMPAT) ?>
 "><i class="mdi-content-add"></i></a>
@@ -27,7 +27,7 @@ if (!function_exists($_b->blocks['content'][] = '_lbafec9992e2_content')) { func
 //
 // block _borrowTable
 //
-if (!function_exists($_b->blocks['_borrowTable'][] = '_lb8b98c2edb9__borrowTable')) { function _lb8b98c2edb9__borrowTable($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v; $_control->redrawControl('borrowTable', FALSE)
+if (!function_exists($_b->blocks['_borrowTable'][] = '_lb646e36780e__borrowTable')) { function _lb646e36780e__borrowTable($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v; $_control->redrawControl('borrowTable', FALSE)
 ?><table class=" striped responsive-table">
 	<thead>
 	<tr>
@@ -43,7 +43,7 @@ if (!function_exists($_b->blocks['_borrowTable'][] = '_lb8b98c2edb9__borrowTable
 	</thead>
 <?php if ($borrowings) { ?>
 			<tbody>
-<?php $iterations = 0; foreach ($borrowings as $borrowing) { Tracy\Debugger::barDump(array('$borrowing' => $borrowing), "Template " . str_replace(dirname(dirname($template->getName())), "\xE2\x80\xA6", $template->getName())) ?>
+<?php $iterations = 0; foreach ($borrowings as $borrowing) { ?>
 				<tr>
 					<td><?php echo Latte\Runtime\Filters::escapeHtml($borrowing->title, ENT_NOQUOTES) ?></td>
 					<td><?php echo Latte\Runtime\Filters::escapeHtml($borrowing->surname, ENT_NOQUOTES) ?>
@@ -57,18 +57,19 @@ if (!function_exists($_b->blocks['_borrowTable'][] = '_lb8b98c2edb9__borrowTable
 
 <?php if ($user->isInRole('admin')) { ?>
 						<td><a href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Borrowing:userborrowing", array($borrowing->user_id)), ENT_COMPAT) ?>
-"> <?php echo Latte\Runtime\Filters::escapeHtml($borrowing->ref('user','user_id')->surname, ENT_NOQUOTES) ;echo Latte\Runtime\Filters::escapeHtml($borrowing->ref('user','user_id')->name, ENT_NOQUOTES) ?></a></td>
+"> <?php echo Latte\Runtime\Filters::escapeHtml($borrowing->ref('user','user_id')->surname, ENT_NOQUOTES) ?>
+ <?php echo Latte\Runtime\Filters::escapeHtml($borrowing->ref('user','user_id')->name, ENT_NOQUOTES) ?></a></td>
 <?php } ?>
 					<td>
-<?php if ($borrowing->give_back) { ?>
-							<span title="<?php echo Latte\Runtime\Filters::escapeHtml($template->date($borrowing->date_give_back, '%d.%m.%Y'), ENT_COMPAT) ?>"  class="btn-floating green accent-2"><i class="mdi-action-verified-user"></i></span>
+<?php if ($borrowing->date_give_back) { ?>
+							<span title="Navráceno <?php echo Latte\Runtime\Filters::escapeHtml($template->date($borrowing->date_give_back, '%d.%m.%Y'), ENT_COMPAT) ?>"  class="btn-floating green accent-2"><i class="mdi-action-verified-user"></i></span>
 <?php } else { ?>
-							<span class="btn-floating red lighten-4"><i class="mdi-image-timer"></i></span>
+							<span class="btn-floating red lighten-4" title="Nenavráceno" ><i class="mdi-image-timer"></i></span>
 <?php } ?>
 					</td>
 
 					<td>
-<?php if (!$borrowing->give_back && $borrowing->user_id == $user->getId()) { ?>
+<?php if (!$borrowing->date_give_back && $borrowing->user_id == $user->getId()) { ?>
 							<a title="Give back" class="ajax btn-floating waves-effect waves-light light-blue lighten-1" href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Borrowing:giveback", array($borrowing->id)), ENT_COMPAT) ?>
 "><i class="mdi-content-reply"></i></a>
 <?php } ?>

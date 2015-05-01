@@ -2,39 +2,41 @@
 // source: C:\xampp\htdocs\BPIS\app\AdminModule/templates/@layoutAdmin.latte
 
 // prolog Latte\Macros\CoreMacros
-list($_b, $_g, $_l) = $template->initialize('5462937122', 'html')
+list($_b, $_g, $_l) = $template->initialize('4156068839', 'html')
 ;
 // prolog Latte\Macros\BlockMacros
 //
-// block head
+// block headerH1
 //
-if (!function_exists($_b->blocks['head'][] = '_lb143c0e0509_head')) { function _lb143c0e0509_head($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+if (!function_exists($_b->blocks['headerH1'][] = '_lbfa73adb3ab_headerH1')) { function _lbfa73adb3ab_headerH1($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ;
 }}
 
 //
-// block headerH1
+// block head
 //
-if (!function_exists($_b->blocks['headerH1'][] = '_lb31fdb11751_headerH1')) { function _lb31fdb11751_headerH1($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+if (!function_exists($_b->blocks['head'][] = '_lbea023f9f6b_head')) { function _lbea023f9f6b_head($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ;
 }}
 
 //
 // block _flashMessage
 //
-if (!function_exists($_b->blocks['_flashMessage'][] = '_lbcc3c747818__flashMessage')) { function _lbcc3c747818__flashMessage($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v; $_control->redrawControl('flashMessage', FALSE)
+if (!function_exists($_b->blocks['_flashMessage'][] = '_lb8a51a78fae__flashMessage')) { function _lb8a51a78fae__flashMessage($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v; $_control->redrawControl('flashMessage', FALSE)
 ?>			<div class="row">
 				<div class="col s12">
 <?php $iterations = 0; foreach ($flashes as $flash) { if ($flash->type  == 'success') { ?>
 							<div class="card-panel tea light-green accent-1 ">
 								<i class="small mdi-action-done"></i>
+<?php } elseif ($flash->type  == 'error') { ?>
+							<div class="card-panel tea  red accent-1 ">
+								<i class="small mdi-alert-error"></i>
 <?php } else { ?>
 							<div class="card-panel tea">
 <?php } ?>
 						<span><?php echo Latte\Runtime\Filters::escapeHtml($flash->message, ENT_NOQUOTES) ?></span>
 						</div>
 <?php $iterations++; } ?>
-
 				</div>
 			</div>
 <?php
@@ -43,19 +45,15 @@ if (!function_exists($_b->blocks['_flashMessage'][] = '_lbcc3c747818__flashMessa
 //
 // block scripts
 //
-if (!function_exists($_b->blocks['scripts'][] = '_lbf49de2ff72_scripts')) { function _lbf49de2ff72_scripts($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+if (!function_exists($_b->blocks['scripts'][] = '_lb4177f67b87_scripts')) { function _lb4177f67b87_scripts($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ?>	<script src="<?php echo Latte\Runtime\Filters::escapeHtml(Latte\Runtime\Filters::safeUrl($basePath), ENT_COMPAT) ?>/js/jquery-2.1.3.min.js"></script>
-	<script src="http://code.jquery.com/jquery-1.9.0.js"></script>
-	<script src="http://code.jquery.com/jquery-migrate-1.0.0.js"></script>
 	<script src="<?php echo Latte\Runtime\Filters::escapeHtml(Latte\Runtime\Filters::safeUrl($basePath), ENT_COMPAT) ?>/js/netteForms.js"></script>
 	<script src="<?php echo Latte\Runtime\Filters::escapeHtml(Latte\Runtime\Filters::safeUrl($basePath), ENT_COMPAT) ?>/js/nette.ajax.js"></script>
 	<script src="<?php echo Latte\Runtime\Filters::escapeHtml(Latte\Runtime\Filters::safeUrl($basePath), ENT_COMPAT) ?>/js/main.js"></script>
 	<script src="<?php echo Latte\Runtime\Filters::escapeHtml(Latte\Runtime\Filters::safeUrl($basePath), ENT_COMPAT) ?>/js/materialize.min.js"></script>
-		<script src="<?php echo Latte\Runtime\Filters::escapeHtml(Latte\Runtime\Filters::safeUrl($basePath), ENT_COMPAT) ?>/js/clockpicker.js"></script>
+	<script src="<?php echo Latte\Runtime\Filters::escapeHtml(Latte\Runtime\Filters::safeUrl($basePath), ENT_COMPAT) ?>/js/clockpicker.js"></script>
 	<script src="<?php echo Latte\Runtime\Filters::escapeHtml(Latte\Runtime\Filters::safeUrl($basePath), ENT_COMPAT) ?>/js/live-form-validation.js"></script>
 	<script src="<?php echo Latte\Runtime\Filters::escapeHtml(Latte\Runtime\Filters::safeUrl($basePath), ENT_COMPAT) ?>/js/cs.js"></script>
-	
-
 	<script type="text/javascript">
 
 	$(document).ready(function()
@@ -79,7 +77,7 @@ if (!function_exists($_b->blocks['scripts'][] = '_lbf49de2ff72_scripts')) { func
   $('.collapsible').collapsible();
 
 	});
-	</script>
+</script>
 <?php
 }}
 
@@ -108,9 +106,8 @@ if (empty($_l->extends) && !empty($_control->snippetMode)) {
 <html>
 <head>
 	<meta charset="utf-8">
-
-	<title><?php if (isset($_b->blocks["title"])) { ob_start(); Latte\Macros\BlockMacros::callBlock($_b, 'title', $template->getParameters()); echo $template->striptags(ob_get_clean()) ?>
- | <?php } ?></title>
+	<title><?php if ($_l->extends) { ob_end_clean(); return $template->renderChildTemplate($_l->extends, get_defined_vars()); }
+ob_start(); call_user_func(reset($_b->blocks['headerH1']), $_b, get_defined_vars()); echo $template->striptags(ob_get_clean())  ?></title>
 	<!-- CSS  -->
 	<link href="<?php echo Latte\Runtime\Filters::escapeHtml(Latte\Runtime\Filters::safeUrl($basePath), ENT_COMPAT) ?>/css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection">
 	<link href="<?php echo Latte\Runtime\Filters::escapeHtml(Latte\Runtime\Filters::safeUrl($basePath), ENT_COMPAT) ?>/css/materialize.aditional.css" type="text/css" rel="stylesheet" media="screen,projection">
@@ -118,14 +115,8 @@ if (empty($_l->extends) && !empty($_control->snippetMode)) {
 	<link href="<?php echo Latte\Runtime\Filters::escapeHtml(Latte\Runtime\Filters::safeUrl($basePath), ENT_COMPAT) ?>/css/clockpicker.css" type="text/css" rel="stylesheet" media="screen,projection">
 	<link href="<?php echo Latte\Runtime\Filters::escapeHtml(Latte\Runtime\Filters::safeUrl($basePath), ENT_COMPAT) ?>/css/screen.css" type="text/css" rel="stylesheet" media="screen,projection">
 	<link href="<?php echo Latte\Runtime\Filters::escapeHtml(Latte\Runtime\Filters::safeUrl($basePath), ENT_COMPAT) ?>/css/timeLine.css" type="text/css" rel="stylesheet" media="screen,projection">
-	<link rel="shortcut icon" href="<?php echo Latte\Runtime\Filters::escapeHtml(Latte\Runtime\Filters::safeUrl($basePath), ENT_COMPAT) ?>/favicon.ico">
-	<!--<link rel="stylesheet" media="screen,projection,tv" href="<?php echo Latte\Runtime\Filters::escapeHtmlComment($basePath) ?>/css/jQueryUi.css">
-	<link rel="stylesheet" media="screen,projection,tv" href="<?php echo Latte\Runtime\Filters::escapeHtmlComment($basePath) ?>/css/dateTimePicker.css">
-	-->
-	<link rel="stylesheet" type="text/css" media="screen" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/themes/smoothness/jquery-ui.css">
-	<link rel="stylesheet" type="text/css" media="screen" href="<?php echo Latte\Runtime\Filters::escapeHtml(Latte\Runtime\Filters::safeUrl($basePath), ENT_COMPAT) ?>/elfinder/css/elfinder.min.css">
-	<?php if ($_l->extends) { ob_end_clean(); return $template->renderChildTemplate($_l->extends, get_defined_vars()); }
-call_user_func(reset($_b->blocks['head']), $_b, get_defined_vars())  ?>
+		<link rel="stylesheet" type="text/css" media="screen" href="<?php echo Latte\Runtime\Filters::escapeHtml(Latte\Runtime\Filters::safeUrl($basePath), ENT_COMPAT) ?>/elfinder/css/elfinder.min.css">
+	<?php call_user_func(reset($_b->blocks['head']), $_b, get_defined_vars())  ?>
 
 </head>
 
@@ -160,7 +151,7 @@ call_user_func(reset($_b->blocks['head']), $_b, get_defined_vars())  ?>
 	<nav class="top-nav  light-blue lighten-1">
 			<div class="nav-wrapper">
 				<div class="col s12">
-					<a class="brand-logo"><h1><?php call_user_func(reset($_b->blocks['headerH1']), $_b, get_defined_vars())  ?></h1></a>
+					<a class="brand-logo"><h1><?php call_user_func(reset($_b->blocks['headerH1']), $_b, get_defined_vars()) ?></h1></a>
 					<ul class="right hide-on-med-and-down">
 					  <!-- Dropdown Trigger -->
 					  <li><a class="dropdown-button" href="#!" data-activates="dropdown1"><?php echo Latte\Runtime\Filters::escapeHtml($user->getIdentity()->login, ENT_NOQUOTES) ?><i class="mdi-navigation-arrow-drop-down right"></i></a></li>
@@ -184,7 +175,8 @@ call_user_func(reset($_b->blocks['head']), $_b, get_defined_vars())  ?>
 	<footer class="page-footer light-blue lighten-1">
 		<div class="container">
 		  <div class="row">
-					  </div>
+
+		  </div>
 		</div>
 		<div class="footer-copyright blue">
 		  <div class="container">

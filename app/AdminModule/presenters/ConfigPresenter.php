@@ -19,8 +19,7 @@ class ConfigPresenter extends BasePresenter {
 	 */
 	public function renderDefault() {
 		$config = $this->configManager->getTable()->limit(1)->fetch();
-		if($config)
-		{
+		if ($config) {
 			$this['configForm']->setDefaults($config);
 		}
 	}

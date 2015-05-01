@@ -54,17 +54,17 @@ class EventPlanningControl extends UI\Control
 		$Users = array();
 		foreach ($terms as $term)
 		{
-				$Users[$term['user_id']] = $this->userManager->get($term['user_id']);
-				$datetime = new \DateTime($term['time']);
-				if(empty($this->userId) ||  $this->userId != $term['user_id'])
-				{
-					$data[$term['user_id']][$datetime->format('d.m.Y')][$datetime->format('H:i:s')][] = $term->toArray();
-				}
-				else
-				{
-					$data[$term['user_id']][$datetime->format('d.m.Y')][$datetime->format('H:i:s')][] = $term->toArray();
-					$dataUser[$datetime->format('d.m.Y')][$datetime->format('H:i:s')][] = $term->toArray();
-				}
+			$Users[$term['user_id']] = $this->userManager->get($term['user_id']);
+			$datetime = new \DateTime($term['time']);
+			if(empty($this->userId) ||  $this->userId != $term['user_id'])
+			{
+				$data[$term['user_id']][$datetime->format('d.m.Y')][$datetime->format('H:i:s')][] = $term->toArray();
+			}
+			else
+			{
+				$data[$term['user_id']][$datetime->format('d.m.Y')][$datetime->format('H:i:s')][] = $term->toArray();
+				$dataUser[$datetime->format('d.m.Y')][$datetime->format('H:i:s')][] = $term->toArray();
+			}
 		}
 		$i = 0;
 		$form = $this['eventPlanningForm'];

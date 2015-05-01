@@ -3,39 +3,43 @@
 {include #parent}  {* include parent #scripts block *}
 <script type="text/javascript">
 
-	$(document).ready(function()
-    {
-      	$(".clockpicker").clockpicker({
+	$(document).ready(function ()
+	{
+		$(".clockpicker").clockpicker({
 			placement: 'top',
 			donetext: 'Vložit',
-			afterDone: function() {
-                $('.active2').click();
+			afterDone: function () {
+				$('.active2').click();
 			},
-
 		});
 
 		/*$('.time-input input').click(function(){
-			$(this).parent().addClass('active2');
-		});
+		 $(this).parent().addClass('active2');
+		 });
 
-		$('.time-input').click(function(){
-			$(this).find('label:first').addClass('active');
-			$(this).find('label:first').click();
-			$(this).removeClass('active2');
-		});*/
+		 $('.time-input').click(function(){
+		 $(this).find('label:first').addClass('active');
+		 $(this).find('label:first').click();
+		 $(this).removeClass('active2');
+		 });*/
 
-		$("form input:checkbox").click(function(){
-			if(this.checked)
+		$("form input:checkbox").click(function () {
+			if (this.checked)
 			{
-				$("form input:checkbox").attr ( "checked" , false );
+				$("form input:checkbox").attr("checked", false);
 				this.checked = true;
 			}
 			else
 			{
-				$("form input:checkbox").attr ( "checked" , false );
+				$("form input:checkbox").attr("checked", false);
 			}
 		});
 
+	});
+
+	jQuery.extend(jQuery.fn.pickadate.defaults, {
+		format: 'd. mm. yyyy',
+		formatSubmit: 'd. mm. yyyy',
 	});
 </script>
 {*<script src="{$basePath}/js/ckeditor/ckeditor.js"></script>
@@ -55,17 +59,17 @@
 {/block}
 {block content}
 {form eventForm}
-<div class="row">
-	<div class="input-field">
+	<div class="row">
+		<div class="input-field">
 		{label name}{/label}
 		{input name}
 	</div>
 </div>
 <div class="row">
 	<div class="input-field">
-		{label description}{/label}
-		{input description}
-	</div>
+	{label description}{/label}
+	{input description}
+</div>
 </div>
 <div class="row">
 	<div class="s12 input-field">
@@ -75,42 +79,41 @@
 </div>
 <div class="row">
 	<div class="input-field">
-		{label record}{/label}
-		{input record}
-	</div>
+	{label record}{/label}
+	{input record}
 </div>
-{* ajax znemozni datepicker*}
+</div>
 {snippet itemsList}
-<h5>Vyhovující termíny:</h5>
+	<h5>Vyhovující termíny:</h5>
 	<div class="row">
-	{foreach $form['dates']->containers as $dateid => $user}
-		<div class="col s12 m3 l3 z-depth-2 eventcard" >
-			<div class="col s12">
-				{input dates-$dateid-remove class=>'ajax btn btn-flat eventbutton'}
-			</div>
-			<div class="input-field col s12">
-				{$user['date']->label}{$user['date']->control}
-			</div>
-			<div class="col s12">
-				{foreach $user['times']->containers as $timeid => $time}
-					<div class="col input-field s12 checkBox">
-						{input $time['pick']: }
-						{label $time['pick']: /}
-					</div>
-					<div class="col input-field s6 time-input">
+		{foreach $form['dates']->containers as $dateid => $user}
+			<div class="col s12 m3 l3 z-depth-2 eventcard" >
+				<div class="col s12">
+					{input dates-$dateid-remove class=>'ajax btn btn-flat eventbutton'}
+				</div>
+				<div class="input-field col s12">
+					{$user['date']->label}{$user['date']->control}
+				</div>
+				<div class="col s12">
+					{foreach $user['times']->containers as $timeid => $time}
+						<div class="col input-field s12 checkBox">
+							{input $time['pick']: }
+							{label $time['pick']: /}
+						</div>
+						<div class="col input-field s6 time-input">
 							{$time['time']->label}{$time['time']->control}
 							{$time['id']->label}{$time['id']->control}
+						</div>
+						<div class="col s6">
+							{input dates-$dateid-times-$timeid-remove class=>'ajax btn btn-flat eventRemoveTime'}
+						</div>
+					{/foreach}
+					<div class="col s12">
+						{input dates-$dateid-times-add class=>'ajax btn btn-flat eventbutton'}
 					</div>
-					<div class="col s6">
-						{input dates-$dateid-times-$timeid-remove class=>'ajax btn btn-flat eventRemoveTime'}
-					</div>
-				{/foreach}
-				<div class="col s12">
-					{input dates-$dateid-times-add class=>'ajax btn btn-flat eventbutton'}
 				</div>
 			</div>
-		</div>
-	{/foreach}
+		{/foreach}
 
 	</div>
 {/snippet}

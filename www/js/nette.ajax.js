@@ -515,7 +515,7 @@
 		});
         $('.datepicker').pickadate({
 			selectMonths: false, // Creates a dropdown to control month
-});
+		});
     }
 });
 // default ajaxification (can be overridden in init())

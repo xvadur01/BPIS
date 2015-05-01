@@ -2,7 +2,7 @@
 // source: C:\xampp\htdocs\BPIS\app\components\TimeLine/TimeLineEventControl.latte
 
 // prolog Latte\Macros\CoreMacros
-list($_b, $_g, $_l) = $template->initialize('5176569289', 'html')
+list($_b, $_g, $_l) = $template->initialize('3347850919', 'html')
 ;
 // prolog Nette\Bridges\ApplicationLatte\UIMacros
 
@@ -16,20 +16,20 @@ if (empty($_l->extends) && !empty($_control->snippetMode)) {
 //
 ?>
 <ul class="timeline">
-<?php $iterations = 0; foreach ($iterator = $_l->its[] = new Latte\Runtime\CachingIterator($data) as $event) { if ($iterator->isOdd()) { ?>
+<?php if (count($data)) { $iterations = 0; foreach ($iterator = $_l->its[] = new Latte\Runtime\CachingIterator($data) as $event) { if ($iterator->isOdd()) { ?>
 		<li>
 <?php } else { ?>
 		<li class="timeline-inverted">
 <?php } if (!$event->date) { ?>
-			<div class="timeline-badge  blue lighten-0">
+			<div title="Plánování události" class="timeline-badge  blue lighten-0">
 					?
 			</div>
 <?php } elseif ($event->date >  new \DateTime()) { ?>
-				<div class="timeline-badge  green lighten-0">
+				<div title="Naplánovaná událost" class="timeline-badge  green lighten-0">
 					<i class="mdi-action-event"></i>
 				</div>
 <?php } else { ?>
-			<div class="timeline-badge grey">
+			<div title="Uskutečněná událost" class="timeline-badge grey">
 				<i class="mdi-action-done"></i>
 			</div>
 <?php } ?>
@@ -60,5 +60,5 @@ if (empty($_l->extends) && !empty($_control->snippetMode)) {
 			</div>
 		</div>
 	</li>
-<?php $iterations++; } array_pop($_l->its); $iterator = end($_l->its) ?>
+<?php $iterations++; } array_pop($_l->its); $iterator = end($_l->its) ;} ?>
 </ul>

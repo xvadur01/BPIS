@@ -14,7 +14,7 @@ php:
 nette:
 	application:
 		errorPresenter: Error
-		catchExceptions: no
+		catchExceptions: true
 
 	session:
 		expiration: 14 days
