@@ -2,50 +2,25 @@
 // source: C:\xampp\htdocs\BPIS\app\AdminModule/templates/Event/edit.latte
 
 // prolog Latte\Macros\CoreMacros
-list($_b, $_g, $_l) = $template->initialize('5909363108', 'html')
+list($_b, $_g, $_l) = $template->initialize('1663972515', 'html')
 ;
 // prolog Latte\Macros\BlockMacros
 //
 // block headerH1
 //
-if (!function_exists($_b->blocks['headerH1'][] = '_lbe88a687017_headerH1')) { function _lbe88a687017_headerH1($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+if (!function_exists($_b->blocks['headerH1'][] = '_lb684b4449f0_headerH1')) { function _lb684b4449f0_headerH1($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ?>Upravit Událost<?php
 }}
 
 //
 // block scripts
 //
-if (!function_exists($_b->blocks['scripts'][] = '_lbfe882f8be8_scripts')) { function _lbfe882f8be8_scripts($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+if (!function_exists($_b->blocks['scripts'][] = '_lb64b9773065_scripts')) { function _lb64b9773065_scripts($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ?> <?php Latte\Macros\BlockMacros::callBlockParent($_b, 'scripts', get_defined_vars()) ?>  
 <script type="text/javascript">
 
 	$(document).ready(function()
     {
-      	$(".clockpicker").clockpicker({
-			placement: 'top',
-			donetext: 'Vložit',
-			afterDone: function() {
-                $('.active2').click();
-			},
-
-		});
-
-		$('#editor').each(function () {
-			//$(this).on('blur', function(){ CKEDITOR.instances. textAreaClientId.updateElement();})
-			var $textarea = $(this);
-			$textarea.val(CKEDITOR.instances[$textarea.attr('name')].getData());
-		 });
-
-		/*$('.time-input input').click(function(){
-			$(this).parent().addClass('active2');
-		});
-
-		$('.time-input').click(function(){
-			$(this).find('label:first').addClass('active');
-			$(this).find('label:first').click();
-			$(this).removeClass('active2');
-		});*/
-
 		$("form input:checkbox").click(function(){
 			if(this.checked)
 			{
@@ -66,27 +41,13 @@ if (!function_exists($_b->blocks['scripts'][] = '_lbfe882f8be8_scripts')) { func
 
 	});
 </script>
-<script src="<?php echo Latte\Runtime\Filters::escapeHtml(Latte\Runtime\Filters::safeUrl($basePath), ENT_COMPAT) ?>/js/ckeditor/ckeditor.js"></script>
-<script type="text/javascript" src="<?php echo Latte\Runtime\Filters::escapeHtml(Latte\Runtime\Filters::safeUrl($basePath), ENT_COMPAT) ?>/elfinder/js/elfinder.min.js"></script>
-<script type="text/javascript">
-	   $().ready(function() {
-        var elf = $('#elfinder').elfinder({
-            // lang: 'ru',             // language (OPTIONAL)
-            url : <?php echo Latte\Runtime\Filters::escapeJs($basePath) ?>+'/elfinder/php/connector.php'  // connector URL (REQUIRED)
-        }).elfinder('instance');
-    });
-	CKEDITOR.replace( 'editor', {
-    filebrowserBrowseUrl : <?php echo Latte\Runtime\Filters::escapeJs($basePath) ?>+'/elfinder/elfinder.html', // eg. 'includes/elFinder/elfinder.html'
-    uiColor : '#9AB8F3'
-});
-</script>
 <?php
 }}
 
 //
 // block content
 //
-if (!function_exists($_b->blocks['content'][] = '_lb7808e9a1f2_content')) { function _lb7808e9a1f2_content($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+if (!function_exists($_b->blocks['content'][] = '_lbbf96dfbeb2_content')) { function _lbbf96dfbeb2_content($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ;Nette\Bridges\FormsLatte\FormMacros::renderFormBegin($form = $_form = $_control["eventForm"], array()) ?>
 
 <div class="row">
@@ -140,7 +101,7 @@ if (!function_exists($_b->blocks['content'][] = '_lb7808e9a1f2_content')) { func
 //
 // block _itemsList
 //
-if (!function_exists($_b->blocks['_itemsList'][] = '_lb72e75ea136__itemsList')) { function _lb72e75ea136__itemsList($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v; $_control->redrawControl('itemsList', FALSE)
+if (!function_exists($_b->blocks['_itemsList'][] = '_lba58847d933__itemsList')) { function _lba58847d933__itemsList($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v; $_control->redrawControl('itemsList', FALSE)
 ?><h5>Vyhovující termíny:</h5>
 <div class="row">
 <?php $iterations = 0; foreach ($form['dates']->containers as $dateid => $user) { ?>

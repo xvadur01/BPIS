@@ -6,3 +6,17 @@ $(function(){
 $(function () {
     $.nette.init();
 });
+
+/*
+ * Function inicilaize form input
+ */
+function initInput()
+{
+	$("input").each(function(){
+		if(typeof($(this).val()) != "undefined" && $(this).val() !== null && $(this).val() != "")
+		{
+			var $label = $("label[for='"+this.id+"']")
+			$label.addClass('active') ;
+		}
+	});
+};

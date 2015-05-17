@@ -24,20 +24,34 @@ abstract class BasePresenter extends \Nette\Application\UI\Presenter {
 	/** @var \App\Model\ConfigManager */
 	private $configManager;
 
+	/**
+	 * function to inject instance frontpageManager and configManager
+	 * @param \Smf\Menu\Control\Factory $factory
+	 */
 	public function injectFrontpageManager(\App\Model\FrontpageManager $frontpageManager, \App\Model\ConfigManager $configManager) {
 		$this->frontpageManager = $frontpageManager;
 		$this->configManager = $configManager;
 	}
 
+	/**
+	 * Before render default set admin template.
+	 */
 	public function beforeRender() {
 		$this->template->config = $this->configManager->getTable()->limit(1)->fetch();
 		$this->setLayout('layout');
 	}
 
+	/**
+	 * Startup check if user is login.
+	 */
 	function startup() {
 		parent::startup();
 	}
 
+	/**
+	 * Prepare form renderer for CSS framework.
+	 * @return \Nette\Application\UI\Form
+	 */
 	protected function form() {
 		$form = new \Nette\Application\UI\Form;
 
@@ -67,6 +81,10 @@ abstract class BasePresenter extends \Nette\Application\UI\Presenter {
 		return $form;
 	}
 
+	/**
+	 * Create navigate menu.
+	 * @return  Smf\Menu
+	 */
 	protected function createComponentMenu() {
 		$menu = $this->menuFactory->createControl();
 		$root = $menu->getRoot();

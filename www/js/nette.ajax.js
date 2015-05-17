@@ -501,17 +501,14 @@
 	});
 	$.nette.ext('datepicker', {
     load: function () {
-		$("input").each(function(){
-				if(typeof($(this).val()) != "undefined" && $(this).val() !== null && $(this).val() != "")
-				{
-					var $label = $("label[for='"+this.id+"']")
-					$label.addClass('active') ;
-				}
-			});
+		window.initInput();
 		$('.clockpicker').clockpicker({
 			placement: 'top',
 			align: 'left',
-			donetext: 'Done'
+			donetext: 'Vložit',
+			afterDone: function () {
+				window.initInput();
+			}
 		});
         $('.datepicker').pickadate({
 			selectMonths: false, // Creates a dropdown to control month

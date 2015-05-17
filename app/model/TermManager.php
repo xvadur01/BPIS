@@ -11,6 +11,7 @@ class TermManager extends BaseManager
 		COLUMN_ID = 'id',
 		COLUMN_USER = 'user_id',
 		COLUMN_EVENT = 'event_id',
+		COLUMN_TIME = 'time',
 		COLUMN_ALLOW = 'confirm';
 
 
@@ -91,12 +92,12 @@ class TermManager extends BaseManager
 	 */
 	public function getTermOfEvent($idUser, $idEvent)
 	{
-		return $this->connection->table(self::TABLE_NAME)->where(self::COLUMN_USER,$idUser)->where(self::COLUMN_EVENT,$idEvent);
+		return $this->connection->table(self::TABLE_NAME)->where(self::COLUMN_USER,$idUser)->where(self::COLUMN_EVENT,$idEvent)->order(self::COLUMN_TIME);
 	}
 
 	public function getTermsOfEvent($idEvent)
 	{
-		return $this->connection->table(self::TABLE_NAME)->where(self::COLUMN_EVENT,$idEvent);
+		return $this->connection->table(self::TABLE_NAME)->where(self::COLUMN_EVENT,$idEvent)->order(self::COLUMN_TIME);
 	}
 
 	/**

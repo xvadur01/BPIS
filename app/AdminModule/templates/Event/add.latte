@@ -5,24 +5,6 @@
 
 	$(document).ready(function ()
 	{
-		$(".clockpicker").clockpicker({
-			placement: 'top',
-			donetext: 'Vložit',
-			afterDone: function () {
-				$('.active2').click();
-			},
-		});
-
-		/*$('.time-input input').click(function(){
-		 $(this).parent().addClass('active2');
-		 });
-
-		 $('.time-input').click(function(){
-		 $(this).find('label:first').addClass('active');
-		 $(this).find('label:first').click();
-		 $(this).removeClass('active2');
-		 });*/
-
 		$("form input:checkbox").click(function () {
 			if (this.checked)
 			{

@@ -61,7 +61,7 @@ class AdminPresenter extends BasePresenter {
 	 * Render default. Load user borrow, 3 newes events, 3 closest events and all records.
 	 */
 	public function renderDefault() {
-		$this->template->borrowing = $this->borrowingManager->getUserActiveBorrow($this->user->getId());
+		$this->template->borrowing = $this->borrowingManager->getUserActiveBorrow($this->user->getId())->order("RAND()")->limit(3);
 		$this->template->newestEvent = $this->eventManager->getNewestUserEvent($this->user->getId())->fetchAll();
 		$this->template->closestEvent = $this->eventManager->getClosestUserEvent($this->user->getId())->fetchAll();
 		$this->data = $this->recordManager->getUserRecord($this->user->getId());

@@ -2,20 +2,20 @@
 // source: C:\xampp\htdocs\BPIS\app\AdminModule/templates/Admin/default.latte
 
 // prolog Latte\Macros\CoreMacros
-list($_b, $_g, $_l) = $template->initialize('6209682721', 'html')
+list($_b, $_g, $_l) = $template->initialize('3710630516', 'html')
 ;
 // prolog Latte\Macros\BlockMacros
 //
 // block headerH1
 //
-if (!function_exists($_b->blocks['headerH1'][] = '_lb486013370b_headerH1')) { function _lb486013370b_headerH1($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+if (!function_exists($_b->blocks['headerH1'][] = '_lbb97cb6af92_headerH1')) { function _lbb97cb6af92_headerH1($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ?>BPIS<?php
 }}
 
 //
 // block scripts
 //
-if (!function_exists($_b->blocks['scripts'][] = '_lb95e61b9231_scripts')) { function _lb95e61b9231_scripts($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+if (!function_exists($_b->blocks['scripts'][] = '_lb9432b2e698_scripts')) { function _lb9432b2e698_scripts($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ;Latte\Macros\BlockMacros::callBlockParent($_b, 'scripts', get_defined_vars()) ?>
 <script type="text/javascript">
 	$(document).ready(function () {
@@ -33,7 +33,7 @@ if (!function_exists($_b->blocks['scripts'][] = '_lb95e61b9231_scripts')) { func
 //
 // block content
 //
-if (!function_exists($_b->blocks['content'][] = '_lb5ecb4624f9_content')) { function _lb5ecb4624f9_content($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+if (!function_exists($_b->blocks['content'][] = '_lbdd7b21ef76_content')) { function _lbdd7b21ef76_content($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ?><div class="row">
 	<div class="col s12 m6 l4">
 		<h5>Nejnovější události</h5>

@@ -31,6 +31,9 @@ class HomepagePresenter extends BasePresenter {
 		$this->recordManager = $recordManager;
 	}
 
+	/**
+	 * Render default.
+	 */
 	public function actionDefault($id = null) {
 		if ($id) {
 			$page = $this->frontpageManager->get($id);
@@ -44,6 +47,9 @@ class HomepagePresenter extends BasePresenter {
 		}
 	}
 
+	/**
+	 * Emal circulated with invitations
+	 */
 	public function actionCron() {
 		$mailer = new SendmailMailer;
 		$latte = new \Latte\Engine;
@@ -94,6 +100,10 @@ class HomepagePresenter extends BasePresenter {
 			$this->eventManager->edit(array('id' => $event->id, 'number_alert' => 0));
 		}
 	}
+
+	/**
+	 * Render sitemap
+	 */
 	public function renderSitemap() {
 		$this->template->sitemap = $this->frontpageManager->getAtiveFronPage();
 	}

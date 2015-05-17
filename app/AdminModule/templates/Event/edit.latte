@@ -5,31 +5,6 @@
 
 	$(document).ready(function()
     {
-      	$(".clockpicker").clockpicker({
-			placement: 'top',
-			donetext: 'Vložit',
-			afterDone: function() {
-                $('.active2').click();
-			},
-
-		});
-
-		$('#editor').each(function () {
-			//$(this).on('blur', function(){ CKEDITOR.instances. textAreaClientId.updateElement();})
-			var $textarea = $(this);
-			$textarea.val(CKEDITOR.instances[$textarea.attr('name')].getData());
-		 });
-
-		/*$('.time-input input').click(function(){
-			$(this).parent().addClass('active2');
-		});
-
-		$('.time-input').click(function(){
-			$(this).find('label:first').addClass('active');
-			$(this).find('label:first').click();
-			$(this).removeClass('active2');
-		});*/
-
 		$("form input:checkbox").click(function(){
 			if(this.checked)
 			{
@@ -50,6 +25,7 @@
 
 	});
 </script>
+{*
 <script src="{$basePath}/js/ckeditor/ckeditor.js"></script>
 <script type="text/javascript" src="{$basePath}/elfinder/js/elfinder.min.js"></script>
 <script type="text/javascript">
@@ -64,6 +40,7 @@
     uiColor : '#9AB8F3'
 });
 </script>
+*}
 {/block}
 {block content}
 {form eventForm}
